@@ -35,146 +35,146 @@ using System.Windows;
 
 namespace Axiom
 {
-    /// <summary>
-    /// Interaction logic for Update.xaml
-    /// </summary>
-    public partial class UpdateWindow : Window
+  /// <summary>
+  /// Interaction logic for Update.xaml
+  /// </summary>
+  public partial class UpdateWindow : Window
+  {
+    // Axiom Exe Current Directory
+    //public static string currentDir = Directory.GetCurrentDirectory().TrimEnd('\\') + @"\";
+
+    // Web Downloads
+    public static ManualResetEvent waiter = new ManualResetEvent(false); // Download one at a time
+
+    // Progress Label Info
+    public static string progressInfo { get; set; }
+
+    // Unzip CMD Arguments
+    public static string extractArgs { get; set; }
+
+
+    public UpdateWindow()
     {
-        // Axiom Exe Current Directory
-        //public static string currentDir = Directory.GetCurrentDirectory().TrimEnd('\\') + @"\";
+      InitializeComponent();
 
-        // Web Downloads
-        public static ManualResetEvent waiter = new ManualResetEvent(false); // Download one at a time
+      // Start Download as soon as Update Window opens
+      StartDownload();
+    }
 
-        // Progress Label Info
-        public static string progressInfo { get; set; }
+    /// <summary>
+    /// Close
+    /// </summary>
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      e.Cancel = true;
+      this.Close();
+    }
 
-        // Unzip CMD Arguments
-        public static string extractArgs { get; set; }
+    // -----------------------------------------------
+    // Download Handlers
+    // -----------------------------------------------
+    // -------------------------
+    // Progress Changed
+    // -------------------------
+    public void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+    {
+      // Progress Info
+      this.Dispatcher.Invoke(() => // must use dispatcher to cross-thread
+      {
+        this.labelProgressInfo.Content = progressInfo;
+      });
+
+      // Progress Bar
+      this.Dispatcher.Invoke(() =>
+      {
+        double bytesIn = double.Parse(e.BytesReceived.ToString());
+        double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
+        double percentage = bytesIn / totalBytes * 100;
+        this.progressBar.Value = int.Parse(Math.Truncate(percentage).ToString());
+      });
+    }
+
+    // -------------------------
+    // Download Complete
+    // -------------------------
+    public void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+    {
+      // Set the waiter Release
+      // Must be here
+      this.Dispatcher.Invoke(() =>
+      {
+        waiter.Set();
+      });
+    }
+
+    // -------------------------
+    // Check For Internet Connection
+    // -------------------------
+    [System.Runtime.InteropServices.DllImport("wininet.dll")]
+    private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
+
+    public static bool CheckForInternetConnection()
+    {
+      int desc;
+      return InternetGetConnectedState(out desc, 0);
+    }
 
 
-        public UpdateWindow()
+    // -------------------------
+    // Axiom Self-Update Download
+    // -------------------------
+    public void StartDownload()
+    {
+      // Start New Thread
+      Thread worker = new Thread(() =>
+      {
+        // -------------------------
+        // Download
+        // -------------------------
+        ServicePointManager.Expect100Continue = true;
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+
+        WebClient wc = new WebClient();
+        wc.Headers.Add(HttpRequestHeader.UserAgent, "Axiom (https://github.com/MattMcManis/Axiom)" + " v" + MainWindow.currentVersion + "-" + MainWindow.currentBuildPhase + " Update");
+        // Do not Add Headers: accept, accept-language, dnt, upgrade-insecure-requests, accept-encoding
+
+        waiter = new ManualResetEvent(false); //start a new waiter for next pass (clicking update again)
+
+        Uri url = new Uri("https://github.com/MattMcManis/Axiom/releases/download/" + "v" + Convert.ToString(MainWindow.latestVersion) + "-" + MainWindow.latestBuildPhase + "/Axiom.zip"); // v1.0.0.0-alpha/Axiom.zip
+
+        // Delete old Axiom.zip file if it was left in %temp%
+        if (File.Exists(Path.Combine(MainWindow.tempDir, "Axiom.zip")))
         {
-            InitializeComponent();
+          try
+          {
+            File.Delete(Path.Combine(MainWindow.tempDir, "Axiom.zip"));
+          }
+          catch
+          {
 
-            // Start Download as soon as Update Window opens
-            StartDownload();
+          }
         }
 
-        /// <summary>
-        /// Close
-        /// </summary>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Close();
-        }
+        // Async
+        wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
+        wc.DownloadFileCompleted += new AsyncCompletedEventHandler(wc_DownloadFileCompleted);
+        wc.DownloadFileAsync(url, MainWindow.tempDir + "Axiom.zip");
 
-        // -----------------------------------------------
-        // Download Handlers
-        // -----------------------------------------------
-        // -------------------------
-        // Progress Changed
-        // -------------------------
-        public void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            // Progress Info
-            this.Dispatcher.Invoke(() => // must use dispatcher to cross-thread
-            {
-                this.labelProgressInfo.Content = progressInfo;
-            });
+        // Progress Info
+        progressInfo = "Downloading Axiom...";
 
-            // Progress Bar
-            this.Dispatcher.Invoke(() =>
-            {
-                double bytesIn = double.Parse(e.BytesReceived.ToString());
-                double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-                double percentage = bytesIn / totalBytes * 100;
-                this.progressBar.Value = int.Parse(Math.Truncate(percentage).ToString());
-            });
-        }
-
-        // -------------------------
-        // Download Complete
-        // -------------------------
-        public void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            // Set the waiter Release
-            // Must be here
-            this.Dispatcher.Invoke(() =>
-            {
-                waiter.Set();
-            });
-        }
-
-        // -------------------------
-        // Check For Internet Connection
-        // -------------------------
-        [System.Runtime.InteropServices.DllImport("wininet.dll")]
-        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
-
-        public static bool CheckForInternetConnection()
-        {
-            int desc;
-            return InternetGetConnectedState(out desc, 0);
-        }
+        // Wait for Download to finish
+        waiter.WaitOne();
 
 
         // -------------------------
-        // Axiom Self-Update Download
+        // Extract
         // -------------------------
-        public void StartDownload()
-        {
-            // Start New Thread
-            Thread worker = new Thread(() =>
-            {
-                // -------------------------
-                // Download
-                // -------------------------
-                ServicePointManager.Expect100Continue = true;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+        // Progress Info
+        progressInfo = "Extracting Axiom...";
 
-                WebClient wc = new WebClient();
-                wc.Headers.Add(HttpRequestHeader.UserAgent, "Axiom (https://github.com/MattMcManis/Axiom)" + " v" + MainWindow.currentVersion + "-" + MainWindow.currentBuildPhase + " Update");
-                // Do not Add Headers: accept, accept-language, dnt, upgrade-insecure-requests, accept-encoding
-
-                waiter = new ManualResetEvent(false); //start a new waiter for next pass (clicking update again)
-
-                Uri url = new Uri("https://github.com/MattMcManis/Axiom/releases/download/" + "v" + Convert.ToString(MainWindow.latestVersion) + "-" + MainWindow.latestBuildPhase + "/Axiom.zip"); // v1.0.0.0-alpha/Axiom.zip
-
-                // Delete old Axiom.zip file if it was left in %temp%
-                if (File.Exists(Path.Combine(MainWindow.tempDir,"Axiom.zip")))
-                {
-                    try
-                    {
-                        File.Delete(Path.Combine(MainWindow.tempDir, "Axiom.zip"));
-                    }
-                    catch
-                    {
-
-                    }
-                }
-
-                // Async
-                wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
-                wc.DownloadFileCompleted += new AsyncCompletedEventHandler(wc_DownloadFileCompleted);
-                wc.DownloadFileAsync(url, MainWindow.tempDir + "Axiom.zip");
-
-                // Progress Info
-                progressInfo = "Downloading Axiom...";
-
-                // Wait for Download to finish
-                waiter.WaitOne();
-
-
-                // -------------------------
-                // Extract
-                // -------------------------
-                // Progress Info
-                progressInfo = "Extracting Axiom...";
-
-                List<string> extractArgs = new List<string>() {
+        List<string> extractArgs = new List<string>() {
                     // Powershell Launch Parameters
                     "-nologo -noprofile -command",
                     "$Host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size (80, 30); ",
@@ -197,23 +197,23 @@ namespace Axiom
                     "timeout 3;",
                     // Relaunch Axiom
                     "& '" + MainWindow.appRootDir + "Axiom.exe'",
-                };
+          };
 
-                // Join List with Spaces
-                string arguments = string.Join(" ", extractArgs.Where(s => !string.IsNullOrEmpty(s)));
+        // Join List with Spaces
+        string arguments = string.Join(" ", extractArgs.Where(s => !string.IsNullOrEmpty(s)));
 
-                // Start
-                Process.Start("powershell.exe", arguments);
+        // Start
+        Process.Start("powershell.exe", arguments);
 
-                // Close Axiom before updating exe
-                Application.Current.Shutdown();
-                //Environment.Exit(0);
-            });
+        // Close Axiom before updating exe
+        Application.Current.Shutdown();
+        //Environment.Exit(0);
+      });
 
 
-            // Start Download Thread
-            //
-            worker.Start();
-        }
+      // Start Download Thread
+      //
+      worker.Start();
     }
+  }
 }
