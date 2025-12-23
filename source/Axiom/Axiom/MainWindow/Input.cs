@@ -164,8 +164,6 @@ namespace Axiom
       }
     }
 
-
-
     /// <summary>
     /// Input Textbox
     /// </summary>
@@ -399,7 +397,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Input Path
     /// </summary>
@@ -523,12 +520,9 @@ namespace Axiom
         input = string.Empty;
       }
 
-
       // Return Value
       return input;
     }
-
-
 
     /// <summary>
     /// Batch Toggle
@@ -600,7 +594,6 @@ namespace Axiom
       //AudioControls.AutoCopyAudioCodec("input");
     }
 
-
     /// <summary>
     /// Batch Input Directory
     /// </summary>
@@ -624,11 +617,9 @@ namespace Axiom
         inputDir = string.Empty;
       }
 
-
       // Return Value
       return inputDir;
     }
-
 
     /// <summary>
     /// Batch Extension Textbox
@@ -671,7 +662,6 @@ namespace Axiom
       //SubtitleControls.AutoCopySubtitleCodec("input");
       //AudioControls.AutoCopyAudioCodec("input");
     }
-
 
     /// <summary>
     /// Batch Extension Period Check (Method)

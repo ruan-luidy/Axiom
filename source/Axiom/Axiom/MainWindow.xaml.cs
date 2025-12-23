@@ -148,7 +148,6 @@ namespace Axiom
     public static string outputFileNameSpacing_SelectedItem_Read { get; set; }
     public static string outputOverwrite_SelectedItem_Read { get; set; }
 
-
     // --------------------------------------------------------------------------------------------------------
     /// <summary>
     /// Other Windows
@@ -185,7 +184,6 @@ namespace Axiom
     /// Update Window
     /// </summary>
     public static UpdateWindow updatewindow;
-
 
     // --------------------------------------------------------------------------------------------------------
     /// <summary>
@@ -294,9 +292,7 @@ namespace Axiom
       logconsole.rtbLog.Document = new FlowDocument(Log.logParagraph); //start
       logconsole.rtbLog.BeginChange(); //begin change
 
-
       Log.logParagraph.Inlines.Add(new Bold(new Run(VM.MainView.TitleVersion)) { Foreground = Log.ConsoleTitle });
-
 
       /// <summary>
       /// System Info
@@ -304,7 +300,6 @@ namespace Axiom
       // Shows OS and Hardware information in Log Console
       SystemInfo();
       //Task<int> task = SystemInfoDisplay();
-
 
       // -----------------------------------------------------------------
       /// <summary>
@@ -570,8 +565,6 @@ namespace Axiom
       logconsole.rtbLog.EndChange();
     }
 
-
-
     /// <summary>
     /// Window Loaded
     /// </summary>
@@ -591,8 +584,8 @@ namespace Axiom
       //cboVideo_Quality.SelectionChanged += cboVideo_Quality_SelectionChanged;
 
       // axiom.conf Path
-      // Event Handler must be in in WindowLoaded(), not in XAML to prevent re-moving file to AppData Local default at startup
-      cboConfigPath.SelectionChanged += cboConfigPath_SelectionChanged;
+      // Event Handler moved to SettingsConfigControl View
+      //cboConfigPath.SelectionChanged += cboConfigPath_SelectionChanged;
 
       // -------------------------
       // Format Controls
@@ -619,7 +612,6 @@ namespace Axiom
       Task.Run(() => UpdateAvailableCheck());
     }
 
-
     /// <summary>
     /// On Closed
     /// </summary>
@@ -630,7 +622,6 @@ namespace Axiom
     //    System.Windows.Forms.Application.ExitThread();
     //    Application.Current.Shutdown();
     //}
-
     /// <summary>
     /// Window Closing
     /// </summary>
@@ -698,7 +689,6 @@ namespace Axiom
       // Exit
       Application.Current.Shutdown();
     }
-
 
     /// <summary>
     /// axiom.conf Read Actions
@@ -996,7 +986,6 @@ namespace Axiom
             };
     }
 
-
     /// <summary>
     /// Save axiom.conf on Exit (Method)
     /// </summary>
@@ -1095,7 +1084,6 @@ namespace Axiom
 
                             // Updates
                             conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.ConfigureView.UpdateAutoCheck_IsChecked.ToString().ToLower());
-
 
                             // --------------------------------------------------
                             // Settings
@@ -1216,7 +1204,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Folder Write Access Check (Method)
     /// </summary>
@@ -1232,7 +1219,6 @@ namespace Axiom
         return false;
       }
     }
-
 
     /// <summary>
     /// Move Directory (Method)
@@ -1256,7 +1242,6 @@ namespace Axiom
       }
       Directory.Delete(source, true);
     }
-
 
     /// <summary>
     /// Path Wrap in Quotes
@@ -1292,7 +1277,6 @@ namespace Axiom
           return s;
       }
     }
-
 
     /// <summary>
     /// PowerShell Escape Quotes
@@ -1493,7 +1477,6 @@ namespace Axiom
                   .Replace("\u2029", "");
     }
 
-
     /// <summary>
     /// Replace Linebreaks with Space (Method)
     /// </summary>
@@ -1522,7 +1505,6 @@ namespace Axiom
 
       return lines;
     }
-
 
     /// <summary>
     /// Deny Special Keys
@@ -1581,7 +1563,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Start Log Console (Method)
     /// </summary>
@@ -1595,7 +1576,6 @@ namespace Axiom
 
       logconsole.rtbLog.Cursor = Cursors.Arrow;
     }
-
 
     /// <summary>
     /// Selected Item
@@ -1668,7 +1648,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Checked
     /// </summary>
@@ -1678,7 +1657,6 @@ namespace Axiom
     {
 
     }
-
 
     /// <summary>
     /// Is Valid Windows Path
@@ -1708,7 +1686,6 @@ namespace Axiom
       return true;
     }
 
-
     /// <summary>
     /// Is Valid Windows Filename
     /// </summary>
@@ -1728,793 +1705,6 @@ namespace Axiom
       return true;
     }
 
-
-
-    /// <summary>
-    /// FFcheck (Method)
-    /// </summary>
-    /// <remarks>
-    /// Check if FFmpeg and FFprobe is on Computer 
-    /// </remarks>
-    public static bool FFcheck()
-    {
-      bool ready = true;
-
-      try
-      {
-        // Environment Variables
-        var envar = Environment.GetEnvironmentVariable("Path"); // Checks both User and System
-                                                                //var envar = Environment.GetEnvironmentVariable("PATH");, 
-                                                                //var envarUser = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
-                                                                //var envarSystem = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine);
-                                                                //MessageBox.Show(envar); //debug
-
-        // -------------------------
-        // FFmpeg
-        // -------------------------
-        // If Auto Mode
-        if (VM.ConfigureView.FFmpegPath_Text == "<auto>")
-        {
-          // Check default current directory
-          if (File.Exists(appRootDir + @"ffmpeg\bin\ffmpeg.exe"))
-          {
-            // let pass
-            return true;
-          }
-          else
-          {
-            int found = 0;
-
-            // Check Environment Variables
-            foreach (var envarPath in envar.Split(';'))
-            {
-              var exePath = Path.Combine(envarPath, "ffmpeg.exe");
-              if (File.Exists(exePath)) { found = 1; }
-            }
-
-            if (found == 1)
-            {
-              // let pass
-              return true;
-            }
-            else
-            {
-              // lock
-              MessageBox.Show("Cannot locate FFmpeg Path in Environment Variables or Current Folder.",
-                              "Error",
-                              MessageBoxButton.OK,
-                              MessageBoxImage.Warning);
-
-              return false;
-            }
-
-          }
-        }
-        // If User Defined Path
-        else if (VM.ConfigureView.FFmpegPath_Text != "<auto>" &&
-                 IsValidPath(VM.ConfigureView.FFprobePath_Text))
-        {
-          var dirPath = Path.GetDirectoryName(VM.ConfigureView.FFmpegPath_Text).TrimEnd('\\') + @"\";
-          var fullPath = Path.Combine(dirPath, "ffmpeg.exe");
-
-          // Make Sure ffmpeg.exe Exists
-          if (File.Exists(fullPath))
-          {
-            // let pass
-            return true;
-          }
-          else
-          {
-            // lock
-            MessageBox.Show("Cannot locate FFmpeg Path in User Defined Path.",
-                            "Error",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Warning);
-
-            return false;
-          }
-
-          // If Configure Path is ffmpeg.exe and not another Program
-          //if (string.Equals(VM.ConfigureView.FFmpegPath_Text, fullPath, StringComparison.OrdinalIgnoreCase))
-          //{
-          //    // let pass
-          //    //ffCheckCleared = true;
-          //    ready = true;
-          //}
-          //else
-          //{
-          //    /* lock */
-          //    //ready = false;
-          //    //ffCheckCleared = false;
-          //    MessageBox.Show("FFmpeg Path must link to ffmpeg.exe.",
-          //                    "Error",
-          //                    MessageBoxButton.OK,
-          //                    MessageBoxImage.Warning);
-
-          //    ready = false;
-          //}
-        }
-
-        // -------------------------
-        // FFprobe
-        // -------------------------
-        // If Auto Mode
-        if (VM.ConfigureView.FFprobePath_Text == "<auto>")
-        {
-          // Check default current directory
-          if (File.Exists(appRootDir + @"ffmpeg\bin\ffprobe.exe"))
-          {
-            // let pass
-            return true;
-          }
-          else
-          {
-            int found = 0;
-
-            // Check Environment Variables
-            foreach (var envarPath in envar.Split(';'))
-            {
-              var exePath = Path.Combine(envarPath, "ffprobe.exe");
-              if (File.Exists(exePath)) { found = 1; }
-            }
-
-            if (found == 1)
-            {
-              // let pass
-              return true;
-            }
-            else
-            {
-              // lock
-              MessageBox.Show("Cannot locate FFprobe Path in Environment Variables or Current Folder.",
-                              "Error",
-                              MessageBoxButton.OK,
-                              MessageBoxImage.Warning);
-
-              return false;
-            }
-
-          }
-        }
-        // If User Defined Path
-        else if (VM.ConfigureView.FFprobePath_Text != "<auto>" &&
-                 IsValidPath(VM.ConfigureView.FFprobePath_Text))
-        {
-          var dirPath = Path.GetDirectoryName(VM.ConfigureView.FFprobePath_Text).TrimEnd('\\') + @"\";
-          var fullPath = Path.Combine(dirPath, "ffprobe.exe");
-
-          // Make Sure ffprobe.exe Exists
-          if (File.Exists(fullPath))
-          {
-            // let pass
-            return true;
-          }
-          else
-          {
-            // lock
-            MessageBox.Show("Cannot locate FFprobe Path in User Defined Path.",
-                            "Error",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Warning);
-
-            return true;
-          }
-
-          //// If Configure Path is FFmpeg.exe and not another Program
-          //if (string.Equals(VM.ConfigureView.FFprobePath_Text, fullPath, StringComparison.OrdinalIgnoreCase))
-          //{
-          //    // let pass
-          //    //ffCheckCleared = true;
-          //    //ready = true;
-          //    return true;
-          //}
-          //else
-          //{
-          //    /* lock */
-          //    //ready = false;
-          //    //ffCheckCleared = false;
-          //    MessageBox.Show("Error: FFprobe Path must link to ffprobe.exe.",
-          //                    "Error",
-          //                    MessageBoxButton.OK,
-          //                    MessageBoxImage.Warning);
-
-          //    ready = false;
-          //    return false;
-          //}
-        }
-      }
-      catch
-      {
-        MessageBox.Show("Unknown Error trying to locate FFmpeg or FFprobe.",
-                        "Error",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
-      }
-
-      //MessageBox.Show(ready.ToString()); //debug
-
-      return ready;
-    }
-
-
-    /// <summary>
-    /// FFmpeg Path (Method)
-    /// </summary>
-    public static String FFmpegPath()
-    {
-      // -------------------------
-      // FFmpeg.exe and FFprobe.exe Paths
-      // -------------------------
-      // If Configure FFmpeg Path is <auto>
-      if (VM.ConfigureView.FFmpegPath_Text == "<auto>")
-      {
-        if (File.Exists(appRootDir + @"ffmpeg\bin\ffmpeg.exe"))
-        {
-          // Use included binary
-          // Do not use WrapWithQuotes() Method
-          Generate.FFmpeg.ffmpeg = Sys.Shell.PowerShell_CallOperator_FFmpeg() + "\"" + appRootDir + @"ffmpeg\bin\ffmpeg.exe" + "\"";
-        }
-        else if (!File.Exists(appRootDir + @"ffmpeg\bin\ffmpeg.exe"))
-        {
-          // Use system installed binaries
-          Generate.FFmpeg.ffmpeg = "ffmpeg";
-        }
-      }
-      // Use User Custom Path
-      else
-      {
-        // Do not use WrapWithQuotes() Method
-        Generate.FFmpeg.ffmpeg = Sys.Shell.PowerShell_CallOperator_FFmpeg() + "\"" + VM.ConfigureView.FFmpegPath_Text + "\"";
-      }
-
-      // Return Value
-      return Generate.FFmpeg.ffmpeg;
-    }
-
-
-    /// <summary>
-    /// FFprobe Path
-    /// </summary>
-    public static void FFprobePath()
-    {
-      // If Configure FFprobe Path is <auto>
-      if (VM.ConfigureView.FFprobePath_Text == "<auto>")
-      {
-        if (File.Exists(appRootDir + @"ffmpeg\bin\ffprobe.exe"))
-        {
-          // use included binary
-          Analyze.FFprobe.ffprobe = "\"" + appRootDir + @"ffmpeg\bin\ffprobe.exe" + "\"";
-        }
-        else if (!File.Exists(appRootDir + @"ffmpeg\bin\ffprobe.exe"))
-        {
-          // use system installed binaries
-          Analyze.FFprobe.ffprobe = "ffprobe";
-        }
-      }
-      // Use User Custom Path
-      else
-      {
-        Analyze.FFprobe.ffprobe = "\"" + VM.ConfigureView.FFprobePath_Text + "\"";
-      }
-
-      // Return Value
-      //return FFprobe.ffprobe;
-    }
-
-
-    /// <summary>
-    /// FFplay Path
-    /// </summary>
-    public static void FFplayPath()
-    {
-      // If Configure FFprobe Path is <auto>
-      if (VM.ConfigureView.FFplayPath_Text == "<auto>")
-      {
-        if (File.Exists(appRootDir + @"ffmpeg\bin\ffplay.exe"))
-        {
-          // use included binary
-          Preview.FFplay.ffplay = "\"" + appRootDir + @"ffmpeg\bin\ffplay.exe" + "\"";
-        }
-        else if (!File.Exists(appRootDir + @"ffmpeg\bin\ffplay.exe"))
-        {
-          // use system installed binaries
-          Preview.FFplay.ffplay = "ffplay";
-        }
-      }
-      // Use User Custom Path
-      else
-      {
-        Preview.FFplay.ffplay = "\"" + VM.ConfigureView.FFplayPath_Text + "\"";
-      }
-
-      // Return Value
-      //return FFplay.ffplay;
-    }
-
-
-    /// <summary>
-    /// youtube-dl Path
-    /// </summary>
-    public static void youtubedlPath()
-    {
-      // If Configure youtubedl Path is <auto>
-      if (VM.ConfigureView.youtubedlPath_Text == "<auto>")
-      {
-        // youtube-dl.exe Exists
-        if (File.Exists(appRootDir + @"youtube-dl\youtube-dl.exe"))
-        {
-          // use included binary path
-          youtubedl = appRootDir + @"youtube-dl\youtube-dl.exe";
-        }
-        else if (File.Exists(appRootDir + @"youtube-dl.exe"))
-        {
-          // moved from folder
-          youtubedl = appRootDir + @"youtube-dl.exe";
-        }
-
-        // youtube-dl.exe Does Not Exist
-        else if (!File.Exists(appRootDir + @"youtube-dl\youtube-dl.exe"))
-        {
-          // Installed
-          // Environment Variable auto path
-          youtubedl = @"youtube-dl";
-        }
-      }
-
-      // Use User Custom Path
-      else
-      {
-        youtubedl = VM.ConfigureView.youtubedlPath_Text;
-      }
-    }
-
-
-    /// <summary>
-    /// Is Valid URL
-    /// </summary>
-    //public static bool IsValidURL(string source)
-    //{
-    //    Uri uriResult;
-    //    return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && (uriResult.Scheme == "http" || uriResult.Scheme == "https");
-    //}
-
-
-    /// <summary>
-    /// Is Website URL
-    /// </summary>
-    public static bool IsWebURL(string input_Text)
-    {
-      // Empty
-      if (string.IsNullOrWhiteSpace(input_Text))
-      {
-        return false;
-      }
-
-      input_Text = input_Text.Trim();
-
-      // URL
-      if ((input_Text.StartsWith("http://") ||
-          input_Text.StartsWith("https://") ||
-          input_Text.StartsWith("www.")) //||
-                                         //input_Text.EndsWith(".com")) //&&
-                                         //IsValidURL(input_Text) == true
-         )
-      {
-        return true;
-      }
-
-      // Local File
-      else
-      {
-        return false;
-      }
-    }
-
-
-    /// <summary>
-    /// Is YouTube URL
-    /// </summary>
-    public static bool IsYouTubeURL(string input_Text)
-    {
-      // Empty
-      if (string.IsNullOrWhiteSpace(input_Text))
-      {
-        return false;
-      }
-
-      // YouTube
-      if (// youtube (any domain extension)
-         input_Text.StartsWith("https://www.youtube.") ||
-         input_Text.StartsWith("http://www.youtube.") ||
-         input_Text.StartsWith("www.youtube.") ||
-         input_Text.StartsWith("youtube.") ||
-
-         // youtu.be
-         input_Text.StartsWith("https://youtu.be") ||
-         input_Text.StartsWith("http://youtu.be") ||
-         input_Text.StartsWith("www.youtu.be") ||
-         input_Text.StartsWith("youtu.be") ||
-
-         // YouTube Music
-         input_Text.StartsWith("https://music.youtube.") ||
-         input_Text.StartsWith("http://music.youtube.") ||
-         input_Text.StartsWith("music.youtube.")
-         )
-      {
-        return true;
-      }
-
-      // Local File
-      else
-      {
-        return false;
-      }
-    }
-
-
-    /// <summary>
-    /// YouTube Download-Only Mode Check (Method)
-    /// </summary>
-    /// <remarks>
-    /// If Axiom is in full Codec Copy mode Download the file without converting
-    /// </remarks>
-    public static bool IsWebDownloadOnly(string videoCodec_SelectedItem,
-                                         string subtitleCodec_SelectedItem,
-                                         string audioCodec_SelectedItem
-                                         )
-    {
-      if (//IsYouTubeURL(VM.MainView.Input_Text) == true &&
-
-          // Video
-          (videoCodec_SelectedItem == "Copy" &&
-           subtitleCodec_SelectedItem == "Copy" &&
-           audioCodec_SelectedItem == "Copy")
-
-           ||
-
-          (videoCodec_SelectedItem == "Copy" &&
-           subtitleCodec_SelectedItem == "Copy")
-
-           ||
-
-          (videoCodec_SelectedItem == "Copy" &&
-           subtitleCodec_SelectedItem == "None")
-
-           ||
-
-          //(videoCodec_SelectedItem == "Copy" &&
-          //subtitleCodec_SelectedItem == "Copy" &&
-          //audioCodec_SelectedItem == "None") ||
-
-          //(videoCodec_SelectedItem == "Copy" &&
-          // subtitleCodec_SelectedItem == "None" &&
-          // audioCodec_SelectedItem == "None") ||
-
-          (videoCodec_SelectedItem == "Copy" &&
-           subtitleCodec_SelectedItem == "None" &&
-           audioCodec_SelectedItem == "Copy")
-
-           ||
-
-          // Music
-          (videoCodec_SelectedItem == "None" &&
-           subtitleCodec_SelectedItem == "None" &&
-           audioCodec_SelectedItem == "Copy")
-          )
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
-    }
-
-
-    /// <summary>
-    /// YouTube Download - FFmpeg Path
-    /// </summary>
-    public static String YouTubeDL_FFmpegPath()
-    {
-      // youtube-dl
-      // FFmpeg must be detected by youtube-dl to merge video+audio into a single file
-      // If using Environment Variables, path will be only 'ffmpeg'
-      // If defining ffmpeg location, do not use "--ffmpeg-location ffmpeg", it will fail
-      // You must use a full path --ffmpeg-location "C:\Path\To\ffmpeg.exe"
-
-      string path = FFmpegPath();
-
-      // Environment Variables
-      if (path == "ffmpeg")
-      {
-        // Do not specify a path if using Environment Variables
-        // It will be detected by youtube-dl automatically
-        return string.Empty;
-      }
-
-      // Missing
-      else if (string.IsNullOrWhiteSpace(path))
-      {
-        // Let youtube-dl throw error
-        return string.Empty;
-      }
-
-      // Specify ffmpeg.exe path
-      else
-      {
-        return " --ffmpeg-location " + path;
-      }
-    }
-
-
-    /// <summary>
-    /// Ready Halts (Method)
-    /// </summary>
-    public static bool ReadyHalts()
-    {
-      // -------------------------
-      // Check if FFmpeg & FFprobe Exists
-      // -------------------------
-      if (FFcheck() == false)
-      {
-        // Halt
-        return false;
-      }
-
-      //MessageBox.Show(FFcheck().ToString()); //debug
-      //MessageBox.Show(ready.ToString()); //debug
-
-      // -------------------------
-      // Input File does not exist
-      // -------------------------
-      //MessageBox.Show(input); //debug
-      if (IsWebURL(VM.MainView.Input_Text) == false) // Ignore Web URL's
-      {
-        if (!string.IsNullOrWhiteSpace(VM.MainView.Input_Text) &&
-            VM.MainView.Batch_IsChecked == false)
-        {
-          if (!File.Exists(VM.MainView.Input_Text))
-          {
-            MessageBox.Show("Input file does not exist.",
-                            "Notice",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Exclamation);
-
-            // Halt
-            return false;
-          }
-        }
-      }
-
-      // -------------------------
-      // YouTube Download - URL Missing
-      // -------------------------
-      // Needs Preset Video/Music detection
-      //if (IsYouTubeDownloadOnly() == true)
-      //{
-
-      //}
-
-      // -------------------------
-      // Do Not allow Auto without FFprobe being installed or linked
-      // -------------------------
-      if (string.IsNullOrWhiteSpace(Analyze.FFprobe.ffprobe))
-      {
-        if (VM.VideoView.Video_Quality_SelectedItem == "Auto" ||
-            VM.AudioView.Audio_Quality_SelectedItem == "Auto")
-        {
-          // Log Console Message /////////
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new Bold(new Run("Auto Quality Mode Requires FFprobe in order to Detect File Info.")) { Foreground = Log.ConsoleWarning });
-
-          MessageBox.Show("Auto Quality Mode Requires FFprobe in order to Detect File Info.",
-                          "Notice",
-                          MessageBoxButton.OK,
-                          MessageBoxImage.Exclamation);
-
-          // Halt
-          return false;
-        }
-      }
-
-
-      // -------------------------
-      // Crop Codec Copy
-      // -------------------------
-      if (!string.IsNullOrWhiteSpace(CropWindow.crop) &&
-          VM.VideoView.Video_Codec_SelectedItem == "Copy") //null check
-      {
-        // Log Console Message /////////
-        Log.WriteAction = () =>
-        {
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new Bold(new Run("Warning: Crop cannot use Codec Copy. Please select a Video Codec.")) { Foreground = Log.ConsoleDefault });
-        };
-        Log.LogActions.Add(Log.WriteAction);
-
-        // Warning
-        MessageBox.Show("Crop cannot use Codec Copy. Please select a Video Codec.",
-                        "Notice",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Exclamation);
-
-        return false;
-      }
-
-
-      // -------------------------
-      // Video BitRate is missing K or M at end of value
-      // -------------------------
-      if (VM.VideoView.Video_Quality_SelectedItem == "Custom" &&
-          VM.VideoView.Video_BitRate_IsEnabled == true &&
-          VM.VideoView.Video_BitRate_Text != "0" && // Constant Bit Rate 0 does not need K or M
-          VM.VideoView.Video_VBR_IsChecked == false)
-      {
-        // Error List
-        ICollection<string> errors = new List<string>();
-
-        // Bit Rate
-        if (!string.IsNullOrWhiteSpace(VM.VideoView.Video_BitRate_Text))
-        {
-          if (VM.VideoView.Video_BitRate_Text.ToUpper()?.Contains("K") == false &&
-              VM.VideoView.Video_BitRate_Text.ToUpper()?.Contains("M") == false)
-          {
-            errors.Add("Bit Rate");
-          }
-        }
-
-        // Min Rate
-        if (!string.IsNullOrWhiteSpace(VM.VideoView.Video_MinRate_Text))
-        {
-          if (VM.VideoView.Video_MinRate_Text.ToUpper()?.Contains("K") == false &&
-              VM.VideoView.Video_MinRate_Text.ToUpper()?.Contains("M") == false)
-          {
-            errors.Add("Min Rate");
-          }
-        }
-
-        // Max Rate
-        if (!string.IsNullOrWhiteSpace(VM.VideoView.Video_MaxRate_Text))
-        {
-          if (VM.VideoView.Video_MaxRate_Text.ToUpper()?.Contains("K") == false &&
-              VM.VideoView.Video_MaxRate_Text.ToUpper()?.Contains("M") == false)
-          {
-            errors.Add("Max Rate");
-          }
-        }
-
-        // Buf Size
-        if (!string.IsNullOrWhiteSpace(VM.VideoView.Video_BufSize_Text))
-        {
-          if (VM.VideoView.Video_BufSize_Text.ToUpper()?.Contains("K") == false &&
-              VM.VideoView.Video_BufSize_Text.ToUpper()?.Contains("M") == false)
-          {
-            errors.Add("Buf Size");
-          }
-        }
-
-
-        // Halt and Display Errors
-        if (errors != null &&
-            errors.Count > 0)
-        {
-          // Log Console Message /////////
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new Bold(new Run("Notice: Video Bit Rate is missing K or M at end of value.")) { Foreground = Log.ConsoleWarning });
-
-          // Warning
-          MessageBox.Show("Video " + string.Join(", ", errors) + " missing K or M at end of value.",
-                          "Notice",
-                          MessageBoxButton.OK,
-                          MessageBoxImage.Warning);
-
-          // Halt
-          return false;
-        }
-      }
-
-
-      // -------------------------
-      // Single File Input with no Extension
-      // -------------------------
-      if (VM.MainView.Batch_IsChecked == false &&
-          VM.MainView.Input_Text.EndsWith("\\"))
-      {
-        // Log Console Message /////////
-        Log.logParagraph.Inlines.Add(new LineBreak());
-        Log.logParagraph.Inlines.Add(new LineBreak());
-        Log.logParagraph.Inlines.Add(new Bold(new Run("Notice: Please choose an input file.")) { Foreground = Log.ConsoleWarning });
-
-        // Warning
-        MessageBox.Show("Please choose an input file.",
-                        "Notice",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Exclamation);
-
-        // Halt
-        return false;
-      }
-
-
-      // -------------------------
-      // Do Not allow Batch Output to same folder if:
-      //      Input/Output TextBoxes are the same and Input/Output File Extensions are the same.
-      //      Input/Output TextBoxes are the same and Batch TextBox is Empty.
-      // (to avoid file overwrite)
-      // -------------------------
-      if (VM.MainView.Batch_IsChecked == true &&
-          !string.IsNullOrWhiteSpace(VM.MainView.Input_Text))
-      {
-        if ((string.Equals(VM.MainView.Input_Text/*inputDir*/, VM.MainView.Output_Text/*outputDir*/, StringComparison.OrdinalIgnoreCase) &&
-             string.Equals(inputExt, outputExt, StringComparison.OrdinalIgnoreCase))
-
-            ||
-
-            (string.Equals(VM.MainView.Input_Text, VM.MainView.Output_Text, StringComparison.OrdinalIgnoreCase) &&
-             string.IsNullOrWhiteSpace(VM.MainView.BatchExtension_Text))
-            )
-        {
-          //MessageBox.Show("inputDir = " + inputDir); //debug
-          //MessageBox.Show("outputDir = " + outputDir); //debug
-          //MessageBox.Show("inputExt = " + inputExt); //debug
-          //MessageBox.Show("outputExt = " + outputExt); //debug
-
-          // Log Console Message /////////
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new Bold(new Run("Notice: Please choose an output folder different than the input folder to avoid file overwrite.")) { Foreground = Log.ConsoleWarning });
-
-          // Warning
-          MessageBox.Show("Please choose an output folder different than the input folder to avoid file overwrite.",
-                          "Notice",
-                          MessageBoxButton.OK,
-                          MessageBoxImage.Exclamation);
-
-          // Halt
-          return false;
-        }
-      }
-
-
-      // -------------------------
-      // VP8/VP9 & CRF does not have BitRate -b:v
-      // -------------------------
-      if (VM.VideoView.Video_Codec_SelectedItem == "VP8" ||
-          VM.VideoView.Video_Codec_SelectedItem == "VP9")
-      {
-        if (!string.IsNullOrWhiteSpace(VM.VideoView.Video_CRF_Text) &&
-            string.IsNullOrWhiteSpace(VM.VideoView.Video_BitRate_Text))
-        {
-          // Log Console Message /////////
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new LineBreak());
-          Log.logParagraph.Inlines.Add(new Bold(new Run("Notice: VP8/VP9 CRF must also have Bit Rate. \n(e.g. 0 for Constant, 1234k for Constrained)")) { Foreground = Log.ConsoleWarning });
-
-          // Notice
-          MessageBox.Show("VP8/VP9 CRF must also have Bit Rate. \n(e.g. 0 for Constant, 1234K for Constrained)",
-                      "Notice",
-                      MessageBoxButton.OK,
-                      MessageBoxImage.Exclamation);
-
-          // Halt
-          return false;
-        }
-      }
-
-
-      // -------------------------
-      // Ready
-      // -------------------------
-      return true;
-    }
-
-
-    /// <summary>
-    /// System Info
-    /// </summary>
     public void SystemInfo()
     {
       //int count = 0;
@@ -2663,7 +1853,6 @@ namespace Axiom
       //return count;
     }
 
-
     /// <summary>
     /// RAM Type
     /// <summary>
@@ -2730,8 +1919,6 @@ namespace Axiom
       }
     }
 
-
-
     /// <summary>
     /// Normalize Value (Method)
     /// <summary>
@@ -2753,616 +1940,6 @@ namespace Axiom
 
     //    return (((val - valmin) / (valmax - valmin)) * (max - min)) + min;
     //}
-
-
-    /// <summary>
-    /// Get Average Value (Method)
-    /// <summary>
-    //public static double GetAverageValue()
-    //{
-
-    //}
-
-
-    // --------------------------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------------------------
-    /// <summary>
-    /// CONTROLS
-    /// </summary>
-    // --------------------------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// Save Preset - Button
-    /// </summary>
-    private void btnSavePreset_Click(object sender, RoutedEventArgs e)
-    {
-      // Check if Profiles Directory exists
-      // Check if Custom Presets Path is valid
-      if (MainWindow.IsValidPath(VM.ConfigureView.CustomPresetsPath_Text) == false)
-      {
-        return;
-      }
-
-      // If not, create it
-      if (!Directory.Exists(VM.ConfigureView.CustomPresetsPath_Text))
-      {
-        // Yes/No Dialog Confirmation
-        //
-        MessageBoxResult resultExport = MessageBox.Show("Presets folder does not exist. Automatically create it?",
-                                                        "Directory Not Found",
-                                                        MessageBoxButton.YesNo,
-                                                        MessageBoxImage.Information);
-        switch (resultExport)
-        {
-          // Create
-          case MessageBoxResult.Yes:
-            try
-            {
-              Directory.CreateDirectory(VM.ConfigureView.CustomPresetsPath_Text);
-            }
-            catch
-            {
-              MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.",
-                              "Error",
-                              MessageBoxButton.OK,
-                              MessageBoxImage.Error);
-            }
-            break;
-          // Use Default
-          case MessageBoxResult.No:
-            break;
-        }
-      }
-
-      // Open 'Save File'
-      Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
-
-      // Defaults
-      saveFile.InitialDirectory = VM.ConfigureView.CustomPresetsPath_Text;
-      saveFile.RestoreDirectory = true;
-      saveFile.Filter = "Initialization Files (*.ini)|*.ini";
-      saveFile.DefaultExt = "ini";
-      saveFile.FileName = "Custom Preset.ini";
-
-      // Process dialog box
-      if (saveFile.ShowDialog() == true)
-      {
-        // Set Input Dir, Name, Ext
-        string presetDir = Path.GetDirectoryName(saveFile.FileName).TrimEnd('\\') + @"\";
-        string presetFileName = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        string presetExt = Path.GetExtension(saveFile.FileName);
-        string preset = Path.Combine(presetDir, presetFileName + presetExt);
-
-        // -------------------------
-        // Overwriting doesn't work properly with INI Writer
-        // Delete File instead before saving new
-        // -------------------------
-        if (File.Exists(preset))
-        {
-          if (hasWriteAccessToFolder(presetDir))
-          {
-            try
-            {
-              File.Delete(preset);
-            }
-            catch
-            {
-              MessageBox.Show("Could not replace old custom preset. May require Administrator privileges.",
-                              "Error",
-                              MessageBoxButton.OK,
-                              MessageBoxImage.Error);
-            }
-          }
-        }
-
-        // -------------------------
-        // Save Custom Preset ini file
-        // -------------------------
-        //MessageBox.Show(preset); //debug
-        Profiles.Profiles.ExportPreset(preset);
-
-        // -------------------------
-        // Load Custom Presets
-        // Refresh Presets ComboBox
-        // -------------------------
-        Profiles.Profiles.LoadCustomPresets();
-
-        // -------------------------
-        // Select the Preset
-        // -------------------------
-        VM.MainView.Preset_SelectedItem = presetFileName;
-      }
-      else
-      {
-        // -------------------------
-        // Load Custom Presets
-        // Refresh Presets ComboBox
-        // -------------------------
-        Profiles.Profiles.LoadCustomPresets();
-
-        if (string.IsNullOrWhiteSpace(VM.MainView.Preset_SelectedItem))
-        {
-          VM.MainView.Preset_SelectedItem = "Preset";
-        }
-      }
-
-    }
-
-    /// <summary>
-    /// Info Button
-    /// </summary>
-    private Boolean IsInfoWindowOpened = false;
-    private void btnInfo_Click(object sender, RoutedEventArgs e)
-    {
-      // Prevent Monitor Resolution Window Crash
-      //
-      try
-      {
-        // Check if Window is already open
-        if (IsInfoWindowOpened) return;
-
-        // Start Window
-        infowindow = new InfoWindow();
-
-        // Only allow 1 Window instance
-        infowindow.ContentRendered += delegate { IsInfoWindowOpened = true; };
-        infowindow.Closed += delegate { IsInfoWindowOpened = false; };
-
-        // Keep Window on Top
-        infowindow.Owner = HandyControl.Controls.Window.GetWindow(this);
-
-        // Detect which screen we're on
-        var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
-        var thisScreen = allScreens.SingleOrDefault(s => Left >= s.WorkingArea.Left && Left < s.WorkingArea.Right);
-        if (thisScreen == null) thisScreen = allScreens.First();
-
-        // Position Relative to MainWindow
-        infowindow.Left = Math.Max((Left + (Width - infowindow.Width) / 2), thisScreen.WorkingArea.Left);
-        infowindow.Top = Math.Max((Top + (Height - infowindow.Height) / 2), thisScreen.WorkingArea.Top);
-
-        // Open Window
-        infowindow.Show();
-      }
-      // Simplified
-      catch
-      {
-        // Check if Window is already open
-        if (IsInfoWindowOpened) return;
-
-        // Start Window
-        infowindow = new InfoWindow();
-
-        // Only allow 1 Window instance
-        infowindow.ContentRendered += delegate { IsInfoWindowOpened = true; };
-        infowindow.Closed += delegate { IsInfoWindowOpened = false; };
-
-        // Keep Window on Top
-        infowindow.Owner = HandyControl.Controls.Window.GetWindow(this);
-
-        // Position Relative to MainWindow
-        infowindow.Left = Math.Max((Left + (Width - infowindow.Width) / 2), Left);
-        infowindow.Top = Math.Max((Top + (Height - infowindow.Height) / 2), Top);
-
-        // Open Window
-        infowindow.Show();
-      }
-    }
-
-    /// <summary>
-    /// Website Button
-    /// </summary>
-    private void btbWebsite_Click(object sender, RoutedEventArgs e)
-    {
-      // Open Axiom Website URL in Default Browser
-      Process.Start("https://axiomui.github.io");
-
-    }
-
-    /// <summary>
-    /// Keep Window - Toggle - Checked
-    /// </summary>
-    private void tglCMDWindowKeep_Checked(object sender, RoutedEventArgs e)
-    {
-      //// Log Console Message /////////
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new Bold(new Run("Keep FFmpeg Window Toggle: ")) { Foreground = Log.ConsoleDefault });
-      //Log.logParagraph.Inlines.Add(new Run("On") { Foreground = Log.ConsoleDefault });
-    }
-    /// <summary>
-    /// Keep Window - Toggle - Unchecked
-    /// </summary>
-    private void tglCMDWindowKeep_Unchecked(object sender, RoutedEventArgs e)
-    {
-      //// Log Console Message /////////
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new Bold(new Run("Keep FFmpeg Window Toggle: ")) { Foreground = Log.ConsoleDefault });
-      //Log.logParagraph.Inlines.Add(new Run("Off") { Foreground = Log.ConsoleDefault });
-    }
-
-    /// <summary>
-    /// Auto Sort Script - Toggle - Checked
-    /// </summary>
-    private void tglAutoSortScript_Checked(object sender, RoutedEventArgs e)
-    {
-      //// Log Console Message /////////
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new Bold(new Run("Auto Sort Script Toggle: ")) { Foreground = Log.ConsoleDefault });
-      //Log.logParagraph.Inlines.Add(new Run("On") { Foreground = Log.ConsoleDefault });
-    }
-    /// <summary>
-    /// Auto Sort Script - Toggle - Unchecked
-    /// </summary>
-    private void tglAutoSortScript_Unchecked(object sender, RoutedEventArgs e)
-    {
-      //// Log Console Message /////////
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new LineBreak());
-      //Log.logParagraph.Inlines.Add(new Bold(new Run("Auto Sort Script Toggle: ")) { Foreground = Log.ConsoleDefault });
-      //Log.logParagraph.Inlines.Add(new Run("Off") { Foreground = Log.ConsoleDefault });
-    }
-
-    /// <summary>
-    /// Debug Console Window Button
-    /// </summary>
-    private Boolean IsDebugConsoleOpened = false;
-    private void btnDebugConsole_Click(object sender, RoutedEventArgs e)
-    {
-      // Prevent Monitor Resolution Window Crash
-      //
-      try
-      {
-        // Check if Window is already open
-        if (IsDebugConsoleOpened) return;
-
-        // Start Window
-        debugconsole = new DebugConsole(this);
-
-        // Only allow 1 Window instance
-        debugconsole.ContentRendered += delegate { IsDebugConsoleOpened = true; };
-        debugconsole.Closed += delegate { IsDebugConsoleOpened = false; };
-
-        // Detect which screen we're on
-        var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
-        var thisScreen = allScreens.SingleOrDefault(s => Left >= s.WorkingArea.Left && Left < s.WorkingArea.Right);
-        if (thisScreen == null) thisScreen = allScreens.First();
-
-
-        // Position Relative to MainWindow
-        // Keep from going off screen
-        debugconsole.Left = Math.Max(Left - debugconsole.Width - 12, thisScreen.WorkingArea.Left);
-        debugconsole.Top = Math.Max(Top - 0, thisScreen.WorkingArea.Top);
-
-        // Write Variables to Debug Window (Method)
-        //DebugConsole.DebugWrite(debugconsole, MainView.vm);
-
-        // Open Window
-        debugconsole.Show();
-      }
-      // Simplified
-      catch
-      {
-        // Check if Window is already open
-        if (IsDebugConsoleOpened) return;
-
-        // Start Window
-        debugconsole = new DebugConsole(this);
-
-        // Only allow 1 Window instance
-        debugconsole.ContentRendered += delegate { IsDebugConsoleOpened = true; };
-        debugconsole.Closed += delegate { IsDebugConsoleOpened = false; };
-
-        // Position Relative to MainWindow
-        // Keep from going off screen
-        debugconsole.Left = Left - debugconsole.Width - 12;
-        debugconsole.Top = Top;
-
-        // Write Variables to Debug Window (Method)
-        //DebugConsole.DebugWrite(debugconsole, MainView.vm);
-
-        // Open Window
-        debugconsole.Show();
-      }
-    }
-
-    /// <summary>
-    /// Log Console Window Button
-    /// </summary>
-    private void btnLogConsole_Click(object sender, RoutedEventArgs e)
-    {
-      // Prevent Monitor Resolution Window Crash
-      //
-      try
-      {
-        // Detect which screen we're on
-        var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
-        var thisScreen = allScreens.SingleOrDefault(s => Left >= s.WorkingArea.Left && Left < s.WorkingArea.Right);
-        if (thisScreen == null) thisScreen = allScreens.First();
-
-        // Position Relative to MainWindow
-        // Keep from going off screen
-        logconsole.Left = Math.Min(Left + ActualWidth + 12, thisScreen.WorkingArea.Right - logconsole.Width);
-        logconsole.Top = Math.Min(Top + 0, thisScreen.WorkingArea.Bottom - logconsole.Height);
-
-        // Open Winndow
-        logconsole.Show();
-      }
-      // Simplified
-      catch
-      {
-        // Position Relative to MainWindow
-        // Keep from going off screen
-        logconsole.Left = Left + ActualWidth + 12;
-        logconsole.Top = Top;
-
-        // Open Winndow
-        logconsole.Show();
-      }
-    }
-
-    /// <summary>
-    /// Log Button
-    /// </summary>
-    private void btnLog_Click(object sender, RoutedEventArgs e)
-    {
-      // Call Method to get Log Path
-      //Log.DefineLogPath();
-      if (VM.ConfigureView.LogCheckBox_IsChecked == true)
-      {
-        if (string.IsNullOrWhiteSpace(VM.ConfigureView.LogPath_Text))
-        {
-          VM.ConfigureView.LogPath_Text = Log.axiomLogDir;
-        }
-      }
-
-      //MessageBox.Show(Configure.logPath.ToString()); //debug
-
-      // Open Log
-      if (File.Exists(VM.ConfigureView.LogPath_Text + "output.log"))
-      {
-        Process.Start("notepad.exe", "\"" + VM.ConfigureView.LogPath_Text + "output.log" + "\"");
-      }
-      else
-      {
-        Log.logParagraph.Inlines.Add(new LineBreak());
-        Log.logParagraph.Inlines.Add(new LineBreak());
-        Log.logParagraph.Inlines.Add(new Bold(new Run("Notice: Output Log has not been created yet.")) { Foreground = Log.ConsoleWarning });
-
-        MessageBox.Show("Output Log has not been created yet.",
-                        "Notice",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-      }
-    }
-
-    /// <summary>
-    /// CMD Button
-    /// </summary>
-    private void btnCmd_Click(object sender, RoutedEventArgs e)
-    {
-      // -------------------------
-      // Launch Shell
-      // -------------------------
-      // Default to User Profile Diretory
-      switch (VM.ConfigureView.Shell_SelectedItem)
-      {
-        // CMD
-        case "CMD":
-          Process.Start("CMD.exe", "/k cd %userprofile%");
-          break;
-
-        // PowerShell
-        case "PowerShell":
-          Process.Start("PowerShell.exe", "-NoExit cd $home");
-          break;
-      }
-    }
-
-    /// <summary>
-    /// File Properties Button
-    /// </summary>
-    private Boolean IsFilePropertiesOpened = false;
-    private void btnProperties_Click(object sender, RoutedEventArgs e)
-    {
-      // Prevent Monitor Resolution Window Crash
-      //
-      try
-      {
-        // Check if Window is already open
-        if (IsFilePropertiesOpened) return;
-
-        // Start window
-        //MainWindow mainwindow = this;
-        filepropwindow = new FilePropertiesWindow(this);
-
-        // Only allow 1 Window instance
-        filepropwindow.ContentRendered += delegate { IsFilePropertiesOpened = true; };
-        filepropwindow.Closed += delegate { IsFilePropertiesOpened = false; };
-
-        // Detect which screen we're on
-        var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
-        var thisScreen = allScreens.SingleOrDefault(s => Left >= s.WorkingArea.Left && Left < s.WorkingArea.Right);
-        if (thisScreen == null) thisScreen = allScreens.First();
-
-        // Position Relative to MainWindow
-        // Keep from going off screen
-        filepropwindow.Left = Math.Max((Left + (Width - filepropwindow.Width) / 2), thisScreen.WorkingArea.Left);
-        filepropwindow.Top = Math.Max((Top + (Height - filepropwindow.Height) / 2), thisScreen.WorkingArea.Top);
-
-        // Write Properties to Textbox in FilePropertiesWindow Initialize
-
-        // Open Window
-        filepropwindow.Show();
-      }
-      // Simplified
-      catch
-      {
-        // Check if Window is already open
-        if (IsFilePropertiesOpened) return;
-
-        // Start window
-        filepropwindow = new FilePropertiesWindow(this);
-
-        // Only allow 1 Window instance
-        filepropwindow.ContentRendered += delegate { IsFilePropertiesOpened = true; };
-        filepropwindow.Closed += delegate { IsFilePropertiesOpened = false; };
-
-        // Position Relative to MainWindow
-        // Keep from going off screen
-        filepropwindow.Left = Math.Max((Left + (Width - filepropwindow.Width) / 2), Left);
-        filepropwindow.Top = Math.Max((Top + (Height - filepropwindow.Height) / 2), Top);
-
-        // Write Properties to Textbox in FilePropertiesWindow Initialize
-
-        // Open Window
-        filepropwindow.Show();
-      }
-    }
-
-    /// <summary>
-    /// Play File Button
-    /// </summary>
-    private void btnPlayFile_Click(object sender, RoutedEventArgs e)
-    {
-      if (File.Exists(@output))
-      {
-        Process.Start("\"" + output + "\"");
-      }
-      else
-      {
-        Log.logParagraph.Inlines.Add(new LineBreak());
-        Log.logParagraph.Inlines.Add(new LineBreak());
-        Log.logParagraph.Inlines.Add(new Bold(new Run("Notice: File does not yet exist.")) { Foreground = Log.ConsoleWarning });
-
-        MessageBox.Show("File does not yet exist.",
-                        "Notice",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
-      }
-    }
-
-    /// <summary>
-    /// Extension Match Load Auto
-    /// </summary>
-    /// <remarks>
-    /// Change the Controls to Auto if Input Extension matches Output Extension
-    /// This will trigger Auto Codec Copy
-    /// </remarks>
-    public void ExtensionMatchLoadAutoValues()
-    {
-      //MessageBox.Show(inputExt + " " + outputExt); //debug
-      //MessageBox.Show(VM.VideoView.Video_Quality_SelectedItem); //debug
-
-      // -------------------------
-      // Get Input/Output Extensions
-      // -------------------------
-      string inputExt = Path.GetExtension(VM.MainView.Input_Text);
-      string outputExt = "." + VM.FormatView.Format_Container_SelectedItem;
-      //MessageBox.Show(inputExt + "\n" + outputExt); //debug
-
-      // Extensions Match Check
-      if (string.IsNullOrWhiteSpace(inputExt) ||
-          string.Equals(inputExt, outputExt, StringComparison.OrdinalIgnoreCase))
-      {
-        // -------------------------
-        // Video
-        // -------------------------
-        if (VM.VideoView.Video_Quality_SelectedItem == "Auto")
-        {
-          // Set Controls:
-
-          // Main
-          // Pixel Format Auto uses PixelFormatControls()
-          VM.VideoView.Video_FPS_SelectedItem = "auto";
-          VM.VideoView.Video_Speed_SelectedItem = "auto";
-          VM.VideoView.Video_Vsync_SelectedItem = "off";
-          VM.VideoView.Video_Optimize_SelectedItem = "None";
-          VM.VideoView.Video_Scale_SelectedItem = "Source";
-          VM.VideoView.Video_ScalingAlgorithm_SelectedItem = "auto";
-
-          // Color
-          VM.VideoView.Video_Color_Range_SelectedItem = "auto";
-          VM.VideoView.Video_Color_Space_SelectedItem = "auto";
-          VM.VideoView.Video_Color_Primaries_SelectedItem = "auto";
-          VM.VideoView.Video_Color_TransferCharacteristics_SelectedItem = "auto";
-          VM.VideoView.Video_Color_Matrix_SelectedItem = "auto";
-
-          // Filters
-          VM.FilterVideoView.LoadFilterVideoDefaults();
-          VM.FilterAudioView.LoadFilterAudioDefaults();
-        }
-
-        // -------------------------
-        // Audio
-        // -------------------------
-        if (VM.AudioView.Audio_Quality_SelectedItem == "Auto")
-        {
-          // Set Controls:
-
-          // Main
-          //VM.AudioView.Audio_Quality_SelectedItem = "Auto";
-          VM.AudioView.Audio_Channel_SelectedItem = "Source";
-          VM.AudioView.Audio_CompressionLevel_SelectedItem = "auto";
-          VM.AudioView.Audio_SampleRate_SelectedItem = "auto";
-          VM.AudioView.Audio_BitDepth_SelectedItem = "auto";
-
-          // Filters
-          VM.AudioView.Audio_Volume_Text = "100";
-          VM.AudioView.Audio_HardLimiter_Value = 0.0;
-          VM.FilterAudioView.LoadFilterAudioDefaults();
-        }
-      }
-    }
-
-
-    /// <summary>
-    /// Script View Drag and Drop
-    /// </summary>
-    private void tbxScriptView_PreviewDragOver(object sender, DragEventArgs e)
-    {
-      try
-      {
-        e.Handled = true;
-        e.Effects = DragDropEffects.Copy;
-      }
-      catch (IOException ex)
-      {
-        MessageBox.Show(ex.ToString(),
-                        "Error",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-      }
-    }
-
-    private void tbxScriptView_PreviewDrop(object sender, DragEventArgs e)
-    {
-      try
-      {
-        var buffer = e.Data.GetData(DataFormats.FileDrop, false) as string[];
-
-        if (buffer != null && buffer.Length == 0) // prevents crash and drag and dropping in-scriptview text
-        {
-          string file = buffer.First();
-          string ext = Path.GetExtension(file);
-
-          // Only accept txt files
-          if (ext == ".txt")
-          {
-            VM.MainView.ScriptView_Text = File.ReadAllText(file);
-          }
-        }
-      }
-      catch (IOException ex)
-      {
-        MessageBox.Show(ex.ToString(),
-                        "Error",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-      }
-    }
 
   }
 }

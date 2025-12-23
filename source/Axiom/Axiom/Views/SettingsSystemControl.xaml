@@ -1,26 +1,341 @@
 <!--
-  Settings System Control
-  Extracted from MainWindow.xaml (Lines 7188-7541)
-  TODO: Copy full content from MainWindow.xaml lines 7200-7541
+  SettingsSystemControl
+  Extracted from MainWindow.xaml
 -->
 <UserControl
   x:Class="Axiom.Views.SettingsSystemControl"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
 
   <Grid Background="Transparent">
-    <!--
-        TODO: COPY LINES 7200-7541 from MainWindow.xaml HERE
 
-        This includes:
-        - Process Group (Shell ComboBox, Shell Title ComboBox, Priority ComboBox, Threads ComboBox)
-        - Log (Path with CheckBox enable/disable)
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
 
-        Start copying from line 7200
-        End at line 7541 (before </TabItem>)
-    -->
+    <!--  Process Group  -->
+    <Grid
+      Grid.Row="0"
+      Margin="0,20,0,0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="64" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="22" />
+        <RowDefinition Height="33" />
+      </Grid.RowDefinitions>
+
+      <!--  Process  -->
+      <!--<Label
+                                       Content="Process"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Width="95"
+                                       FontFamily="Segoe UI Semibold"
+                                       Grid.Row="0"
+                                       Height="26"
+                                       Grid.Column="1" />-->
+
+      <!--  Shell  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Shell"
+        ToolTip="Launch FFmpeg through CMD or PowerShell"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboShell"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding Shell_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding Shell_Items}"
+        SelectedIndex="{Binding Shell_SelectedIndex}"
+        SelectedItem="{Binding Shell_SelectedItem}"
+        SelectionChanged="cboShell_SelectionChanged" />
+      <!--  Revert Button  -->
+      <Button
+        x:Name="btnShellDefault"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnShellDefault_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+
+      <!--  Shell Title  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Title"
+        ToolTip="Shell Title"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboShellTitle"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding ShellTitle_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding ShellTitle_Items}"
+        SelectedIndex="{Binding ShellTitle_SelectedIndex}"
+        SelectedItem="{Binding ShellTitle_SelectedItem}"
+        SelectionChanged="cboShellTitle_SelectionChanged" />
+      <!--  Revert Button  -->
+      <Button
+        x:Name="btnShellTitleDefault"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnShellTitleDefault_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+
+      <!--  Priority  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Priority"
+        ToolTip="Process Priority"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboProcessPriority"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding ProcessPriority_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding ProcessPriority_Items}"
+        SelectedIndex="{Binding ProcessPriority_SelectedIndex}"
+        SelectedItem="{Binding ProcessPriority_SelectedItem}" />
+      <!--  Revert Button  -->
+      <Button
+        x:Name="btnProcessPriorityDefault"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnProcessPriorityDefault_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+
+      <!--  Threads  -->
+      <Label
+        Grid.Row="3"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Threads"
+        ToolTip="Amount of CPU threads to use."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboThreads"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding Threads_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding Threads_Items}"
+        KeyDown="threadSelect_KeyDown"
+        SelectedIndex="{Binding Threads_SelectedIndex}"
+        SelectedItem="{Binding Threads_SelectedItem}"
+        SelectionChanged="threadSelect_SelectionChanged" />
+      <!--  Revert Button  -->
+      <Button
+        x:Name="btnThreadsDefault"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnThreadsDefault_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+
+      <!--  Log Path  -->
+      <Label
+        x:Name="labelLogConfig"
+        Grid.Row="5"
+        Grid.Column="1"
+        Width="36"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Log"
+        Cursor="Hand"
+        PreviewMouseDown="lblLogPath_PreviewMouseDown"
+        ToolTip="Path to save axiom.log"
+        ToolTipService.InitialShowDelay="250"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Log Enable/Disable Checkbox  -->
+      <CheckBox
+        x:Name="cbxLog"
+        Grid.Row="5"
+        Grid.Column="1"
+        Margin="39,6,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Checked="cbxLog_Checked"
+        IsChecked="{Binding LogCheckBox_IsChecked}"
+        IsEnabled="{Binding LogCheckBox_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ToolTip="Enable/Disable Log"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True"
+        Unchecked="cbxLog_Unchecked" />
+      <!--  Log Path TextBox  -->
+      <TextBox
+        x:Name="tbxLogConfig"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="105"
+        Height="20"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        AllowDrop="True"
+        Cursor="Arrow"
+        IsEnabled="{Binding LogPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsReadOnly="True"
+        MaxLines="1"
+        PreviewDragEnter="tbxLogPath_PreviewDragOver"
+        PreviewDragOver="tbxLogPath_PreviewDragOver"
+        PreviewDrop="tbxLogPath_PreviewDrop"
+        Style="{DynamicResource TextBoxBrowseStyle}"
+        Text="{Binding LogPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="NoWrap"
+        ToolTip="{Binding LogPath_Text, Mode=OneWay}"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Log Revert Button  -->
+      <Button
+        x:Name="btnLogAuto"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnLogPathAuto_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+    </Grid>
+
+
   </Grid>
 </UserControl>

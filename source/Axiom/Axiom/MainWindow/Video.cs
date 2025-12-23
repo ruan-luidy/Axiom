@@ -422,7 +422,6 @@ namespace Axiom
       Controls.Video.Controls.passUserSelected = true;
     }
 
-
     /// <summary>
     /// Video Quality - ComboBox
     /// </summary>
@@ -489,7 +488,6 @@ namespace Axiom
       // -------------------------
       //VideoControls.AutoCopyVideoCodec("control");
     }
-
 
     /// <summary>
     /// Video CRF Custom Number Textbox
@@ -563,7 +561,6 @@ namespace Axiom
         // Select Item
         VM.VideoView.Video_Pass_SelectedItem = "1 Pass";
       }
-
 
       // -------------------------
       // Display Bit Rate in TextBox
@@ -639,7 +636,6 @@ namespace Axiom
                                                   VM.VideoView.Video_Pass_SelectedItem);
     }
 
-
     /// <summary>
     /// Pixel Format
     /// </summary>
@@ -650,7 +646,6 @@ namespace Axiom
       // -------------------------
       //OutputPath_UpdateDisplay();
     }
-
 
     /// <summary>
     /// FPS ComboBox
@@ -712,7 +707,6 @@ namespace Axiom
       //}
     }
 
-
     /// <summary>
     /// Speed ComboBox
     /// </summary>
@@ -754,7 +748,6 @@ namespace Axiom
       // Only allow Numbers and Backspace
       Allow_Only_Number_Keys(e);
     }
-
 
     /// <summary>
     /// Presets
@@ -905,7 +898,6 @@ namespace Axiom
 
     //}
 
-
     /// <summary>
     /// Video Color Range Combobox
     /// </summary>
@@ -913,8 +905,6 @@ namespace Axiom
     {
       //VideoControls.AutoCopyVideoCodec("control");
     }
-
-
 
     private void cboVideo_Scale_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -954,7 +944,6 @@ namespace Axiom
         VM.VideoView.Video_ScalingAlgorithm_IsEnabled = true;
       }
 
-
       // -------------------------
       // Update Width/Height TextBox Display
       // -------------------------
@@ -965,8 +954,6 @@ namespace Axiom
       // -------------------------
       //OutputPath_UpdateDisplay();
     }
-
-
 
     /// <summary>
     /// Video Scale Display
@@ -1171,7 +1158,6 @@ namespace Axiom
     //    }
     //}
 
-
     /// <summary>
     /// Width Textbox Change
     /// </summary>
@@ -1222,7 +1208,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Video Screen Format
     /// </summary>
@@ -1234,7 +1219,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Video Aspect Ratio
     /// </summary>
@@ -1242,7 +1226,6 @@ namespace Axiom
     {
 
     }
-
 
     /// <summary>
     /// Video Scaling Algorithm
@@ -1254,7 +1237,6 @@ namespace Axiom
       // -------------------------
       //OutputPath_UpdateDisplay();
     }
-
 
     /// <summary>
     /// Crop Window - Button
@@ -1279,7 +1261,6 @@ namespace Axiom
       // Open Window
       cropwindow.ShowDialog();
     }
-
 
     /// <summary>
     /// Crop Clear Button

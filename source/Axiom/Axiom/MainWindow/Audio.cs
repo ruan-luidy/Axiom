@@ -158,7 +158,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Audio Channel - ComboBox
     /// </summary>
@@ -169,7 +168,6 @@ namespace Axiom
       // -------------------------
       //OutputPath_UpdateDisplay();
     }
-
 
     /// <summary>
     /// Audio Quality - ComboBox
@@ -285,7 +283,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Audio Custom BitRate kbps - Textbox
     /// </summary>
@@ -317,7 +314,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Samplerate ComboBox
     /// </summary>
@@ -347,7 +343,6 @@ namespace Axiom
       //OutputPath_UpdateDisplay();
     }
 
-
     /// <summary>
     /// Bit Depth ComboBox
     /// </summary>
@@ -366,7 +361,6 @@ namespace Axiom
       // -------------------------
       //OutputPath_UpdateDisplay();
     }
-
 
     /// <summary>
     /// Volume TextBox Changed
@@ -456,7 +450,6 @@ namespace Axiom
       dispatcherTimerDown.Stop();
     }
 
-
     /// <summary>
     /// Audio Hard Limiter - Slider
     /// </summary>
@@ -477,7 +470,6 @@ namespace Axiom
     {
       //Controls.Audio.Controls.AutoCopyAudioCodec("control");
     }
-
 
     /// <summary>
     /// Audio Mux - ListView

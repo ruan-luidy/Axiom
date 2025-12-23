@@ -220,6 +220,51 @@
     <Compile Include="ViewModel\SubtitleViewModel.cs" />
     <Compile Include="ViewModel\VideoViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Views\AudioSettingsControl.xaml.cs">
+      <DependentUpon>AudioSettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilterAudioControl.xaml.cs">
+      <DependentUpon>FilterAudioControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilterVideoControl.xaml.cs">
+      <DependentUpon>FilterVideoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormatControl.xaml.cs">
+      <DependentUpon>FormatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InputOutputControl.xaml.cs">
+      <DependentUpon>InputOutputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessControlPanel.xaml.cs">
+      <DependentUpon>ProcessControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScriptControl.xaml.cs">
+      <DependentUpon>ScriptControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsConfigControl.xaml.cs">
+      <DependentUpon>SettingsConfigControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsFileControl.xaml.cs">
+      <DependentUpon>SettingsFileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsSystemControl.xaml.cs">
+      <DependentUpon>SettingsSystemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubtitlesControl.xaml.cs">
+      <DependentUpon>SubtitlesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolbarControl.xaml.cs">
+      <DependentUpon>ToolbarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VideoColorControl.xaml.cs">
+      <DependentUpon>VideoColorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VideoEncodingControl.xaml.cs">
+      <DependentUpon>VideoEncodingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VideoSizeControl.xaml.cs">
+      <DependentUpon>VideoSizeControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="CropWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,6 +302,66 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UpdateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AudioSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FilterAudioControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FilterVideoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FormatControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InputOutputControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProcessControlPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ScriptControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsConfigControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsFileControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsSystemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SubtitlesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ToolbarControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\VideoColorControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\VideoEncodingControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\VideoSizeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -74,7 +74,6 @@ namespace Axiom
           return;
         }
 
-
         // -------------------------
         // Inline
         // -------------------------
@@ -92,7 +91,6 @@ namespace Axiom
         }
       }
     }
-
 
     /// <summary>
     /// Check if Script has been Edited (Method)
@@ -140,7 +138,6 @@ namespace Axiom
       return edited;
     }
 
-
     /// <summary>
     /// Script View Copy/Paste
     /// </summary>
@@ -151,7 +148,6 @@ namespace Axiom
     //private void OnScriptCopy(object sender, DataObjectCopyingEventArgs e)
     //{
     //}
-
 
     /// <summary>
     /// Script - Button
@@ -188,7 +184,6 @@ namespace Axiom
       // -------------------------
       Controls.ScriptView.sort = false;
       txblScriptSort.Text = "Sort";
-
 
       // -------------------------
       // Start Script
@@ -234,7 +229,6 @@ namespace Axiom
         int count1 = await process;
         //sw.Stop();
         //MessageBox.Show(sw.Elapsed.ToString());
-
 
         // -------------------------
         // Generate Script
@@ -283,7 +277,6 @@ namespace Axiom
       //}
     }
 
-
     /// <summary>
     /// Load Script Button
     /// </summary>
@@ -321,7 +314,6 @@ namespace Axiom
         }
       }
     }
-
 
     /// <summary>
     /// Save Script Button
@@ -374,7 +366,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Copy All Button
     /// </summary>
@@ -387,7 +378,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Clear Button
     /// </summary>
@@ -395,7 +385,6 @@ namespace Axiom
     {
       Controls.ScriptView.ClearScriptView();
     }
-
 
     /// <summary>
     /// Sort Button
@@ -405,7 +394,6 @@ namespace Axiom
       scriptText = VM.MainView.ScriptView_Text; // Prevents ScriptView Flicker
       Sort();
     }
-
 
     /// <summary>
     /// Run Button

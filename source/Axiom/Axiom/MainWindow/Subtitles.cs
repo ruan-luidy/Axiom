@@ -68,7 +68,6 @@ namespace Axiom
       ConvertButtonText();
     }
 
-
     /// <summary>
     /// Subtitle Stream - ComboBox
     /// </summary>
@@ -181,7 +180,6 @@ namespace Axiom
         VM.SubtitleView.Subtitle_Delay_Text = string.Empty;
       }
     }
-
 
     /// <summary>
     /// Subtitle Add
@@ -478,7 +476,6 @@ namespace Axiom
         }
       }
     }
-
 
     /// <summary>
     /// Title Metadata - TextBox

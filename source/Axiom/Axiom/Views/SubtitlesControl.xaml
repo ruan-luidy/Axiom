@@ -1,33 +1,319 @@
 <!--
   Subtitles Control
-  Extracted from MainWindow.xaml (Lines 4991-5353)
-  TODO: Copy full content from MainWindow.xaml lines 4998-5353
+  Extracted from MainWindow.xaml
 -->
 <UserControl
   x:Class="Axiom.Views.SubtitlesControl"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
 
   <Grid Background="Transparent">
-    <ScrollViewer
-      Width="254"
-      HorizontalAlignment="Right"
-      Template="{DynamicResource ScrollViewerControlTemplate}">
-      <!--
-            TODO: COPY LINES 5001-5353 from MainWindow.xaml HERE
+    <ScrollViewer Width="254" HorizontalAlignment="Right">
 
-            This includes:
-            - Subtitle Codec ComboBox
-            - Stream ComboBox
-            - Mux ListView with management buttons (Add, Remove, Sort Up/Down, Clear)
-            - Metadata (Title TextBox, Language ComboBox)
+      <!--  Grid  -->
+      <Grid Margin="0,20,0,30" VerticalAlignment="Top">
 
-            Start copying from line 5001: <Grid Margin="0,20,0,30" VerticalAlignment="Top">
-            End at line 5353 (before </TabItem>)
-      -->
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="15" />
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+          <RowDefinition Height="33" />
+          <RowDefinition Height="33" />
+          <RowDefinition Height="33" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="11" />
+          <RowDefinition Height="33" />
+          <RowDefinition Height="33" />
+          <RowDefinition Height="33" />
+          <RowDefinition Height="33" />
+          <RowDefinition Height="22" />
+        </Grid.RowDefinitions>
+
+        <!--  Subtitle Codec  -->
+        <Label
+          Grid.Row="0"
+          Grid.Column="1"
+          Width="85"
+          Height="26"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Content="Subtitle Codec"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboSubtitle_Codec"
+          Grid.Row="0"
+          Grid.Column="2"
+          Width="105"
+          Height="22"
+          Margin="0,0,0,9"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Bottom"
+          IsEnabled="{Binding Subtitle_Codec_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Subtitle_Codec_Items}"
+          SelectedItem="{Binding Subtitle_Codec_SelectedItem}"
+          SelectionChanged="cboSubtitle_Codec_SelectionChanged" />
+
+        <!--  Subtitles  -->
+        <Label
+          Grid.Row="1"
+          Grid.Column="1"
+          Width="54"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Content="Stream"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Subtitle Stream to keep."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+        <ComboBox
+          x:Name="cboSubtitles_Stream"
+          Grid.Row="1"
+          Grid.Column="2"
+          Width="105"
+          Margin="0,2,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          FontFamily="Segoe UI Semilight"
+          IsEnabled="{Binding Subtitle_Stream_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Subtitle_Stream_Items}"
+          SelectedIndex="{Binding Subtitle_Stream_SelectedIndex}"
+          SelectedItem="{Binding Subtitle_Stream_SelectedItem}"
+          SelectionChanged="cboSubtitle_Stream_SelectionChanged"
+          ToolTip="Subtitle Stream to keep. Add External Subtitle files. Mark CheckBox for Default."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <!--  Mux  -->
+        <Label
+          Grid.Row="2"
+          Grid.Column="1"
+          Width="95"
+          Height="26"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Content="Mux"
+          FontFamily="Segoe UI Semibold" />
+        <!--  Subtitles List  -->
+        <ListView
+          x:Name="lstvSubtitles"
+          Grid.Row="3"
+          Grid.Column="1"
+          Grid.ColumnSpan="2"
+          Height="130"
+          Margin="5,7,48,0"
+          VerticalAlignment="Top"
+          BorderThickness="0"
+          IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding Subtitle_ListView_Items}"
+          Opacity="{Binding Subtitle_ListView_Opacity}"
+          SelectedIndex="{Binding Subtitle_ListView_SelectedIndex}"
+          SelectionChanged="lstvSubtitles_SelectionChanged"
+          SelectionMode="Single"
+          Style="{DynamicResource ListViewStyle}"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+
+          <ListView.Resources>
+            <Style TargetType="{x:Type GridViewColumnHeader}">
+              <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+          </ListView.Resources>
+
+          <ListView.ToolTip>
+            <TextBlock>
+              To enable, select Stream: mux/external.<LineBreak />
+              <LineBreak />
+              Add External Subtitle files. Mark CheckBox for Default.<LineBreak />
+              <LineBreak />
+              Select Codec: Copy to keep original file without converting.</TextBlock>
+          </ListView.ToolTip>
+
+          <!--  List Checkboxes  -->
+          <ListView.View>
+            <GridView>
+              <!--  CheckBox  -->
+              <GridViewColumn>
+                <GridViewColumn.CellTemplate>
+                  <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                  </DataTemplate>
+                </GridViewColumn.CellTemplate>
+              </GridViewColumn>
+              <!--  Name  -->
+              <GridViewColumn Width="125" />
+            </GridView>
+          </ListView.View>
+        </ListView>
+
+        <!--  Add  -->
+        <Button
+          x:Name="btnSubtitle_Add"
+          Grid.Row="3"
+          Grid.Column="2"
+          Width="22"
+          Height="22"
+          Margin="83,7,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Click="btnSubtitle_Add_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Add"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock Margin="0,-2,0,0" Text="+" />
+        </Button>
+        <!--  Remove  -->
+        <Button
+          x:Name="btnSubtitle_Remove"
+          Grid.Row="3"
+          Grid.Column="2"
+          Width="22"
+          Height="22"
+          Margin="83,34,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Click="btnSubtitle_Remove_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Remove"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock Margin="0,-2,0,0" Text="-" />
+        </Button>
+        <!--  Sort Up  -->
+        <Button
+          x:Name="btnSubtitle_SortUp"
+          Grid.Row="3"
+          Grid.Column="2"
+          Width="22"
+          Height="22"
+          Margin="83,88,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Click="btnSubtitle_SortUp_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+          <TextBlock Margin="0,-2,0,0" Text="▴" />
+        </Button>
+        <!--  Sort Down  -->
+        <Button
+          x:Name="btnSubtitle_SortDown"
+          Grid.Row="3"
+          Grid.Column="2"
+          Width="22"
+          Height="22"
+          Margin="83,115,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Click="btnSubtitle_SortDown_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+          <TextBlock Margin="0,0,0,0" Text="▾" />
+        </Button>
+        <!--  Clear All  -->
+        <Button
+          x:Name="btnSubtitle_Clear"
+          Grid.Row="3"
+          Grid.Column="2"
+          Width="22"
+          Height="22"
+          Margin="83,61,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Click="btnSubtitle_Clear_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Clear All"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock Margin="0,-3,0,0" Text="x" />
+        </Button>
+
+        <!--  Title Metadata  -->
+        <Label
+          Grid.Row="5"
+          Grid.Column="1"
+          Width="85"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Content="Title"
+          FontFamily="Segoe UI Semilight" />
+        <TextBox
+          x:Name="tbxSubtitle_Metadata_Title"
+          Grid.Row="6"
+          Grid.Column="1"
+          Grid.ColumnSpan="2"
+          Width="196"
+          Height="22"
+          Margin="5,2,0,0"
+          Padding="2,1,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Subtitle_Metadata_Title_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          KeyUp="tbxSubtitle_Metadata_Title_KeyUp"
+          LostFocus="tbxSubtitle_Metadata_Title_LostFocus"
+          MaxLines="1"
+          Text="{Binding Subtitle_Metadata_Title_Text, Mode=TwoWay}"
+          TextWrapping="NoWrap"
+          ToolTip="Stream Title Metadata"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <!--  Language Metadata  -->
+        <Label
+          Grid.Row="7"
+          Grid.Column="1"
+          Width="85"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Content="Language"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Stream Language Metadata"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+        <ComboBox
+          x:Name="cboSubtitle_Metadata_Language"
+          Grid.Row="7"
+          Grid.Column="2"
+          Width="105"
+          Height="22"
+          Margin="0,2,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Subtitle_Metadata_Language_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Subtitle_Metadata_Language_Items}"
+          SelectedIndex="{Binding Subtitle_Metadata_Language_SelectedIndex}"
+          SelectedValue="{Binding Subtitle_Metadata_Language_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValuePath="Name"
+          SelectionChanged="cboSubtitle_Metadata_Language_SelectionChanged">
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <Grid>
+                <TextBlock DataContext="{Binding}">
+                  <TextBlock.Text>
+                    <Binding Path="Name" />
+                  </TextBlock.Text>
+                </TextBlock>
+              </Grid>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+
+      </Grid>
+
     </ScrollViewer>
   </Grid>
 </UserControl>

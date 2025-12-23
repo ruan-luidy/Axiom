@@ -573,7 +573,6 @@ namespace Axiom
       //VideoControls.AutoCopyVideoCodec("control");
     }
 
-
     /// <summary>
     /// Filter Video - Selective Color Reset
     /// </summary>
@@ -584,7 +583,6 @@ namespace Axiom
 
       //VideoControls.AutoCopyVideoCodec("control");
     }
-
 
     /// <summary>
     /// Filter Video - EQ Sliders
@@ -697,8 +695,6 @@ namespace Axiom
       //VideoControls.AutoCopyVideoCodec("control");
     }
 
-
-
     /// <summary>
     /// Filter Video - Deband
     /// </summary>
@@ -771,7 +767,6 @@ namespace Axiom
       //VideoControls.AutoCopyVideoCodec("control");
     }
 
-
     /// <summary>
     /// Audio Limiter
     /// </summary>
@@ -813,7 +808,6 @@ namespace Axiom
     //{
     //    //AudioControls.AutoCopyAudioCodec("control");
     //}
-
 
     /// <summary>
     /// Filter Audio - Contrast

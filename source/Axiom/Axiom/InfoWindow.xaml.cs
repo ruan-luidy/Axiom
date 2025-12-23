@@ -26,28 +26,28 @@ using ViewModel;
 
 namespace Axiom
 {
-    /// <summary>
-    /// Interaction logic for Info.xaml
-    /// </summary>
-    public partial class InfoWindow : Window
+  /// <summary>
+  /// Interaction logic for Info.xaml
+  /// </summary>
+  public partial class InfoWindow : Window
+  {
+    public InfoWindow()
     {
-        public InfoWindow()
-        {
-            InitializeComponent();
+      InitializeComponent();
 
-            // Set Min/Max Width/Height to prevent Tablets maximizing
-            this.MinWidth = 500;
-            this.MinHeight = 400;
-            //this.MaxWidth = 445;
-            //this.MaxHeight = 335;
-        }
+      // Set Min/Max Width/Height to prevent Tablets maximizing
+      this.MinWidth = 500;
+      this.MinHeight = 400;
+      //this.MaxWidth = 445;
+      //this.MaxHeight = 335;
+    }
 
-        /// <summary>
-        /// Window Loaded
-        /// </summary>
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            VM.MainView.Info_Text =
+    /// <summary>
+    /// Window Loaded
+    /// </summary>
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+      VM.MainView.Info_Text =
 @"Axiom generates command scripts to be interpreted and processed by multimedia encoder FFmpeg and stream analyzer FFprobe. 
 
 Axiom UI
@@ -732,6 +732,6 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
 ";
-        }
     }
+  }
 }

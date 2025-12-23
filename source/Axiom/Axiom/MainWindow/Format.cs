@@ -82,7 +82,6 @@ namespace Axiom
       // -------------------------
       Controls.Video.Controls.OptimizeControls();
 
-
       //// -------------------------
       //// File Renamer
       //// -------------------------
@@ -133,8 +132,6 @@ namespace Axiom
       //AudioControls.AutoCopyAudioCodec("control");
     }
 
-
-
     /// <summary>
     /// Media Type - Combobox
     /// </summary>
@@ -144,7 +141,6 @@ namespace Axiom
 
       Controls.Format.Controls.MediaTypeControls_SelectedItems(); // Selected Items
     }
-
 
     /// <summary>
     /// Cut Combobox
@@ -400,7 +396,6 @@ namespace Axiom
       Allow_Only_Number_Keys(e);
     }
 
-
     // -------------------------
     // Frame Start Textbox Change
     // -------------------------
@@ -435,7 +430,6 @@ namespace Axiom
       Allow_Only_Number_Keys(e);
     }
 
-
     /// <summary>
     /// YouTube Download Check (Method)
     /// </summary>
@@ -452,7 +446,6 @@ namespace Axiom
       return false;
     }
 
-
     /// <summary>
     /// YouTube Download - URL (Method)
     /// </summary>
@@ -465,7 +458,6 @@ namespace Axiom
 
       return url;
     }
-
 
     /// <summary>
     /// YouTube Download - Format (Method)
@@ -528,7 +520,6 @@ namespace Axiom
 
       return string.Empty;
     }
-
 
     /// <summary>
     /// YouTube Download - Quality (Method)
@@ -622,10 +613,8 @@ namespace Axiom
         }
       }
 
-
       return string.Empty;
     }
-
 
     /// <summary>
     /// YouTube Method - Selection Changed
@@ -667,8 +656,6 @@ namespace Axiom
       }
     }
 
-
-
     /// <summary>
     /// YouTube Download - Merge Output Format
     /// </summary>
@@ -688,7 +675,6 @@ namespace Axiom
     //                                                                );
     //    }
     //}
-
 
   }
 }

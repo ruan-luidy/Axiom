@@ -228,7 +228,6 @@
         ToolTipService.InitialShowDelay="500"
         ToolTipService.ShowOnDisabled="True">
         <TextBlock
-          Margin="0,-2,0,0"
           Style="{DynamicResource ButtonCropTextBlock}"
           Text="Crop" />
       </Button>
@@ -250,7 +249,6 @@
         ToolTipService.ShowOnDisabled="True">
         <TextBlock
           x:Name="tblkCropClear"
-          Margin="0,-2,0,0"
           Text="{Binding Video_CropClear_Text, Mode=TwoWay}" />
       </Button>
 

@@ -468,8 +468,7 @@
         Collapsed="expVideo_BitRateAdvanced_Expander_Collapsed"
         DataContext="{Binding VideoView}"
         Expanded="expVideo_BitRateAdvanced_Expander_Expanded"
-        IsExpanded="{Binding Video_BitRateAdvanced_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        Style="{DynamicResource GroupBoxExpanderStyle}">
+        IsExpanded="{Binding Video_BitRateAdvanced_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
         <Expander.Header>
           <StackPanel>
@@ -809,8 +808,7 @@
           Panel.ZIndex="0"
           DataContext="{Binding VideoView}"
           IsEnabled="{Binding Video_Optimize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          IsExpanded="{Binding Video_Optimize_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          Style="{DynamicResource GroupBoxExpanderStyle}">
+          IsExpanded="{Binding Video_Optimize_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
           <Expander.Header>
             <StackPanel>

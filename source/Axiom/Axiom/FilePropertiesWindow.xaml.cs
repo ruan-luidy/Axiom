@@ -27,107 +27,107 @@ using ViewModel;
 
 namespace Axiom
 {
-    /// <summary>
-    /// Interaction logic for Console.xaml
-    /// </summary>
-    public partial class FilePropertiesWindow : Window
+  /// <summary>
+  /// Interaction logic for Console.xaml
+  /// </summary>
+  public partial class FilePropertiesWindow : Window
+  {
+    private MainWindow mainwindow;
+
+    public FilePropertiesWindow(MainWindow mainwindow)
     {
-        private MainWindow mainwindow;
+      InitializeComponent();
 
-        public FilePropertiesWindow(MainWindow mainwindow)
-        {
-            InitializeComponent();
+      //DataContext = vm;
 
-            //DataContext = vm;
+      // Set Width/Height to prevent Tablets maximizing
+      //this.Width = 420;
+      //this.Height = 400;
+      this.MinWidth = 200;
+      this.MinHeight = 200;
 
-            // Set Width/Height to prevent Tablets maximizing
-            //this.Width = 420;
-            //this.Height = 400;
-            this.MinWidth = 200;
-            this.MinHeight = 200;
-
-            this.mainwindow = mainwindow;
-        }
-
-        /// <summary>
-        /// Window Loaded
-        /// </summary>
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //MainView vm = mainwindow.DataContext as MainView;
-
-            // -------------------------
-            // Display FFprobe File Properties
-            // -------------------------
-
-            // Get FFprobe Path
-            MainWindow.FFprobePath();
-
-            // -------------------------
-            // Write Properties to Window
-            // -------------------------
-            try
-            {
-                Paragraph propertiesParagraph = new Paragraph(); //RichTextBox
-
-                // Clear Rich Text Box on Start
-                propertiesParagraph.Inlines.Clear();
-
-                // Start
-                rtbFileProperties.Document = new FlowDocument(propertiesParagraph); 
-
-                Analyze.FFprobe.argsFileProperties = " -i" + " " + "\"" + VM.MainView.Input_Text + "\"" + " -v quiet -print_format ini -show_format -show_streams";
-
-                Analyze.FFprobe.inputFileProperties = Analyze.FFprobe.InputFileInfo(VM.MainView.Input_Text, 
-                                                                                VM.MainView.Batch_IsChecked, 
-                                                                                Analyze.FFprobe.argsFileProperties
-                                                                                );
-
-                // Write All File Properties to Rich Text Box
-                if (!string.IsNullOrEmpty(Analyze.FFprobe.inputFileProperties))
-                {
-                    rtbFileProperties.BeginChange(); // begin change
-
-                    propertiesParagraph.Inlines.Add(new Run(Analyze.FFprobe.inputFileProperties) { Foreground = Log.ConsoleDefault });
-
-                    rtbFileProperties.EndChange(); // end change
-                }
-            }
-            catch
-            {
-
-            }
-        }
-
-
-        /// <summary>
-        /// Close
-        /// </summary>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Close();
-        }
-
-
-        /// <summary>
-        /// Expand Button
-        /// </summary>
-        private void buttonExpand_Click(object sender, RoutedEventArgs e)
-        {
-            // If less than 600px Height
-            if (this.Height <= 650)
-            {
-                this.Width = 650;
-                this.Height = 600;
-
-                double screenWidth = SystemParameters.PrimaryScreenWidth;
-                double screenHeight = SystemParameters.PrimaryScreenHeight;
-                double windowWidth = this.Width;
-                double windowHeight = this.Height;
-                this.Left = (screenWidth / 2) - (windowWidth / 2);
-                this.Top = (screenHeight / 2) - (windowHeight / 2);
-            }
-        }
+      this.mainwindow = mainwindow;
     }
+
+    /// <summary>
+    /// Window Loaded
+    /// </summary>
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+      //MainView vm = mainwindow.DataContext as MainView;
+
+      // -------------------------
+      // Display FFprobe File Properties
+      // -------------------------
+
+      // Get FFprobe Path
+      MainWindow.FFprobePath();
+
+      // -------------------------
+      // Write Properties to Window
+      // -------------------------
+      try
+      {
+        Paragraph propertiesParagraph = new Paragraph(); //RichTextBox
+
+        // Clear Rich Text Box on Start
+        propertiesParagraph.Inlines.Clear();
+
+        // Start
+        rtbFileProperties.Document = new FlowDocument(propertiesParagraph);
+
+        Analyze.FFprobe.argsFileProperties = " -i" + " " + "\"" + VM.MainView.Input_Text + "\"" + " -v quiet -print_format ini -show_format -show_streams";
+
+        Analyze.FFprobe.inputFileProperties = Analyze.FFprobe.InputFileInfo(VM.MainView.Input_Text,
+                                                                        VM.MainView.Batch_IsChecked,
+                                                                        Analyze.FFprobe.argsFileProperties
+                                                                        );
+
+        // Write All File Properties to Rich Text Box
+        if (!string.IsNullOrEmpty(Analyze.FFprobe.inputFileProperties))
+        {
+          rtbFileProperties.BeginChange(); // begin change
+
+          propertiesParagraph.Inlines.Add(new Run(Analyze.FFprobe.inputFileProperties) { Foreground = Log.ConsoleDefault });
+
+          rtbFileProperties.EndChange(); // end change
+        }
+      }
+      catch
+      {
+
+      }
+    }
+
+
+    /// <summary>
+    /// Close
+    /// </summary>
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      e.Cancel = true;
+      this.Close();
+    }
+
+
+    /// <summary>
+    /// Expand Button
+    /// </summary>
+    private void buttonExpand_Click(object sender, RoutedEventArgs e)
+    {
+      // If less than 600px Height
+      if (this.Height <= 650)
+      {
+        this.Width = 650;
+        this.Height = 600;
+
+        double screenWidth = SystemParameters.PrimaryScreenWidth;
+        double screenHeight = SystemParameters.PrimaryScreenHeight;
+        double windowWidth = this.Width;
+        double windowHeight = this.Height;
+        this.Left = (screenWidth / 2) - (windowWidth / 2);
+        this.Top = (screenHeight / 2) - (windowHeight / 2);
+      }
+    }
+  }
 }

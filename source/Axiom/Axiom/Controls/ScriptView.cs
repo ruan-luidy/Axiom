@@ -29,17 +29,17 @@ using ViewModel;
 
 namespace Controls
 {
-    public class ScriptView
+  public class ScriptView
+  {
+    public static bool sort = false;
+
+    /// <summary>
+    /// Clear RichTextBox
+    /// </summary>
+    public static void ClearScriptView()
     {
-        public static bool sort = false;
-
-        /// <summary>
-        /// Clear RichTextBox
-        /// </summary>
-        public static void ClearScriptView()
-        {
-            VM.MainView.ScriptView_Text = string.Empty;
-        }
-
+      VM.MainView.ScriptView_Text = string.Empty;
     }
+
+  }
 }

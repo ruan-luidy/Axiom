@@ -1,26 +1,404 @@
 <!--
-  Settings File Control
-  Extracted from MainWindow.xaml (Lines 6763-7186)
-  TODO: Copy full content from MainWindow.xaml lines 6776-7186
+  SettingsFileControl
+  Extracted from MainWindow.xaml
 -->
 <UserControl
   x:Class="Axiom.Views.SettingsFileControl"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
 
   <Grid Background="Transparent">
-    <!--
-        TODO: COPY LINES 6776-7186 from MainWindow.xaml HERE
 
-        This includes:
-        - Input Group (Filename Tokens ComboBox, Custom Tokens TextBox)
-        - Output Group (Overwrite ComboBox, Spacing ComboBox, Tokens ListView with management buttons)
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
 
-        Start copying from line 6776
-        End at line 7186 (before </TabItem>)
-    -->
+    <!--  Input Group  -->
+    <Grid
+      Grid.Row="0"
+      Margin="0,20,0,0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="64" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="80" />
+        <RowDefinition Height="11" />
+      </Grid.RowDefinitions>
+
+      <!--  Input  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="54"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Input"
+        FontFamily="Segoe UI Semibold" />
+
+      <!--  Input Filename Tokens  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Tokens"
+        ToolTip="Keep or Remove Input Filename Tokens (e.g. 1080p x264 DD7.1)"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboInputFileNameTokens"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding InputFileNameTokens_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding InputFileNameTokens_Items}"
+        SelectedIndex="{Binding InputFileNameTokens_SelectedIndex}"
+        SelectedItem="{Binding InputFileNameTokens_SelectedItem}"
+        SelectionChanged="cboInputFileNameTokens_SelectionChanged" />
+      <!--  Revert Button  -->
+      <Button
+        x:Name="btnInputFileNameTokensDefault"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnInputFileNameTokensDefault_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+
+      <!--  Input Tokens Custom  -->
+      <TextBox
+        x:Name="tbxInputFileNameTokensCustom"
+        Grid.Row="2"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        Width="203"
+        Height="75"
+        Margin="5,2,0,0"
+        Padding="5"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding InputFileNameTokensCustom_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        MaxLines="1"
+        RenderOptions.ClearTypeHint="Enabled"
+        Text="{Binding InputFileNameTokensCustom_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="Wrap"
+        ToolTip="Add additional custom Input Filename Tokens to be removed, separated by commas."
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True"
+        VerticalScrollBarVisibility="Auto" />
+    </Grid>
+
+    <!--  Output Group  -->
+    <Grid
+      Grid.Row="1"
+      Margin="0,20,0,0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="64" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="44" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
+
+      <!--  Output  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="54"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Output"
+        FontFamily="Segoe UI Semibold" />
+
+      <!--  Naming Tokens  -->
+      <Label
+        Grid.Row="3"
+        Grid.Column="1"
+        Width="54"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Tokens"
+        ToolTip="Add these settings to the output filename."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <!--  Tokens List  -->
+      <ListView
+        x:Name="lstvOutputNaming"
+        Grid.Row="3"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        Height="238"
+        Margin="0,31,30,0"
+        Padding="2,4,0,0"
+        VerticalAlignment="Top"
+        BorderThickness="0"
+        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="False"
+        ItemsSource="{Binding OutputNaming_ListView_Items}"
+        SelectedIndex="{Binding OutputNaming_ListView_SelectedIndex}"
+        SelectionChanged="lstvOutputNaming_SelectionChanged"
+        SelectionMode="Multiple"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+
+        <ListView.Resources>
+          <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+          </Style>
+        </ListView.Resources>
+
+        <!--  List Checkboxes  -->
+        <ListView.View>
+          <GridView>
+            <!--  CheckBox  -->
+            <GridViewColumn>
+              <GridViewColumn.CellTemplate>
+                <DataTemplate>
+                  <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                </DataTemplate>
+              </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <!--  Name  -->
+            <GridViewColumn Width="122" />
+          </GridView>
+        </ListView.View>
+      </ListView>
+
+      <!--  Sort Up  -->
+      <Button
+        x:Name="btnOutputNaming_SortUp"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="22"
+        Height="22"
+        Margin="120,31,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnOutputNaming_SortUp_Click"
+        Cursor="Hand"
+        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBlock Margin="0,-2,0,0" Text="▴" />
+      </Button>
+      <!--  Sort Down  -->
+      <Button
+        x:Name="btnOutputNaming_SortDown"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="22"
+        Height="22"
+        Margin="120,58,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnOutputNaming_SortDown_Click"
+        Cursor="Hand"
+        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBlock Margin="0,0,0,0" Text="▾" />
+      </Button>
+      <!--  Select All  -->
+      <Button
+        x:Name="btnOutputNaming_SelectAll"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="22"
+        Height="22"
+        Margin="120,85,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnOutputNaming_SelectAll_Click"
+        Cursor="Hand"
+        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ToolTip="Select All"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock
+          Margin="0,-1,0,0"
+          FontSize="11"
+          Text="✓" />
+      </Button>
+      <!--  Deselect All  -->
+      <Button
+        x:Name="btnOutputNaming_DeselectAll"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="22"
+        Height="22"
+        Margin="120,112,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnOutputNaming_DeselectAll_Click"
+        Cursor="Hand"
+        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ToolTip="Deselect All"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock Margin="0,-4,0,0" Text="x" />
+      </Button>
+      <!--  Output Naming Load Defaults  -->
+      <Button
+        x:Name="btnOutputNamingDefaults"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="22"
+        Height="22"
+        Margin="120,139,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnOutputNamingDefaults_Click"
+        Cursor="Hand"
+        ToolTip="Load Default Positions and Selections"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,-1,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+
+      <!--  Spacing  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="68"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Spacing"
+        ToolTip="Output filename spacing (e.g. My.File.x264.mp4)"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboOutputFileNameSpacing"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding OutputFileNameSpacing_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding OutputFileNameSpacing_Items}"
+        SelectedIndex="{Binding OutputFileNameSpacing_SelectedIndex}"
+        SelectedItem="{Binding OutputFileNameSpacing_SelectedItem}" />
+      <!--  Revert Button  -->
+      <Button
+        x:Name="btnOutputFileNameSpacingDefault"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnOutputFileNameSpacingDefault_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+
+      <!--  Overwrite  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="68"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Overwrite"
+        ToolTip="Overwrite output file if it already exists."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboOutputOverwrite"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding OutputOverwrite_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding OutputOverwrite_Items}"
+        SelectedIndex="{Binding OutputOverwrite_SelectedIndex}"
+        SelectedItem="{Binding OutputOverwrite_SelectedItem}" />
+      <!--  Revert Button  -->
+      <Button
+        x:Name="btnOutputOverwriteDefault"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnOutputOverwriteDefault_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <Image
+          Width="9"
+          Height="11"
+          Margin="1,0,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Stretch="Uniform"
+          Style="{DynamicResource ButtonRevertArrow}" />
+      </Button>
+    </Grid>
+
   </Grid>
 </UserControl>

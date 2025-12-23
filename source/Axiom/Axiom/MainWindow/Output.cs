@@ -86,7 +86,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Output Button
     /// </summary>
@@ -94,8 +93,6 @@ namespace Axiom
     {
       // Get Output File Extension
       Controls.Format.Controls.OutputFormatExt();
-
-
 
       switch (VM.MainView.Batch_IsChecked)
       {
@@ -251,7 +248,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Output Path
     /// </summary>
@@ -282,7 +278,6 @@ namespace Axiom
 
       return output;
     }
-
 
     /// <summary>
     /// Output Path - Single File
@@ -450,7 +445,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// Output Path - Batch
     /// </summary>
@@ -544,7 +538,6 @@ namespace Axiom
       //output = outputDir;
       output = Path.Combine(outputDir, outputFileName + outputExt);
     }
-
 
     /// <summary>
     /// Output Textbox - TextChanged
@@ -751,7 +744,6 @@ namespace Axiom
       }
     }
 
-
     /// <summary>
     /// File Renamer (Method)
     /// </summary>
@@ -802,7 +794,6 @@ namespace Axiom
         return outputFileName;
       }
     }
-
 
     /// <summary>
     /// Token Appender (Method)
@@ -1314,7 +1305,6 @@ namespace Axiom
             "Bit Depth"
         };
 
-
     /// <summary>
     /// Token Remover (Method)
     /// </summary>
@@ -1591,7 +1581,6 @@ namespace Axiom
         // Stray Parentheses
         string symbols = @"\(\)|\(\s+\)"; // do not wrap with \b
 
-
         // Build regex rules
         // Order is important
         IEnumerable<string> regexTagsList = new List<string>()
@@ -1672,7 +1661,6 @@ namespace Axiom
         return filename;
       }
     }
-
 
     /// <summary>
     /// Output Filename Spacing (Method)
