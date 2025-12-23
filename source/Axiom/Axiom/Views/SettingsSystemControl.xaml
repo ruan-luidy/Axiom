@@ -1,0 +1,26 @@
+<!--
+  Settings System Control
+  Extracted from MainWindow.xaml (Lines 7188-7541)
+  TODO: Copy full content from MainWindow.xaml lines 7200-7541
+-->
+<UserControl
+  x:Class="Axiom.Views.SettingsSystemControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <Grid Background="Transparent">
+    <!--
+        TODO: COPY LINES 7200-7541 from MainWindow.xaml HERE
+
+        This includes:
+        - Process Group (Shell ComboBox, Shell Title ComboBox, Priority ComboBox, Threads ComboBox)
+        - Log (Path with CheckBox enable/disable)
+
+        Start copying from line 7200
+        End at line 7541 (before </TabItem>)
+    -->
+  </Grid>
+</UserControl>

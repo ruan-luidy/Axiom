@@ -1,0 +1,26 @@
+<!--
+  Settings File Control
+  Extracted from MainWindow.xaml (Lines 6763-7186)
+  TODO: Copy full content from MainWindow.xaml lines 6776-7186
+-->
+<UserControl
+  x:Class="Axiom.Views.SettingsFileControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <Grid Background="Transparent">
+    <!--
+        TODO: COPY LINES 6776-7186 from MainWindow.xaml HERE
+
+        This includes:
+        - Input Group (Filename Tokens ComboBox, Custom Tokens TextBox)
+        - Output Group (Overwrite ComboBox, Spacing ComboBox, Tokens ListView with management buttons)
+
+        Start copying from line 6776
+        End at line 7186 (before </TabItem>)
+    -->
+  </Grid>
+</UserControl>

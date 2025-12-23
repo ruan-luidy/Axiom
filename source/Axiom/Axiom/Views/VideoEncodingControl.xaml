@@ -1,0 +1,909 @@
+<!--
+  Video Encoding Control
+  Extracted from MainWindow.xaml (Lines 992-1948)
+  Contains: Encoding, HW Accel, Quality, and Optimize groups
+-->
+<UserControl
+  x:Class="Axiom.Views.VideoEncodingControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="clr-namespace:HandyControl.Collections;assembly=HandyControl"
+  xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <Grid Background="Transparent">
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    <!--  Encoding Group  -->
+    <Grid
+      Grid.Row="0"
+      Margin="0,20,0,0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
+
+      <!--  Video Codec  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="75"
+        Height="26"
+        Margin="0,0,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Video Codec"
+        FontFamily="Segoe UI Semilight" />
+      <ComboBox
+        x:Name="cboVideo_Codec"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Codec_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Codec_Items}"
+        SelectedIndex="{Binding Video_Codec_SelectedIndex}"
+        SelectedItem="{Binding Video_Codec_SelectedItem}"
+        SelectionChanged="cboVideo_Codec_SelectionChanged" />
+
+      <!--  Encode Speed  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="91"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Encode Speed"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Encoding Speed. Slower = Better Quality &amp; Compression."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboEncodeSpeed"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_EncodeSpeed_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding Video_EncodeSpeed_Items}"
+        SelectedIndex="{Binding Video_EncodeSpeed_SelectedIndex}"
+        SelectedValue="{Binding Video_EncodeSpeed_SelectedItem, Mode=TwoWay}"
+        SelectedValuePath="Name"
+        SelectionChanged="cboEncodeSpeed_SelectionChanged"
+        ToolTip="Encoding Speed. Slower = Better Quality &amp; Compression."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <TextBlock DataContext="{Binding}">
+                <TextBlock.Text>
+                  <Binding Path="Name" />
+                </TextBlock.Text>
+              </TextBlock>
+            </Grid>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+    </Grid>
+
+    <!--  HW Accel Group  -->
+    <Grid
+      Grid.Row="1"
+      Margin="0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
+
+      <!--  HW Acceleration  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="91"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="HW Accel"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Hardware Acceleration"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboHWAccel"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_HWAccel_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_HWAccel_Items}"
+        SelectedIndex="{Binding Video_HWAccel_SelectedIndex}"
+        SelectedItem="{Binding Video_HWAccel_SelectedItem}"
+        SelectionChanged="cboHWAccel_SelectionChanged"
+        ToolTip="Hardware Acceleration" />
+
+      <!--  HW Decode  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="91"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Decode"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Hardware Acceleration Decode"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboHWAccelDecode"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_HWAccel_Decode_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_HWAccel_Decode_Items}"
+        SelectedIndex="{Binding Video_HWAccel_Decode_SelectedIndex}"
+        SelectedItem="{Binding Video_HWAccel_Decode_SelectedItem, Mode=TwoWay}"
+        ToolTip="Hardware Acceleration Decode"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  HW Transcode  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="91"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Transcode"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Hardware Acceleration Transcode"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboHWAccelTranscode"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_HWAccel_Transcode_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_HWAccel_Transcode_Items}"
+        SelectedIndex="{Binding Video_HWAccel_Transcode_SelectedIndex}"
+        SelectedItem="{Binding Video_HWAccel_Transcode_SelectedItem, Mode=TwoWay}"
+        SelectionChanged="cboHWAccelTranscode_SelectionChanged"
+        ToolTip="Hardware Acceleration Transcode"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+    </Grid>
+
+    <!--  Quality Group  -->
+    <Grid
+      Grid.Row="2"
+      Margin="0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
+
+      <!--  Video Quality  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="56"
+        Margin="0,0,0,4"
+        HorizontalAlignment="Left"
+        Content="Quality"
+        FontFamily="Segoe UI Semilight" />
+      <ComboBox
+        x:Name="cboVideo_Quality"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Quality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Quality_Items}"
+        SelectedValue="{Binding Video_Quality_SelectedItem, Mode=TwoWay}"
+        SelectedValuePath="Name"
+        SelectionChanged="cboVideo_Quality_SelectionChanged">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <TextBlock DataContext="{Binding}">
+                <TextBlock.Text>
+                  <Binding Path="Name" />
+                </TextBlock.Text>
+              </TextBlock>
+            </Grid>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+      <!--  Pass  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Pass"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Encoding Pass Method" />
+      <ComboBox
+        x:Name="cboVideo_Pass"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        DropDownClosed="cboVideo_Pass_DropDownClosed"
+        IsEnabled="{Binding Video_Pass_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding Video_Pass_Items}"
+        SelectedIndex="{Binding Video_Pass_SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        SelectedValue="{Binding Video_Pass_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        SelectionChanged="cboVideo_Pass_SelectionChanged"
+        ToolTip="Encoding Pass Method"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  CRF  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="CRF"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Constant Rate Factor. Lower value is higher quality."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <Slider
+        x:Name="slVideo_CRF"
+        Grid.Row="2"
+        Grid.Column="2"
+        Height="18"
+        Margin="0,4,42,0"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsDirectionReversed="True"
+        IsEnabled="{Binding Video_CRF_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsMoveToPointEnabled="True"
+        IsSnapToTickEnabled="True"
+        Maximum="51"
+        Minimum="0"
+        MouseDoubleClick="slVideo_CRF_MouseDoubleClick"
+        ToolTip="Constant Rate Factor. Lower value is higher quality."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True"
+        ValueChanged="slVideo_CRF_ValueChanged"
+        Value="{Binding Video_CRF_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBox
+        x:Name="tbxVideo_CRF"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="30"
+        Height="22"
+        Margin="75,2,0,0"
+        Padding="1,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_CRF_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        KeyDown="tbxVideo_CRF_KeyDown"
+        MaxLength="2"
+        MaxLines="1"
+        Text="{Binding Video_CRF_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextChanged="tbxVideo_CRF_TextChanged"
+        TextWrapping="NoWrap"
+        ToolTip="Constant Rate Factor. Lower value is higher quality."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Video Bit Rate  -->
+      <Label
+        Grid.Row="3"
+        Grid.Column="1"
+        Width="56"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Bit Rate"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Video Bit Rate (e.g. 1000K or 1M)"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <TextBox
+        x:Name="tbxVideo_BitRate"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="70"
+        Height="22"
+        Margin="0,2,0,0"
+        Padding="1,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_BitRate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        MaxLength="10"
+        MaxLines="1"
+        Text="{Binding Video_BitRate_Text, Mode=TwoWay}"
+        TextWrapping="NoWrap"
+        ToolTip="Video Bit Rate (e.g. 1000K or 1M)"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Video VBR  -->
+      <ToggleButton
+        x:Name="tglVideo_VBR"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="30"
+        Height="23"
+        Margin="75,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Checked="tglVideo_VBR_Checked"
+        Content="VBR"
+        Cursor="Hand"
+        DataContext="{Binding VideoView}"
+        IsChecked="{Binding Video_VBR_IsChecked}"
+        IsEnabled="{Binding Video_VBR_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ToolTip="Toggle Variable Bit Rate."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True"
+        Unchecked="tglVideo_VBR_Unchecked" />
+
+      <!--  Bit Rate Advanced Expander  -->
+      <Button
+        x:Name="btnVideoBitRateAdvanced_Expand"
+        Grid.Row="3"
+        Grid.Column="1"
+        Width="20"
+        Height="20"
+        Margin="0,3,15,0"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Click="btnVideoBitRateAdvanced_Expand_Click"
+        Cursor="Hand"
+        Foreground="White"
+        ToolTip="Show Advanced Bit Rate Controls"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <iconPack:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="PlusBold" />
+      </Button>
+
+      <!--  Bit Rate Advanced Expander  -->
+      <Expander
+        x:Name="expVideo_BitRateAdvanced_Expander"
+        Grid.Row="4"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        Margin="0,0,0,0"
+        Panel.ZIndex="0"
+        Collapsed="expVideo_BitRateAdvanced_Expander_Collapsed"
+        DataContext="{Binding VideoView}"
+        Expanded="expVideo_BitRateAdvanced_Expander_Expanded"
+        IsExpanded="{Binding Video_BitRateAdvanced_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Style="{DynamicResource GroupBoxExpanderStyle}">
+
+        <Expander.Header>
+          <StackPanel>
+            <TextBlock x:Name="expVideo_BitRateAdvanced_Expander_Header" IsEnabled="False" />
+          </StackPanel>
+        </Expander.Header>
+
+        <Grid Margin="0,-17,-5,0">
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11.5" />
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="79.5" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height="33" />
+            <RowDefinition Height="33" />
+            <RowDefinition Height="33" />
+          </Grid.RowDefinitions>
+
+          <!--  Video Min Rate  -->
+          <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Width="75"
+            Height="26"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Min Rate"
+            FontFamily="Segoe UI Semilight"
+            ToolTip="Video Min Bit Rate (e.g. 1000K or 1M)"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True" />
+          <TextBox
+            x:Name="tbxVideo_MinRate"
+            Grid.Column="3"
+            Width="105"
+            Height="22"
+            Padding="1,1,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsEnabled="{Binding Video_MinRate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            MaxLength="10"
+            MaxLines="1"
+            Text="{Binding Video_MinRate_Text, Mode=TwoWay}"
+            TextWrapping="NoWrap"
+            ToolTip="Video Min Bit Rate (e.g. 1000K or 1M)"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True" />
+
+          <!--  Video Max Rate  -->
+          <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Width="75"
+            Height="26"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Max Rate"
+            FontFamily="Segoe UI Semilight"
+            ToolTip="Video Max Bit Rate (e.g. 1000K or 1M)"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True" />
+          <TextBox
+            x:Name="tbxVideo_MaxRate"
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="105"
+            Height="22"
+            Padding="1,1,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsEnabled="{Binding Video_MaxRate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            MaxLength="10"
+            MaxLines="1"
+            Text="{Binding Video_MaxRate_Text, Mode=TwoWay}"
+            TextWrapping="NoWrap"
+            ToolTip="Video Max Bit Rate (e.g. 1000K or 1M)"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True" />
+
+          <!--  Video Buf Size  -->
+          <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Width="56"
+            Height="26"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Buf Size"
+            FontFamily="Segoe UI Semilight"
+            ToolTip="Rate Control Buffer (e.g. 1000K or 1M)"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True" />
+          <TextBox
+            x:Name="tbxVideo_BufSize"
+            Grid.Row="2"
+            Grid.Column="3"
+            Width="105"
+            Height="22"
+            Padding="1,1,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsEnabled="{Binding Video_BufSize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            MaxLength="10"
+            MaxLines="1"
+            Text="{Binding Video_BufSize_Text, Mode=TwoWay}"
+            TextWrapping="NoWrap"
+            ToolTip="Rate Control Buffer (e.g. 1000K or 1M)"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True" />
+
+        </Grid>
+      </Expander>
+
+      <!--  Pix Format  -->
+      <Label
+        Grid.Row="5"
+        Grid.Column="1"
+        Width="80"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Pixel Format"
+        FontFamily="Segoe UI Semilight" />
+      <ComboBox
+        x:Name="cboVideo_PixelFormat"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_PixelFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding Video_PixelFormat_Items}"
+        SelectedIndex="{Binding Video_PixelFormat_SelectedIndex}"
+        SelectedItem="{Binding Video_PixelFormat_SelectedItem}"
+        SelectionChanged="cboVideo_PixelFormat_SelectionChanged" />
+
+      <!--  Framerate  -->
+      <Label
+        Grid.Row="6"
+        Grid.Column="1"
+        Width="75"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Frame Rate"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Frames Per Second"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboVideo_FrameRate"
+        Grid.Row="6"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEditable="{Binding Video_FPS_IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsEnabled="{Binding Video_FPS_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding Video_FPS_Items}"
+        SelectedIndex="{Binding Video_FPS_SelectedIndex}"
+        SelectedItem="{Binding Video_FPS_SelectedItem}"
+        SelectionChanged="cboVideo_FPS_SelectionChanged"
+        Text="{Binding Video_FPS_Text}"
+        TextBoxBase.KeyDown="cboVideo_FrameRate_KeyDown"
+        ToolTip="Frames Per Second"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Speed  -->
+      <Label
+        Grid.Row="7"
+        Grid.Column="1"
+        Width="75"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Speed"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Speed Up / Slow Down Video"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboVideo_Speed"
+        Grid.Row="7"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEditable="{Binding Video_Speed_IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsEnabled="{Binding Video_Speed_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemsSource="{Binding Video_Speed_Items}"
+        SelectedIndex="{Binding Video_Speed_SelectedIndex}"
+        SelectedItem="{Binding Video_Speed_SelectedItem}"
+        SelectionChanged="cboVideo_Speed_SelectionChanged"
+        Text="{Binding Video_Speed_Text}"
+        TextBoxBase.KeyDown="cboVideo_Speed_KeyDown"
+        ToolTip="Speed Up / Slow Down Video"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Vsync  -->
+      <Label
+        Grid.Row="8"
+        Grid.Column="1"
+        Width="85"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Vsync"
+        FontFamily="Segoe UI Semilight">
+        <Label.ToolTip>
+          <TextBlock>
+            auto: Chooses between 1 and 2 depending on muxer capabilities. This is the default method.<LineBreak />
+            passthrough: Each frame is passed with its timestamp from the demuxer to the muxer.<LineBreak />
+            cfr: Frames will be duplicated and dropped to achieve exactly the requested constant frame rate.<LineBreak />
+            vfr: Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp.<LineBreak />
+            drop: As passthrough but destroys all timestamps, making the muxer generate fresh timestamps based on frame-rate.</TextBlock>
+        </Label.ToolTip>
+      </Label>
+      <ComboBox
+        x:Name="cboVideo_Vsync"
+        Grid.Row="8"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Vsync_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding Video_Vsync_Items}"
+        SelectedItem="{Binding Video_Vsync_SelectedItem, Mode=TwoWay}"
+        SelectionChanged="cboVideo_Vsync_SelectionChanged" />
+
+    </Grid>
+
+    <!--  Optimize Group  -->
+    <Grid
+      Grid.Row="3"
+      Height="auto"
+      Margin="0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
+
+      <!--  Optimize  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="75"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Panel.ZIndex="1"
+        Content="Optimize"
+        FontFamily="Segoe UI Semilight" />
+      <ComboBox
+        x:Name="cboVideo_Optimize"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Panel.ZIndex="1"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Optimize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Optimize_Items}"
+        SelectedIndex="{Binding Video_Optimize_SelectedIndex}"
+        SelectedValue="{Binding Video_Optimize_SelectedItem, Mode=TwoWay}"
+        SelectedValuePath="Name"
+        SelectionChanged="cboVideo_Optimize_SelectionChanged"
+        ToolTip="Optimize file for device type."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <TextBlock DataContext="{Binding}">
+                <TextBlock.Text>
+                  <Binding Path="Name" />
+                </TextBlock.Text>
+              </TextBlock>
+            </Grid>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+      <!--  Expander  -->
+      <Grid
+        Grid.Row="1"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        Margin="0,0,10,0">
+
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Expander
+          x:Name="expVideo_Optimize_Expander"
+          Grid.Row="1"
+          Grid.Column="1"
+          Margin="0,0,0,0"
+          Panel.ZIndex="0"
+          DataContext="{Binding VideoView}"
+          IsEnabled="{Binding Video_Optimize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsExpanded="{Binding Video_Optimize_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          Style="{DynamicResource GroupBoxExpanderStyle}">
+
+          <Expander.Header>
+            <StackPanel>
+              <TextBlock x:Name="expVideo_Optimize_Expander_Header" IsEnabled="False" />
+            </StackPanel>
+          </Expander.Header>
+
+          <Grid Margin="0,-17,-5,0">
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="95" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+              <RowDefinition Height="33" />
+              <RowDefinition Height="33" />
+              <RowDefinition Height="33" />
+            </Grid.RowDefinitions>
+
+            <!--  Tune  -->
+            <Label
+              Grid.Row="0"
+              Grid.Column="0"
+              Width="75"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              Content="Tune" />
+            <ComboBox
+              x:Name="cboVideo_Optimize_Tune"
+              Grid.Row="0"
+              Grid.Column="1"
+              Width="105"
+              Margin="0,2,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              IsEnabled="{Binding Video_Optimize_Tune_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsSynchronizedWithCurrentItem="True"
+              ItemsSource="{Binding Video_Optimize_Tune_Items}"
+              SelectedIndex="{Binding Video_Optimize_Tune_SelectedIndex}"
+              SelectedItem="{Binding Video_Optimize_Tune_SelectedItem, Mode=TwoWay}" />
+
+            <!--  Profile  -->
+            <Label
+              Grid.Row="1"
+              Grid.Column="0"
+              Width="75"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              Content="Profile" />
+            <ComboBox
+              x:Name="cboVideo_Optimize_Profile"
+              Grid.Row="1"
+              Grid.Column="1"
+              Width="105"
+              Margin="0,2,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              IsEnabled="{Binding Video_Optimize_Profile_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsSynchronizedWithCurrentItem="True"
+              ItemsSource="{Binding Video_Optimize_Profile_Items}"
+              SelectedIndex="{Binding Video_Optimize_Profile_SelectedIndex}"
+              SelectedItem="{Binding Video_Optimize_Profile_SelectedItem, Mode=TwoWay}" />
+
+            <!--  Level  -->
+            <Label
+              Grid.Row="2"
+              Grid.Column="0"
+              Width="75"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              Content="Level" />
+            <ComboBox
+              x:Name="cboVideo_Optimize_Level"
+              Grid.Row="2"
+              Grid.Column="1"
+              Width="105"
+              Margin="0,2,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              IsEnabled="{Binding Video_Optimize_Level_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsSynchronizedWithCurrentItem="True"
+              ItemsSource="{Binding Video_Optimize_Level_Items}"
+              SelectedIndex="{Binding Video_Optimize_Level_SelectedIndex}"
+              SelectedItem="{Binding Video_Optimize_Level_SelectedItem, Mode=TwoWay}" />
+
+          </Grid>
+
+        </Expander>
+
+      </Grid>
+
+    </Grid>
+
+  </Grid>
+</UserControl>

@@ -1,0 +1,263 @@
+<UserControl
+  x:Class="Axiom.Views.ToolbarControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="35"
+  d:DesignWidth="343"
+  mc:Ignorable="d">
+
+  <!--  Tool Buttons Grid  -->
+  <Grid
+    Width="343"
+    Height="35"
+    Margin="10,0,0,0"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Bottom">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="30" />
+
+    </Grid.ColumnDefinitions>
+
+    <!--  Info Button  -->
+    <Button
+      x:Name="btnInfo"
+      Width="22"
+      Height="22"
+      Margin="0,0,0,0"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnInfo_Click"
+      Cursor="Hand"
+      ToolTip="About this program"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="InfoBold" />
+    </Button>
+
+    <!--  Website Button  -->
+    <Button
+      x:Name="btbWebsite"
+      Grid.Column="1"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btbWebsite_Click"
+      Cursor="Hand"
+      ToolTip="Visit Website"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="GlobeHemisphereWestFill" />
+    </Button>
+
+    <!--  Update Button  -->
+    <Button
+      x:Name="btnUpdate"
+      Grid.Column="2"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnUpdate_Click"
+      Cursor="Hand"
+      ToolTip="Check for Updates"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="ArrowFatUpFill" />
+    </Button>
+
+    <!--  Window Toggle  -->
+    <ToggleButton
+      x:Name="tglCMDWindowKeep"
+      Grid.Column="3"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Checked="tglCMDWindowKeep_Checked"
+      Cursor="Hand"
+      IsChecked="{Binding MainView.CMDWindowKeep_IsChecked}"
+      ToolTip="Keep FFmpeg window open after converting"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True"
+      Unchecked="tglCMDWindowKeep_Unchecked">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="BrowserFill" />
+    </ToggleButton>
+
+    <!--  Auto Sort Script Button  -->
+    <ToggleButton
+      x:Name="tglAutoSortScript"
+      Grid.Column="4"
+      Width="22"
+      Height="22"
+      Margin="0,0,0,0"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Checked="tglAutoSortScript_Checked"
+      Cursor="Hand"
+      IsChecked="{Binding MainView.AutoSortScript_IsChecked}"
+      ToolTip="Auto Sort Script"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True"
+      Unchecked="tglAutoSortScript_Unchecked">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="ListBold" />
+    </ToggleButton>
+
+    <!--  Debug Console  -->
+    <Button
+      x:Name="btnDebugConsole"
+      Grid.Column="5"
+      Width="22"
+      Height="22"
+      Margin="1,0,0,0"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnDebugConsole_Click"
+      Cursor="Hand"
+      ToolTip="Show Debug Console"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="BracketsCurlyBold" />
+    </Button>
+
+    <!--  Log Console  -->
+    <Button
+      x:Name="btnLogConsole"
+      Grid.Column="6"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnLogConsole_Click"
+      Cursor="Hand"
+      ToolTip="Show Log Console"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="BracketsSquareBold" />
+    </Button>
+
+    <!--  Log Button  -->
+    <Button
+      x:Name="btnLog"
+      Grid.Column="7"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnLog_Click"
+      Cursor="Hand"
+      ToolTip="View the last Output Log"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="FileTextBold" />
+    </Button>
+
+    <!--  CMD Button  -->
+    <Button
+      x:Name="btnCmd"
+      Grid.Column="8"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnCmd_Click"
+      Cursor="Hand"
+      ToolTip="Launch Command Prompt / PowerShell"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="TerminalWindowBold" />
+    </Button>
+
+    <!--  Properties Button  -->
+    <Button
+      x:Name="btnProperties"
+      Grid.Column="9"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnProperties_Click"
+      Cursor="Hand"
+      ToolTip="View File Properties"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="ListBulletsBold" />
+    </Button>
+
+    <!--  Play File  -->
+    <Button
+      x:Name="btnPlayFile"
+      Grid.Column="10"
+      Width="22"
+      Height="22"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Click="btnPlayFile_Click"
+      Cursor="Hand"
+      ToolTip="Play Converted File"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Kind="PlayFill" />
+    </Button>
+
+  </Grid>
+
+</UserControl>

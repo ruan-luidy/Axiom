@@ -1,0 +1,35 @@
+<!--
+  Audio Settings Control
+  Extracted from MainWindow.xaml (Lines 4179-4989)
+  TODO: Copy full content from MainWindow.xaml lines 4186-4989
+-->
+<UserControl
+  x:Class="Axiom.Views.AudioSettingsControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <Grid Background="Transparent">
+    <ScrollViewer
+      Width="254"
+      HorizontalAlignment="Right"
+      Template="{DynamicResource ScrollViewerControlTemplate}">
+      <!--
+            TODO: COPY LINES 4193-4989 from MainWindow.xaml HERE
+
+            This includes:
+            - Encoding Group (Audio Codec, Stream, Channel)
+            - Quality Group (Quality, Bit Rate, VBR toggle, Compression, Sample Rate, Bit Depth)
+            - Volume Group (Volume slider with up/down buttons)
+            - Hard Limiter
+            - Mux Group (ListView with Add/Remove/Sort buttons)
+            - Metadata (Title, Language)
+
+            Start copying from line 4193: <Grid Margin="0,20,0,30" VerticalAlignment="Top">
+            End at line 4989 (before </TabItem>)
+      -->
+    </ScrollViewer>
+  </Grid>
+</UserControl>

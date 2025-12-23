@@ -1,0 +1,128 @@
+<UserControl
+  x:Class="Axiom.Views.ScriptControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+
+  <Grid>
+    <!--  Script View  -->
+    <TextBox
+      x:Name="tbxScriptView"
+      Grid.ColumnSpan="1"
+      Margin="11,71,280,56"
+      Padding="10,10,10,48"
+      AcceptsReturn="True"
+      AllowDrop="True"
+      FontSize="14"
+      PreviewDragOver="tbxScriptView_PreviewDragOver"
+      PreviewDrop="tbxScriptView_PreviewDrop"
+      RenderOptions.ClearTypeHint="Enabled"
+      Text="{Binding MainView.ScriptView_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+      TextWrapping="Wrap"
+      VerticalScrollBarVisibility="Auto" />
+
+    <!--  Save Button  -->
+    <Button
+      x:Name="btnScriptSave"
+      Width="59"
+      Margin="86,0,0,66"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      Click="btnScriptSave_Click"
+      Cursor="Hand">
+      <TextBlock Text="Save" />
+    </Button>
+
+    <!--  Load Button  -->
+    <Button
+      x:Name="btnScriptLoad"
+      Width="59"
+      Margin="20,0,0,66"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      Click="btnScriptLoad_Click"
+      Cursor="Hand">
+      <TextBlock Text="Load" />
+    </Button>
+
+    <!--  Copy Button  -->
+    <Button
+      x:Name="btnScriptCopy"
+      Width="59"
+      Margin="152,0,0,66"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      Click="btnScriptCopy_Click"
+      Cursor="Hand">
+      <TextBlock Text="Copy" />
+    </Button>
+
+    <!--  Sort Button  -->
+    <Button
+      x:Name="btnScriptSort"
+      Width="59"
+      Margin="284,0,0,66"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      Click="btnScriptSort_Click"
+      Cursor="Hand">
+      <TextBlock
+        x:Name="txblScriptSort"
+        Width="50"
+        Text="{Binding MainView.Sort_Text, Mode=TwoWay}"
+        TextAlignment="Center" />
+    </Button>
+
+    <!--  Clear Button  -->
+    <Button
+      x:Name="btnScriptClear"
+      Width="59"
+      Margin="218,0,0,66"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      Click="btnScriptClear_Click"
+      Cursor="Hand">
+      <TextBlock
+        x:Name="txblScriptClear"
+        Width="50"
+        Text="Clear"
+        TextAlignment="Center" />
+    </Button>
+
+    <!--  Script Button  -->
+    <Button
+      x:Name="btnScript"
+      Width="75"
+      Margin="350,0,0,66"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      Click="btnScript_Click"
+      Cursor="Hand"
+      ToolTip="Generate FFmpeg Commands"
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <TextBlock Text="Script" />
+    </Button>
+
+    <!--  Run Button  -->
+    <Button
+      x:Name="btnScriptRun"
+      Width="72"
+      Margin="432,0,0,66"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      Click="btnScriptRun_Click"
+      Cursor="Hand"
+      ToolTip="Run the customized Script."
+      ToolTipService.InitialShowDelay="500"
+      ToolTipService.ShowOnDisabled="True">
+      <TextBlock Text="Run" />
+    </Button>
+
+  </Grid>
+
+</UserControl>

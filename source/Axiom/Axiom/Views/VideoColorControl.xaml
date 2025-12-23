@@ -1,0 +1,1805 @@
+<UserControl
+  x:Class="Axiom.Views.VideoColorControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  Foreground="{DynamicResource PrimaryTextBrush}"
+  mc:Ignorable="d">
+
+  <Grid Background="Transparent">
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    <!--  Color Profiles Group  -->
+    <Grid
+      Grid.Row="0"
+      Margin="0,15,0,0"
+      VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="11" />
+      </Grid.RowDefinitions>
+
+      <!--  Color Space  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="95"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Color Space"
+        FontFamily="Segoe UI Semibold" />
+
+      <!--  Color Range  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="91"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Color Range"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Color Range"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboColorRange"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Color_Range_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Color_Range_Items}"
+        SelectedIndex="{Binding Video_Color_Range_SelectedIndex}"
+        SelectedItem="{Binding Video_Color_Range_SelectedItem, Mode=TwoWay}"
+        SelectionChanged="cboColorRange_SelectionChanged" />
+
+      <!--  Color Space  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="91"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Color Space"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Color Space"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboColorSpace"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="105"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Color_Space_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Color_Space_Items}"
+        SelectedIndex="{Binding Video_Color_Space_SelectedIndex}"
+        SelectedItem="{Binding Video_Color_Space_SelectedItem, Mode=TwoWay}" />
+
+      <!--  Color Primaries  -->
+      <Label
+        Grid.Row="3"
+        Grid.Column="1"
+        Width="96"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Color Primaries"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Color Primaries"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboColorPrimaries"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="105"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Color_Primaries_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Color_Primaries_Items}"
+        SelectedIndex="{Binding Video_Color_Primaries_SelectedIndex}"
+        SelectedItem="{Binding Video_Color_Primaries_SelectedItem, Mode=TwoWay}" />
+
+      <!--  Transfer Characteristics  -->
+      <Label
+        Grid.Row="4"
+        Grid.Column="1"
+        Width="96"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Transfer Char"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Transfer Characteristics"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboColorTransferCharacteristics"
+        Grid.Row="4"
+        Grid.Column="2"
+        Width="105"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Color_TransferCharacteristics_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Color_TransferCharacteristics_Items}"
+        SelectedIndex="{Binding Video_Color_TransferCharacteristics_SelectedIndex}"
+        SelectedItem="{Binding Video_Color_TransferCharacteristics_SelectedItem, Mode=TwoWay}" />
+
+      <!--  Color Matrix  -->
+      <Label
+        Grid.Row="5"
+        Grid.Column="1"
+        Width="91"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Color Matrix"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Color Matrix"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboColorMatrix"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="105"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Color_Matrix_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_Color_Matrix_Items}"
+        SelectedIndex="{Binding Video_Color_Matrix_SelectedIndex}"
+        SelectedItem="{Binding Video_Color_Matrix_SelectedItem, Mode=TwoWay}" />
+
+      <!--  Color Reset Button  -->
+      <Button
+        x:Name="btnColor_Reset"
+        Grid.Row="6"
+        Grid.Column="2"
+        Width="50"
+        MinWidth="50"
+        MaxWidth="60"
+        Margin="55,0,0,6"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        Click="btnColor_Reset_Click"
+        Cursor="Hand"
+        ToolTip="Reset Color Default."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock Text="Reset" />
+      </Button>
+    </Grid>
+
+
+    <!--  EQ Group  -->
+    <Grid
+      Grid.Row="2"
+      Margin="0"
+      VerticalAlignment="Top"
+      DataContext="{Binding FilterVideoView}">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="11" />
+      </Grid.RowDefinitions>
+
+      <!--  EQ  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="95"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="EQ"
+        FontFamily="Segoe UI Semibold" />
+
+      <!--  Brightness  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="85"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Brightness"
+        FontFamily="Segoe UI Semilight" />
+      <Slider
+        x:Name="slFilterVideo_EQ_Brightness"
+        Grid.Row="1"
+        Grid.Column="2"
+        Margin="0,4,50,0"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsMoveToPointEnabled="True"
+        IsSnapToTickEnabled="True"
+        Maximum="100"
+        Minimum="-100"
+        MouseDoubleClick="slFilterVideo_EQ_Brightness_MouseDoubleClick"
+        PreviewMouseUp="slFilterVideo_EQ_Brightness_PreviewMouseUp"
+        Value="{Binding FilterVideo_EQ_Brightness_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBox
+        x:Name="tbxFilterVideo_EQ_Brightness"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="39"
+        Height="22"
+        Margin="0,2,9,0"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        KeyDown="tbxFilterVideo_EQ_Brightness_KeyDown"
+        MaxLength="4"
+        MaxLines="1"
+        PreviewKeyUp="tbxFilterVideo_EQ_Brightness_PreviewKeyUp"
+        Text="{Binding Value, ElementName=slFilterVideo_EQ_Brightness, UpdateSourceTrigger=PropertyChanged}" />
+
+      <!--  Contrast  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="85"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Contrast"
+        FontFamily="Segoe UI Semilight" />
+      <Slider
+        x:Name="slFilterVideo_EQ_Contrast"
+        Grid.Row="2"
+        Grid.Column="2"
+        Margin="0,4,50,0"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsMoveToPointEnabled="True"
+        IsSnapToTickEnabled="True"
+        Maximum="100"
+        Minimum="-100"
+        MouseDoubleClick="slFilterVideo_EQ_Contrast_MouseDoubleClick"
+        PreviewMouseUp="slFilterVideo_EQ_Contrast_PreviewMouseUp"
+        Value="{Binding FilterVideo_EQ_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBox
+        x:Name="tbxFilterVideo_EQ_Contrast"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="39"
+        Height="22"
+        Margin="0,2,9,0"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        KeyDown="tbxFilterVideo_EQ_Contrast_KeyDown"
+        MaxLength="4"
+        MaxLines="1"
+        PreviewKeyUp="tbxFilterVideo_EQ_Contrast_PreviewKeyUp"
+        Text="{Binding Value, ElementName=slFilterVideo_EQ_Contrast, UpdateSourceTrigger=PropertyChanged}" />
+
+      <!--  Saturation  -->
+      <Label
+        Grid.Row="3"
+        Grid.Column="1"
+        Width="85"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Saturation"
+        FontFamily="Segoe UI Semilight" />
+      <Slider
+        x:Name="slFilterVideo_EQ_Saturation"
+        Grid.Row="3"
+        Grid.Column="2"
+        Margin="0,4,50,0"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsMoveToPointEnabled="True"
+        IsSnapToTickEnabled="True"
+        Maximum="100"
+        Minimum="-100"
+        MouseDoubleClick="slFilterVideo_EQ_Saturation_MouseDoubleClick"
+        PreviewMouseUp="slFilterVideo_EQ_Saturation_PreviewMouseUp"
+        Value="{Binding FilterVideo_EQ_Saturation_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBox
+        x:Name="tbxFilterVideo_EQ_Saturation"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="39"
+        Height="22"
+        Margin="0,2,9,0"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        KeyDown="tbxFilterVideo_EQ_Saturation_KeyDown"
+        MaxLength="4"
+        MaxLines="1"
+        PreviewKeyUp="tbxFilterVideo_EQ_Saturation_PreviewKeyUp"
+        Text="{Binding Value, ElementName=slFilterVideo_EQ_Saturation, UpdateSourceTrigger=PropertyChanged}" />
+
+      <!--  Gamma  -->
+      <Label
+        Grid.Row="4"
+        Grid.Column="1"
+        Width="85"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Gamma"
+        FontFamily="Segoe UI Semilight" />
+      <Slider
+        x:Name="slFilterVideo_EQ_Gamma"
+        Grid.Row="4"
+        Grid.Column="2"
+        Margin="0,4,50,0"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsMoveToPointEnabled="True"
+        IsSnapToTickEnabled="True"
+        Maximum="100"
+        Minimum="-100"
+        MouseDoubleClick="slFilterVideo_EQ_Gamma_MouseDoubleClick"
+        PreviewMouseUp="slFilterVideo_EQ_Gamma_PreviewMouseUp"
+        Value="{Binding FilterVideo_EQ_Gamma_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBox
+        x:Name="tbxFilterVideo_EQ_Gamma"
+        Grid.Row="4"
+        Grid.Column="2"
+        Width="39"
+        Height="22"
+        Margin="0,2,9,0"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        KeyDown="tbxFilterVideo_EQ_Gamma_KeyDown"
+        MaxLength="4"
+        MaxLines="1"
+        PreviewKeyUp="tbxFilterVideo_EQ_Gamma_PreviewKeyUp"
+        Text="{Binding Value, ElementName=slFilterVideo_EQ_Gamma, UpdateSourceTrigger=PropertyChanged}" />
+
+      <!--  EQ Reset Button  -->
+      <Button
+        x:Name="btnFilterVideo_EQ_Reset"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="50"
+        Margin="55,0,0,6"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Click="btnFilterVideo_EQ_Reset_Click"
+        Cursor="Hand"
+        ToolTip="Reset EQ to Default."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock Text="Reset" />
+      </Button>
+
+    </Grid>
+
+
+    <!--  Selective Color Group  -->
+    <Grid
+      Grid.Row="3"
+      Margin="0"
+      VerticalAlignment="Top"
+      DataContext="{Binding FilterVideoView}">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="110" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
+
+      <!--  Selective Color  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="95"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Selective Color"
+        FontFamily="Segoe UI Semibold" />
+
+      <!--  Color  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="80"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Color"
+        FontFamily="Segoe UI Semilight" />
+
+      <ComboBox
+        x:Name="cboFilterVideo_SelectiveColor"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_SelectiveColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding FilterVideo_SelectiveColor_Items}"
+        SelectedIndex="{Binding FilterVideo_SelectiveColor_SelectedIndex}"
+        SelectedValue="{Binding FilterVideo_SelectiveColor_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        SelectedValuePath="Name"
+        SelectionChanged="cboFilterVideo_SelectiveColor_SelectionChanged">
+
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+
+              <Border
+                Width="12"
+                Height="12"
+                Margin="2"
+                Background="{Binding Color}" />
+
+              <TextBlock
+                Grid.Column="1"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Text="{Binding Name}" />
+            </Grid>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+
+      </ComboBox>
+
+      <!--  Correction Method  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="80"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Method"
+        FontFamily="Segoe UI Semilight" />
+
+      <ComboBox
+        x:Name="cboFilterVideo_SelectiveColor_Correction_Method"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding FilterVideo_SelectiveColor_Correction_Method_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding FilterVideo_SelectiveColor_Correction_Method_Items}"
+        SelectedItem="{Binding FilterVideo_SelectiveColor_Correction_Method_SelectedItem, Mode=TwoWay}" />
+
+      <!--  Color Tab Control  -->
+      <TabControl
+        x:Name="tabControl_SelectiveColor"
+        Grid.Row="3"
+        Grid.ColumnSpan="3"
+        Width="237"
+        Padding="0"
+        HorizontalAlignment="Right"
+        Background="Transparent"
+        BorderBrush="Transparent">
+
+        <!--  Reds  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Reds"
+          Width="0"
+          Height="0"
+          Header="Reds">
+
+          <Grid Background="Transparent">
+
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Reds Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Reds_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Cyan_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Reds_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Reds_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Reds_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Reds_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Cyan_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Reds_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Reds_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Reds Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Reds_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Magenta_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Reds_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Reds_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Reds_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Reds_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Magenta_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxLength="4"
+                MaxLines="1"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Reds_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Reds Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Reds_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Yellow_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Reds_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Reds_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Reds_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Reds_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Yellow_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxLength="4"
+                MaxLines="1"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Reds_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Yellows  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Yellows"
+          Width="0"
+          Height="0"
+          Header="Yellows">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Yellows Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Yellows_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Yellows_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Yellows_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Yellows_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Yellows_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Yellows_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Yellows_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Yellows Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Yellows_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Yellows_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Yellows_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Yellows_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Yellows_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Yellows_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Yellows_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Yellows Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Yellows_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Yellows_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Yellows_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Yellows_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Yellows_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Yellows_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Yellows_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Greens  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Greens"
+          Width="0"
+          Height="0"
+          Header="Greens">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Greens Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Greens_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Greens_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Greens_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Greens_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Greens_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Greens_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Greens_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Greens Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Greens_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Greens_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Greens_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Greens_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Greens_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Greens_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Greens_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Greens Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Greens_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Greens_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Greens_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Greens_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Greens_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Greens_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Greens_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Cyans  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Cyans"
+          Width="0"
+          Height="0"
+          Header="Cyans">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Cyans Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Cyans_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Cyans_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Cyans_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Cyans_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Cyans_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Cyans_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Cyans_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Cyans Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Cyans_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Cyans_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Cyans_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Cyans_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Cyans_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Cyans_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Cyans_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Cyans Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Cyans_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Cyans_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Cyans_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Cyans_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Cyans_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Cyans_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Cyans_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Blues  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Blues"
+          Width="0"
+          Height="0"
+          Header="Blues">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Blues Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Blues_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Blues_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Blues_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Blues_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Blues_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blues_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blues_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Blues Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Blues_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Blues_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Blues_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Blues_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Blues_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blues_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blues_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Blues Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Blues_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Blues_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Blues_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Blues_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Blues_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blues_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blues_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Magentas  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Magentas"
+          Width="0"
+          Height="0"
+          Header="Magentas">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Magentas Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Magentas_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Magentas_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Magentas_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Magentas_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Magentas_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Magentas_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Magentas_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Magentas Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Magentas_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Magentas_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Magentas_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Magentas_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Magentas_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Magentas_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Magentas_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Magentas Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Magentas_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Magentas_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Magentas_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Magentas_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Magentas_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Magentas_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Magentas_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Whites  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Whites"
+          Width="0"
+          Height="0"
+          Header="Whites">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Whites Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Whites_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Whites_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Whites_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Whites_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Whites_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Whites_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Whites_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Whites Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Whites_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Whites_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Whites_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Whites_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Whites_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Whites_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Whites_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Whites Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Whites_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Whites_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Whites_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Whites_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Whites_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Whites_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Whites_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Neutrals  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Neutrals"
+          Width="0"
+          Height="0"
+          Header="Neutrals">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Neutrals Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Neutrals_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Neutrals_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Neutrals_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Neutrals_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Neutrals_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Neutrals_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Neutrals_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Neutrals Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Neutrals_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Neutrals_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Neutrals_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Neutrals_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Neutrals_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Neutrals_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Neutrals_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Neutrals Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Neutrals_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Neutrals_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Neutrals_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Neutrals_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Neutrals_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Neutrals_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Neutrals_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+        <!--  Blacks  -->
+        <TabItem
+          x:Name="tabItem_SelectiveColor_Blacks"
+          Width="0"
+          Height="0"
+          Header="Blacks">
+          <Grid Background="Transparent">
+            <!--  Grid  -->
+            <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+              </Grid.RowDefinitions>
+
+              <!--  Blacks Cyan  -->
+              <Label
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Cyan"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Blacks_Cyan"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Blacks_Cyan_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Blacks_Cyan_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Blacks_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Blacks_Cyan"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blacks_Cyan_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blacks_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Blacks Magenta  -->
+              <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Magenta"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Blacks_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Blacks_Magenta_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Blacks_Magenta_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Blacks_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Blacks_Magenta"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blacks_Magenta_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blacks_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+
+              <!--  Blacks Yellow  -->
+              <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="85"
+                Height="26"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Yellow"
+                FontFamily="Segoe UI Semilight" />
+              <Slider
+                x:Name="slFilterVideo_SelectiveColor_Blacks_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,4,50,0"
+                VerticalAlignment="Top"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="-100"
+                MouseDoubleClick="slFilterVideo_SelectiveColor_Blacks_Yellow_MouseDoubleClick"
+                PreviewMouseUp="slFilterVideo_SelectiveColor_Blacks_Yellow_PreviewMouseUp"
+                Value="{Binding FilterVideo_SelectiveColor_Blacks_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox
+                x:Name="tbxFilterVideo_SelectiveColor_Blacks_Yellow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="39"
+                Height="22"
+                Margin="0,2,8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                MaxLength="4"
+                MaxLines="1"
+                PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blacks_Yellow_PreviewKeyUp"
+                Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blacks_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+          </Grid>
+        </TabItem>
+
+      </TabControl>
+
+      <!--  Selective Color Rest Button  -->
+      <Button
+        x:Name="btnFilterVideo_SelectiveColorReset"
+        Grid.Row="4"
+        Grid.Column="2"
+        Width="50"
+        Height="19"
+        MinWidth="50"
+        MaxWidth="60"
+        MaxHeight="22"
+        Margin="55,0,0,12"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Click="btnFilterVideo_SelectiveColorReset_Click"
+        Cursor="Hand"
+        ToolTip="Reset Selective Color to Default."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock Margin="0,-2,0,0" Text="Reset" />
+      </Button>
+      <!--  End Selective Color  -->
+
+    </Grid>
+
+
+  </Grid>
+
+</UserControl>

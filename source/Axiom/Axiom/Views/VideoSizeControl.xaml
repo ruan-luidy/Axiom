@@ -1,0 +1,259 @@
+<!--
+  Video Size Control
+  Extracted from MainWindow.xaml (Lines 3896-4168)
+  Contains: Size, Width, Height, Screen Format, Aspect Ratio, Scaling, Crop
+-->
+<UserControl
+  x:Class="Axiom.Views.VideoSizeControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <Grid Background="Transparent">
+    <Grid Margin="0,20,0,0" VerticalAlignment="Top">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="95" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+      </Grid.RowDefinitions>
+
+      <!--  Size  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Width="75"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Size" />
+      <ComboBox
+        x:Name="cboVideo_Scale"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Scale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding Video_Scale_Items}"
+        SelectedIndex="{Binding Video_Scale_SelectedIndex}"
+        SelectedItem="{Binding Video_Scale_SelectedItem, Mode=TwoWay}"
+        SelectionChanged="cboVideo_Scale_SelectionChanged" />
+
+      <!--  Width  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="75"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Width" />
+      <TextBox
+        x:Name="tbxVideo_Width"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        Padding="2,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        GotFocus="tbxVideo_Width_GotFocus"
+        IsEnabled="{Binding Video_Width_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        LostFocus="tbxVideo_Width_LostFocus"
+        MaxLines="1"
+        Text="{Binding Video_Width_Text, Mode=TwoWay}"
+        TextWrapping="NoWrap" />
+
+      <!--  Height  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        Width="75"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Height" />
+      <TextBox
+        x:Name="tbxVideo_Height"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        Padding="2,1,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        GotFocus="tbxVideo_Height_GotFocus"
+        IsEnabled="{Binding Video_Height_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        LostFocus="tbxVideo_Height_LostFocus"
+        MaxLines="1"
+        Text="{Binding Video_Height_Text, Mode=TwoWay}"
+        TextWrapping="NoWrap" />
+
+      <!--  Screen Format  -->
+      <Label
+        Grid.Row="3"
+        Grid.Column="1"
+        Width="86"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Format"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Screen Format"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboVideo_ScreenFormat"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_ScreenFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding Video_ScreenFormat_Items}"
+        SelectedIndex="{Binding Video_ScreenFormat_SelectedIndex}"
+        SelectedItem="{Binding Video_ScreenFormat_SelectedItem}"
+        SelectionChanged="cboVideo_ScreenFormat_SelectionChanged"
+        ToolTip="Screen Format"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Aspect Ratio  -->
+      <Label
+        Grid.Row="4"
+        Grid.Column="1"
+        Width="80"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Aspect Ratio"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Aspect Ratio"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboVideo_AspectRatio"
+        Grid.Row="4"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_AspectRatio_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemsSource="{Binding Video_AspectRatio_Items}"
+        SelectedIndex="{Binding Video_AspectRatio_SelectedIndex}"
+        SelectedItem="{Binding Video_AspectRatio_SelectedItem}"
+        SelectionChanged="cboVideo_AspectRatio_SelectionChanged" />
+
+      <!--  Scaling  -->
+      <Label
+        Grid.Row="5"
+        Grid.Column="1"
+        Width="75"
+        Height="26"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Scaling"
+        FontFamily="Segoe UI Semilight"
+        ToolTip="Algorithm used for resizing."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboVideo_ScalingAlgorithm"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="105"
+        Height="22"
+        Margin="0,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_ScalingAlgorithm_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding Video_ScalingAlgorithm_Items}"
+        SelectedIndex="{Binding Video_ScalingAlgorithm_SelectedIndex}"
+        SelectedItem="{Binding Video_ScalingAlgorithm_SelectedItem}"
+        SelectionChanged="cboVideo_ScalingAlgorithm_SelectionChanged"
+        ToolTip="Algorithm used for resizing."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+
+      <!--  Crop  -->
+      <Label
+        Grid.Row="6"
+        Grid.Column="1"
+        Width="75"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Crop" />
+      <Button
+        x:Name="btnVideo_Crop"
+        Grid.Row="6"
+        Grid.Column="2"
+        Width="50"
+        Height="22"
+        Margin="0,2,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnVideo_Crop_Click"
+        Cursor="Hand"
+        DataContext="{Binding VideoView}"
+        IsEnabled="{Binding Video_Crop_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ToolTip="Open Crop Window"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock
+          Margin="0,-2,0,0"
+          Style="{DynamicResource ButtonCropTextBlock}"
+          Text="Crop" />
+      </Button>
+      <Button
+        x:Name="btnVideo_CropClear"
+        Grid.Row="6"
+        Grid.Column="2"
+        Width="50"
+        Height="22"
+        Margin="55,2,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnVideo_CropClear_Click"
+        Cursor="Hand"
+        DataContext="{Binding VideoView}"
+        ToolTip="Clear Last Used Crop Settings"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock
+          x:Name="tblkCropClear"
+          Margin="0,-2,0,0"
+          Text="{Binding Video_CropClear_Text, Mode=TwoWay}" />
+      </Button>
+
+    </Grid>
+  </Grid>
+</UserControl>

@@ -1,0 +1,33 @@
+<!--
+  Subtitles Control
+  Extracted from MainWindow.xaml (Lines 4991-5353)
+  TODO: Copy full content from MainWindow.xaml lines 4998-5353
+-->
+<UserControl
+  x:Class="Axiom.Views.SubtitlesControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <Grid Background="Transparent">
+    <ScrollViewer
+      Width="254"
+      HorizontalAlignment="Right"
+      Template="{DynamicResource ScrollViewerControlTemplate}">
+      <!--
+            TODO: COPY LINES 5001-5353 from MainWindow.xaml HERE
+
+            This includes:
+            - Subtitle Codec ComboBox
+            - Stream ComboBox
+            - Mux ListView with management buttons (Add, Remove, Sort Up/Down, Clear)
+            - Metadata (Title TextBox, Language ComboBox)
+
+            Start copying from line 5001: <Grid Margin="0,20,0,30" VerticalAlignment="Top">
+            End at line 5353 (before </TabItem>)
+      -->
+    </ScrollViewer>
+  </Grid>
+</UserControl>

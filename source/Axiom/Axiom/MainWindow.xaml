@@ -60,7 +60,6 @@
       PreviewDragOver="tbxScriptView_PreviewDragOver"
       PreviewDrop="tbxScriptView_PreviewDrop"
       RenderOptions.ClearTypeHint="Enabled"
-      Style="{DynamicResource TextBoxScriptView}"
       Text="{Binding MainView.ScriptView_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
       TextWrapping="Wrap"
       VerticalScrollBarVisibility="Auto" />
@@ -6651,9 +6650,6 @@
                         IsEnabled="{Binding Theme_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         IsTextSearchEnabled="False"
                         ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                        ItemsSource="{Binding Theme_Items}"
-                        SelectedIndex="{Binding Theme_SelectedIndex}"
-                        SelectedItem="{Binding Theme_SelectedItem}"
                         SelectionChanged="themeSelect_SelectionChanged"
                         Style="{DynamicResource ComboBoxStyle}" />
 
@@ -7587,7 +7583,6 @@
         Background="Transparent"
         Click="btnInfo_Click"
         Cursor="Hand"
-        Style="{DynamicResource ButtonSmallStyle}"
         ToolTip="About this program"
         ToolTipService.InitialShowDelay="500"
         ToolTipService.ShowOnDisabled="True">
@@ -7597,8 +7592,7 @@
           Margin="1,0,0,0"
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          Stretch="Uniform"
-          Style="{DynamicResource ButtonInfo}" />
+          Stretch="Uniform" />
       </Button>
 
       <!--  Website Button  -->
@@ -7612,19 +7606,9 @@
         Background="Transparent"
         Click="btbWebsite_Click"
         Cursor="Hand"
-        Style="{DynamicResource ButtonSmallStyle}"
         ToolTip="Visit Website"
         ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True">
-        <Image
-          Width="11"
-          Height="11"
-          Margin="1,-1,0,0"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Stretch="Uniform"
-          Style="{DynamicResource ButtonWebsite}" />
-      </Button>
+        ToolTipService.ShowOnDisabled="True" />
 
       <!--  Update Button  -->
       <Button
