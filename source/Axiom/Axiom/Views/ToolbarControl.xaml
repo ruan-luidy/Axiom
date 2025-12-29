@@ -38,6 +38,7 @@
       Width="22"
       Height="22"
       Margin="0,0,0,0"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnInfo_Click"
@@ -58,6 +59,7 @@
       Grid.Column="1"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btbWebsite_Click"
@@ -78,6 +80,7 @@
       Grid.Column="2"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnUpdate_Click"
@@ -98,6 +101,7 @@
       Grid.Column="3"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Checked="tglCMDWindowKeep_Checked"
@@ -121,6 +125,7 @@
       Width="22"
       Height="22"
       Margin="0,0,0,0"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Checked="tglAutoSortScript_Checked"
@@ -144,6 +149,7 @@
       Width="22"
       Height="22"
       Margin="1,0,0,0"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnDebugConsole_Click"
@@ -164,6 +170,7 @@
       Grid.Column="6"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnLogConsole_Click"
@@ -184,6 +191,7 @@
       Grid.Column="7"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnLog_Click"
@@ -204,6 +212,7 @@
       Grid.Column="8"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnCmd_Click"
@@ -211,11 +220,13 @@
       ToolTip="Launch Command Prompt / PowerShell"
       ToolTipService.InitialShowDelay="500"
       ToolTipService.ShowOnDisabled="True">
-      <iconPacks:PackIconPhosphorIcons
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="TerminalWindowBold" />
+      <Grid>
+        <iconPacks:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="TerminalWindowBold" />
+      </Grid>
     </Button>
 
     <!--  Properties Button  -->
@@ -224,6 +235,7 @@
       Grid.Column="9"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnProperties_Click"
@@ -244,6 +256,7 @@
       Grid.Column="10"
       Width="22"
       Height="22"
+      Padding="0"
       HorizontalAlignment="Left"
       VerticalAlignment="Top"
       Click="btnPlayFile_Click"

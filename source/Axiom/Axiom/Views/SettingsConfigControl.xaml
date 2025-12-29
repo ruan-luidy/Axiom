@@ -14,35 +14,35 @@
 
   <Grid Background="Transparent">
 
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="auto" />
-                      <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
 
-                    <!--  Config Group  -->
-                    <Grid
-                      Grid.Row="0"
-                      Margin="0,20,0,0"
-                      VerticalAlignment="Top">
+    <!--  Config Group  -->
+    <Grid
+      Grid.Row="0"
+      Margin="0,20,0,0"
+      VerticalAlignment="Top">
 
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="7" />
-                        <ColumnDefinition Width="64" />
-                        <ColumnDefinition Width="*" />
-                      </Grid.ColumnDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="64" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
 
-                      <Grid.RowDefinitions>
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="22" />
-                      </Grid.RowDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
 
-                      <!--  Config  -->
-                      <!--<Label Style="{DynamicResource LabelStyle}"
+      <!--  Config  -->
+      <!--<Label
                                        Content="Config"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
@@ -52,404 +52,367 @@
                                        Height="26"
                                        Grid.Column="1" />-->
 
-                      <!--  Location  -->
-                      <Label
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Width="58"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="Location"
-                        Cursor="Hand"
-                        PreviewMouseDown="lblConfigPath_PreviewMouseDown"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Your config file will be moved to this location."
-                        ToolTipService.InitialShowDelay="250"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <!--  Event Handler must be in in WindowLoaded(), not in XAML to prevent re-moving file to AppData Local default at startup  -->
-                      <ComboBox
-                        x:Name="cboConfigPath"
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Width="105"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        IsEnabled="{Binding ConfigPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                        ItemsSource="{Binding ConfigPath_Items}"
-                        SelectedIndex="{Binding ConfigPath_SelectedIndex}"
-                        SelectedItem="{Binding ConfigPath_SelectedItem}"
-                        Style="{DynamicResource ComboBoxStyle}"
-                        ToolTip="Your config file will be moved to this location."
-                        ToolTipService.InitialShowDelay="500"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <Button
-                        x:Name="btnConfigPath"
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Width="23"
-                        Height="23"
-                        Margin="122,1,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="btnConfigPath_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonFolderStyle}"
-                        ToolTip="Open Location"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True">
-                        <Image
-                          Width="11"
-                          Height="7"
-                          Margin="1,0,0,0"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Stretch="Uniform"
-                          Style="{DynamicResource ButtonQuickFolder}" />
-                      </Button>
+      <!--  Location  -->
+      <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Location"
+        Cursor="Hand"
+        PreviewMouseDown="lblConfigPath_PreviewMouseDown"
+        ToolTip="Your config file will be moved to this location."
+        ToolTipService.InitialShowDelay="250"
+        ToolTipService.ShowOnDisabled="True" />
+      <!--  Event Handler must be in in WindowLoaded(), not in XAML to prevent re-moving file to AppData Local default at startup  -->
+      <ComboBox
+        x:Name="cboConfigPath"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding ConfigPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+        ItemsSource="{Binding ConfigPath_Items}"
+        SelectedIndex="{Binding ConfigPath_SelectedIndex}"
+        SelectedItem="{Binding ConfigPath_SelectedItem}"
+        ToolTip="Your config file will be moved to this location."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <Button
+        x:Name="btnConfigPath"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnConfigPath_Click"
+        Cursor="Hand"
+        ToolTip="Open Location"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <iconPacks:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="FolderOpenFill" />
+      </Button>
 
-                      <!--  Custom Presets Path TextBox  -->
-                      <Label
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Width="58"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="Presets"
-                        Cursor="Hand"
-                        PreviewMouseDown="lblCustomPresetsPath_PreviewMouseDown"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Path to Custom Presets folder."
-                        ToolTipService.InitialShowDelay="250"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <TextBox
-                        x:Name="tbxCustomPresetsPath"
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Width="105"
-                        Height="20"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        AllowDrop="True"
-                        IsEnabled="{Binding CustomPresetsPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsReadOnly="True"
-                        MaxLines="1"
-                        PreviewDragEnter="tbxCustomPresetsPath_PreviewDragOver"
-                        PreviewDragOver="tbxCustomPresetsPath_PreviewDragOver"
-                        PreviewDrop="tbxCustomPresetsPath_PreviewDrop"
-                        PreviewMouseDown="tbxCustomPresetsPath_PreviewMouseDown"
-                        Style="{DynamicResource TextBoxBrowseStyle}"
-                        Text="{Binding CustomPresetsPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextWrapping="NoWrap"
-                        ToolTip="{Binding CustomPresetsPath_Text, Mode=OneWay}"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <!--  CustomPresets Path Revert Button  -->
-                      <Button
-                        x:Name="btnCustomPresetsAuto"
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Width="23"
-                        Height="23"
-                        Margin="122,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="btnCustomPresetsAuto_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonFolderStyle}"
-                        ToolTip="Revert to Default"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True">
-                        <Image
-                          Width="9"
-                          Height="11"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Stretch="Uniform"
-                          Style="{DynamicResource ButtonRevertArrow}" />
-                      </Button>
+      <!--  Custom Presets Path TextBox  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Presets"
+        Cursor="Hand"
+        PreviewMouseDown="lblCustomPresetsPath_PreviewMouseDown"
+        ToolTip="Path to Custom Presets folder."
+        ToolTipService.InitialShowDelay="250"
+        ToolTipService.ShowOnDisabled="True" />
+      <TextBox
+        x:Name="tbxCustomPresetsPath"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="105"
+        Height="20"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        AllowDrop="True"
+        IsEnabled="{Binding CustomPresetsPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsReadOnly="True"
+        MaxLines="1"
+        PreviewDragEnter="tbxCustomPresetsPath_PreviewDragOver"
+        PreviewDragOver="tbxCustomPresetsPath_PreviewDragOver"
+        PreviewDrop="tbxCustomPresetsPath_PreviewDrop"
+        PreviewMouseDown="tbxCustomPresetsPath_PreviewMouseDown"
+        Text="{Binding CustomPresetsPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="NoWrap"
+        ToolTip="{Binding CustomPresetsPath_Text, Mode=OneWay}"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True" />
+      <!--  CustomPresets Path Revert Button  -->
+      <Button
+        x:Name="btnCustomPresetsAuto"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,0,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnCustomPresetsAuto_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Default"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <iconPacks:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
+      </Button>
 
-                      <!--  FFmpeg Path TextBox  -->
-                      <Label
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Width="58"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="FFmpeg"
-                        Cursor="Hand"
-                        PreviewMouseDown="lblFFmpegPath_PreviewMouseDown"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Path to ffmpeg.exe"
-                        ToolTipService.InitialShowDelay="250"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <TextBox
-                        x:Name="tbxFFmpegPathConfig"
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Width="105"
-                        Height="20"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        AllowDrop="True"
-                        IsEnabled="{Binding FFmpegPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsReadOnly="True"
-                        MaxLines="1"
-                        PreviewDragEnter="tbxFFmpegPath_PreviewDragOver"
-                        PreviewDragOver="tbxFFmpegPath_PreviewDragOver"
-                        PreviewDrop="tbxFFmpegPath_PreviewDrop"
-                        PreviewMouseDown="tbxFFmpegPath_PreviewMouseDown"
-                        Style="{DynamicResource TextBoxBrowseStyle}"
-                        Text="{Binding FFmpegPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextWrapping="NoWrap"
-                        ToolTip="{Binding FFmpegPath_Text, Mode=OneWay}"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <!--  FFmpeg Path Revert Button  -->
-                      <Button
-                        x:Name="btnFFmpegAuto"
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Width="23"
-                        Height="23"
-                        Margin="122,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="btnFFmpegAuto_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonFolderStyle}"
-                        ToolTip="Revert to Auto"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True">
-                        <Image
-                          Width="9"
-                          Height="11"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Stretch="Uniform"
-                          Style="{DynamicResource ButtonRevertArrow}" />
-                      </Button>
+      <!--  FFmpeg Path TextBox  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="FFmpeg"
+        Cursor="Hand"
+        PreviewMouseDown="lblFFmpegPath_PreviewMouseDown"
+        ToolTip="Path to ffmpeg.exe"
+        ToolTipService.InitialShowDelay="250"
+        ToolTipService.ShowOnDisabled="True" />
+      <TextBox
+        x:Name="tbxFFmpegPathConfig"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="105"
+        Height="20"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        AllowDrop="True"
+        IsEnabled="{Binding FFmpegPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsReadOnly="True"
+        MaxLines="1"
+        PreviewDragEnter="tbxFFmpegPath_PreviewDragOver"
+        PreviewDragOver="tbxFFmpegPath_PreviewDragOver"
+        PreviewDrop="tbxFFmpegPath_PreviewDrop"
+        PreviewMouseDown="tbxFFmpegPath_PreviewMouseDown"
+        Text="{Binding FFmpegPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="NoWrap"
+        ToolTip="{Binding FFmpegPath_Text, Mode=OneWay}"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True" />
+      <!--  FFmpeg Path Revert Button  -->
+      <Button
+        x:Name="btnFFmpegAuto"
+        Grid.Row="2"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,0,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnFFmpegAuto_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Auto"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <iconPacks:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
+      </Button>
 
-                      <!--  FFprobe Path TextBox  -->
-                      <Label
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Width="58"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="FFprobe"
-                        Cursor="Hand"
-                        PreviewMouseDown="lblFFprobePath_PreviewMouseDown"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Path to ffprobe.exe"
-                        ToolTipService.InitialShowDelay="250"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <TextBox
-                        x:Name="tbxFFprobePathConfig"
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Width="105"
-                        Height="20"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        AllowDrop="True"
-                        IsEnabled="{Binding FFprobePath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsReadOnly="True"
-                        MaxLines="1"
-                        PreviewDragEnter="tbxFFprobePath_PreviewDragOver"
-                        PreviewDragOver="tbxFFprobePath_PreviewDragOver"
-                        PreviewDrop="tbxFFprobePath_PreviewDrop"
-                        PreviewMouseDown="tbxFFprobePath_PreviewMouseDown"
-                        Style="{DynamicResource TextBoxBrowseStyle}"
-                        Text="{Binding FFprobePath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextWrapping="NoWrap"
-                        ToolTip="{Binding FFprobePath_Text, Mode=OneWay}"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <!--  FFprobe Path Revert Button  -->
-                      <Button
-                        x:Name="btnFFprobeAuto"
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Width="23"
-                        Height="23"
-                        Margin="122,1,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="btnFFprobeAuto_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonFolderStyle}"
-                        ToolTip="Revert to Auto"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True">
-                        <Image
-                          Width="9"
-                          Height="11"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Stretch="Uniform"
-                          Style="{DynamicResource ButtonRevertArrow}" />
-                      </Button>
+      <!--  FFprobe Path TextBox  -->
+      <Label
+        Grid.Row="3"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="FFprobe"
+        Cursor="Hand"
+        PreviewMouseDown="lblFFprobePath_PreviewMouseDown"
+        ToolTip="Path to ffprobe.exe"
+        ToolTipService.InitialShowDelay="250"
+        ToolTipService.ShowOnDisabled="True" />
+      <TextBox
+        x:Name="tbxFFprobePathConfig"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="105"
+        Height="20"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        AllowDrop="True"
+        IsEnabled="{Binding FFprobePath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsReadOnly="True"
+        MaxLines="1"
+        PreviewDragEnter="tbxFFprobePath_PreviewDragOver"
+        PreviewDragOver="tbxFFprobePath_PreviewDragOver"
+        PreviewDrop="tbxFFprobePath_PreviewDrop"
+        PreviewMouseDown="tbxFFprobePath_PreviewMouseDown"
+        Text="{Binding FFprobePath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="NoWrap"
+        ToolTip="{Binding FFprobePath_Text, Mode=OneWay}"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True" />
+      <!--  FFprobe Path Revert Button  -->
+      <Button
+        x:Name="btnFFprobeAuto"
+        Grid.Row="3"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnFFprobeAuto_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Auto"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <iconPacks:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
+      </Button>
 
-                      <!--  FFplay Path TextBox  -->
-                      <Label
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        Width="58"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="FFplay"
-                        Cursor="Hand"
-                        PreviewMouseDown="lblFFplayPath_PreviewMouseDown"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Path to ffplay.exe"
-                        ToolTipService.InitialShowDelay="250"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <TextBox
-                        x:Name="tbxFFplayPathConfig"
-                        Grid.Row="4"
-                        Grid.Column="2"
-                        Width="105"
-                        Height="20"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        AllowDrop="True"
-                        IsEnabled="{Binding FFplayPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsReadOnly="True"
-                        MaxLines="1"
-                        PreviewDragEnter="tbxFFplayPath_PreviewDragOver"
-                        PreviewDragOver="tbxFFplayPath_PreviewDragOver"
-                        PreviewDrop="tbxFFplayPath_PreviewDrop"
-                        PreviewMouseDown="tbxFFplayPath_PreviewMouseDown"
-                        Style="{DynamicResource TextBoxBrowseStyle}"
-                        Text="{Binding FFplayPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextWrapping="NoWrap"
-                        ToolTip="{Binding FFplayPath_Text, Mode=OneWay}"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <!--  FFplay Path Revert Button  -->
-                      <Button
-                        x:Name="btnFFplayAuto"
-                        Grid.Row="4"
-                        Grid.Column="2"
-                        Width="23"
-                        Height="23"
-                        Margin="122,1,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="btnFFplayAuto_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonFolderStyle}"
-                        ToolTip="Revert to Auto"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True">
-                        <Image
-                          Width="9"
-                          Height="11"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Stretch="Uniform"
-                          Style="{DynamicResource ButtonRevertArrow}" />
-                      </Button>
+      <!--  FFplay Path TextBox  -->
+      <Label
+        Grid.Row="4"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="FFplay"
+        Cursor="Hand"
+        PreviewMouseDown="lblFFplayPath_PreviewMouseDown"
+        ToolTip="Path to ffplay.exe"
+        ToolTipService.InitialShowDelay="250"
+        ToolTipService.ShowOnDisabled="True" />
+      <TextBox
+        x:Name="tbxFFplayPathConfig"
+        Grid.Row="4"
+        Grid.Column="2"
+        Width="105"
+        Height="20"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        AllowDrop="True"
+        IsEnabled="{Binding FFplayPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsReadOnly="True"
+        MaxLines="1"
+        PreviewDragEnter="tbxFFplayPath_PreviewDragOver"
+        PreviewDragOver="tbxFFplayPath_PreviewDragOver"
+        PreviewDrop="tbxFFplayPath_PreviewDrop"
+        PreviewMouseDown="tbxFFplayPath_PreviewMouseDown"
+        Text="{Binding FFplayPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="NoWrap"
+        ToolTip="{Binding FFplayPath_Text, Mode=OneWay}"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True" />
+      <!--  FFplay Path Revert Button  -->
+      <Button
+        x:Name="btnFFplayAuto"
+        Grid.Row="4"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnFFplayAuto_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Auto"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <iconPacks:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
+      </Button>
 
-                      <!--  youtube-dl Path TextBox  -->
-                      <Label
-                        Grid.Row="5"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Width="70"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="youtube-dl"
-                        Cursor="Hand"
-                        PreviewMouseDown="lblyoutubedlPath_PreviewMouseDown"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Path to youtube-dl.exe"
-                        ToolTipService.InitialShowDelay="250"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <TextBox
-                        x:Name="tbxyoutubedlPathConfig"
-                        Grid.Row="5"
-                        Grid.Column="2"
-                        Width="105"
-                        Height="20"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        AllowDrop="True"
-                        IsEnabled="{Binding youtubedlPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsReadOnly="True"
-                        MaxLines="1"
-                        PreviewDragEnter="tbxyoutubedlPath_PreviewDragOver"
-                        PreviewDragOver="tbxyoutubedlPath_PreviewDragOver"
-                        PreviewDrop="tbxyoutubedlPath_PreviewDrop"
-                        PreviewMouseDown="tbxyoutubedlPath_PreviewMouseDown"
-                        Style="{DynamicResource TextBoxBrowseStyle}"
-                        Text="{Binding youtubedlPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextWrapping="NoWrap"
-                        ToolTip="{Binding youtubedlPath_Text, Mode=OneWay}"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True" />
+      <!--  youtube-dl Path TextBox  -->
+      <Label
+        Grid.Row="5"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="youtube-dl"
+        Cursor="Hand"
+        PreviewMouseDown="lblyoutubedlPath_PreviewMouseDown"
+        ToolTip="Path to youtube-dl.exe"
+        ToolTipService.InitialShowDelay="250"
+        ToolTipService.ShowOnDisabled="True" />
+      <TextBox
+        x:Name="tbxyoutubedlPathConfig"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="105"
+        Height="20"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        AllowDrop="True"
+        IsEnabled="{Binding youtubedlPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsReadOnly="True"
+        MaxLines="1"
+        PreviewDragEnter="tbxyoutubedlPath_PreviewDragOver"
+        PreviewDragOver="tbxyoutubedlPath_PreviewDragOver"
+        PreviewDrop="tbxyoutubedlPath_PreviewDrop"
+        PreviewMouseDown="tbxyoutubedlPath_PreviewMouseDown"
+        Text="{Binding youtubedlPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="NoWrap"
+        ToolTip="{Binding youtubedlPath_Text, Mode=OneWay}"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True" />
 
-                      <!--  youtubedl Path Revert Button  -->
-                      <Button
-                        x:Name="btnyoutubedlAuto"
-                        Grid.Row="5"
-                        Grid.Column="2"
-                        Width="23"
-                        Height="23"
-                        Margin="122,1,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="btnyoutubedlAuto_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonFolderStyle}"
-                        ToolTip="Revert to Auto"
-                        ToolTipService.InitialShowDelay="200"
-                        ToolTipService.ShowOnDisabled="True">
-                        <Image
-                          Width="9"
-                          Height="11"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Stretch="Uniform"
-                          Style="{DynamicResource ButtonRevertArrow}" />
-                      </Button>
+      <!--  youtubedl Path Revert Button  -->
+      <Button
+        x:Name="btnyoutubedlAuto"
+        Grid.Row="5"
+        Grid.Column="2"
+        Width="23"
+        Height="23"
+        Margin="122,1,0,0"
+        Padding="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="btnyoutubedlAuto_Click"
+        Cursor="Hand"
+        ToolTip="Revert to Auto"
+        ToolTipService.InitialShowDelay="200"
+        ToolTipService.ShowOnDisabled="True">
+        <iconPacks:PackIconPhosphorIcons
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
+      </Button>
 
-                    </Grid>
+    </Grid>
 
-                    <!--  App Group  -->
-                    <Grid
-                      Grid.Row="4"
-                      Margin="0,0,0,0"
-                      VerticalAlignment="Top">
+    <!--  App Group  -->
+    <Grid
+      Grid.Row="4"
+      Margin="0,0,0,0"
+      VerticalAlignment="Top">
 
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="7" />
-                        <ColumnDefinition Width="64" />
-                        <ColumnDefinition Width="*" />
-                      </Grid.ColumnDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="7" />
+        <ColumnDefinition Width="64" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
 
-                      <Grid.RowDefinitions>
-                        <RowDefinition Height="55" />
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="33" />
-                        <RowDefinition Height="22" />
-                      </Grid.RowDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="55" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="33" />
+        <RowDefinition Height="22" />
+      </Grid.RowDefinitions>
 
-                      <!--  App  -->
-                      <!--<Label Style="{DynamicResource LabelStyle}"
+      <!--  App  -->
+      <!--<Label
                                        Content="App"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
@@ -459,138 +422,114 @@
                                        Height="26"
                                        Grid.Column="1" />-->
 
-                      <!--  Theme  -->
-                      <Label
-                        x:Name="labelTheme"
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Width="52"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="Theme"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Program Theme"
-                        ToolTipService.InitialShowDelay="500"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <ComboBox
-                        x:Name="cboTheme"
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Width="105"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        IsEnabled="{Binding Theme_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsTextSearchEnabled="False"
-                        ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                        SelectionChanged="themeSelect_SelectionChanged"
-                        Style="{DynamicResource ComboBoxStyle}" />
+      <!--  Theme  -->
+      <Label
+        x:Name="labelTheme"
+        Grid.Row="0"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Theme"
+        ToolTip="Program Theme"
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <ComboBox
+        x:Name="cboTheme"
+        Grid.Row="0"
+        Grid.Column="2"
+        Width="105"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        IsEnabled="{Binding Theme_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsTextSearchEnabled="False"
+        ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+        SelectionChanged="themeSelect_SelectionChanged" />
 
-                      <!--  Check for Updates  -->
-                      <Label
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Width="58"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="Updates"
-                        Style="{DynamicResource LabelStyle}"
-                        ToolTip="Automatically check for updates at startup."
-                        ToolTipService.InitialShowDelay="500"
-                        ToolTipService.ShowOnDisabled="True" />
-                      <!--  Window Toggle  -->
-                      <ToggleButton
-                        x:Name="tglUpdateAutoCheck"
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Width="55"
-                        Height="22"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Checked="tglUpdateAutoCheck_Checked"
-                        Cursor="Hand"
-                        IsChecked="{Binding UpdateAutoCheck_IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsEnabled="{Binding UpdateAutoCheck_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Style="{DynamicResource ToggleButtonStyle}"
-                        ToolTip="Automatically check for updates at startup."
-                        ToolTipService.InitialShowDelay="500"
-                        ToolTipService.ShowOnDisabled="True"
-                        Unchecked="tglUpdateAutoCheck_Unchecked">
-                        <TextBlock
-                          Margin="0,-2,0,0"
-                          Style="{DynamicResource TextBlockStyle}"
-                          Text="{Binding UpdateAutoCheck_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                      </ToggleButton>
+      <!--  Check for Updates  -->
+      <Label
+        Grid.Row="1"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Updates"
+        ToolTip="Automatically check for updates at startup."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True" />
+      <!--  Window Toggle  -->
+      <ToggleButton
+        x:Name="tglUpdateAutoCheck"
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="55"
+        Height="22"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Checked="tglUpdateAutoCheck_Checked"
+        Cursor="Hand"
+        IsChecked="{Binding UpdateAutoCheck_IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsEnabled="{Binding UpdateAutoCheck_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ToolTip="Automatically check for updates at startup."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True"
+        Unchecked="tglUpdateAutoCheck_Unchecked">
+        <TextBlock
+          Margin="0,-2,0,0"
+          Style="{DynamicResource TextBlockStyle}"
+          Text="{Binding UpdateAutoCheck_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      </ToggleButton>
 
-                      <Label
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Width="75"
-                        Height="26"
-                        Margin="69,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="Auto-Check"
-                        Style="{DynamicResource LabelStyle}" />
+      <Label
+        Grid.Row="1"
+        Grid.Column="2"
+        Width="75"
+        Height="26"
+        Margin="69,0,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Auto-Check" />
 
-                      <!--  Reset Saved Settings  -->
-                      <Button
-                        x:Name="btnClearAllSavedSettings"
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Width="55"
-                        Height="23"
-                        Margin="72,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Background="Transparent"
-                        Click="btnResetConfig_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonSmallStyle}"
-                        ToolTip="Delete config file and reset settings."
-                        ToolTipService.InitialShowDelay="500"
-                        ToolTipService.ShowOnDisabled="True">
-                        <TextBlock
-                          Margin="0,-1,0,0"
-                          Style="{DynamicResource TextBlockStyle}"
-                          Text="Reset" />
-                      </Button>
+      <!--  Reset Saved Settings  -->
+      <Button
+        x:Name="btnClearAllSavedSettings"
+        Grid.Row="2"
+        Grid.Column="2"
+        Margin="72,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Background="Transparent"
+        Click="btnResetConfig_Click"
+        Cursor="Hand"
+        ToolTip="Delete config file and reset settings."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Reset" />
+      </Button>
 
-                      <!--  Settings Default  -->
-                      <Label
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Width="58"
-                        Height="26"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="Settings"
-                        Style="{DynamicResource LabelStyle}" />
-                      <Button
-                        x:Name="btnSettingsDefault"
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Width="55"
-                        Height="23"
-                        Margin="10,2,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Background="Transparent"
-                        Click="btnSettingsDefault_Click"
-                        Cursor="Hand"
-                        Style="{DynamicResource ButtonSmallStyle}"
-                        ToolTip="Set all settings to default."
-                        ToolTipService.InitialShowDelay="500"
-                        ToolTipService.ShowOnDisabled="True">
-                        <TextBlock
-                          Margin="0,-1,0,0"
-                          Style="{DynamicResource TextBlockStyle}"
-                          Text="Default" />
-                      </Button>
-                    </Grid>
+      <!--  Settings Default  -->
+      <Label
+        Grid.Row="2"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Settings" />
+      <Button
+        x:Name="btnSettingsDefault"
+        Grid.Row="2"
+        Grid.Column="2"
+        Margin="10,2,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Background="Transparent"
+        Click="btnSettingsDefault_Click"
+        Cursor="Hand"
+        ToolTip="Set all settings to default."
+        ToolTipService.InitialShowDelay="500"
+        ToolTipService.ShowOnDisabled="True">
+        <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Default" />
+      </Button>
+    </Grid>
 
   </Grid>
 </UserControl>

@@ -48,6 +48,7 @@
       Width="22"
       Height="22"
       Margin="0,1,24,0"
+      Padding="0"
       HorizontalAlignment="Right"
       VerticalAlignment="Top"
       Click="btnInputClear_Click"
@@ -60,7 +61,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="BackpackFill" />
+        Kind="BackspaceFill" />
     </Button>
 
     <!--  Input Location Button  -->
@@ -69,6 +70,7 @@
       Width="22"
       Height="22"
       Margin="0,1,1,0"
+      Padding="0"
       HorizontalAlignment="Right"
       VerticalAlignment="Top"
       Click="openLocationInput_Click"
@@ -117,6 +119,7 @@
       Width="22"
       Height="22"
       Margin="0,30,24,0"
+      Padding="0"
       HorizontalAlignment="Right"
       VerticalAlignment="Top"
       Click="btnOutputClear_Click"
@@ -129,7 +132,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="BackpackFill" />
+        Kind="BackspaceFill" />
     </Button>
 
     <!--  Output Location Button  -->
@@ -138,6 +141,7 @@
       Width="22"
       Height="22"
       Margin="0,30,1,0"
+      Padding="0"
       HorizontalAlignment="Right"
       VerticalAlignment="Top"
       Click="openLocationOutput_Click"

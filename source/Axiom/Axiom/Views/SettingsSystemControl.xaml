@@ -54,8 +54,6 @@
       <Label
         Grid.Row="0"
         Grid.Column="1"
-        Width="56"
-        Height="26"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Shell"
@@ -84,6 +82,7 @@
         Width="23"
         Height="23"
         Margin="122,1,0,0"
+        Padding="0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Click="btnShellDefault_Click"
@@ -91,22 +90,17 @@
         ToolTip="Revert to Default"
         ToolTipService.InitialShowDelay="200"
         ToolTipService.ShowOnDisabled="True">
-        <Image
-          Width="9"
-          Height="11"
-          Margin="1,0,0,0"
+        <iconPacks:PackIconPhosphorIcons
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          Stretch="Uniform"
-          Style="{DynamicResource ButtonRevertArrow}" />
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
       </Button>
 
       <!--  Shell Title  -->
       <Label
         Grid.Row="1"
         Grid.Column="1"
-        Width="56"
-        Height="26"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Title"
@@ -135,6 +129,7 @@
         Width="23"
         Height="23"
         Margin="122,1,0,0"
+        Padding="0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Click="btnShellTitleDefault_Click"
@@ -142,22 +137,17 @@
         ToolTip="Revert to Default"
         ToolTipService.InitialShowDelay="200"
         ToolTipService.ShowOnDisabled="True">
-        <Image
-          Width="9"
-          Height="11"
-          Margin="1,0,0,0"
+        <iconPacks:PackIconPhosphorIcons
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          Stretch="Uniform"
-          Style="{DynamicResource ButtonRevertArrow}" />
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
       </Button>
 
       <!--  Priority  -->
       <Label
         Grid.Row="2"
         Grid.Column="1"
-        Width="56"
-        Height="26"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Priority"
@@ -185,6 +175,7 @@
         Width="23"
         Height="23"
         Margin="122,1,0,0"
+        Padding="0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Click="btnProcessPriorityDefault_Click"
@@ -192,22 +183,17 @@
         ToolTip="Revert to Default"
         ToolTipService.InitialShowDelay="200"
         ToolTipService.ShowOnDisabled="True">
-        <Image
-          Width="9"
-          Height="11"
-          Margin="1,0,0,0"
+        <iconPacks:PackIconPhosphorIcons
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          Stretch="Uniform"
-          Style="{DynamicResource ButtonRevertArrow}" />
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
       </Button>
 
       <!--  Threads  -->
       <Label
         Grid.Row="3"
         Grid.Column="1"
-        Width="56"
-        Height="26"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Threads"
@@ -237,6 +223,7 @@
         Width="23"
         Height="23"
         Margin="122,1,0,0"
+        Padding="0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Click="btnThreadsDefault_Click"
@@ -244,14 +231,11 @@
         ToolTip="Revert to Default"
         ToolTipService.InitialShowDelay="200"
         ToolTipService.ShowOnDisabled="True">
-        <Image
-          Width="9"
-          Height="11"
-          Margin="1,0,0,0"
+        <iconPacks:PackIconPhosphorIcons
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          Stretch="Uniform"
-          Style="{DynamicResource ButtonRevertArrow}" />
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
       </Button>
 
       <!--  Log Path  -->
@@ -259,8 +243,6 @@
         x:Name="labelLogConfig"
         Grid.Row="5"
         Grid.Column="1"
-        Width="36"
-        Height="26"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Log"
@@ -303,7 +285,6 @@
         PreviewDragEnter="tbxLogPath_PreviewDragOver"
         PreviewDragOver="tbxLogPath_PreviewDragOver"
         PreviewDrop="tbxLogPath_PreviewDrop"
-        Style="{DynamicResource TextBoxBrowseStyle}"
         Text="{Binding LogPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         TextWrapping="NoWrap"
         ToolTip="{Binding LogPath_Text, Mode=OneWay}"
@@ -318,6 +299,7 @@
         Width="23"
         Height="23"
         Margin="122,1,0,0"
+        Padding="0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Click="btnLogPathAuto_Click"
@@ -325,14 +307,11 @@
         ToolTip="Revert to Default"
         ToolTipService.InitialShowDelay="200"
         ToolTipService.ShowOnDisabled="True">
-        <Image
-          Width="9"
-          Height="11"
-          Margin="1,0,0,0"
+        <iconPacks:PackIconPhosphorIcons
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          Stretch="Uniform"
-          Style="{DynamicResource ButtonRevertArrow}" />
+          Foreground="{DynamicResource PrimaryTextBrush}"
+          Kind="ArrowCounterClockwiseBold" />
       </Button>
     </Grid>
 

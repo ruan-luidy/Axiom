@@ -8,7 +8,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:hc="https://handyorg.github.io/handycontrol"
-  xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
 
@@ -164,6 +164,7 @@
           Width="22"
           Height="22"
           Margin="83,7,0,0"
+          Padding="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Click="btnSubtitle_Add_Click"
@@ -172,7 +173,11 @@
           ToolTip="Add"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True">
-          <TextBlock Margin="0,-2,0,0" Text="+" />
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="PlusBold" />
         </Button>
         <!--  Remove  -->
         <Button
@@ -182,6 +187,7 @@
           Width="22"
           Height="22"
           Margin="83,34,0,0"
+          Padding="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Click="btnSubtitle_Remove_Click"
@@ -190,7 +196,11 @@
           ToolTip="Remove"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True">
-          <TextBlock Margin="0,-2,0,0" Text="-" />
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="MinusBold" />
         </Button>
         <!--  Sort Up  -->
         <Button
@@ -200,12 +210,17 @@
           Width="22"
           Height="22"
           Margin="83,88,0,0"
+          Padding="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Click="btnSubtitle_SortUp_Click"
           Cursor="Hand"
           IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-          <TextBlock Margin="0,-2,0,0" Text="▴" />
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="CaretUpFill" />
         </Button>
         <!--  Sort Down  -->
         <Button
@@ -215,12 +230,17 @@
           Width="22"
           Height="22"
           Margin="83,115,0,0"
+          Padding="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Click="btnSubtitle_SortDown_Click"
           Cursor="Hand"
           IsEnabled="{Binding Subtitle_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-          <TextBlock Margin="0,0,0,0" Text="▾" />
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="CaretDownFill" />
         </Button>
         <!--  Clear All  -->
         <Button
@@ -230,6 +250,7 @@
           Width="22"
           Height="22"
           Margin="83,61,0,0"
+          Padding="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Click="btnSubtitle_Clear_Click"
@@ -238,7 +259,11 @@
           ToolTip="Clear All"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True">
-          <TextBlock Margin="0,-3,0,0" Text="x" />
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="XBold" />
         </Button>
 
         <!--  Title Metadata  -->
