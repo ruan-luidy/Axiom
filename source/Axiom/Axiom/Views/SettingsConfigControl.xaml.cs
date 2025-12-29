@@ -26,22 +26,22 @@ namespace Axiom.Views
               {
                 // AppData Local
                 case "AppData Local":
-                  ConfigDirectoryOpen(appDataLocalDir + @"Axiom UI\");
+                  MainWindow.ConfigDirectoryOpen(MainWindow.appDataLocalDir + @"Axiom UI\");
                   break;
 
                 // AppData Roaming
                 case "AppData Roaming":
-                  ConfigDirectoryOpen(appDataRoamingDir + @"Axiom UI\");
+                  MainWindow.ConfigDirectoryOpen(MainWindow.appDataRoamingDir + @"Axiom UI\");
                   break;
 
                 // Documents
                 case "Documents":
-                  ConfigDirectoryOpen(documentsDir + @"Axiom UI\");
+                  MainWindow.ConfigDirectoryOpen(MainWindow.documentsDir + @"Axiom UI\");
                   break;
 
                 // App Root
                 case "App Root":
-                  Process.Start("explorer.exe", appRootDir);
+                  Process.Start("explorer.exe", MainWindow.appRootDir);
                   break;
               }
             }
@@ -51,7 +51,8 @@ namespace Axiom.Views
             /// </summary>
             private void btnCustomPresetsAuto_Click(object sender, RoutedEventArgs e)
             {
-              CustomPresetsAuto();
+              // TODO: CustomPresetsAuto method not implemented
+              //CustomPresetsAuto();
             }
 
             /// <summary>
@@ -90,7 +91,8 @@ namespace Axiom.Views
             private void btnSettingsDefault_Click(object sender, RoutedEventArgs e)
             {
               // Config
-              CustomPresetsAuto();
+              // TODO: CustomPresetsAuto method not implemented
+              //CustomPresetsAuto();
               VM.ConfigureView.FFmpegPath_Text = "<auto>";
               VM.ConfigureView.FFprobePath_Text = "<auto>";
               VM.ConfigureView.FFplayPath_Text = "<auto>";
@@ -110,8 +112,10 @@ namespace Axiom.Views
               // Output
               VM.ConfigureView.OutputOverwrite_SelectedItem = "Always";
               VM.ConfigureView.OutputFileNameSpacing_SelectedItem = "Original";
-              lstvOutputNaming.SelectedIndex = -1;
-              OutputNamignDefaults();
+              // TODO: Fix XAML compilation - lstvOutputNaming is in SettingsFileControl UserControl
+              //lstvOutputNaming.SelectedIndex = -1;
+              // TODO: OutputNamignDefaults method not implemented
+              //OutputNamignDefaults();
             }
 
             /// <summary>

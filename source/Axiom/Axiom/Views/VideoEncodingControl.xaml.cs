@@ -1,4 +1,6 @@
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -52,7 +54,7 @@ namespace Axiom.Views
       // -------------------------
       // Select HW Accel Video Codec
       // -------------------------
-      SelectHWAccelVideoCodec();
+      MainWindow.SelectHWAccelVideoCodec();
     }
 
     /// <summary>
@@ -92,7 +94,7 @@ namespace Axiom.Views
       }
 
       // Add HW Accel Format Container Codecs
-      SetHWAccelVideoCodecs();
+      MainWindow.SetHWAccelVideoCodecs();
     }
 
     /// <summary>
@@ -105,7 +107,7 @@ namespace Axiom.Views
       // -------------------------
       // Change HW Accel Transcode
       // -------------------------
-      ChangeHWAccelTranscode();
+      MainWindow.ChangeHWAccelTranscode();
 
       // -------------------------
       // Halt if Selected Codec is Null
@@ -212,7 +214,7 @@ namespace Axiom.Views
       // -------------------------
       // Convert Button Text Change
       // -------------------------
-      ConvertButtonText();
+      MainWindow.ConvertButtonText();
     }
 
     /// <summary>
@@ -393,7 +395,7 @@ namespace Axiom.Views
     private void cboVideo_Speed_KeyDown(object sender, KeyEventArgs e)
     {
       // Only allow Numbers and Backspace
-      Allow_Only_Number_Keys(e);
+      MainWindow.Allow_Only_Number_Keys(e);
     }
 
     /// <summary>
@@ -448,7 +450,7 @@ namespace Axiom.Views
     private void tbxVideo_CRF_KeyDown(object sender, KeyEventArgs e)
     {
       // Only allow Numbers and Backspace
-      Allow_Only_Number_Keys(e);
+      MainWindow.Allow_Only_Number_Keys(e);
     }
 
     private void tbxVideo_CRF_TextChanged(object sender, TextChangedEventArgs e)
@@ -547,6 +549,33 @@ namespace Axiom.Views
       Controls.Video.Controls.VideoBitRateDisplay(VM.VideoView.Video_Quality_Items,
                                                   VM.VideoView.Video_Quality_SelectedItem,
                                                   VM.VideoView.Video_Pass_SelectedItem);
+    }
+
+    // Expanded
+    private void expVideo_BitRateAdvanced_Expander_Expanded(object sender, RoutedEventArgs e)
+    {
+      // TODO: Fix XAML compilation - textBlockExpand moved to VideoEncodingControl UserControl
+      //textBlockExpand.Text = "-";
+    }
+
+    // Collapsed
+    private void expVideo_BitRateAdvanded_Expander_Collapsed(object sender, RoutedEventArgs e)
+    {
+      // TODO: Fix XAML compilation - textBlockExpand moved to VideoEncodingControl UserControl
+      //textBlockExpand.Text = "+";
+    }
+
+    private void cboVideo_Pass_DropDownClosed(object sender, EventArgs e)
+    {
+      // User willingly selected a Pass
+      Controls.Video.Controls.passUserSelected = true;
+    }
+
+    // Slider Value Change
+    private void slVideo_CRF_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+      // Update TextBox with value
+      VM.VideoView.Video_CRF_Text = VM.VideoView.Video_CRF_Value.ToString();
     }
 
   }

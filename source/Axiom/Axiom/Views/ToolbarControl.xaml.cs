@@ -389,7 +389,23 @@ namespace Axiom.Views
             }
         }
 
-        // TODO: Event Handlers from XAML (not yet implemented in MainWindow.xaml.cs)
-        // TODO: btnUpdate_Click
+        /// <summary>
+        /// Update Button
+        /// </summary>
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            // Call the MainWindow method
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (mainWindow != null)
+            {
+                // Use reflection to call private method
+                var methodInfo = typeof(MainWindow).GetMethod("btnUpdate_Click",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (methodInfo != null)
+                {
+                    methodInfo.Invoke(mainWindow, new object[] { sender, e });
+                }
+            }
+        }
     }
 }

@@ -487,10 +487,13 @@ namespace Axiom
         VM.AudioView.Audio_ListView_SelectedItems.TrimExcess();
       }
 
+      // TODO: Fix XAML compilation - lstvAudio .g.cs not generated
+      /*
       // Create Selected Items List for ViewModel
       VM.AudioView.Audio_ListView_SelectedItems = lstvAudio.SelectedItems
                                                            .Cast<string>()
                                                            .ToList();
+      */
 
       // -------------------------
       // Set Metadata

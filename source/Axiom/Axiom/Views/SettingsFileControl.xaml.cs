@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,9 +37,11 @@ namespace Axiom.Views
     private void btnOutputNamingDefaults_Click(object sender, RoutedEventArgs e)
     {
       // Deselect All
-      lstvOutputNaming.SelectedIndex = -1;
+      // TODO: Fix XAML compilation - lstvOutputNaming .g.cs not generated
+      //lstvOutputNaming.SelectedIndex = -1;
 
-      OutputNamignDefaults();
+      // TODO: OutputNamignDefaults method not implemented
+      //OutputNamignDefaults();
     }
 
     /// <summary>
@@ -46,7 +49,8 @@ namespace Axiom.Views
     /// </summary>
     private void btnOutputNaming_DeselectAll_Click(object sender, RoutedEventArgs e)
     {
-      lstvOutputNaming.SelectedIndex = -1;
+      // TODO: Fix XAML compilation - lstvOutputNaming .g.cs not generated
+      //lstvOutputNaming.SelectedIndex = -1;
     }
 
     /// <summary>
@@ -54,7 +58,8 @@ namespace Axiom.Views
     /// </summary>
     private void btnOutputNaming_SelectAll_Click(object sender, RoutedEventArgs e)
     {
-      lstvOutputNaming.SelectAll();
+      // TODO: Fix XAML compilation - lstvOutputNaming .g.cs not generated
+      //lstvOutputNaming.SelectAll();
     }
 
     /// <summary>
@@ -153,6 +158,8 @@ namespace Axiom.Views
       //VM.ConfigureView.OutputNaming_ListView_Items = VM.ConfigureView.OutputNaming_ListView_Items.Distinct().ToList();
 
       // Build the list by Order Arranged
+      // TODO: Fix XAML compilation - lstvOutputNaming .g.cs not generated
+      /*
       for (var i = 0; i < VM.ConfigureView.OutputNaming_ListView_Items.Count; i++)
       {
         if (lstvOutputNaming.SelectedItems
@@ -163,6 +170,7 @@ namespace Axiom.Views
           VM.ConfigureView.OutputNaming_ListView_SelectedItems.Add(VM.ConfigureView.OutputNaming_ListView_Items[i]);
         }
       }
+      */
 
       // Remove ListView Selected Items Duplicates
       VM.ConfigureView.OutputNaming_ListView_SelectedItems = VM.ConfigureView.OutputNaming_ListView_SelectedItems

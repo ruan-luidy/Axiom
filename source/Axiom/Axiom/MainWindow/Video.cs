@@ -590,12 +590,14 @@ namespace Axiom
     // Expanded
     private void expVideo_BitRateAdvanced_Expander_Expanded(object sender, RoutedEventArgs e)
     {
-      textBlockExpand.Text = "-";
+      // TODO: Fix XAML compilation - textBlockExpand moved to VideoEncodingControl UserControl
+      //textBlockExpand.Text = "-";
     }
     // Collapsed
-    private void expVideo_BitRateAdvanced_Expander_Collapsed(object sender, RoutedEventArgs e)
+    private void expVideo_BitRateAdvanded_Expander_Collapsed(object sender, RoutedEventArgs e)
     {
-      textBlockExpand.Text = "+";
+      // TODO: Fix XAML compilation - textBlockExpand moved to VideoEncodingControl UserControl
+      //textBlockExpand.Text = "+";
     }
 
     /// <summary>
@@ -1164,16 +1166,21 @@ namespace Axiom
     // Got Focus
     private void tbxVideo_Width_GotFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Width moved to VideoSizeControl UserControl
       // Clear textbox on focus if default text "auto"
+      /*
       if (tbxVideo_Width.Focus() == true &&
           VM.VideoView.Video_Width_Text == "auto")
       {
         VM.VideoView.Video_Width_Text = string.Empty;
       }
+      */
     }
     // Lost Focus
     private void tbxVideo_Width_LostFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Width moved to VideoSizeControl UserControl
+      /*
       VM.VideoView.Video_Width_Text = tbxVideo_Width.Text;
 
       // Change textbox back to "auto" if left empty
@@ -1181,6 +1188,7 @@ namespace Axiom
       {
         VM.VideoView.Video_Width_Text = "auto";
       }
+      */
     }
 
     /// <summary>
@@ -1189,16 +1197,21 @@ namespace Axiom
     // Got Focus
     private void tbxVideo_Height_GotFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Height moved to VideoSizeControl UserControl
       // Clear textbox on focus if default text "auto"
+      /*
       if (tbxVideo_Height.Focus() == true &&
           VM.VideoView.Video_Height_Text == "auto")
       {
         VM.VideoView.Video_Height_Text = string.Empty;
       }
+      */
     }
     // Lost Focus
     private void tbxVideo_Height_LostFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Height moved to VideoSizeControl UserControl
+      /*
       VM.VideoView.Video_Height_Text = tbxVideo_Height.Text;
 
       // Change textbox back to "height" if left empty
@@ -1206,6 +1219,7 @@ namespace Axiom
       {
         VM.VideoView.Video_Height_Text = "auto";
       }
+      */
     }
 
     /// <summary>

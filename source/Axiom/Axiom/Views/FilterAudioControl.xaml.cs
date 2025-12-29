@@ -54,7 +54,7 @@ namespace Axiom.Views
 
     private void tbxFilterAudio_Contrast_KeyDown(object sender, KeyEventArgs e)
     {
-      Allow_Only_Number_Keys(e);
+      MainWindow.Allow_Only_Number_Keys(e);
     }
 
     private void tbxFilterAudio_Contrast_PreviewKeyUp(object sender, KeyEventArgs e)
@@ -64,7 +64,7 @@ namespace Axiom.Views
 
     private void tbxFilterAudio_ExtraStereo_KeyDown(object sender, KeyEventArgs e)
     {
-      Allow_Only_Number_Keys(e);
+      MainWindow.Allow_Only_Number_Keys(e);
     }
 
     private void tbxFilterAudio_ExtraStereo_PreviewKeyUp(object sender, KeyEventArgs e)
@@ -74,7 +74,7 @@ namespace Axiom.Views
 
     private void tbxFilterAudio_Tempo_KeyDown(object sender, KeyEventArgs e)
     {
-      Allow_Only_Number_Keys(e);
+      MainWindow.Allow_Only_Number_Keys(e);
     }
 
     private void tbxFilterAudio_Tempo_PreviewKeyUp(object sender, KeyEventArgs e)

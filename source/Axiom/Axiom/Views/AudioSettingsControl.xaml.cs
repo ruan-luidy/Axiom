@@ -4,15 +4,44 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using ViewModel;
 
 namespace Axiom.Views
 {
   public partial class AudioSettingsControl : UserControl
   {
+    // Volume Up Down Dispatcher Timers
+    public DispatcherTimer dispatcherTimerUp = new DispatcherTimer(DispatcherPriority.Render);
+    public DispatcherTimer dispatcherTimerDown = new DispatcherTimer(DispatcherPriority.Render);
+
     public AudioSettingsControl()
     {
       InitializeComponent();
+
+      // Initialize Dispatcher Timers
+      dispatcherTimerUp.Tick += new EventHandler(dispatcherTimerUp_Tick);
+      dispatcherTimerDown.Tick += new EventHandler(dispatcherTimerDown_Tick);
+    }
+
+    // Up Button Each Timer Tick
+    private void dispatcherTimerUp_Tick(object sender, EventArgs e)
+    {
+      int value;
+      int.TryParse(VM.AudioView.Audio_Volume_Text, out value);
+
+      value += 1;
+      VM.AudioView.Audio_Volume_Text = value.ToString();
+    }
+
+    // Down Button Each Timer Tick
+    private void dispatcherTimerDown_Tick(object sender, EventArgs e)
+    {
+      int value;
+      int.TryParse(VM.AudioView.Audio_Volume_Text, out value);
+
+      value -= 1;
+      VM.AudioView.Audio_Volume_Text = value.ToString();
     }
 
     /// <summary>
@@ -47,7 +76,7 @@ namespace Axiom.Views
         for (var i = 0; i < selectFiles.FileNames.Length; i++)
         {
           // Wrap in quotes for ffmpeg -i
-          Generate.Audio.Audio.audioFilePathsList.Add(WrapWithQuotes(selectFiles.FileNames[i]));
+          Generate.Audio.Audio.audioFilePathsList.Add(MainWindow.WrapWithQuotes(selectFiles.FileNames[i]));
           //MessageBox.Show(Video.audioFiles[i]); //debug
 
           Generate.Audio.Audio.audioFileNamesList.Add(Path.GetFileName(selectFiles.FileNames[i]));
@@ -73,7 +102,7 @@ namespace Axiom.Views
     /// </summary>
     private void btnAudio_Clear_Click(object sender, RoutedEventArgs e)
     {
-      AudioClear();
+      MainWindow.AudioClear();
     }
 
     /// <summary>
@@ -263,7 +292,7 @@ namespace Axiom.Views
     private void btnAudio_VolumeDown_PreviewMouseUp(object sender, MouseButtonEventArgs e)
     {
       // Disable Timer
-      dispatcherTimerDown.Stop();
+      // dispatcherTimerDown.Stop(); // TODO: Implement timer in UserControl
     }
 
     private void btnAudio_VolumeUp_Click(object sender, RoutedEventArgs e)
@@ -278,7 +307,7 @@ namespace Axiom.Views
     private void btnAudio_VolumeUp_PreviewMouseUp(object sender, MouseButtonEventArgs e)
     {
       // Disable Timer
-      dispatcherTimerUp.Stop();
+      // dispatcherTimerUp.Stop(); // TODO: Implement timer in UserControl
     }
 
     /// <summary>
@@ -402,7 +431,7 @@ namespace Axiom.Views
       // -------------------------
       // Convert Button Text Change
       // -------------------------
-      ConvertButtonText();
+      MainWindow.ConvertButtonText();
 
       // -------------------------
       // Output Path Update Display
@@ -575,9 +604,12 @@ namespace Axiom.Views
       }
 
       // Create Selected Items List for ViewModel
+      // TODO: Fix XAML compilation - lstvAudio .g.cs not generated
+      /*
       VM.AudioView.Audio_ListView_SelectedItems = lstvAudio.SelectedItems
                                                            .Cast<string>()
                                                            .ToList();
+      */
 
       // -------------------------
       // Set Metadata
@@ -585,6 +617,8 @@ namespace Axiom.Views
       int selectedIndex = VM.AudioView.Audio_ListView_SelectedIndex;
 
       // Title
+      // TODO: Fix XAML compilation - tbxAudio_Metadata_Title .g.cs not generated
+      /*
       if (Generate.Audio.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
       {
         tbxAudio_Metadata_Title.Text = Generate.Audio.Metadata.titleList[selectedIndex];
@@ -593,6 +627,7 @@ namespace Axiom.Views
       {
         tbxAudio_Metadata_Title.Text = string.Empty;
       }
+      */
 
       // Language
       if (Generate.Audio.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
@@ -654,7 +689,7 @@ namespace Axiom.Views
     private void tbxAudio_BitRate_KeyDown(object sender, KeyEventArgs e)
     {
       // Only allow Numbers and Backspace
-      Allow_Only_Number_Keys(e);
+      MainWindow.Allow_Only_Number_Keys(e);
     }
 
     private void tbxAudio_BitRate_LostFocus(object sender, RoutedEventArgs e)
@@ -686,7 +721,7 @@ namespace Axiom.Views
 
     private void tbxAudio_Metadata_Title_LostFocus(object sender, RoutedEventArgs e)
     {
-      SaveMetadata_Audio_Title();
+      // SaveMetadata_Audio_Title(); // TODO: Implement in UserControl
     }
 
     /// <summary>
@@ -695,7 +730,7 @@ namespace Axiom.Views
     private void tbxAudio_Volume_KeyDown(object sender, KeyEventArgs e)
     {
       // Only allow Numbers and Backspace
-      Allow_Only_Number_Keys(e);
+      MainWindow.Allow_Only_Number_Keys(e);
     }
 
     /// <summary>
@@ -754,6 +789,64 @@ namespace Axiom.Views
       if (VM.AudioView.Audio_Codec_SelectedItem == "Opus")
       {
         VM.AudioView.Audio_CompressionLevel_IsEnabled = false;
+      }
+    }
+
+    /// <summary>
+    /// Volume Buttons
+    /// </summary>
+    // Hold Up Button
+    private void btnAudio_VolumeUp_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+      // Timer
+      dispatcherTimerUp.Interval = new TimeSpan(0, 0, 0, 0, 100); //100ms
+      dispatcherTimerUp.Start();
+    }
+
+    // Hold Down Button
+    private void btnAudio_VolumeDown_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+      // Timer
+      dispatcherTimerDown.Interval = new TimeSpan(0, 0, 0, 0, 100); //100ms
+      dispatcherTimerDown.Start();
+    }
+
+    /// <summary>
+    /// Title Metadata - TextBox
+    /// </summary>
+    private void tbxAudio_Metadata_Title_KeyUp(object sender, KeyEventArgs e)
+    {
+      SaveMetadata_Audio_Title();
+    }
+
+    public void SaveMetadata_Audio_Title()
+    {
+      // -------------------------
+      // Halts
+      // -------------------------
+      if (VM.AudioView.Audio_Stream_SelectedItem != "mux")
+      {
+        return;
+      }
+
+      // -------------------------
+      // Title
+      // -------------------------
+      if (Generate.Audio.Metadata.titleList != null &&
+          Generate.Audio.Metadata.titleList.Count > 0)
+      {
+        // Set selected index
+        int selectedIndex = VM.AudioView.Audio_ListView_SelectedIndex;
+
+        // Remove previous from the list at selected track index
+        if (selectedIndex >= 0 && selectedIndex < Generate.Audio.Metadata.titleList.Count)
+        {
+          Generate.Audio.Metadata.titleList.RemoveAt(selectedIndex);
+
+          // Add back new with replaced placeholder
+          // TODO: Fix XAML compilation - tbxAudio_Metadata_Title .g.cs not generated
+          //Generate.Audio.Metadata.titleList.Insert(selectedIndex, tbxAudio_Metadata_Title.Text);
+        }
       }
     }
   }

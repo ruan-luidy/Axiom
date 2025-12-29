@@ -343,7 +343,8 @@ namespace Axiom
       // --------------------------
       // Input/Output Copy/Paste
       // --------------------------
-      DataObject.AddPastingHandler(tbxOutput, OnOutputTextBoxPaste);
+      // TODO: Fix XAML compilation - tbxOutput moved to InputOutputControl UserControl
+      //DataObject.AddPastingHandler(tbxOutput, OnOutputTextBoxPaste);
 
       // --------------------------
       // ScriptView Copy/Paste
@@ -953,6 +954,8 @@ namespace Axiom
                                     //VM.ConfigureView.OutputNaming_ListView_SelectedItems.Add(arrOuputNaming_SelectedItems[i]);
 
                                     // Select the Item
+                                    // TODO: Fix XAML compilation - lstvOutputNaming moved to SettingsFileControl UserControl
+                                    /*
                                     try
                                     {
                                         this.lstvOutputNaming.SelectedItems.Add(arrOuputNaming_SelectedItems[i]);
@@ -961,6 +964,7 @@ namespace Axiom
                                     {
 
                                     }
+                                    */
                                 }
                             }
                         }
@@ -1241,6 +1245,33 @@ namespace Axiom
         }
       }
       Directory.Delete(source, true);
+    }
+
+    /// <summary>
+    /// Thread Detect
+    /// </summary>
+    public static String ThreadDetect()
+    {
+      // Optimal
+      if (VM.ConfigureView.Threads_SelectedItem == "Optimal")
+      {
+        return string.Empty; // FFmpeg auto-detects optimal thread count
+      }
+      // All
+      else if (VM.ConfigureView.Threads_SelectedItem == "All")
+      {
+        return "-threads 0";
+      }
+      // Specific number
+      else if (!string.IsNullOrWhiteSpace(VM.ConfigureView.Threads_SelectedItem))
+      {
+        return "-threads " + VM.ConfigureView.Threads_SelectedItem;
+      }
+      // Default
+      else
+      {
+        return string.Empty;
+      }
     }
 
     /// <summary>
@@ -1547,7 +1578,7 @@ namespace Axiom
     /// <summary>
     /// Allow Only Numbers & Backspace
     /// </summary>
-    public void Allow_Only_Number_Keys(KeyEventArgs e)
+    public static void Allow_Only_Number_Keys(KeyEventArgs e)
     {
       // Only allow Numbers
       // Deny Symbols (Shift + Number)
@@ -1702,6 +1733,396 @@ namespace Axiom
       ;
 
       // Is Valid
+      return true;
+    }
+
+    /// <summary>
+    /// FFmpeg Path
+    /// </summary>
+    public static String FFmpegPath()
+    {
+      // -------------------------
+      // FFmpeg.exe and FFprobe.exe Paths
+      // -------------------------
+      // If Configure FFmpeg Path is <auto>
+      if (VM.ConfigureView.FFmpegPath_Text == "<auto>")
+      {
+        if (File.Exists(appRootDir + @"ffmpeg\bin\ffmpeg.exe"))
+        {
+          // Use included binary
+          // Do not use WrapWithQuotes() Method
+          Generate.FFmpeg.ffmpeg = Sys.Shell.PowerShell_CallOperator_FFmpeg() + "\"" + appRootDir + @"ffmpeg\bin\ffmpeg.exe" + "\"";
+        }
+        else if (!File.Exists(appRootDir + @"ffmpeg\bin\ffmpeg.exe"))
+        {
+          // Use system installed binaries
+          Generate.FFmpeg.ffmpeg = "ffmpeg";
+        }
+      }
+      // Use User Custom Path
+      else
+      {
+        // Do not use WrapWithQuotes() Method
+        Generate.FFmpeg.ffmpeg = Sys.Shell.PowerShell_CallOperator_FFmpeg() + "\"" + VM.ConfigureView.FFmpegPath_Text + "\"";
+      }
+
+      // Return Value
+      return Generate.FFmpeg.ffmpeg;
+    }
+
+    /// <summary>
+    /// FFmpeg Path for YouTube-DL
+    /// </summary>
+    public static String YouTubeDL_FFmpegPath()
+    {
+      // youtube-dl
+      // FFmpeg must be detected by youtube-dl to merge video+audio into a single file
+      // If using Environment Variables, path will be only 'ffmpeg'
+      // If defining ffmpeg location, do not use "--ffmpeg-location ffmpeg", it will fail
+      // You must use a full path --ffmpeg-location "C:\Path\To\ffmpeg.exe"
+
+      string path = FFmpegPath();
+
+      // Environment Variables
+      if (path == "ffmpeg")
+      {
+        // Do not specify a path if using Environment Variables
+        // It will be detected by youtube-dl automatically
+        return string.Empty;
+      }
+
+      // Missing
+      else if (string.IsNullOrWhiteSpace(path))
+      {
+        // Let youtube-dl throw error
+        return string.Empty;
+      }
+
+      // Specify ffmpeg.exe path
+      else
+      {
+        return " --ffmpeg-location " + path;
+      }
+    }
+
+    /// <summary>
+    /// FFprobe Path
+    /// </summary>
+    public static void FFprobePath()
+    {
+      // If Configure FFprobe Path is <auto>
+      if (VM.ConfigureView.FFprobePath_Text == "<auto>")
+      {
+        if (File.Exists(appRootDir + @"ffmpeg\bin\ffprobe.exe"))
+        {
+          // use included binary
+          Analyze.FFprobe.ffprobe = "\"" + appRootDir + @"ffmpeg\bin\ffprobe.exe" + "\"";
+        }
+        else if (!File.Exists(appRootDir + @"ffmpeg\bin\ffprobe.exe"))
+        {
+          // use system installed binaries
+          Analyze.FFprobe.ffprobe = "ffprobe";
+        }
+      }
+      // Use User Custom Path
+      else
+      {
+        Analyze.FFprobe.ffprobe = "\"" + VM.ConfigureView.FFprobePath_Text + "\"";
+      }
+    }
+
+    /// <summary>
+    /// FFplay Path
+    /// </summary>
+    public static void FFplayPath()
+    {
+      // If Configure FFprobe Path is <auto>
+      if (VM.ConfigureView.FFplayPath_Text == "<auto>")
+      {
+        if (File.Exists(appRootDir + @"ffmpeg\bin\ffplay.exe"))
+        {
+          // use included binary
+          Preview.FFplay.ffplay = "\"" + appRootDir + @"ffmpeg\bin\ffplay.exe" + "\"";
+        }
+        else if (!File.Exists(appRootDir + @"ffmpeg\bin\ffplay.exe"))
+        {
+          // use system installed binaries
+          Preview.FFplay.ffplay = "ffplay";
+        }
+      }
+      // Use User Custom Path
+      else
+      {
+        Preview.FFplay.ffplay = "\"" + VM.ConfigureView.FFplayPath_Text + "\"";
+      }
+    }
+
+    /// <summary>
+    /// youtube-dl Path
+    /// </summary>
+    public static void youtubedlPath()
+    {
+      // If Configure youtubedl Path is <auto>
+      if (VM.ConfigureView.youtubedlPath_Text == "<auto>")
+      {
+        // youtube-dl.exe Exists
+        if (File.Exists(appRootDir + @"youtube-dl\youtube-dl.exe"))
+        {
+          // use included binary path
+          youtubedl = appRootDir + @"youtube-dl\youtube-dl.exe";
+        }
+        else if (File.Exists(appRootDir + @"youtube-dl.exe"))
+        {
+          // moved from folder
+          youtubedl = appRootDir + @"youtube-dl.exe";
+        }
+
+        // youtube-dl.exe Does Not Exist
+        else if (!File.Exists(appRootDir + @"youtube-dl\youtube-dl.exe"))
+        {
+          // Installed
+          // Environment Variable auto path
+          youtubedl = @"youtube-dl";
+        }
+      }
+
+      // Use User Custom Path
+      else
+      {
+        youtubedl = VM.ConfigureView.youtubedlPath_Text;
+      }
+    }
+
+    /// <summary>
+    /// Is Web URL
+    /// </summary>
+    public static bool IsWebURL(string input_Text)
+    {
+      // Empty
+      if (string.IsNullOrWhiteSpace(input_Text))
+      {
+        return false;
+      }
+
+      input_Text = input_Text.Trim();
+
+      // URL
+      if ((input_Text.StartsWith("http://") ||
+        input_Text.StartsWith("https://") ||
+        input_Text.StartsWith("www."))
+         )
+      {
+        return true;
+      }
+
+      // Local File
+      else
+      {
+        return false;
+      }
+    }
+
+    /// <summary>
+    /// Is YouTube URL
+    /// </summary>
+    public static bool IsYouTubeURL(string input_Text)
+    {
+      // Empty
+      if (string.IsNullOrWhiteSpace(input_Text))
+      {
+        return false;
+      }
+
+      // YouTube
+      if (// youtube (any domain extension)
+         input_Text.StartsWith("https://www.youtube.") ||
+         input_Text.StartsWith("http://www.youtube.") ||
+         input_Text.StartsWith("www.youtube.") ||
+         input_Text.StartsWith("youtube.") ||
+
+         // youtu.be
+         input_Text.StartsWith("https://youtu.be") ||
+         input_Text.StartsWith("http://youtu.be") ||
+         input_Text.StartsWith("www.youtu.be") ||
+         input_Text.StartsWith("youtu.be")
+         )
+      {
+        return true;
+      }
+
+      // Other
+      else
+      {
+        return false;
+      }
+    }
+
+    /// <summary>
+    /// Is Web Download Only
+    /// </summary>
+    public static bool IsWebDownloadOnly(string videoCodec_SelectedItem,
+                                         string subtitleCodec_SelectedItem,
+                                         string audioCodec_SelectedItem
+                                         )
+    {
+      if (// Video
+          (videoCodec_SelectedItem == "Copy" &&
+           subtitleCodec_SelectedItem == "Copy" &&
+           audioCodec_SelectedItem == "Copy")
+
+           ||
+
+          (videoCodec_SelectedItem == "Copy" &&
+           subtitleCodec_SelectedItem == "Copy")
+
+           ||
+
+          (videoCodec_SelectedItem == "Copy" &&
+           subtitleCodec_SelectedItem == "None" &&
+           audioCodec_SelectedItem == "Copy")
+
+           ||
+
+          (videoCodec_SelectedItem == "None" &&
+           subtitleCodec_SelectedItem == "None" &&
+           audioCodec_SelectedItem == "Copy")
+          )
+      {
+        return true;
+      }
+
+      // Other
+      else
+      {
+        return false;
+      }
+    }
+
+    /// <summary>
+    /// FFmpeg Checks
+    /// </summary>
+    public static bool FFcheck()
+    {
+      bool ready = true;
+
+      try
+      {
+        // Environment Variables
+        var envar = Environment.GetEnvironmentVariable("Path");
+
+        // -------------------------
+        // FFmpeg
+        // -------------------------
+        // If Auto Mode
+        if (VM.ConfigureView.FFmpegPath_Text == "<auto>")
+        {
+          // Check default current directory
+          if (File.Exists(appRootDir + @"ffmpeg\bin\ffmpeg.exe"))
+          {
+            // let pass
+            return true;
+          }
+          else
+          {
+            int found = 0;
+
+            // Check Environment Variables
+            foreach (var envarPath in envar.Split(';'))
+            {
+              var exePath = Path.Combine(envarPath, "ffmpeg.exe");
+              if (File.Exists(exePath)) { found = 1; }
+            }
+
+            if (found == 1)
+            {
+              // let pass
+              return true;
+            }
+            else
+            {
+              // lock
+              MessageBox.Show("Cannot locate FFmpeg Path in Environment Variables or Current Folder.",
+                              "Error",
+                              MessageBoxButton.OK,
+                              MessageBoxImage.Warning);
+
+              return false;
+            }
+          }
+        }
+        // If User Defined Path
+        else if (VM.ConfigureView.FFmpegPath_Text != "<auto>" &&
+                 IsValidPath(VM.ConfigureView.FFprobePath_Text))
+        {
+          var dirPath = Path.GetDirectoryName(VM.ConfigureView.FFmpegPath_Text).TrimEnd('\\') + @"\";
+          var fullPath = Path.Combine(dirPath, "ffmpeg.exe");
+
+          // Make Sure ffmpeg.exe Exists
+          if (File.Exists(fullPath))
+          {
+            // let pass
+            return true;
+          }
+          else
+          {
+            // lock
+            MessageBox.Show("Cannot locate FFmpeg Path in User Defined Path.",
+                            "Error",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+
+            return false;
+          }
+        }
+      }
+      catch
+      {
+        MessageBox.Show("Unknown Error trying to locate FFmpeg Path.",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+        return false;
+      }
+
+      return ready;
+    }
+
+    /// <summary>
+    /// Ready Halts
+    /// </summary>
+    public static bool ReadyHalts()
+    {
+      // -------------------------
+      // Check if FFmpeg & FFprobe Exists
+      // -------------------------
+      if (FFcheck() == false)
+      {
+        // Halt
+        return false;
+      }
+
+      // -------------------------
+      // Input File does not exist
+      // -------------------------
+      if (IsWebURL(VM.MainView.Input_Text) == false) // Ignore Web URL's
+      {
+        if (!string.IsNullOrWhiteSpace(VM.MainView.Input_Text) &&
+            VM.MainView.Batch_IsChecked == false)
+        {
+          if (!File.Exists(VM.MainView.Input_Text))
+          {
+            MessageBox.Show("Input file does not exist.",
+                            "Notice",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Exclamation);
+
+            // Halt
+            return false;
+          }
+        }
+      }
+
+      // Pass
       return true;
     }
 

@@ -120,7 +120,8 @@ namespace Axiom
       // Force MediaTypeControls ComboBox to fire SelectionChanged Event
       // to update Format changes such as Audio_Stream_SelectedItem
       // -------------------------
-      cboFormat_MediaType_SelectionChanged(cboFormat_MediaType, null);
+      // TODO: Fix XAML compilation - cboFormat_MediaType .g.cs not generated
+      //cboFormat_MediaType_SelectionChanged(cboFormat_MediaType, null);
 
       // -------------------------
       // Set Video and AudioCodec Combobox to "Copy" if 

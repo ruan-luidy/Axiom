@@ -48,7 +48,7 @@ namespace Axiom.Views
                 {
                   // Wrap in quotes for ffmpeg -i
                   //Generate.Subtitle.subtitleFilePathsList.Add("\"" + selectFiles.FileNames[i] + "\"");
-                  Generate.Subtitle.Subtitle.subtitleFilePathsList.Add(WrapWithQuotes(selectFiles.FileNames[i]));
+                  Generate.Subtitle.Subtitle.subtitleFilePathsList.Add(MainWindow.WrapWithQuotes(selectFiles.FileNames[i]));
                   //MessageBox.Show(Video.subtitleFiles[i]); //debug
 
                   Generate.Subtitle.Subtitle.subtitleFileNamesList.Add(Path.GetFileName(selectFiles.FileNames[i]));
@@ -74,7 +74,7 @@ namespace Axiom.Views
             /// </summary>
             private void btnSubtitle_Clear_Click(object sender, RoutedEventArgs e)
             {
-              SubtitlesClear();
+              MainWindow.SubtitlesClear();
             }
 
             /// <summary>
@@ -282,7 +282,7 @@ namespace Axiom.Views
               // -------------------------
               // Convert Button Text Change
               // -------------------------
-              ConvertButtonText();
+              MainWindow.ConvertButtonText();
             }
 
             /// <summary>
@@ -399,9 +399,12 @@ namespace Axiom.Views
               }
 
               // Create Selected Items List for ViewModel
+              // TODO: Fix XAML compilation - lstvSubtitles .g.cs not generated
+              /*
               VM.SubtitleView.Subtitle_ListView_SelectedItems = lstvSubtitles.SelectedItems
                                                                              .Cast<string>()
                                                                              .ToList();
+              */
 
               // -------------------------
               // Set Metadata
@@ -409,6 +412,8 @@ namespace Axiom.Views
               int selectedIndex = VM.SubtitleView.Subtitle_ListView_SelectedIndex;
 
               // Title
+              // TODO: Fix XAML compilation - tbxSubtitle_Metadata_Title .g.cs not generated
+              /*
               if (Generate.Subtitle.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
               {
                 tbxSubtitle_Metadata_Title.Text = Generate.Subtitle.Metadata.titleList[selectedIndex];
@@ -417,6 +422,7 @@ namespace Axiom.Views
               {
                 tbxSubtitle_Metadata_Title.Text = string.Empty;
               }
+              */
 
               // Language
               if (Generate.Subtitle.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
@@ -445,9 +451,17 @@ namespace Axiom.Views
               }
             }
 
+            /// <summary>
+            /// Title Metadata - TextBox
+            /// </summary>
+            private void tbxSubtitle_Metadata_Title_KeyUp(object sender, KeyEventArgs e)
+            {
+              MainWindow.SaveMetadata_Subtitle_Title();
+            }
+
             private void tbxSubtitle_Metadata_Title_LostFocus(object sender, RoutedEventArgs e)
             {
-              SaveMetadata_Subtitle_Title();
+              MainWindow.SaveMetadata_Subtitle_Title();
             }
 
     }

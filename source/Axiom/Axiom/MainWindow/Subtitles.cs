@@ -134,10 +134,13 @@ namespace Axiom
         VM.SubtitleView.Subtitle_ListView_SelectedItems.TrimExcess();
       }
 
+      // TODO: Fix XAML compilation - lstvSubtitles .g.cs not generated
+      /*
       // Create Selected Items List for ViewModel
       VM.SubtitleView.Subtitle_ListView_SelectedItems = lstvSubtitles.SelectedItems
                                                                      .Cast<string>()
                                                                      .ToList();
+      */
 
       // -------------------------
       // Set Metadata

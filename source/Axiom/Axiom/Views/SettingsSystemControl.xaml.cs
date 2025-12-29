@@ -132,7 +132,7 @@ namespace Axiom.Views
             private void threadSelect_KeyDown(object sender, KeyEventArgs e)
             {
               // Only allow Numbers and Backspace
-              Allow_Only_Number_Keys(e);
+              MainWindow.Allow_Only_Number_Keys(e);
             }
 
             /// <summary>

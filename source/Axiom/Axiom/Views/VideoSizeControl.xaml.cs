@@ -28,23 +28,27 @@ namespace Axiom.Views
     /// </summary>
     private void btnVideo_Crop_Click(object sender, RoutedEventArgs e)
     {
+      // Get MainWindow reference
+      var mainWindow = Window.GetWindow(this) as MainWindow;
+      if (mainWindow == null) return;
+
       // Start Window
-      cropwindow = new CropWindow(this);
+      MainWindow.cropwindow = new CropWindow(mainWindow);
 
       // Detect which screen we're on
       var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
-      var thisScreen = allScreens.SingleOrDefault(s => Left >= s.WorkingArea.Left && Left < s.WorkingArea.Right);
+      var thisScreen = allScreens.SingleOrDefault(s => mainWindow.Left >= s.WorkingArea.Left && mainWindow.Left < s.WorkingArea.Right);
 
       // Position Relative to MainWindow
       // Keep from going off screen
-      cropwindow.Left = Math.Max((Left + (Width - cropwindow.Width) / 2), thisScreen.WorkingArea.Left);
-      cropwindow.Top = Math.Max(Top - cropwindow.Height - 12, thisScreen.WorkingArea.Top);
+      MainWindow.cropwindow.Left = Math.Max((mainWindow.Left + (mainWindow.Width - MainWindow.cropwindow.Width) / 2), thisScreen.WorkingArea.Left);
+      MainWindow.cropwindow.Top = Math.Max(mainWindow.Top - MainWindow.cropwindow.Height - 12, thisScreen.WorkingArea.Top);
 
       // Keep Window on Top
-      cropwindow.Owner = Window.GetWindow(this);
+      MainWindow.cropwindow.Owner = mainWindow;
 
       // Open Window
-      cropwindow.ShowDialog();
+      MainWindow.cropwindow.ShowDialog();
     }
 
     /// <summary>
@@ -97,7 +101,7 @@ namespace Axiom.Views
       // -------------------------
       // Update Width/Height TextBox Display
       // -------------------------
-      VideoScaleDisplay();
+      MainWindow.VideoScaleDisplay();
 
       // -------------------------
       // Output Path Update Display
@@ -123,22 +127,27 @@ namespace Axiom.Views
     {
       if (VM.VideoView.Video_Scale_SelectedItem != "Custom")
       {
-        VideoScaleDisplay();
+        MainWindow.VideoScaleDisplay();
       }
     }
 
     private void tbxVideo_Height_GotFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Height not being generated
       // Clear textbox on focus if default text "auto"
+      /*
       if (tbxVideo_Height.Focus() == true &&
           VM.VideoView.Video_Height_Text == "auto")
       {
         VM.VideoView.Video_Height_Text = string.Empty;
       }
+      */
     }
 
     private void tbxVideo_Height_LostFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Height not being generated
+      /*
       VM.VideoView.Video_Height_Text = tbxVideo_Height.Text;
 
       // Change textbox back to "height" if left empty
@@ -146,20 +155,26 @@ namespace Axiom.Views
       {
         VM.VideoView.Video_Height_Text = "auto";
       }
+      */
     }
 
     private void tbxVideo_Width_GotFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Width not being generated
       // Clear textbox on focus if default text "auto"
+      /*
       if (tbxVideo_Width.Focus() == true &&
           VM.VideoView.Video_Width_Text == "auto")
       {
         VM.VideoView.Video_Width_Text = string.Empty;
       }
+      */
     }
 
     private void tbxVideo_Width_LostFocus(object sender, RoutedEventArgs e)
     {
+      // TODO: Fix XAML compilation - tbxVideo_Width not being generated
+      /*
       VM.VideoView.Video_Width_Text = tbxVideo_Width.Text;
 
       // Change textbox back to "auto" if left empty
@@ -167,6 +182,7 @@ namespace Axiom.Views
       {
         VM.VideoView.Video_Width_Text = "auto";
       }
+      */
     }
 
   }

@@ -183,7 +183,8 @@ namespace Axiom
       // Reset Sort
       // -------------------------
       Controls.ScriptView.sort = false;
-      txblScriptSort.Text = "Sort";
+      // TODO: Fix XAML compilation - txblScriptSort moved to ScriptControl UserControl
+      //txblScriptSort.Text = "Sort";
 
       // -------------------------
       // Start Script

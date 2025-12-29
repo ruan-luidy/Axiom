@@ -84,6 +84,8 @@ namespace Axiom
 
       string selectedItem = VM.FilterVideoView.FilterVideo_SelectiveColor_SelectedItem;
 
+      // TODO: Fix XAML compilation - controls moved to VideoColorControl UserControl
+      /*
       switch (selectedItem)
       {
         case "Reds":
@@ -131,6 +133,7 @@ namespace Axiom
           tabItem_SelectiveColor_Blacks.IsSelected = true;
           break;
       }
+      */
     }
 
     /// <summary>
@@ -602,10 +605,13 @@ namespace Axiom
     private void tbxFilterVideo_EQ_Brightness_PreviewKeyUp(object sender, KeyEventArgs e)
     {
       // Reset Empty to 0
+      // TODO: Fix XAML compilation - tbxFilterVideo_EQ_Brightness moved to VideoColorControl UserControl
+      /*
       if (string.IsNullOrWhiteSpace(tbxFilterVideo_EQ_Brightness.Text))
       {
         VM.FilterVideoView.FilterVideo_EQ_Brightness_Value = 0;
       }
+      */
 
       //VideoControls.AutoCopyVideoCodec("control");
     }

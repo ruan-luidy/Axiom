@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -71,6 +72,8 @@ namespace Axiom.Views
 
               string selectedItem = VM.FilterVideoView.FilterVideo_SelectiveColor_SelectedItem;
 
+              // TODO: Fix XAML compilation - controls not being generated
+              /*
               switch (selectedItem)
               {
                 case "Reds":
@@ -118,6 +121,7 @@ namespace Axiom.Views
                   tabItem_SelectiveColor_Blacks.IsSelected = true;
                   break;
               }
+              */
             }
 
             private void slFilterVideo_EQ_Brightness_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -525,23 +529,26 @@ namespace Axiom.Views
 
             private void tbxFilterVideo_EQ_Brightness_KeyDown(object sender, KeyEventArgs e)
             {
-              Allow_Only_Number_Keys(e);
+              MainWindow.Allow_Only_Number_Keys(e);
             }
 
             private void tbxFilterVideo_EQ_Brightness_PreviewKeyUp(object sender, KeyEventArgs e)
             {
               // Reset Empty to 0
+              // TODO: Fix XAML compilation - tbxFilterVideo_EQ_Brightness .g.cs not generated
+              /*
               if (string.IsNullOrWhiteSpace(tbxFilterVideo_EQ_Brightness.Text))
               {
                 VM.FilterVideoView.FilterVideo_EQ_Brightness_Value = 0;
               }
+              */
 
               //VideoControls.AutoCopyVideoCodec("control");
             }
 
             private void tbxFilterVideo_EQ_Contrast_KeyDown(object sender, KeyEventArgs e)
             {
-              Allow_Only_Number_Keys(e);
+              MainWindow.Allow_Only_Number_Keys(e);
             }
 
             private void tbxFilterVideo_EQ_Contrast_PreviewKeyUp(object sender, KeyEventArgs e)
@@ -551,7 +558,7 @@ namespace Axiom.Views
 
             private void tbxFilterVideo_EQ_Gamma_KeyDown(object sender, KeyEventArgs e)
             {
-              Allow_Only_Number_Keys(e);
+              MainWindow.Allow_Only_Number_Keys(e);
             }
 
             private void tbxFilterVideo_EQ_Gamma_PreviewKeyUp(object sender, KeyEventArgs e)
@@ -561,7 +568,7 @@ namespace Axiom.Views
 
             private void tbxFilterVideo_EQ_Saturation_KeyDown(object sender, KeyEventArgs e)
             {
-              Allow_Only_Number_Keys(e);
+              MainWindow.Allow_Only_Number_Keys(e);
             }
 
             private void tbxFilterVideo_EQ_Saturation_PreviewKeyUp(object sender, KeyEventArgs e)
