@@ -120,7 +120,6 @@
           SelectedIndex="{Binding Subtitle_ListView_SelectedIndex}"
           SelectionChanged="lstvSubtitles_SelectionChanged"
           SelectionMode="Single"
-          Style="{DynamicResource ListViewStyle}"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True">
 

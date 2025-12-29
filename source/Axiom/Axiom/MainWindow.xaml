@@ -61,18 +61,19 @@
       Width="260"
       Margin="0,10,10,56"
       HorizontalAlignment="Right"
-      Background="Transparent">
+      Background="Transparent"
+      TabStripPlacement="Top">
 
       <!--  Format Tab  -->
       <TabItem
-        Width="85"
+        HorizontalContentAlignment="Stretch"
         DataContext="{Binding FormatView}"
         Header="Format">
         <views:FormatControl />
       </TabItem>
 
       <!--  Video Tab  -->
-      <TabItem Width="86" Header="Video">
+      <TabItem HorizontalContentAlignment="Stretch" Header="Video">
 
         <Grid Background="Transparent">
           <ScrollViewer Width="254" HorizontalAlignment="Right">
@@ -83,23 +84,24 @@
               Margin="0,10,0,0"
               HorizontalAlignment="Right"
               Background="Transparent"
-              BorderThickness="0,1,0,0">
+              BorderThickness="0,1,0,0"
+              TabStripPlacement="Top">
 
               <!--  Encoding Tab  -->
-              <TabItem Width="72" Header="Encoding">
+              <TabItem HorizontalContentAlignment="Stretch" Header="Encoding">
                 <views:VideoEncodingControl />
               </TabItem>
 
               <!--  Color Tab  -->
               <TabItem
-                Width="70"
+                HorizontalContentAlignment="Stretch"
                 DataContext="{Binding VideoView}"
                 Header="Color">
                 <views:VideoColorControl />
               </TabItem>
 
               <!--  Size Tab  -->
-              <TabItem Width="70" Header="Size">
+              <TabItem HorizontalContentAlignment="Stretch" Header="Size">
                 <views:VideoSizeControl />
               </TabItem>
 
@@ -110,7 +112,7 @@
 
       <!--  Audio Tab  -->
       <TabItem
-        Width="85"
+        HorizontalContentAlignment="Stretch"
         DataContext="{Binding AudioView}"
         Header="Audio">
         <views:AudioSettingsControl />
@@ -118,14 +120,14 @@
 
       <!--  Subtitles Tab  -->
       <TabItem
-        Width="85"
+        HorizontalContentAlignment="Stretch"
         DataContext="{Binding SubtitleView}"
         Header="Subtitles">
         <views:SubtitlesControl />
       </TabItem>
 
       <!--  Filters Tab  -->
-      <TabItem Width="85" Header="Filters">
+      <TabItem HorizontalContentAlignment="Stretch" Header="Filters">
 
         <Grid Background="Transparent">
           <ScrollViewer Width="254" HorizontalAlignment="Right">
@@ -136,11 +138,12 @@
               Margin="0,10,0,0"
               HorizontalAlignment="Right"
               Background="Transparent"
-              BorderThickness="0,1,0,0">
+              BorderThickness="0,1,0,0"
+              TabStripPlacement="Top">
 
               <!--  Video Filter Tab  -->
               <TabItem
-                Width="72"
+                HorizontalContentAlignment="Stretch"
                 DataContext="{Binding FilterVideoView}"
                 Header="Video">
                 <views:FilterVideoControl />
@@ -148,7 +151,7 @@
 
               <!--  Audio Filter Tab  -->
               <TabItem
-                Width="72"
+                HorizontalContentAlignment="Stretch"
                 DataContext="{Binding FilterAudioView}"
                 Header="Audio">
                 <views:FilterAudioControl />
@@ -160,7 +163,7 @@
       </TabItem>
 
       <!--  Settings Tab  -->
-      <TabItem Width="85" Header="Settings">
+      <TabItem HorizontalContentAlignment="Stretch" Header="Settings">
 
         <Grid Background="Transparent">
           <ScrollViewer Width="254" HorizontalAlignment="Right">
@@ -171,11 +174,12 @@
               Margin="0,10,0,0"
               HorizontalAlignment="Right"
               Background="Transparent"
-              BorderThickness="0,1,0,0">
+              BorderThickness="0,1,0,0"
+              TabStripPlacement="Top">
 
               <!--  Config Tab  -->
               <TabItem
-                Width="72"
+                HorizontalContentAlignment="Stretch"
                 DataContext="{Binding ConfigView}"
                 Header="Config">
                 <views:SettingsConfigControl />
@@ -183,7 +187,7 @@
 
               <!--  File Tab  -->
               <TabItem
-                Width="72"
+                HorizontalContentAlignment="Stretch"
                 DataContext="{Binding SettingsView}"
                 Header="File">
                 <views:SettingsFileControl />
@@ -191,7 +195,7 @@
 
               <!--  System Tab  -->
               <TabItem
-                Width="72"
+                HorizontalContentAlignment="Stretch"
                 DataContext="{Binding SystemView}"
                 Header="System">
                 <views:SettingsSystemControl />
