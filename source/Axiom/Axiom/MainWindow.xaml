@@ -76,7 +76,10 @@
       <TabItem HorizontalContentAlignment="Stretch" Header="Video">
 
         <Grid Background="Transparent">
-          <ScrollViewer Width="254" HorizontalAlignment="Right" VerticalScrollBarVisibility="Auto">
+          <ScrollViewer
+            Width="254"
+            HorizontalAlignment="Right"
+            VerticalScrollBarVisibility="Auto">
 
             <!--  Video TabControl  -->
             <TabControl
@@ -131,7 +134,10 @@
       <TabItem HorizontalContentAlignment="Stretch" Header="Filters">
 
         <Grid Background="Transparent">
-          <ScrollViewer Width="254" HorizontalAlignment="Right" VerticalScrollBarVisibility="Auto">
+          <ScrollViewer
+            Width="254"
+            HorizontalAlignment="Right"
+            VerticalScrollBarVisibility="Auto">
 
             <!--  Filters TabControl  -->
             <TabControl
@@ -168,7 +174,10 @@
       <TabItem HorizontalContentAlignment="Stretch" Header="Settings">
 
         <Grid Background="Transparent">
-          <ScrollViewer Width="254" HorizontalAlignment="Right" VerticalScrollBarVisibility="Auto">
+          <ScrollViewer
+            Width="254"
+            HorizontalAlignment="Right"
+            VerticalScrollBarVisibility="Auto">
 
             <!--  Settings TabControl  -->
             <TabControl
