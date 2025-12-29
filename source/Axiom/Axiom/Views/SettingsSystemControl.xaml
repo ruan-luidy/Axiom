@@ -21,7 +21,7 @@
     <!--  Process Group  -->
     <Grid
       Grid.Row="0"
-      Margin="0,20,0,0"
+      Margin="5,5,5,0"
       VerticalAlignment="Top">
 
       <Grid.ColumnDefinitions>

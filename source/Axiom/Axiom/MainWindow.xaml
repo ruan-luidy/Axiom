@@ -76,15 +76,16 @@
       <TabItem HorizontalContentAlignment="Stretch" Header="Video">
 
         <Grid Background="Transparent">
-          <ScrollViewer Width="254" HorizontalAlignment="Right">
+          <ScrollViewer Width="254" HorizontalAlignment="Right" VerticalScrollBarVisibility="Auto">
 
             <!--  Video TabControl  -->
             <TabControl
               x:Name="tabVideo"
-              Margin="0,10,0,0"
-              HorizontalAlignment="Right"
+              Margin="0,0,0,0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
               Background="Transparent"
-              BorderThickness="0,1,0,0"
+              BorderThickness="0"
               TabStripPlacement="Top">
 
               <!--  Encoding Tab  -->
@@ -130,15 +131,16 @@
       <TabItem HorizontalContentAlignment="Stretch" Header="Filters">
 
         <Grid Background="Transparent">
-          <ScrollViewer Width="254" HorizontalAlignment="Right">
+          <ScrollViewer Width="254" HorizontalAlignment="Right" VerticalScrollBarVisibility="Auto">
 
             <!--  Filters TabControl  -->
             <TabControl
               x:Name="tabFilters"
-              Margin="0,10,0,0"
-              HorizontalAlignment="Right"
+              Margin="0,0,0,0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
               Background="Transparent"
-              BorderThickness="0,1,0,0"
+              BorderThickness="0"
               TabStripPlacement="Top">
 
               <!--  Video Filter Tab  -->
@@ -166,15 +168,16 @@
       <TabItem HorizontalContentAlignment="Stretch" Header="Settings">
 
         <Grid Background="Transparent">
-          <ScrollViewer Width="254" HorizontalAlignment="Right">
+          <ScrollViewer Width="254" HorizontalAlignment="Right" VerticalScrollBarVisibility="Auto">
 
             <!--  Settings TabControl  -->
             <TabControl
               x:Name="tabSettings"
-              Margin="0,10,0,0"
-              HorizontalAlignment="Right"
+              Margin="0,0,0,0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
               Background="Transparent"
-              BorderThickness="0,1,0,0"
+              BorderThickness="0"
               TabStripPlacement="Top">
 
               <!--  Config Tab  -->
