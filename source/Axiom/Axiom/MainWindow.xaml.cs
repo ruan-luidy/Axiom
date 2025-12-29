@@ -1,4 +1,4 @@
-﻿/* ----------------------------------------------------------------------
+/* ----------------------------------------------------------------------
 Axiom UI
 Copyright (C) 2017-2021 Matt McManis
 https://github.com/MattMcManis/Axiom
@@ -1215,10 +1215,15 @@ namespace Axiom
     {
       try
       {
-        System.Security.AccessControl.DirectorySecurity ds = Directory.GetAccessControl(path);
+        var directoryInfo = new DirectoryInfo(path);
+        var ds = directoryInfo.GetAccessControl();
         return true;
       }
       catch (UnauthorizedAccessException)
+      {
+        return false;
+      }
+      catch
       {
         return false;
       }
@@ -2201,7 +2206,7 @@ namespace Axiom
 
         foreach (ManagementObject obj in gpu.Get())
         {
-          Log.logParagraph.Inlines.Add(new Run(Convert.ToString(obj["Name"]) + " " + Convert.ToString(Math.Round(Convert.ToDouble(obj["AdapterRAM"]) * 0.000000001, 3) + "GB")) { Foreground = Log.ConsoleDefault });
+          Log.logParagraph.Inlines.Add(new Run(Convert.ToString(obj["Name"]) + " " + Convert.ToString(Math.Round(Convert.ToDouble(obj["AdapterRAM"]) * 0.000000001, 3)) + "GB") { Foreground = Log.ConsoleDefault });
           Log.logParagraph.Inlines.Add(new LineBreak());
         }
       }

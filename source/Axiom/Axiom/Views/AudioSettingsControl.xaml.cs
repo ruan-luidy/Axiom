@@ -102,7 +102,8 @@ namespace Axiom.Views
     /// </summary>
     private void btnAudio_Clear_Click(object sender, RoutedEventArgs e)
     {
-      MainWindow.AudioClear();
+      var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
+      mainWindow?.AudioClear();
     }
 
     /// <summary>

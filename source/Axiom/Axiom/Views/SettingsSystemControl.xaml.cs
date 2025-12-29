@@ -112,6 +112,19 @@ namespace Axiom.Views
               VM.ConfigureView.LogPath_IsEnabled = false;
             }
 
+            private void tbxLogPath_PreviewDragOver(object sender, DragEventArgs e)
+            {
+              if (e.Data.GetDataPresent(DataFormats.FileDrop))
+              {
+                e.Effects = DragDropEffects.Copy;
+              }
+              else
+              {
+                e.Effects = DragDropEffects.None;
+              }
+              e.Handled = true;
+            }
+
             private void tbxLogPath_PreviewDrop(object sender, DragEventArgs e)
             {
               var buffer = e.Data.GetData(DataFormats.FileDrop, false) as string[];
@@ -126,6 +139,23 @@ namespace Axiom.Views
               else
               {
                 VM.ConfigureView.LogPath_Text = buffer.First();
+              }
+            }
+
+            /// <summary>
+            /// Log Path - Label Button
+            /// </summary>
+            private void lblLogPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+            {
+              if (e.LeftButton == MouseButtonState.Pressed)
+              {
+                if (MainWindow.IsValidPath(VM.ConfigureView.LogPath_Text))
+                {
+                  if (Directory.Exists(VM.ConfigureView.LogPath_Text))
+                  {
+                    System.Diagnostics.Process.Start("explorer.exe", VM.ConfigureView.LogPath_Text);
+                  }
+                }
               }
             }
 

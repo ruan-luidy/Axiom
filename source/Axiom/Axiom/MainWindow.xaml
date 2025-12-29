@@ -163,10 +163,7 @@
       <TabItem Width="85" Header="Settings">
 
         <Grid Background="Transparent">
-          <ScrollViewer
-            Width="254"
-            HorizontalAlignment="Right"
-            Template="{DynamicResource ScrollViewerControlTemplate}">
+          <ScrollViewer Width="254" HorizontalAlignment="Right">
 
             <!--  Settings TabControl  -->
             <TabControl

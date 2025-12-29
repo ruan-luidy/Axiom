@@ -565,6 +565,13 @@ namespace Axiom.Views
       //textBlockExpand.Text = "+";
     }
 
+    // Alternate spelling
+    private void expVideo_BitRateAdvanced_Expander_Collapsed(object sender, RoutedEventArgs e)
+    {
+      // Call the correctly spelled method
+      expVideo_BitRateAdvanded_Expander_Collapsed(sender, e);
+    }
+
     private void cboVideo_Pass_DropDownClosed(object sender, EventArgs e)
     {
       // User willingly selected a Pass

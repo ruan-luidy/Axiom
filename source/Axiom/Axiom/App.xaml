@@ -28,7 +28,7 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <!--  HandyControl Themes  -->
-        <hc:Theme AccentColor="#DF326CF3" Skin="Dark" />
+        <hc:Theme Skin="Default" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

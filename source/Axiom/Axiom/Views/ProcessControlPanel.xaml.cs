@@ -133,13 +133,60 @@ namespace Axiom.Views
       }
     }
 
-    // TODO: Event Handlers from XAML (not yet implemented in MainWindow.xaml.cs)
-    // TODO: btnDeletePreset_Click
-    // TODO: cboPreset_SelectionChanged
-    // TODO: btnPreview_Click
-    // TODO: btnConvert_Click
-    // TODO: tglBatch_Checked
-    // TODO: tglBatch_Unchecked
-    // TODO: batchExtension_TextChanged
+    /// <summary>
+    /// Delete Preset - Button
+    /// </summary>
+    private void btnDeletePreset_Click(object sender, RoutedEventArgs e)
+    {
+      // TODO: Implement preset deletion functionality
+    }
+
+    /// <summary>
+    /// Preset - ComboBox SelectionChanged
+    /// </summary>
+    private void cboPreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      // TODO: Implement preset selection changed functionality
+    }
+
+    /// <summary>
+    /// Preview - Button
+    /// </summary>
+    private void btnPreview_Click(object sender, RoutedEventArgs e)
+    {
+      // TODO: Implement preview functionality
+    }
+
+    /// <summary>
+    /// Convert - Button
+    /// </summary>
+    private void btnConvert_Click(object sender, RoutedEventArgs e)
+    {
+      // TODO: Implement convert functionality
+    }
+
+    /// <summary>
+    /// Batch - Toggle Checked
+    /// </summary>
+    private void tglBatch_Checked(object sender, RoutedEventArgs e)
+    {
+      // TODO: Implement batch checked functionality
+    }
+
+    /// <summary>
+    /// Batch - Toggle Unchecked
+    /// </summary>
+    private void tglBatch_Unchecked(object sender, RoutedEventArgs e)
+    {
+      // TODO: Implement batch unchecked functionality
+    }
+
+    /// <summary>
+    /// Batch Extension - TextChanged
+    /// </summary>
+    private void batchExtension_TextChanged(object sender, TextChangedEventArgs e)
+    {
+      // TODO: Implement batch extension text changed functionality
+    }
   }
 }

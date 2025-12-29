@@ -74,7 +74,8 @@ namespace Axiom.Views
             /// </summary>
             private void btnSubtitle_Clear_Click(object sender, RoutedEventArgs e)
             {
-              MainWindow.SubtitlesClear();
+              var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
+              mainWindow?.SubtitlesClear();
             }
 
             /// <summary>
@@ -456,12 +457,14 @@ namespace Axiom.Views
             /// </summary>
             private void tbxSubtitle_Metadata_Title_KeyUp(object sender, KeyEventArgs e)
             {
-              MainWindow.SaveMetadata_Subtitle_Title();
+              var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
+              mainWindow?.SaveMetadata_Subtitle_Title();
             }
 
             private void tbxSubtitle_Metadata_Title_LostFocus(object sender, RoutedEventArgs e)
             {
-              MainWindow.SaveMetadata_Subtitle_Title();
+              var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
+              mainWindow?.SaveMetadata_Subtitle_Title();
             }
 
     }
