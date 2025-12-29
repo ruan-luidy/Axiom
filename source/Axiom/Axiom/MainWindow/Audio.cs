@@ -501,6 +501,10 @@ namespace Axiom
       int selectedIndex = VM.AudioView.Audio_ListView_SelectedIndex;
 
       // Title
+      // Note: tbxAudio_Metadata_Title is in AudioSettingsControl UserControl
+      // The control should be bound to VM.AudioView.Audio_Metadata_Title_Text in XAML
+      // For now, we just set the metadata list directly since the control handles its own display
+      /*
       if (Generate.Audio.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
       {
         tbxAudio_Metadata_Title.Text = Generate.Audio.Metadata.titleList[selectedIndex];
@@ -509,6 +513,7 @@ namespace Axiom
       {
         tbxAudio_Metadata_Title.Text = string.Empty;
       }
+      */
 
       // Language
       if (Generate.Audio.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
@@ -875,7 +880,10 @@ namespace Axiom
         }
 
         // Add to list
+        // Note: tbxAudio_Metadata_Title is in AudioSettingsControl UserControl
+        // The SaveMetadata_Audio_Title() in AudioSettingsControl handles this now
         //MessageBox.Show(string.Join("\r\n", Generate.Audio.Metadata.titleList));
+        /*
         try
         {
           Generate.Audio.Metadata.titleList.Insert(selectedIndex, tbxAudio_Metadata_Title.Text);
@@ -885,8 +893,9 @@ namespace Axiom
 
         }
 
-        //Generate.Audio.Metadata.titleList.Add(tbxAudio_Metadata_Title.Text/*VM.AudioView.Audio_Metadata_Title_Text*/);
+        //Generate.Audio.Metadata.titleList.Add(tbxAudio_Metadata_Title.Text);
         //MessageBox.Show(tbxAudio_Metadata_Title.Text); // binding not working
+        */
         //MessageBox.Show(string.Join("\r\n", Generate.Audio.Metadata.titleList));
         //MessageBox.Show(VM.AudioView.Audio_ListView_SelectedIndex.ToString());
       }

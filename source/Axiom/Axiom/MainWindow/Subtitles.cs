@@ -148,6 +148,10 @@ namespace Axiom
       int selectedIndex = VM.SubtitleView.Subtitle_ListView_SelectedIndex;
 
       // Title
+      // Note: tbxSubtitle_Metadata_Title is in SubtitlesControl UserControl
+      // The control should be bound to VM.SubtitleView.Subtitle_Metadata_Title_Text in XAML
+      // For now, we just set the metadata list directly since the control handles its own display
+      /*
       if (Generate.Subtitle.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
       {
         tbxSubtitle_Metadata_Title.Text = Generate.Subtitle.Metadata.titleList[selectedIndex];
@@ -156,6 +160,7 @@ namespace Axiom
       {
         tbxSubtitle_Metadata_Title.Text = string.Empty;
       }
+      */
 
       // Language
       if (Generate.Subtitle.Metadata.titleList.ElementAtOrDefault(selectedIndex) != null)
@@ -524,6 +529,9 @@ namespace Axiom
         }
 
         // Add to list
+        // Note: tbxSubtitle_Metadata_Title is in SubtitlesControl UserControl
+        // The SaveMetadata_Subtitle_Title() in SubtitlesControl handles this now
+        /*
         try
         {
           Generate.Subtitle.Metadata.titleList.Insert(selectedIndex, tbxSubtitle_Metadata_Title.Text);
@@ -532,6 +540,7 @@ namespace Axiom
         {
 
         }
+        */
       }
     }
 
