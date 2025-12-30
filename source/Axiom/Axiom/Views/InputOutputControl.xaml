@@ -14,14 +14,27 @@
   d:DesignWidth="545"
   mc:Ignorable="d">
 
-  <Grid Height="56" VerticalAlignment="Top">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
 
+    <!--  Input Row  -->
     <!--  Input Button  -->
     <Button
       x:Name="btnInput"
-      Margin="0,0,0,0"
+      Grid.Row="0"
+      Grid.Column="0"
+      Width="60"
+      Margin="0,0,4,4"
       HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnInput_Click"
       Cursor="Hand">
       <TextBlock Text="Input" />
@@ -30,10 +43,11 @@
     <!--  Input Textbox  -->
     <TextBox
       x:Name="tbxInput"
+      Grid.Row="0"
+      Grid.Column="1"
       Height="22"
-      Margin="75,0,0,0"
-      Padding="10,1,50,0"
-      VerticalAlignment="Top"
+      Margin="0,0,4,4"
+      Padding="10,1,10,0"
       AllowDrop="True"
       MaxLines="1"
       PreviewDragOver="tbxInput_PreviewDragOver"
@@ -45,12 +59,12 @@
     <!--  Input Clear Button  -->
     <Button
       x:Name="btnInputClear"
+      Grid.Row="0"
+      Grid.Column="2"
       Width="28"
       Height="28"
-      Margin="0,1,24,0"
+      Margin="0,0,2,4"
       Padding="0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
       Background="Transparent"
       BorderThickness="0"
       Click="btnInputClear_Click"
@@ -69,12 +83,12 @@
     <!--  Input Location Button  -->
     <Button
       x:Name="openLocationInput"
+      Grid.Row="0"
+      Grid.Column="3"
       Width="28"
       Height="28"
-      Margin="0,1,1,0"
+      Margin="0,0,0,4"
       Padding="0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
       Background="Transparent"
       BorderThickness="0"
       Click="openLocationInput_Click"
@@ -90,12 +104,13 @@
         Kind="FolderOpenFill" />
     </Button>
 
+    <!--  Output Row  -->
     <!--  Output Button  -->
     <Button
       x:Name="btnOutput"
-      Margin="0,29,0,0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
+      Grid.Row="1"
+      Grid.Column="0"
+      Margin="0,0,4,0"
       Click="btnOutput_Click"
       Cursor="Hand">
       <TextBlock Text="Output" />
@@ -104,10 +119,11 @@
     <!--  Output Textbox  -->
     <TextBox
       x:Name="tbxOutput"
+      Grid.Row="1"
+      Grid.Column="1"
       Height="22"
-      Margin="75,29,0,0"
-      Padding="10,1,25,0"
-      VerticalAlignment="Top"
+      Margin="0,0,4,0"
+      Padding="10,1,10,0"
       AllowDrop="True"
       MaxLines="1"
       PreviewDragOver="tbxOutput_PreviewDragOver"
@@ -120,12 +136,12 @@
     <!--  Output Clear Button  -->
     <Button
       x:Name="btnOutputClear"
+      Grid.Row="1"
+      Grid.Column="2"
       Width="28"
       Height="28"
-      Margin="0,30,24,0"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
       Background="Transparent"
       BorderThickness="0"
       Click="btnOutputClear_Click"
@@ -144,12 +160,12 @@
     <!--  Output Location Button  -->
     <Button
       x:Name="openLocationOutput"
+      Grid.Row="1"
+      Grid.Column="3"
       Width="28"
       Height="28"
-      Margin="0,30,1,0"
+      Margin="0"
       Padding="0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
       Background="Transparent"
       BorderThickness="0"
       Click="openLocationOutput_Click"
