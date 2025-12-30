@@ -80,7 +80,7 @@
         x:Name="tbxInputFileNameTokensCustom"
         Width="218"
         Height="75"
-        Padding="5"
+        Padding="10"
         HorizontalAlignment="Left"
         VerticalContentAlignment="Top"
         IsEnabled="{Binding InputFileNameTokensCustom_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

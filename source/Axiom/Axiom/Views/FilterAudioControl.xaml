@@ -11,7 +11,7 @@
   Foreground="{DynamicResource PrimaryTextBrush}"
   mc:Ignorable="d">
 
-  <StackPanel Margin="10,10,10,0" Background="Transparent">
+  <StackPanel Margin="10,10,10,0">
 
     <!--  EQ Group  -->
     <StackPanel Margin="0,0,0,15">
