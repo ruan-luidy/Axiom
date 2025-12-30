@@ -17,7 +17,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.If not, see<http://www.gnu.org/licenses/> .-->
-<Window
+<hc:Window
   x:Class="Axiom.LogConsole"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -25,6 +25,8 @@
   xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
   xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="clr-namespace:HandyControl.Controls;assembly=HandyControl"
+  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   Title="Log Console"
   Width="400"
@@ -37,9 +39,10 @@
       Name="rtbLog"
       Margin="0"
       Padding="10"
-      Background="{x:Null}"
+      hc:BorderElement.CornerRadius="0"
+      Background="{DynamicResource ReverseTextBrush}"
+      BorderThickness="0"
       FontFamily="Consolas"
-      Foreground="{DynamicResource PrimaryTextBrush}"
       IsReadOnly="True"
       IsUndoEnabled="False"
       RenderOptions.ClearTypeHint="Enabled"
@@ -49,27 +52,26 @@
                     <Run Text="{Binding LogConsole_Text, Mode=OneWay}" />
                 </Paragraph>
             </FlowDocument>
-        </RichTextBox>-->
+        </RichTextBox-->
 
     <Button
       x:Name="btnExpand"
-      Width="20"
-      Height="20"
-      Margin="0,10,28,0"
+      Width="28"
+      Height="28"
+      Margin="0,10,25,0"
+      Padding="0"
       HorizontalAlignment="Right"
       VerticalAlignment="Top"
-      Background="{x:Null}"
-      BorderBrush="#7FFFFFFF"
+      Background="Transparent"
       Click="btnExpand_Click"
       Cursor="Hand"
-      Foreground="White"
       ToolTip="Expand Window">
-      <TextBlock
-        x:Name="textBlockExpand"
-        Margin="0,-2,0,0"
-        Foreground="#99FFFFFF"
-        Text="+" />
+      <iconPacks:PackIconPhosphorIcons
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="{DynamicResource RegionBrush}"
+        Kind="Plus" />
     </Button>
 
   </Grid>
-</Window>
+</hc:Window>

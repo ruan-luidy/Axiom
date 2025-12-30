@@ -27,65 +27,65 @@ using System.Windows.Media;
 
 namespace Axiom
 {
-    /// <summary>
-    /// Interaction logic for Console.xaml
-    /// </summary>
-    public partial class LogConsole : Window
+  /// <summary>
+  /// Interaction logic for Console.xaml
+  /// </summary>
+  public partial class LogConsole : HandyControl.Controls.Window
+  {
+    public LogConsole()
     {
-        public LogConsole()
-        {
-            InitializeComponent();
+      InitializeComponent();
 
-            // Set Width/Height to prevent Tablets maximizing
-            //this.Width = 400;
-            //this.Height = 500;
-            this.MinWidth = 200;
-            this.MinHeight = 200;
-        }
-
-
-        /// <summary>
-        /// Close
-        /// </summary>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Close();
-        }
-
-
-        /// <summary>
-        /// Hide Window Instead of Closing
-        /// </summary>
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            this.Hide();
-            this.Width = 400;
-            this.Height = 500;
-            e.Cancel = true;
-            base.OnClosing(e);
-        }
-
-
-        /// <summary>
-        /// Expand Button
-        /// </summary>
-        private void btnExpand_Click(object sender, RoutedEventArgs e)
-        {
-            // If less than 600px Height
-            if (this.Height <= 650)
-            {
-                this.Width = 650;
-                this.Height = 600;
-
-                double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
-                double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
-                double windowWidth = this.Width;
-                double windowHeight = this.Height;
-                this.Left = (screenWidth / 2) - (windowWidth / 2);
-                this.Top = (screenHeight / 2) - (windowHeight / 2);
-            }
-        }
-
+      // Set Width/Height to prevent Tablets maximizing
+      //this.Width = 400;
+      //this.Height = 500;
+      this.MinWidth = 200;
+      this.MinHeight = 200;
     }
+
+
+    /// <summary>
+    /// Close
+    /// </summary>
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      e.Cancel = true;
+      this.Close();
+    }
+
+
+    /// <summary>
+    /// Hide Window Instead of Closing
+    /// </summary>
+    protected override void OnClosing(CancelEventArgs e)
+    {
+      this.Hide();
+      this.Width = 400;
+      this.Height = 500;
+      e.Cancel = true;
+      base.OnClosing(e);
+    }
+
+
+    /// <summary>
+    /// Expand Button
+    /// </summary>
+    private void btnExpand_Click(object sender, RoutedEventArgs e)
+    {
+      // If less than 600px Height
+      if (this.Height <= 650)
+      {
+        this.Width = 650;
+        this.Height = 600;
+
+        double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+        double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+        double windowWidth = this.Width;
+        double windowHeight = this.Height;
+        this.Left = (screenWidth / 2) - (windowWidth / 2);
+        this.Top = (screenHeight / 2) - (windowHeight / 2);
+      }
+    }
+
+  }
 }

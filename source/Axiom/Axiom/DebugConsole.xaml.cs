@@ -40,7 +40,7 @@ namespace Axiom
     /// <summary>
     /// Interaction logic for DebugConsole.xaml
     /// </summary>
-    public partial class DebugConsole : Window
+    public partial class DebugConsole : HandyControl.Controls.Window
     {
         //private MainWindow mainwindow;
 
