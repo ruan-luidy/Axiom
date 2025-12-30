@@ -1,3 +1,4 @@
+
 <!--
   Video Size Control
   Extracted from MainWindow.xaml (Lines 3896-4168)
@@ -29,10 +30,8 @@
 
       <!--  Size Row  -->
       <hc:Row Gutter="20">
-        <hc:Col Span="4">
+        <hc:Col Span="6">
           <Label
-            Grid.Column="0"
-            Width="45"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="Transparent"
@@ -40,10 +39,9 @@
             Content="Size"
             FontFamily="Segoe UI Semilight" />
         </hc:Col>
-        <hc:Col Span="10">
+        <hc:Col Span="18">
           <ComboBox
             x:Name="cboVideo_Scale"
-            Grid.Column="1"
             Width="105"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -58,9 +56,8 @@
 
       <!--  Width Row  -->
       <hc:Row Gutter="20">
-        <hc:Col Span="8">
+        <hc:Col Span="6">
           <Label
-            Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="Transparent"
@@ -68,10 +65,9 @@
             Content="Width"
             FontFamily="Segoe UI Semilight" />
         </hc:Col>
-        <hc:Col Span="16">
+        <hc:Col Span="18">
           <TextBox
             x:Name="tbxVideo_Width"
-            Grid.Column="1"
             Width="105"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -86,9 +82,8 @@
 
       <!--  Height Row  -->
       <hc:Row Gutter="20">
-        <hc:Col Span="4">
+        <hc:Col Span="6">
           <Label
-            Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="Transparent"
@@ -96,10 +91,9 @@
             Content="Height"
             FontFamily="Segoe UI Semilight" />
         </hc:Col>
-        <hc:Col Span="10">
+        <hc:Col Span="18">
           <TextBox
             x:Name="tbxVideo_Height"
-            Grid.Column="1"
             Width="105"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -114,9 +108,8 @@
 
       <!--  Screen Format Row  -->
       <hc:Row Gutter="20">
-        <hc:Col Span="4">
+        <hc:Col Span="6">
           <Label
-            Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="Transparent"
@@ -127,10 +120,9 @@
             ToolTipService.InitialShowDelay="500"
             ToolTipService.ShowOnDisabled="True" />
         </hc:Col>
-        <hc:Col Span="10">
+        <hc:Col Span="18">
           <ComboBox
             x:Name="cboVideo_ScreenFormat"
-            Grid.Column="1"
             Width="105"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -147,9 +139,8 @@
 
       <!--  Aspect Ratio Row  -->
       <hc:Row Gutter="20">
-        <hc:Col Span="4">
+        <hc:Col Span="7">
           <Label
-            Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="Transparent"
@@ -160,10 +151,9 @@
             ToolTipService.InitialShowDelay="500"
             ToolTipService.ShowOnDisabled="True" />
         </hc:Col>
-        <hc:Col Span="10">
+        <hc:Col Span="17">
           <ComboBox
             x:Name="cboVideo_AspectRatio"
-            Grid.Column="1"
             Width="105"
             Height="22"
             HorizontalAlignment="Left"
@@ -178,9 +168,8 @@
 
       <!--  Scaling Row  -->
       <hc:Row Gutter="20">
-        <hc:Col Span="4">
+        <hc:Col Span="6">
           <Label
-            Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="Transparent"
@@ -191,10 +180,9 @@
             ToolTipService.InitialShowDelay="500"
             ToolTipService.ShowOnDisabled="True" />
         </hc:Col>
-        <hc:Col Span="10">
+        <hc:Col Span="18">
           <ComboBox
             x:Name="cboVideo_ScalingAlgorithm"
-            Grid.Column="1"
             Width="105"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -214,7 +202,6 @@
       <hc:Row Gutter="20">
         <hc:Col Span="6">
           <Label
-            Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="Transparent"
@@ -222,7 +209,7 @@
             Content="Crop"
             FontFamily="Segoe UI Semilight" />
         </hc:Col>
-        <hc:Col Span="6">
+        <hc:Col Span="9">
           <Button
             x:Name="btnVideo_Crop"
             Width="50"
@@ -237,7 +224,7 @@
             <TextBlock Style="{DynamicResource ButtonCropTextBlock}" Text="Crop" />
           </Button>
         </hc:Col>
-        <hc:Col Span="6">
+        <hc:Col Span="9">
           <Button
             x:Name="btnVideo_CropClear"
             Width="50"
