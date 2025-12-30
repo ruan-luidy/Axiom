@@ -10,37 +10,15 @@
   d:DesignWidth="343"
   mc:Ignorable="d">
 
-  <!--  Tool Buttons Grid  -->
-  <Grid
-    Width="343"
-    Height="35"
-    Margin="10,0,0,0"
-    HorizontalAlignment="Left"
-    VerticalAlignment="Bottom">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="30" />
-
-    </Grid.ColumnDefinitions>
+  <StackPanel Orientation="Horizontal">
 
     <!--  Info Button  -->
     <Button
       x:Name="btnInfo"
       Width="28"
       Height="28"
-      Margin="0,0,0,0"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnInfo_Click"
       Cursor="Hand"
       ToolTip="About this program"
@@ -56,12 +34,10 @@
     <!--  Website Button  -->
     <Button
       x:Name="btbWebsite"
-      Grid.Column="1"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Command="hc:ControlCommands.OpenLink"
       CommandParameter="https://axiomui.github.io/"
       Cursor="Hand"
@@ -78,12 +54,10 @@
     <!--  Update Button  -->
     <Button
       x:Name="btnUpdate"
-      Grid.Column="2"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnUpdate_Click"
       Cursor="Hand"
       ToolTip="Check for Updates"
@@ -99,12 +73,10 @@
     <!--  Window Toggle  -->
     <ToggleButton
       x:Name="tglCMDWindowKeep"
-      Grid.Column="3"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Checked="tglCMDWindowKeep_Checked"
       Cursor="Hand"
       IsChecked="{Binding MainView.CMDWindowKeep_IsChecked}"
@@ -122,13 +94,10 @@
     <!--  Auto Sort Script Button  -->
     <ToggleButton
       x:Name="tglAutoSortScript"
-      Grid.Column="4"
       Width="28"
       Height="28"
-      Margin="0,0,0,0"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Checked="tglAutoSortScript_Checked"
       Cursor="Hand"
       IsChecked="{Binding MainView.AutoSortScript_IsChecked}"
@@ -146,13 +115,10 @@
     <!--  Debug Console  -->
     <Button
       x:Name="btnDebugConsole"
-      Grid.Column="5"
       Width="28"
       Height="28"
-      Margin="1,0,0,0"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnDebugConsole_Click"
       Cursor="Hand"
       ToolTip="Show Debug Console"
@@ -168,12 +134,10 @@
     <!--  Log Console  -->
     <Button
       x:Name="btnLogConsole"
-      Grid.Column="6"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnLogConsole_Click"
       Cursor="Hand"
       ToolTip="Show Log Console"
@@ -189,12 +153,10 @@
     <!--  Log Button  -->
     <Button
       x:Name="btnLog"
-      Grid.Column="7"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnLog_Click"
       Cursor="Hand"
       ToolTip="View the last Output Log"
@@ -210,12 +172,10 @@
     <!--  CMD Button  -->
     <Button
       x:Name="btnCmd"
-      Grid.Column="8"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnCmd_Click"
       Cursor="Hand"
       ToolTip="Launch Command Prompt / PowerShell"
@@ -233,12 +193,10 @@
     <!--  Properties Button  -->
     <Button
       x:Name="btnProperties"
-      Grid.Column="9"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnProperties_Click"
       Cursor="Hand"
       ToolTip="View File Properties"
@@ -254,12 +212,10 @@
     <!--  Play File  -->
     <Button
       x:Name="btnPlayFile"
-      Grid.Column="10"
       Width="28"
       Height="28"
+      Margin="0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnPlayFile_Click"
       Cursor="Hand"
       ToolTip="Play Converted File"
@@ -272,6 +228,6 @@
         Kind="PlayFill" />
     </Button>
 
-  </Grid>
+  </StackPanel>
 
 </UserControl>

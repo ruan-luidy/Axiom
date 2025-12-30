@@ -15,16 +15,26 @@
   d:DesignWidth="433"
   mc:Ignorable="d">
 
-  <Grid Width="433" Height="35">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
 
-    <!--  Delete Preset ini  -->
+    <!--  Delete Preset Button  -->
     <Button
       x:Name="btnDeletePreset"
+      Grid.Column="0"
       Width="28"
       Height="28"
+      Margin="0,0,2,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnDeletePreset_Click"
       Cursor="Hand"
       ToolTip="Delete Preset"
@@ -37,15 +47,14 @@
         Kind="Trash" />
     </Button>
 
-    <!--  Save Preset ini  -->
+    <!--  Save Preset Button  -->
     <Button
       x:Name="btnSavePreset"
+      Grid.Column="1"
       Width="28"
       Height="28"
-      Margin="28,0"
+      Margin="0,0,4,0"
       Padding="0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
       Click="btnSavePreset_Click"
       Cursor="Hand"
       ToolTip="Save Preset"
@@ -58,14 +67,14 @@
         Kind="FloppyDisk" />
     </Button>
 
-    <!--  Preset  -->
+    <!--  Preset ComboBox  -->
     <ComboBox
       x:Name="cboPreset"
+      Grid.Column="2"
       Width="75"
       Height="22"
-      Margin="56,0,0,0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
+      Margin="0,0,8,0"
+      VerticalAlignment="Center"
       ItemsSource="{Binding MainView.Preset_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
       SelectedIndex="{Binding MainView.Preset_SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
       SelectedValue="{Binding MainView.Preset_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -84,35 +93,15 @@
       </ComboBox.ItemTemplate>
     </ComboBox>
 
-    <!--  Preview Button  -->
-    <Button
-      x:Name="btnPreview"
-      Margin="0,0,87,0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
-      Click="btnPreview_Click"
-      Cursor="Hand">
-      <TextBlock x:Name="btnPreviewTextBlock" Text="Preview" />
-    </Button>
+    <!--  Spacer  -->
+    <Grid Grid.Column="3" />
 
-    <!--  Convert Button  -->
-    <Button
-      x:Name="btnConvert"
-      Width="75"
-      Margin="0,0,4,0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
-      Click="btnConvert_Click"
-      Cursor="Hand">
-      <TextBlock x:Name="btnConvertTextBlock" Text="{Binding MainView.Convert_Text, Mode=TwoWay}" />
-    </Button>
-
-    <!--  Batch Checkbox  -->
+    <!--  Batch Toggle  -->
     <ToggleButton
       x:Name="tglBatch"
-      Margin="0,0,242,0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
+      Grid.Column="4"
+      Margin="0,0,4,0"
+      VerticalAlignment="Center"
       Checked="tglBatch_Checked"
       Cursor="Hand"
       IsChecked="{Binding MainView.Batch_IsChecked, Mode=TwoWay}"
@@ -126,12 +115,12 @@
         Text="Batch" />
     </ToggleButton>
 
-    <!--  Batch Textbox  -->
+    <!--  Batch Extension TextBox  -->
     <TextBox
       x:Name="batchExtensionTextBox"
-      Margin="0,0,177,0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Top"
+      Grid.Column="5"
+      Margin="0,0,4,0"
+      VerticalAlignment="Center"
       IsEnabled="{Binding MainView.BatchExtension_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
       Text="{Binding MainView.BatchExtension_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
       TextChanged="batchExtension_TextChanged"
@@ -139,6 +128,29 @@
       ToolTip="File Extension in Folder to Batch Process (e.g. mp4)"
       ToolTipService.InitialShowDelay="500"
       ToolTipService.ShowOnDisabled="True" />
+
+    <!--  Preview Button  -->
+    <Button
+      x:Name="btnPreview"
+      Grid.Column="6"
+      Margin="0,0,4,0"
+      VerticalAlignment="Center"
+      Click="btnPreview_Click"
+      Cursor="Hand">
+      <TextBlock x:Name="btnPreviewTextBlock" Text="Preview" />
+    </Button>
+
+    <!--  Convert Button  -->
+    <Button
+      x:Name="btnConvert"
+      Grid.Column="7"
+      Width="75"
+      Margin="0"
+      VerticalAlignment="Center"
+      Click="btnConvert_Click"
+      Cursor="Hand">
+      <TextBlock x:Name="btnConvertTextBlock" Text="{Binding MainView.Convert_Text, Mode=TwoWay}" />
+    </Button>
 
   </Grid>
 </UserControl>

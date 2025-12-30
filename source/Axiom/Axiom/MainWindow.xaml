@@ -48,19 +48,37 @@
   </hc:Window.DataContext>
 
   <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
 
-    <!--  Script View  -->
-    <views:ScriptControl Margin="11,71,280,56" />
+    <!--  Input / Output - Row 0, Column 0  -->
+    <views:InputOutputControl
+      Grid.Row="0"
+      Grid.Column="0"
+      Margin="10,10,10,0" />
 
-    <!--  Input / Output Grid  -->
-    <views:InputOutputControl Margin="10,10,280,0" VerticalAlignment="Top" />
+    <!--  Script View - Row 1, Column 0  -->
+    <views:ScriptControl
+      Grid.Row="1"
+      Grid.Column="0"
+      Margin="10,10,10,0" />
 
-    <!--  Tab Control  -->
+    <!--  Tab Control - Row 0+1, Column 1  -->
     <TabControl
       x:Name="tabControl"
-      Margin="0,0,0,56"
-      HorizontalAlignment="Right"
-      Background="Transparent">
+      Grid.Row="0"
+      Grid.RowSpan="2"
+      Grid.Column="1"
+      Margin="0,10,0,0"
+      Background="Transparent"
+      BorderThickness="1,1,0,0">
 
       <!--  Format Tab  -->
       <TabItem
@@ -77,7 +95,7 @@
         <TabControl
           x:Name="tabVideo"
           Width="254"
-          Margin="0,0,0,0"
+          Margin="0"
           HorizontalAlignment="Right"
           VerticalAlignment="Top"
           Background="Transparent"
@@ -133,8 +151,8 @@
         <!--  Filters TabControl  -->
         <TabControl
           x:Name="tabFilters"
-          Width="260"
-          Margin="0,0,0,0"
+          Width="341"
+          Margin="-1,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="Transparent"
@@ -171,7 +189,7 @@
         <TabControl
           x:Name="tabSettings"
           Width="341"
-          Margin="0,0,0,0"
+          Margin="-1,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="Transparent"
@@ -213,17 +231,30 @@
 
     </TabControl>
 
-    <!--  Tool Buttons Grid  -->
-    <views:ToolbarControl
-      Margin="10,0,0,0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom" />
+    <!--  Bottom Bar - Row 2, Column 0+1  -->
+    <Border
+      Grid.Row="2"
+      Grid.Column="0"
+      Grid.ColumnSpan="2"
+      Margin="0"
+      Background="{DynamicResource SecondaryRegionBrush}"
+      BorderBrush="{DynamicResource BorderBrush}"
+      BorderThickness="0,1,0,0"
+      CornerRadius="0">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
-    <!--  Process Buttons Grid  -->
-    <views:ProcessControlPanel
-      Margin="0,0,10,0"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Bottom" />
+        <!--  Tool Buttons - Left  -->
+        <views:ToolbarControl Grid.Column="0" Margin="8,4,8,4" />
+
+        <!--  Process Buttons - Right  -->
+        <views:ProcessControlPanel Grid.Column="2" Margin="8,4,8,4" />
+      </Grid>
+    </Border>
 
   </Grid>
 </hc:Window>
