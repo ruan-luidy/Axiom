@@ -347,6 +347,7 @@
             Height="18"
             Margin="0,4,42,0"
             VerticalAlignment="Top"
+            Background="{DynamicResource BorderBrush}"
             IsDirectionReversed="True"
             IsEnabled="{Binding Video_CRF_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsMoveToPointEnabled="True"
@@ -364,7 +365,6 @@
             Width="30"
             Height="22"
             Margin="75,2,0,0"
-            Padding="1,1,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             IsEnabled="{Binding Video_CRF_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -403,11 +403,10 @@
           <TextBox
             x:Name="tbxVideo_BitRate"
             Width="70"
-            Height="22"
             Margin="0,2,0,0"
-            Padding="1,1,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
             IsEnabled="{Binding Video_BitRate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             MaxLength="10"
             MaxLines="1"
@@ -418,8 +417,6 @@
             ToolTipService.ShowOnDisabled="True" />
           <ToggleButton
             x:Name="tglVideo_VBR"
-            Width="30"
-            Height="23"
             Margin="75,1,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"

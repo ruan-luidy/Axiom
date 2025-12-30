@@ -76,9 +76,7 @@
           x:Name="tbxVideo_Width"
           Grid.Column="1"
           Width="105"
-          Height="22"
           Margin="0,2,0,0"
-          Padding="2,1,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           GotFocus="tbxVideo_Width_GotFocus"
@@ -109,9 +107,7 @@
           x:Name="tbxVideo_Height"
           Grid.Column="1"
           Width="105"
-          Height="22"
           Margin="0,2,0,0"
-          Padding="2,1,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           GotFocus="tbxVideo_Height_GotFocus"
@@ -145,7 +141,6 @@
           x:Name="cboVideo_ScreenFormat"
           Grid.Column="1"
           Width="105"
-          Height="22"
           Margin="0,2,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
@@ -216,7 +211,6 @@
           x:Name="cboVideo_ScalingAlgorithm"
           Grid.Column="1"
           Width="105"
-          Height="22"
           Margin="0,2,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
@@ -251,9 +245,7 @@
           <Button
             x:Name="btnVideo_Crop"
             Width="50"
-            Height="22"
             Margin="0,2,0,0"
-            Padding="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnVideo_Crop_Click"
@@ -262,16 +254,12 @@
             ToolTip="Open Crop Window"
             ToolTipService.InitialShowDelay="500"
             ToolTipService.ShowOnDisabled="True">
-            <TextBlock
-              Style="{DynamicResource ButtonCropTextBlock}"
-              Text="Crop" />
+            <TextBlock Style="{DynamicResource ButtonCropTextBlock}" Text="Crop" />
           </Button>
           <Button
             x:Name="btnVideo_CropClear"
             Width="50"
-            Height="22"
             Margin="55,2,0,0"
-            Padding="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnVideo_CropClear_Click"
@@ -279,9 +267,7 @@
             ToolTip="Clear Last Used Crop Settings"
             ToolTipService.InitialShowDelay="500"
             ToolTipService.ShowOnDisabled="True">
-            <TextBlock
-              x:Name="tblkCropClear"
-              Text="{Binding Video_CropClear_Text, Mode=TwoWay}" />
+            <TextBlock x:Name="tblkCropClear" Text="{Binding Video_CropClear_Text, Mode=TwoWay}" />
           </Button>
         </Grid>
       </Grid>
