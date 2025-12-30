@@ -33,8 +33,10 @@
   xmlns:settings="clr-namespace:Axiom.Properties"
   xmlns:views="clr-namespace:Axiom.Views"
   Title="{Binding MainView.TitleVersion, Mode=OneWay}"
-  Width="824"
-  Height="464"
+  Width="909"
+  Height="508"
+  MinWidth="912"
+  MinHeight="508"
   Closing="Window_Closing"
   Icon="axiom.ico"
   Loaded="Window_Loaded"
@@ -93,41 +95,45 @@
       <hc:TabItem HorizontalContentAlignment="Stretch" Header="Video">
 
         <!--  Video TabControl  -->
-        <TabControl
+        <hc:TabControl
           x:Name="tabVideo"
-          Width="254"
           Margin="0"
-          HorizontalAlignment="Right"
           VerticalAlignment="Top"
-          Background="Transparent"
           BorderThickness="0"
+          IsTabFillEnabled="True"
           TabStripPlacement="Top">
 
           <!--  Encoding Tab  -->
-          <TabItem HorizontalContentAlignment="Stretch" Header="Encoding">
+          <hc:TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding VideoView}"
+            Header="Encoding">
             <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
               <views:VideoEncodingControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
           <!--  Color Tab  -->
-          <TabItem
+          <hc:TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding VideoView}"
             Header="Color">
             <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
               <views:VideoColorControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
           <!--  Size Tab  -->
-          <TabItem HorizontalContentAlignment="Stretch" Header="Size">
+          <hc:TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding VideoView}"
+            Header="Size">
             <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
               <views:VideoSizeControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
-        </TabControl>
+        </hc:TabControl>
       </hc:TabItem>
 
       <!--  Audio Tab  -->

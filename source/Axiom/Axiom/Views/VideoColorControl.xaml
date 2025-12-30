@@ -11,524 +11,522 @@
   Foreground="{DynamicResource PrimaryTextBrush}"
   mc:Ignorable="d">
 
-  <Grid Background="Transparent">
-
-    <Grid.RowDefinitions>
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-    </Grid.RowDefinitions>
+  <StackPanel Margin="10,10,10,0" Background="Transparent">
 
     <!--  Color Profiles Group  -->
-    <Grid
-      Grid.Row="0"
-      Margin="5,5,5,0"
-      VerticalAlignment="Top">
-
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="7" />
-        <ColumnDefinition Width="95" />
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-
-      <Grid.RowDefinitions>
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="11" />
-      </Grid.RowDefinitions>
-
-      <!--  Color Space  -->
+    <StackPanel Margin="0,0,0,15">
+      <!--  Color Space Header  -->
       <Label
-        Grid.Row="0"
-        Grid.Column="1"
-        Width="95"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="Color Space"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Color Range  -->
-      <Label
-        Grid.Row="1"
-        Grid.Column="1"
-        Width="91"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Color Range"
-        FontFamily="Segoe UI Semilight"
-        ToolTip="Color Range"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboColorRange"
-        Grid.Row="1"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        DataContext="{Binding VideoView}"
-        IsEnabled="{Binding Video_Color_Range_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsSynchronizedWithCurrentItem="True"
-        ItemsSource="{Binding Video_Color_Range_Items}"
-        SelectedIndex="{Binding Video_Color_Range_SelectedIndex}"
-        SelectedItem="{Binding Video_Color_Range_SelectedItem, Mode=TwoWay}"
-        SelectionChanged="cboColorRange_SelectionChanged" />
+      <!--  Color Range Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-      <!--  Color Space  -->
-      <Label
-        Grid.Row="2"
-        Grid.Column="1"
-        Width="91"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Color Space"
-        FontFamily="Segoe UI Semilight"
-        ToolTip="Color Space"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboColorSpace"
-        Grid.Row="2"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        DataContext="{Binding VideoView}"
-        IsEnabled="{Binding Video_Color_Space_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsSynchronizedWithCurrentItem="True"
-        ItemsSource="{Binding Video_Color_Space_Items}"
-        SelectedIndex="{Binding Video_Color_Space_SelectedIndex}"
-        SelectedItem="{Binding Video_Color_Space_SelectedItem, Mode=TwoWay}" />
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Color Range"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Color Range"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
 
-      <!--  Color Primaries  -->
-      <Label
-        Grid.Row="3"
-        Grid.Column="1"
-        Width="96"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Color Primaries"
-        FontFamily="Segoe UI Semilight"
-        ToolTip="Color Primaries"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboColorPrimaries"
-        Grid.Row="3"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        DataContext="{Binding VideoView}"
-        IsEnabled="{Binding Video_Color_Primaries_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsSynchronizedWithCurrentItem="True"
-        ItemsSource="{Binding Video_Color_Primaries_Items}"
-        SelectedIndex="{Binding Video_Color_Primaries_SelectedIndex}"
-        SelectedItem="{Binding Video_Color_Primaries_SelectedItem, Mode=TwoWay}" />
+        <ComboBox
+          x:Name="cboColorRange"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_Color_Range_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Video_Color_Range_Items}"
+          SelectedIndex="{Binding Video_Color_Range_SelectedIndex}"
+          SelectedItem="{Binding Video_Color_Range_SelectedItem, Mode=TwoWay}"
+          SelectionChanged="cboColorRange_SelectionChanged" />
+      </Grid>
 
-      <!--  Transfer Characteristics  -->
-      <Label
-        Grid.Row="4"
-        Grid.Column="1"
-        Width="96"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Transfer Char"
-        FontFamily="Segoe UI Semilight"
-        ToolTip="Transfer Characteristics"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboColorTransferCharacteristics"
-        Grid.Row="4"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        DataContext="{Binding VideoView}"
-        IsEnabled="{Binding Video_Color_TransferCharacteristics_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsSynchronizedWithCurrentItem="True"
-        ItemsSource="{Binding Video_Color_TransferCharacteristics_Items}"
-        SelectedIndex="{Binding Video_Color_TransferCharacteristics_SelectedIndex}"
-        SelectedItem="{Binding Video_Color_TransferCharacteristics_SelectedItem, Mode=TwoWay}" />
+      <!--  Color Space Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-      <!--  Color Matrix  -->
-      <Label
-        Grid.Row="5"
-        Grid.Column="1"
-        Width="91"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Color Matrix"
-        FontFamily="Segoe UI Semilight"
-        ToolTip="Color Matrix"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboColorMatrix"
-        Grid.Row="5"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        DataContext="{Binding VideoView}"
-        IsEnabled="{Binding Video_Color_Matrix_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsSynchronizedWithCurrentItem="True"
-        ItemsSource="{Binding Video_Color_Matrix_Items}"
-        SelectedIndex="{Binding Video_Color_Matrix_SelectedIndex}"
-        SelectedItem="{Binding Video_Color_Matrix_SelectedItem, Mode=TwoWay}" />
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Color Space"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Color Space"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
 
-      <!--  Color Reset Button  -->
-      <Button
-        x:Name="btnColor_Reset"
-        Grid.Row="6"
-        Grid.Column="2"
-        Width="50"
-        MinWidth="50"
-        MaxWidth="60"
-        Margin="55,0,0,6"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Center"
-        Click="btnColor_Reset_Click"
-        Cursor="Hand"
-        ToolTip="Reset Color Default."
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True">
-        <TextBlock Text="Reset" />
-      </Button>
-    </Grid>
+        <ComboBox
+          x:Name="cboColorSpace"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_Color_Space_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Video_Color_Space_Items}"
+          SelectedIndex="{Binding Video_Color_Space_SelectedIndex}"
+          SelectedItem="{Binding Video_Color_Space_SelectedItem, Mode=TwoWay}" />
+      </Grid>
+
+      <!--  Color Primaries Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Color Primaries"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Color Primaries"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <ComboBox
+          x:Name="cboColorPrimaries"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_Color_Primaries_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Video_Color_Primaries_Items}"
+          SelectedIndex="{Binding Video_Color_Primaries_SelectedIndex}"
+          SelectedItem="{Binding Video_Color_Primaries_SelectedItem, Mode=TwoWay}" />
+      </Grid>
+
+      <!--  Transfer Characteristics Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Transfer Char"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Transfer Characteristics"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <ComboBox
+          x:Name="cboColorTransferCharacteristics"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_Color_TransferCharacteristics_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Video_Color_TransferCharacteristics_Items}"
+          SelectedIndex="{Binding Video_Color_TransferCharacteristics_SelectedIndex}"
+          SelectedItem="{Binding Video_Color_TransferCharacteristics_SelectedItem, Mode=TwoWay}" />
+      </Grid>
+
+      <!--  Color Matrix Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Color Matrix"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Color Matrix"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <ComboBox
+          x:Name="cboColorMatrix"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_Color_Matrix_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Video_Color_Matrix_Items}"
+          SelectedIndex="{Binding Video_Color_Matrix_SelectedIndex}"
+          SelectedItem="{Binding Video_Color_Matrix_SelectedItem, Mode=TwoWay}" />
+      </Grid>
+
+      <!--  Color Reset Button Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button
+          x:Name="btnColor_Reset"
+          Grid.Column="1"
+          Width="50"
+          MinWidth="50"
+          MaxWidth="60"
+          Margin="55,0,0,6"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Click="btnColor_Reset_Click"
+          Cursor="Hand"
+          ToolTip="Reset Color Default."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock Text="Reset" />
+        </Button>
+      </Grid>
+    </StackPanel>
 
 
     <!--  EQ Group  -->
-    <Grid
-      Grid.Row="2"
-      Margin="0"
-      VerticalAlignment="Top"
-      DataContext="{Binding FilterVideoView}">
-
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="7" />
-        <ColumnDefinition Width="95" />
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-
-      <Grid.RowDefinitions>
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="11" />
-      </Grid.RowDefinitions>
-
-      <!--  EQ  -->
+    <StackPanel Margin="0,0,0,15">
+      <!--  EQ Header  -->
       <Label
-        Grid.Row="0"
-        Grid.Column="1"
-        Width="95"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="EQ"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Brightness  -->
-      <Label
-        Grid.Row="1"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Brightness"
-        FontFamily="Segoe UI Semilight" />
-      <Slider
-        x:Name="slFilterVideo_EQ_Brightness"
-        Grid.Row="1"
-        Grid.Column="2"
-        Margin="0,4,50,0"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsMoveToPointEnabled="True"
-        IsSnapToTickEnabled="True"
-        Maximum="100"
-        Minimum="-100"
-        MouseDoubleClick="slFilterVideo_EQ_Brightness_MouseDoubleClick"
-        PreviewMouseUp="slFilterVideo_EQ_Brightness_PreviewMouseUp"
-        Value="{Binding FilterVideo_EQ_Brightness_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        x:Name="tbxFilterVideo_EQ_Brightness"
-        Grid.Row="1"
-        Grid.Column="2"
-        Width="39"
-        Height="22"
-        Margin="0,2,9,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        KeyDown="tbxFilterVideo_EQ_Brightness_KeyDown"
-        MaxLength="4"
-        MaxLines="1"
-        PreviewKeyUp="tbxFilterVideo_EQ_Brightness_PreviewKeyUp"
-        Text="{Binding Value, ElementName=slFilterVideo_EQ_Brightness, UpdateSourceTrigger=PropertyChanged}" />
+      <!--  Brightness Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-      <!--  Contrast  -->
-      <Label
-        Grid.Row="2"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Contrast"
-        FontFamily="Segoe UI Semilight" />
-      <Slider
-        x:Name="slFilterVideo_EQ_Contrast"
-        Grid.Row="2"
-        Grid.Column="2"
-        Margin="0,4,50,0"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsMoveToPointEnabled="True"
-        IsSnapToTickEnabled="True"
-        Maximum="100"
-        Minimum="-100"
-        MouseDoubleClick="slFilterVideo_EQ_Contrast_MouseDoubleClick"
-        PreviewMouseUp="slFilterVideo_EQ_Contrast_PreviewMouseUp"
-        Value="{Binding FilterVideo_EQ_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        x:Name="tbxFilterVideo_EQ_Contrast"
-        Grid.Row="2"
-        Grid.Column="2"
-        Width="39"
-        Height="22"
-        Margin="0,2,9,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        KeyDown="tbxFilterVideo_EQ_Contrast_KeyDown"
-        MaxLength="4"
-        MaxLines="1"
-        PreviewKeyUp="tbxFilterVideo_EQ_Contrast_PreviewKeyUp"
-        Text="{Binding Value, ElementName=slFilterVideo_EQ_Contrast, UpdateSourceTrigger=PropertyChanged}" />
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Brightness"
+          FontFamily="Segoe UI Semilight" />
 
-      <!--  Saturation  -->
-      <Label
-        Grid.Row="3"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Saturation"
-        FontFamily="Segoe UI Semilight" />
-      <Slider
-        x:Name="slFilterVideo_EQ_Saturation"
-        Grid.Row="3"
-        Grid.Column="2"
-        Margin="0,4,50,0"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsMoveToPointEnabled="True"
-        IsSnapToTickEnabled="True"
-        Maximum="100"
-        Minimum="-100"
-        MouseDoubleClick="slFilterVideo_EQ_Saturation_MouseDoubleClick"
-        PreviewMouseUp="slFilterVideo_EQ_Saturation_PreviewMouseUp"
-        Value="{Binding FilterVideo_EQ_Saturation_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        x:Name="tbxFilterVideo_EQ_Saturation"
-        Grid.Row="3"
-        Grid.Column="2"
-        Width="39"
-        Height="22"
-        Margin="0,2,9,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        KeyDown="tbxFilterVideo_EQ_Saturation_KeyDown"
-        MaxLength="4"
-        MaxLines="1"
-        PreviewKeyUp="tbxFilterVideo_EQ_Saturation_PreviewKeyUp"
-        Text="{Binding Value, ElementName=slFilterVideo_EQ_Saturation, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid Grid.Column="1">
+          <Slider
+            x:Name="slFilterVideo_EQ_Brightness"
+            Margin="0,4,50,0"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="True"
+            Maximum="100"
+            Minimum="-100"
+            MouseDoubleClick="slFilterVideo_EQ_Brightness_MouseDoubleClick"
+            PreviewMouseUp="slFilterVideo_EQ_Brightness_PreviewMouseUp"
+            Value="{Binding FilterVideo_EQ_Brightness_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <TextBox
+            x:Name="tbxFilterVideo_EQ_Brightness"
+            Width="39"
+            Height="22"
+            Margin="0,2,9,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            KeyDown="tbxFilterVideo_EQ_Brightness_KeyDown"
+            MaxLength="4"
+            MaxLines="1"
+            PreviewKeyUp="tbxFilterVideo_EQ_Brightness_PreviewKeyUp"
+            Text="{Binding Value, ElementName=slFilterVideo_EQ_Brightness, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
 
-      <!--  Gamma  -->
-      <Label
-        Grid.Row="4"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Gamma"
-        FontFamily="Segoe UI Semilight" />
-      <Slider
-        x:Name="slFilterVideo_EQ_Gamma"
-        Grid.Row="4"
-        Grid.Column="2"
-        Margin="0,4,50,0"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsMoveToPointEnabled="True"
-        IsSnapToTickEnabled="True"
-        Maximum="100"
-        Minimum="-100"
-        MouseDoubleClick="slFilterVideo_EQ_Gamma_MouseDoubleClick"
-        PreviewMouseUp="slFilterVideo_EQ_Gamma_PreviewMouseUp"
-        Value="{Binding FilterVideo_EQ_Gamma_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        x:Name="tbxFilterVideo_EQ_Gamma"
-        Grid.Row="4"
-        Grid.Column="2"
-        Width="39"
-        Height="22"
-        Margin="0,2,9,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        KeyDown="tbxFilterVideo_EQ_Gamma_KeyDown"
-        MaxLength="4"
-        MaxLines="1"
-        PreviewKeyUp="tbxFilterVideo_EQ_Gamma_PreviewKeyUp"
-        Text="{Binding Value, ElementName=slFilterVideo_EQ_Gamma, UpdateSourceTrigger=PropertyChanged}" />
+      <!--  Contrast Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-      <!--  EQ Reset Button  -->
-      <Button
-        x:Name="btnFilterVideo_EQ_Reset"
-        Grid.Row="5"
-        Grid.Column="2"
-        Width="50"
-        Margin="55,0,0,6"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Bottom"
-        Click="btnFilterVideo_EQ_Reset_Click"
-        Cursor="Hand"
-        ToolTip="Reset EQ to Default."
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True">
-        <TextBlock Text="Reset" />
-      </Button>
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Contrast"
+          FontFamily="Segoe UI Semilight" />
 
-    </Grid>
+        <Grid Grid.Column="1">
+          <Slider
+            x:Name="slFilterVideo_EQ_Contrast"
+            Margin="0,4,50,0"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="True"
+            Maximum="100"
+            Minimum="-100"
+            MouseDoubleClick="slFilterVideo_EQ_Contrast_MouseDoubleClick"
+            PreviewMouseUp="slFilterVideo_EQ_Contrast_PreviewMouseUp"
+            Value="{Binding FilterVideo_EQ_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <TextBox
+            x:Name="tbxFilterVideo_EQ_Contrast"
+            Width="39"
+            Height="22"
+            Margin="0,2,9,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            KeyDown="tbxFilterVideo_EQ_Contrast_KeyDown"
+            MaxLength="4"
+            MaxLines="1"
+            PreviewKeyUp="tbxFilterVideo_EQ_Contrast_PreviewKeyUp"
+            Text="{Binding Value, ElementName=slFilterVideo_EQ_Contrast, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
+
+      <!--  Saturation Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Saturation"
+          FontFamily="Segoe UI Semilight" />
+
+        <Grid Grid.Column="1">
+          <Slider
+            x:Name="slFilterVideo_EQ_Saturation"
+            Margin="0,4,50,0"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="True"
+            Maximum="100"
+            Minimum="-100"
+            MouseDoubleClick="slFilterVideo_EQ_Saturation_MouseDoubleClick"
+            PreviewMouseUp="slFilterVideo_EQ_Saturation_PreviewMouseUp"
+            Value="{Binding FilterVideo_EQ_Saturation_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <TextBox
+            x:Name="tbxFilterVideo_EQ_Saturation"
+            Width="39"
+            Height="22"
+            Margin="0,2,9,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            KeyDown="tbxFilterVideo_EQ_Saturation_KeyDown"
+            MaxLength="4"
+            MaxLines="1"
+            PreviewKeyUp="tbxFilterVideo_EQ_Saturation_PreviewKeyUp"
+            Text="{Binding Value, ElementName=slFilterVideo_EQ_Saturation, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
+
+      <!--  Gamma Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Gamma"
+          FontFamily="Segoe UI Semilight" />
+
+        <Grid Grid.Column="1">
+          <Slider
+            x:Name="slFilterVideo_EQ_Gamma"
+            Margin="0,4,50,0"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="True"
+            Maximum="100"
+            Minimum="-100"
+            MouseDoubleClick="slFilterVideo_EQ_Gamma_MouseDoubleClick"
+            PreviewMouseUp="slFilterVideo_EQ_Gamma_PreviewMouseUp"
+            Value="{Binding FilterVideo_EQ_Gamma_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <TextBox
+            x:Name="tbxFilterVideo_EQ_Gamma"
+            Width="39"
+            Height="22"
+            Margin="0,2,9,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            KeyDown="tbxFilterVideo_EQ_Gamma_KeyDown"
+            MaxLength="4"
+            MaxLines="1"
+            PreviewKeyUp="tbxFilterVideo_EQ_Gamma_PreviewKeyUp"
+            Text="{Binding Value, ElementName=slFilterVideo_EQ_Gamma, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
+
+      <!--  EQ Reset Button Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button
+          x:Name="btnFilterVideo_EQ_Reset"
+          Grid.Column="1"
+          Margin="55,0,0,6"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Bottom"
+          Click="btnFilterVideo_EQ_Reset_Click"
+          Cursor="Hand"
+          ToolTip="Reset EQ to Default."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock Text="Reset" />
+        </Button>
+      </Grid>
+    </StackPanel>
 
 
     <!--  Selective Color Group  -->
-    <Grid
-      Grid.Row="3"
-      Margin="0"
-      VerticalAlignment="Top"
-      DataContext="{Binding FilterVideoView}">
-
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="7" />
-        <ColumnDefinition Width="95" />
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-
-      <Grid.RowDefinitions>
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="110" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="22" />
-      </Grid.RowDefinitions>
-
-      <!--  Selective Color  -->
+    <StackPanel Margin="0,0,0,0">
+      <!--  Selective Color Header  -->
       <Label
-        Grid.Row="0"
-        Grid.Column="1"
-        Width="95"
-        Height="26"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="Selective Color"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Color  -->
-      <Label
-        Grid.Row="1"
-        Grid.Column="1"
-        Width="80"
-        Height="26"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Color"
-        FontFamily="Segoe UI Semilight" />
+      <!--  Color Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-      <ComboBox
-        x:Name="cboFilterVideo_SelectiveColor"
-        Grid.Row="1"
-        Grid.Column="2"
-        Width="105"
-        Height="22"
-        Margin="0,2,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_SelectiveColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ItemsSource="{Binding FilterVideo_SelectiveColor_Items}"
-        SelectedIndex="{Binding FilterVideo_SelectiveColor_SelectedIndex}"
-        SelectedValue="{Binding FilterVideo_SelectiveColor_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        SelectedValuePath="Name"
-        SelectionChanged="cboFilterVideo_SelectiveColor_SelectionChanged">
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Color"
+          FontFamily="Segoe UI Semilight" />
 
-        <ComboBox.ItemTemplate>
-          <DataTemplate>
-            <Grid>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-              </Grid.ColumnDefinitions>
+        <ComboBox
+          x:Name="cboFilterVideo_SelectiveColor"
+          Grid.Column="1"
+          Width="105"
+          Margin="0,2,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding FilterVideo_SelectiveColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterVideo_SelectiveColor_Items}"
+          SelectedIndex="{Binding FilterVideo_SelectiveColor_SelectedIndex}"
+          SelectedValue="{Binding FilterVideo_SelectiveColor_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValuePath="Name"
+          SelectionChanged="cboFilterVideo_SelectiveColor_SelectionChanged">
 
-              <Border
-                Width="12"
-                Height="12"
-                Margin="2"
-                Background="{Binding Color}" />
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-              <TextBlock
-                Grid.Column="1"
-                Margin="5,0"
-                VerticalAlignment="Center"
-                Text="{Binding Name}" />
-            </Grid>
-          </DataTemplate>
-        </ComboBox.ItemTemplate>
+                <Border
+                  Width="12"
+                  Height="12"
+                  Margin="2"
+                  Background="{Binding Color}" />
 
-      </ComboBox>
+                <TextBlock
+                  Grid.Column="1"
+                  Margin="5,0"
+                  VerticalAlignment="Center"
+                  Text="{Binding Name}" />
+              </Grid>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
 
-      <!--  Correction Method  -->
-      <Label
-        Grid.Row="2"
-        Grid.Column="1"
-        Width="80"
-        Height="26"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Method"
-        FontFamily="Segoe UI Semilight" />
+        </ComboBox>
+      </Grid>
 
-      <ComboBox
-        x:Name="cboFilterVideo_SelectiveColor_Correction_Method"
-        Grid.Row="2"
-        Grid.Column="2"
-        Width="105"
-        Height="22"
-        Margin="0,1,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterVideo_SelectiveColor_Correction_Method_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ItemsSource="{Binding FilterVideo_SelectiveColor_Correction_Method_Items}"
-        SelectedItem="{Binding FilterVideo_SelectiveColor_Correction_Method_SelectedItem, Mode=TwoWay}" />
+      <!--  Correction Method Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Method"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboFilterVideo_SelectiveColor_Correction_Method"
+          Grid.Column="1"
+          Width="105"
+          Margin="0,1,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding FilterVideo_SelectiveColor_Correction_Method_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterVideo_SelectiveColor_Correction_Method_Items}"
+          SelectedItem="{Binding FilterVideo_SelectiveColor_Correction_Method_SelectedItem, Mode=TwoWay}" />
+      </Grid>
 
       <!--  Color Tab Control  -->
       <TabControl
         x:Name="tabControl_SelectiveColor"
-        Grid.Row="3"
-        Grid.ColumnSpan="3"
         Width="237"
+        Margin="0,0,0,0"
         Padding="0"
         HorizontalAlignment="Right"
         Background="Transparent"
@@ -1775,31 +1773,32 @@
 
       </TabControl>
 
-      <!--  Selective Color Rest Button  -->
-      <Button
-        x:Name="btnFilterVideo_SelectiveColorReset"
-        Grid.Row="4"
-        Grid.Column="2"
-        Width="50"
-        Height="19"
-        MinWidth="50"
-        MaxWidth="60"
-        MaxHeight="22"
-        Margin="55,0,0,12"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Bottom"
-        Click="btnFilterVideo_SelectiveColorReset_Click"
-        Cursor="Hand"
-        ToolTip="Reset Selective Color to Default."
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True">
-        <TextBlock Margin="0,-2,0,0" Text="Reset" />
-      </Button>
+      <!--  Selective Color Reset Button Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button
+          x:Name="btnFilterVideo_SelectiveColorReset"
+          Grid.Column="1"
+          Margin="55,0,0,12"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Bottom"
+          Click="btnFilterVideo_SelectiveColorReset_Click"
+          Cursor="Hand"
+          ToolTip="Reset Selective Color to Default."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock Margin="0,-2,0,0" Text="Reset" />
+        </Button>
+      </Grid>
       <!--  End Selective Color  -->
 
-    </Grid>
+    </StackPanel>
 
 
-  </Grid>
+  </StackPanel>
 
 </UserControl>
