@@ -12,102 +12,75 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
 
-  <Grid Background="Transparent">
-
-    <Grid.RowDefinitions>
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-    </Grid.RowDefinitions>
+  <StackPanel Margin="10,10,10,0" Background="Transparent">
 
     <!--  Input Group  -->
-    <Grid
-      Grid.Row="0"
-      Margin="5,5,5,0"
-      VerticalAlignment="Top">
-
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="7" />
-        <ColumnDefinition Width="64" />
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-
-      <Grid.RowDefinitions>
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="80" />
-        <RowDefinition Height="11" />
-      </Grid.RowDefinitions>
-
-      <!--  Input  -->
+    <StackPanel Margin="0,0,0,15">
+      <!--  Input Header  -->
       <Label
-        Grid.Row="0"
-        Grid.Column="1"
-        Width="54"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="Input"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Input Filename Tokens  -->
-      <Label
-        Grid.Row="1"
-        Grid.Column="1"
-        Margin="0,2,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Tokens"
-        ToolTip="Keep or Remove Input Filename Tokens (e.g. 1080p x264 DD7.1)"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboInputFileNameTokens"
-        Grid.Row="1"
-        Grid.Column="2"
-        Width="105"
-        Margin="10,2,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding InputFileNameTokens_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsTextSearchEnabled="False"
-        ItemsSource="{Binding InputFileNameTokens_Items}"
-        SelectedIndex="{Binding InputFileNameTokens_SelectedIndex}"
-        SelectedItem="{Binding InputFileNameTokens_SelectedItem}"
-        SelectionChanged="cboInputFileNameTokens_SelectionChanged" />
-      <!--  Revert Button  -->
-      <Button
-        x:Name="btnInputFileNameTokensDefault"
-        Grid.Row="1"
-        Grid.Column="2"
-        Width="23"
-        Height="23"
-        Margin="122,1,0,0"
-        Padding="0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Click="btnInputFileNameTokensDefault_Click"
-        Cursor="Hand"
-        ToolTip="Revert to Default"
-        ToolTipService.InitialShowDelay="200"
-        ToolTipService.ShowOnDisabled="True">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
+      <!--  Input Filename Tokens Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="80" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
           VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="ArrowCounterClockwiseBold" />
-      </Button>
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Tokens"
+          ToolTip="Keep or Remove Input Filename Tokens (e.g. 1080p x264 DD7.1)"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <ComboBox
+            x:Name="cboInputFileNameTokens"
+            Width="105"
+            IsEnabled="{Binding InputFileNameTokens_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsTextSearchEnabled="False"
+            ItemsSource="{Binding InputFileNameTokens_Items}"
+            SelectedIndex="{Binding InputFileNameTokens_SelectedIndex}"
+            SelectedItem="{Binding InputFileNameTokens_SelectedItem}"
+            SelectionChanged="cboInputFileNameTokens_SelectionChanged" />
+
+          <Button
+            x:Name="btnInputFileNameTokensDefault"
+            Width="28"
+            Height="28"
+            Margin="5,0,0,0"
+            Padding="0"
+            Click="btnInputFileNameTokensDefault_Click"
+            Cursor="Hand"
+            ToolTip="Revert to Default"
+            ToolTipService.InitialShowDelay="200"
+            ToolTipService.ShowOnDisabled="True">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="ArrowCounterClockwiseBold" />
+          </Button>
+        </StackPanel>
+      </Grid>
 
       <!--  Input Tokens Custom  -->
       <TextBox
         x:Name="tbxInputFileNameTokensCustom"
-        Grid.Row="2"
-        Grid.Column="1"
-        Grid.ColumnSpan="2"
-        Width="203"
+        Width="218"
         Height="75"
-        Margin="5,2,0,0"
         Padding="5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
         VerticalContentAlignment="Top"
         IsEnabled="{Binding InputFileNameTokensCustom_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         MaxLines="1"
@@ -118,294 +91,261 @@
         ToolTipService.InitialShowDelay="200"
         ToolTipService.ShowOnDisabled="True"
         VerticalScrollBarVisibility="Auto" />
-    </Grid>
+    </StackPanel>
 
     <!--  Output Group  -->
-    <Grid
-      Grid.Row="1"
-      Margin="0,20,0,0"
-      VerticalAlignment="Top">
-
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="7" />
-        <ColumnDefinition Width="64" />
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-
-      <Grid.RowDefinitions>
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="44" />
-        <RowDefinition Height="270" />
-        <RowDefinition Height="22" />
-      </Grid.RowDefinitions>
-
-      <!--  Output  -->
+    <StackPanel Margin="0,0,0,0">
+      <!--  Output Header  -->
       <Label
-        Grid.Row="0"
-        Grid.Column="1"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="Output"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Naming Tokens  -->
+      <!--  Overwrite Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="80" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Overwrite"
+          ToolTip="Overwrite output file if it already exists."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <ComboBox
+            x:Name="cboOutputOverwrite"
+            Width="105"
+            IsEnabled="{Binding OutputOverwrite_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsTextSearchEnabled="False"
+            ItemsSource="{Binding OutputOverwrite_Items}"
+            SelectedIndex="{Binding OutputOverwrite_SelectedIndex}"
+            SelectedItem="{Binding OutputOverwrite_SelectedItem}" />
+
+          <Button
+            x:Name="btnOutputOverwriteDefault"
+            Width="28"
+            Height="28"
+            Margin="5,0,0,0"
+            Padding="0"
+            Click="btnOutputOverwriteDefault_Click"
+            Cursor="Hand"
+            ToolTip="Revert to Default"
+            ToolTipService.InitialShowDelay="200"
+            ToolTipService.ShowOnDisabled="True">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="ArrowCounterClockwiseBold" />
+          </Button>
+        </StackPanel>
+      </Grid>
+
+      <!--  Spacing Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="80" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Spacing"
+          ToolTip="Output filename spacing (e.g. My.File.x264.mp4)"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <ComboBox
+            x:Name="cboOutputFileNameSpacing"
+            Width="105"
+            IsEnabled="{Binding OutputFileNameSpacing_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsTextSearchEnabled="False"
+            ItemsSource="{Binding OutputFileNameSpacing_Items}"
+            SelectedIndex="{Binding OutputFileNameSpacing_SelectedIndex}"
+            SelectedItem="{Binding OutputFileNameSpacing_SelectedItem}" />
+
+          <Button
+            x:Name="btnOutputFileNameSpacingDefault"
+            Width="28"
+            Height="28"
+            Margin="5,0,0,0"
+            Padding="0"
+            Click="btnOutputFileNameSpacingDefault_Click"
+            Cursor="Hand"
+            ToolTip="Revert to Default"
+            ToolTipService.InitialShowDelay="200"
+            ToolTipService.ShowOnDisabled="True">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="ArrowCounterClockwiseBold" />
+          </Button>
+        </StackPanel>
+      </Grid>
+
+      <!--  Tokens Section  -->
       <Label
-        Grid.Row="3"
-        Grid.Column="1"
+        Margin="0,5,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="Tokens"
+        FontFamily="Segoe UI Semibold"
         ToolTip="Add these settings to the output filename."
         ToolTipService.InitialShowDelay="500"
         ToolTipService.ShowOnDisabled="True" />
-      <!--  Tokens List  -->
-      <ListView
-        x:Name="lstvOutputNaming"
-        Grid.Row="3"
-        Grid.Column="0"
-        Grid.ColumnSpan="3"
-        Height="216"
-        Margin="10,31,35,0"
-        Padding="2,4,0,0"
-        VerticalAlignment="Top"
-        BorderThickness="1"
-        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsSynchronizedWithCurrentItem="False"
-        ItemsSource="{Binding OutputNaming_ListView_Items}"
-        SelectedIndex="{Binding OutputNaming_ListView_SelectedIndex}"
-        SelectionChanged="lstvOutputNaming_SelectionChanged"
-        SelectionMode="Multiple"
-        Style="{StaticResource ListView.Small}"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True">
 
-        <ListView.Resources>
-          <Style TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="Visibility" Value="Collapsed" />
-          </Style>
-        </ListView.Resources>
+      <!--  Tokens List with Buttons  -->
+      <Grid>
+        <ListView
+          x:Name="lstvOutputNaming"
+          Height="216"
+          Margin="0,0,30,0"
+          Padding="2,4,0,0"
+          VerticalAlignment="Top"
+          BorderThickness="1"
+          IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="False"
+          ItemsSource="{Binding OutputNaming_ListView_Items}"
+          SelectedIndex="{Binding OutputNaming_ListView_SelectedIndex}"
+          SelectionChanged="lstvOutputNaming_SelectionChanged"
+          SelectionMode="Multiple"
+          Style="{StaticResource ListView.Small}"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
 
-        <!--  List Checkboxes  -->
-        <ListView.View>
-          <GridView>
-            <!--  CheckBox  -->
-            <GridViewColumn>
-              <GridViewColumn.CellTemplate>
-                <DataTemplate>
-                  <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
-                </DataTemplate>
-              </GridViewColumn.CellTemplate>
-            </GridViewColumn>
-            <!--  Name  -->
-            <GridViewColumn Width="122" />
-          </GridView>
-        </ListView.View>
-      </ListView>
+          <ListView.Resources>
+            <Style TargetType="{x:Type GridViewColumnHeader}">
+              <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+          </ListView.Resources>
 
-      <!--  Sort Up  -->
-      <Button
-        x:Name="btnOutputNaming_SortUp"
-        Grid.Row="3"
-        Grid.Column="2"
-        Width="22"
-        Height="22"
-        Margin="0,31,8,0"
-        Padding="0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        Click="btnOutputNaming_SortUp_Click"
-        Cursor="Hand"
-        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="CaretUpFill" />
-      </Button>
-      <!--  Sort Down  -->
-      <Button
-        x:Name="btnOutputNaming_SortDown"
-        Grid.Row="3"
-        Grid.Column="2"
-        Width="22"
-        Height="22"
-        Margin="0,58,8,0"
-        Padding="0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        Click="btnOutputNaming_SortDown_Click"
-        Cursor="Hand"
-        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="CaretDownFill" />
-      </Button>
-      <!--  Select All  -->
-      <Button
-        x:Name="btnOutputNaming_SelectAll"
-        Grid.Row="3"
-        Grid.Column="2"
-        Width="22"
-        Height="22"
-        Margin="0,85,8,0"
-        Padding="0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        Click="btnOutputNaming_SelectAll_Click"
-        Cursor="Hand"
-        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ToolTip="Select All"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="CheckBold" />
-      </Button>
-      <!--  Deselect All  -->
-      <Button
-        x:Name="btnOutputNaming_DeselectAll"
-        Grid.Row="3"
-        Grid.Column="2"
-        Width="22"
-        Height="22"
-        Margin="0,112,8,0"
-        Padding="0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        Click="btnOutputNaming_DeselectAll_Click"
-        Cursor="Hand"
-        IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ToolTip="Deselect All"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="XBold" />
-      </Button>
-      <!--  Output Naming Load Defaults  -->
-      <Button
-        x:Name="btnOutputNamingDefaults"
-        Grid.Row="3"
-        Grid.Column="2"
-        Width="22"
-        Height="22"
-        Margin="0,139,8,0"
-        Padding="0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        Click="btnOutputNamingDefaults_Click"
-        Cursor="Hand"
-        ToolTip="Load Default Positions and Selections"
-        ToolTipService.InitialShowDelay="200"
-        ToolTipService.ShowOnDisabled="True">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="ArrowCounterClockwiseBold" />
-      </Button>
+          <!--  List Checkboxes  -->
+          <ListView.View>
+            <GridView>
+              <!--  CheckBox  -->
+              <GridViewColumn>
+                <GridViewColumn.CellTemplate>
+                  <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                  </DataTemplate>
+                </GridViewColumn.CellTemplate>
+              </GridViewColumn>
+              <!--  Name  -->
+              <GridViewColumn Width="122" />
+            </GridView>
+          </ListView.View>
+        </ListView>
 
-      <!--  Spacing  -->
-      <Label
-        Grid.Row="2"
-        Grid.Column="1"
-        Margin="0,2,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Spacing"
-        ToolTip="Output filename spacing (e.g. My.File.x264.mp4)"
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboOutputFileNameSpacing"
-        Grid.Row="2"
-        Grid.Column="2"
-        Width="105"
-        Margin="10,2,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding OutputFileNameSpacing_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsTextSearchEnabled="False"
-        ItemsSource="{Binding OutputFileNameSpacing_Items}"
-        SelectedIndex="{Binding OutputFileNameSpacing_SelectedIndex}"
-        SelectedItem="{Binding OutputFileNameSpacing_SelectedItem}" />
-      <!--  Revert Button  -->
-      <Button
-        x:Name="btnOutputFileNameSpacingDefault"
-        Grid.Row="2"
-        Grid.Column="2"
-        Width="23"
-        Height="23"
-        Margin="122,1,0,0"
-        Padding="0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Click="btnOutputFileNameSpacingDefault_Click"
-        Cursor="Hand"
-        ToolTip="Revert to Default"
-        ToolTipService.InitialShowDelay="200"
-        ToolTipService.ShowOnDisabled="True">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="ArrowCounterClockwiseBold" />
-      </Button>
+        <!--  Buttons StackPanel  -->
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+          <!--  Sort Up  -->
+          <Button
+            x:Name="btnOutputNaming_SortUp"
+            Width="28"
+            Height="28"
+            Margin="0,0,0,5"
+            Padding="0"
+            Click="btnOutputNaming_SortUp_Click"
+            Cursor="Hand"
+            IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="CaretUpFill" />
+          </Button>
+          <!--  Sort Down  -->
+          <Button
+            x:Name="btnOutputNaming_SortDown"
+            Width="28"
+            Height="28"
+            Margin="0,0,0,5"
+            Padding="0"
+            Click="btnOutputNaming_SortDown_Click"
+            Cursor="Hand"
+            IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="CaretDownFill" />
+          </Button>
+          <!--  Select All  -->
+          <Button
+            x:Name="btnOutputNaming_SelectAll"
+            Width="28"
+            Height="28"
+            Margin="0,0,0,5"
+            Padding="0"
+            Click="btnOutputNaming_SelectAll_Click"
+            Cursor="Hand"
+            IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ToolTip="Select All"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="CheckBold" />
+          </Button>
+          <!--  Deselect All  -->
+          <Button
+            x:Name="btnOutputNaming_DeselectAll"
+            Width="28"
+            Height="28"
+            Margin="0,0,0,5"
+            Padding="0"
+            Click="btnOutputNaming_DeselectAll_Click"
+            Cursor="Hand"
+            IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ToolTip="Deselect All"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="XBold" />
+          </Button>
+          <!--  Output Naming Load Defaults  -->
+          <Button
+            x:Name="btnOutputNamingDefaults"
+            Width="28"
+            Height="28"
+            Padding="0"
+            Click="btnOutputNamingDefaults_Click"
+            Cursor="Hand"
+            ToolTip="Load Default Positions and Selections"
+            ToolTipService.InitialShowDelay="200"
+            ToolTipService.ShowOnDisabled="True">
+            <iconPacks:PackIconPhosphorIcons
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Foreground="{DynamicResource PrimaryTextBrush}"
+              Kind="ArrowCounterClockwiseBold" />
+          </Button>
+        </StackPanel>
+      </Grid>
+    </StackPanel>
 
-      <!--  Overwrite  -->
-      <Label
-        Grid.Row="1"
-        Grid.Column="1"
-        Margin="0,2,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Overwrite"
-        ToolTip="Overwrite output file if it already exists."
-        ToolTipService.InitialShowDelay="500"
-        ToolTipService.ShowOnDisabled="True" />
-      <ComboBox
-        x:Name="cboOutputOverwrite"
-        Grid.Row="1"
-        Grid.Column="2"
-        Width="105"
-        Margin="10,2,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding OutputOverwrite_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsTextSearchEnabled="False"
-        ItemsSource="{Binding OutputOverwrite_Items}"
-        SelectedIndex="{Binding OutputOverwrite_SelectedIndex}"
-        SelectedItem="{Binding OutputOverwrite_SelectedItem}" />
-      <!--  Revert Button  -->
-      <Button
-        x:Name="btnOutputOverwriteDefault"
-        Grid.Row="1"
-        Grid.Column="2"
-        Width="23"
-        Height="23"
-        Margin="122,1,0,0"
-        Padding="0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Click="btnOutputOverwriteDefault_Click"
-        Cursor="Hand"
-        ToolTip="Revert to Default"
-        ToolTipService.InitialShowDelay="200"
-        ToolTipService.ShowOnDisabled="True">
-        <iconPacks:PackIconPhosphorIcons
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="ArrowCounterClockwiseBold" />
-      </Button>
-    </Grid>
-
-  </Grid>
+  </StackPanel>
 </UserControl>
