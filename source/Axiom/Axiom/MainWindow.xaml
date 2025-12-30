@@ -78,6 +78,7 @@
         <Grid Background="Transparent">
           <ScrollViewer
             Width="254"
+            Padding="-4,0"
             HorizontalAlignment="Right"
             VerticalScrollBarVisibility="Auto">
 
@@ -136,6 +137,7 @@
         <Grid Background="Transparent">
           <ScrollViewer
             Width="254"
+            Padding="-4,0"
             HorizontalAlignment="Right"
             VerticalScrollBarVisibility="Auto">
 
@@ -176,6 +178,7 @@
         <Grid Background="Transparent">
           <ScrollViewer
             Width="254"
+            Padding="-4,0"
             HorizontalAlignment="Right"
             VerticalScrollBarVisibility="Auto">
 

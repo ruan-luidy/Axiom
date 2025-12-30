@@ -52,6 +52,7 @@
       <Label
         Grid.Row="1"
         Grid.Column="1"
+        Margin="0,2,0,0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Tokens"
@@ -315,6 +316,7 @@
       <Label
         Grid.Row="2"
         Grid.Column="1"
+        Margin="0,2,0,0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Spacing"
@@ -361,6 +363,7 @@
       <Label
         Grid.Row="1"
         Grid.Column="1"
+        Margin="0,2,0,0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Content="Overwrite"

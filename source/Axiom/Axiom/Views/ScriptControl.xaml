@@ -15,6 +15,7 @@
       Grid.ColumnSpan="1"
       Margin="11,71,280,56"
       Padding="10,10,10,48"
+      VerticalContentAlignment="Top"
       AcceptsReturn="True"
       AllowDrop="True"
       FontSize="14"
