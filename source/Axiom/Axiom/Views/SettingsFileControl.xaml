@@ -10,9 +10,10 @@
   xmlns:hc="https://handyorg.github.io/handycontrol"
   xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Background="{DynamicResource SecondaryRegionBrush}"
   mc:Ignorable="d">
 
-  <StackPanel Margin="10,10,10,0" Background="Transparent">
+  <StackPanel Margin="10,10,10,0">
 
     <!--  Input Group  -->
     <StackPanel Margin="0,0,0,15">
@@ -216,9 +217,8 @@
       <Grid>
         <ListView
           x:Name="lstvOutputNaming"
-          Height="216"
+          Height="220"
           Margin="0,0,30,0"
-          Padding="2,4,0,0"
           VerticalAlignment="Top"
           BorderThickness="1"
           IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

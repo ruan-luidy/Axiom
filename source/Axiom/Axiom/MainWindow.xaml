@@ -170,7 +170,7 @@
         <!--  Settings TabControl  -->
         <TabControl
           x:Name="tabSettings"
-          Width="260"
+          Width="341"
           Margin="0,0,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
