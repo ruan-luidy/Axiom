@@ -11,54 +11,30 @@
   Foreground="{DynamicResource PrimaryTextBrush}"
   mc:Ignorable="d">
 
-  <Grid Background="Transparent">
+  <StackPanel Margin="10,10,10,0" Background="Transparent">
 
-    <!--  Grid  -->
-    <Grid Margin="5,5,5,0" VerticalAlignment="Top">
+    <!--  Display Group  -->
+    <StackPanel Margin="0,0,0,15">
+      <!--  Display Header  -->
+      <Label
+        Margin="0,0,0,5"
+        HorizontalAlignment="Left"
+        Background="Transparent"
+        BorderThickness="0"
+        Content="Display"
+        FontFamily="Segoe UI Semibold" />
 
-      <Grid.RowDefinitions>
-        <RowDefinition Height="auto" />
-        <RowDefinition Height="auto" />
-        <RowDefinition Height="auto" />
-        <RowDefinition Height="auto" />
-        <RowDefinition Height="auto" />
-      </Grid.RowDefinitions>
-
-      <!--  Display Group  -->
-      <Grid
-        Grid.Row="0"
-        Margin="0"
-        VerticalAlignment="Top">
-
+      <!--  Drop Frames Row  -->
+      <Grid Margin="0,0,0,5">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="7" />
           <ColumnDefinition Width="95" />
-          <ColumnDefinition />
+          <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="22" />
-        </Grid.RowDefinitions>
-
-        <!--  Display  -->
         <Label
-          Grid.Row="0"
-          Grid.Column="1"
+          Grid.Column="0"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Display"
-          FontFamily="Segoe UI Semibold" />
-
-        <!--  Drop Frames  -->
-        <Label
-          Grid.Row="1"
-          Grid.Column="1"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
+          VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
           Content="Drop Frames"
@@ -72,288 +48,286 @@
               could in theory be used for fixing movies that were inverse-telecined incorrectly.</TextBlock>
           </Label.ToolTip>
         </Label>
+
         <ComboBox
           x:Name="cboFilterVideo_DropFrames"
-          Grid.Row="1"
-          Grid.Column="2"
+          Grid.Column="1"
           Width="105"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_DropFrames_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           ItemsSource="{Binding FilterVideo_DropFrames_Items}"
           SelectedItem="{Binding FilterVideo_DropFrames_SelectedItem, Mode=TwoWay}"
           SelectionChanged="cboFilterVideo_DropFrames_SelectionChanged" />
       </Grid>
+    </StackPanel>
 
-      <!--  Fix Group  -->
-      <Grid
-        Grid.Row="1"
-        Margin="0"
-        VerticalAlignment="Top">
+    <!--  Fix Group  -->
+    <StackPanel Margin="0,0,0,15">
+      <!--  Fix Header  -->
+      <Label
+        Margin="0,0,0,5"
+        HorizontalAlignment="Left"
+        Background="Transparent"
+        BorderThickness="0"
+        Content="Fix"
+        FontFamily="Segoe UI Semibold" />
 
+      <!--  Deinterlace Row  -->
+      <Grid Margin="0,0,0,5">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="7" />
           <ColumnDefinition Width="95" />
-          <ColumnDefinition />
+          <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-          <RowDefinition Height="0" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="22" />
-        </Grid.RowDefinitions>
-
-        <!--  Fix  -->
         <Label
-          Grid.Row="1"
-          Grid.Column="1"
+          Grid.Column="0"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Fix"
-          FontFamily="Segoe UI Semibold" />
-
-        <!--  Deband  -->
-        <Label
-          Grid.Row="6"
-          Grid.Column="1"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Deband"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFilterVideo_Deband"
-          Grid.Row="6"
-          Grid.Column="2"
-          Width="105"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding FilterVideo_Deband_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding FilterVideo_Deband_Items}"
-          SelectedItem="{Binding FilterVideo_Deband_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFilterVideo_Deband_SelectionChanged" />
-
-        <!--  Deshake  -->
-        <Label
-          Grid.Row="7"
-          Grid.Column="1"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Deshake"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFilterVideo_Deshake"
-          Grid.Row="7"
-          Grid.Column="2"
-          Width="105"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding FilterVideo_Deshake_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding FilterVideo_Deshake_Items}"
-          SelectedItem="{Binding FilterVideo_Deshake_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFilterVideo_Deshake_SelectionChanged" />
-
-        <!--  Deflicker  -->
-        <Label
-          Grid.Row="4"
-          Grid.Column="1"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Deflicker"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFilterVideo_Deflicker"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="105"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding FilterVideo_Deflicker_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding FilterVideo_Deflicker_Items}"
-          SelectedItem="{Binding FilterVideo_Deflicker_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFilterVideo_Deflicker_SelectionChanged" />
-
-        <!--  Dejudder  -->
-        <Label
-          Grid.Row="8"
-          Grid.Column="1"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Dejudder"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFilterVideo_Dejudder"
-          Grid.Row="8"
-          Grid.Column="2"
-          Width="105"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding FilterVideo_Dejudder_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding FilterVideo_Dejudder_Items}"
-          SelectedItem="{Binding FilterVideo_Dejudder_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFilterVideo_Dejudder_SelectionChanged" />
-
-        <!--  Denoise  -->
-        <Label
-          Grid.Row="5"
-          Grid.Column="1"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Denoise"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFilterVideo_Denoise"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="105"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding FilterVideo_Denoise_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding FilterVideo_Denoise_Items}"
-          SelectedItem="{Binding FilterVideo_Denoise_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFilterVideo_Denoise_SelectionChanged" />
-
-        <!--  Deinterlace  -->
-        <Label
-          Grid.Row="2"
-          Grid.Column="1"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
+          VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
           Content="Deinterlace"
           FontFamily="Segoe UI Semilight" />
+
         <ComboBox
           x:Name="cboFilterVideo_Deinterlace"
-          Grid.Row="2"
-          Grid.Column="2"
+          Grid.Column="1"
           Width="105"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Deinterlace_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           ItemsSource="{Binding FilterVideo_Deinterlace_Items}"
           SelectedItem="{Binding FilterVideo_Deinterlace_SelectedItem, Mode=TwoWay}"
           SelectionChanged="cboFilterVideo_Deinterlace_SelectionChanged" />
+      </Grid>
 
-        <!--  Deblock  -->
+      <!--  Deblock Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
         <Label
-          Grid.Row="3"
-          Grid.Column="1"
+          Grid.Column="0"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
+          VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
           Content="Deblock"
           FontFamily="Segoe UI Semilight" />
+
         <ComboBox
           x:Name="cboFilterVideo_Deblock"
-          Grid.Row="3"
-          Grid.Column="2"
+          Grid.Column="1"
           Width="105"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Deblock_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           ItemsSource="{Binding FilterVideo_Deblock_Items}"
           SelectedItem="{Binding FilterVideo_Deblock_SelectedItem, Mode=TwoWay}"
           SelectionChanged="cboFilterVideo_Deblock_SelectionChanged" />
       </Grid>
 
-
-      <!--  Transpose Group  -->
-      <Grid
-        Grid.Row="2"
-        Margin="0"
-        VerticalAlignment="Top">
-
+      <!--  Deflicker Row  -->
+      <Grid Margin="0,0,0,5">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="7" />
           <ColumnDefinition Width="95" />
-          <ColumnDefinition />
+          <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="22" />
-        </Grid.RowDefinitions>
-
-        <!--  Transpose  -->
         <Label
-          Grid.Row="0"
-          Grid.Column="1"
+          Grid.Column="0"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
+          VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
-          Content="Transpose"
-          FontFamily="Segoe UI Semibold" />
+          Content="Deflicker"
+          FontFamily="Segoe UI Semilight" />
 
-        <!--  Flip  -->
-        <Label
-          Grid.Row="1"
+        <ComboBox
+          x:Name="cboFilterVideo_Deflicker"
           Grid.Column="1"
+          Width="105"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
+          IsEnabled="{Binding FilterVideo_Deflicker_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterVideo_Deflicker_Items}"
+          SelectedItem="{Binding FilterVideo_Deflicker_SelectedItem, Mode=TwoWay}"
+          SelectionChanged="cboFilterVideo_Deflicker_SelectionChanged" />
+      </Grid>
+
+      <!--  Denoise Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Denoise"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboFilterVideo_Denoise"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding FilterVideo_Denoise_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterVideo_Denoise_Items}"
+          SelectedItem="{Binding FilterVideo_Denoise_SelectedItem, Mode=TwoWay}"
+          SelectionChanged="cboFilterVideo_Denoise_SelectionChanged" />
+      </Grid>
+
+      <!--  Deband Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Deband"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboFilterVideo_Deband"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding FilterVideo_Deband_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterVideo_Deband_Items}"
+          SelectedItem="{Binding FilterVideo_Deband_SelectedItem, Mode=TwoWay}"
+          SelectionChanged="cboFilterVideo_Deband_SelectionChanged" />
+      </Grid>
+
+      <!--  Deshake Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Deshake"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboFilterVideo_Deshake"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding FilterVideo_Deshake_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterVideo_Deshake_Items}"
+          SelectedItem="{Binding FilterVideo_Deshake_SelectedItem, Mode=TwoWay}"
+          SelectionChanged="cboFilterVideo_Deshake_SelectionChanged" />
+      </Grid>
+
+      <!--  Dejudder Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Dejudder"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboFilterVideo_Dejudder"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding FilterVideo_Dejudder_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterVideo_Dejudder_Items}"
+          SelectedItem="{Binding FilterVideo_Dejudder_SelectedItem, Mode=TwoWay}"
+          SelectionChanged="cboFilterVideo_Dejudder_SelectionChanged" />
+      </Grid>
+    </StackPanel>
+
+    <!--  Transpose Group  -->
+    <StackPanel Margin="0,0,0,0">
+      <!--  Transpose Header  -->
+      <Label
+        Margin="0,0,0,5"
+        HorizontalAlignment="Left"
+        Background="Transparent"
+        BorderThickness="0"
+        Content="Transpose"
+        FontFamily="Segoe UI Semibold" />
+
+      <!--  Flip Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
           Content="Flip"
           FontFamily="Segoe UI Semilight" />
+
         <ComboBox
           x:Name="cboFilterVideo_Flip"
-          Grid.Row="1"
-          Grid.Column="2"
+          Grid.Column="1"
           Width="105"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Flip_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           ItemsSource="{Binding FilterVideo_Flip_Items}"
           SelectedItem="{Binding FilterVideo_Flip_SelectedItem, Mode=TwoWay}"
           SelectionChanged="cboFilterVideo_Flip_SelectionChanged" />
+      </Grid>
 
-        <!--  Rotate  -->
+      <!--  Rotate Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
         <Label
-          Grid.Row="2"
-          Grid.Column="1"
+          Grid.Column="0"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
+          VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
           Content="Rotate"
           FontFamily="Segoe UI Semilight" />
+
         <ComboBox
           x:Name="cboFilterVideo_Rotate"
-          Grid.Row="2"
-          Grid.Column="2"
+          Grid.Column="1"
           Width="105"
           HorizontalAlignment="Left"
-          VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Rotate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           ItemsSource="{Binding FilterVideo_Rotate_Items}"
           SelectedItem="{Binding FilterVideo_Rotate_SelectedItem, Mode=TwoWay}"
           SelectionChanged="cboFilterVideo_Rotate_SelectionChanged" />
       </Grid>
+    </StackPanel>
 
-    </Grid>
-
-  </Grid>
+  </StackPanel>
 
 </UserControl>

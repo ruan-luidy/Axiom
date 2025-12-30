@@ -157,7 +157,7 @@
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding FilterAudioView}"
             Header="Audio">
-            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:FilterAudioControl />
             </ScrollViewer>
           </TabItem>
