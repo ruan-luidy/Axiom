@@ -34,7 +34,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="TrashBold" />
+        Kind="Trash" />
     </Button>
 
     <!--  Save Preset ini  -->
@@ -55,7 +55,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="FloppyDiskBold" />
+        Kind="FloppyDisk" />
     </Button>
 
     <!--  Preset  -->
