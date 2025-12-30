@@ -50,7 +50,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="InfoBold" />
+        Kind="Info" />
     </Button>
 
     <!--  Website Button  -->
@@ -139,7 +139,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="ListBold" />
+        Kind="List" />
     </ToggleButton>
 
     <!--  Debug Console  -->
@@ -161,7 +161,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="BracketsCurlyBold" />
+        Kind="BracketsCurly" />
     </Button>
 
     <!--  Log Console  -->
@@ -182,7 +182,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="BracketsSquareBold" />
+        Kind="BracketsSquare" />
     </Button>
 
     <!--  Log Button  -->
@@ -203,7 +203,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="FileTextBold" />
+        Kind="FileText" />
     </Button>
 
     <!--  CMD Button  -->
@@ -225,7 +225,7 @@
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
           Foreground="{DynamicResource PrimaryTextBrush}"
-          Kind="TerminalWindowBold" />
+          Kind="TerminalWindow" />
       </Grid>
     </Button>
 
@@ -247,7 +247,7 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="ListBulletsBold" />
+        Kind="ListBullets" />
     </Button>
 
     <!--  Play File  -->

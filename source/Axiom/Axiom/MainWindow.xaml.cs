@@ -764,9 +764,33 @@ namespace Axiom
                     string theme_SelectedItem = Controls.Configure.ConfigFile.conf.Read("Settings", "Theme_SelectedItem");
                     if (!string.IsNullOrWhiteSpace(theme_SelectedItem))
                     {
-                        VM.ConfigureView.Theme_SelectedItem = theme_SelectedItem;
+                        // Convert old themes to new Light/Dark system
+                        if (theme_SelectedItem == "Axiom" || theme_SelectedItem == "FFmpeg" ||
+                            theme_SelectedItem == "Cyberpunk" || theme_SelectedItem == "Circuit" ||
+                            theme_SelectedItem == "Prelude" || theme_SelectedItem == "System")
+                        {
+                            theme_SelectedItem = "Light"; // Default to Light for old themes
+                        }
+                        else if (theme_SelectedItem == "Onyx")
+                        {
+                            theme_SelectedItem = "Dark"; // Onyx was dark theme
+                        }
+
+                        // Only set if it's a valid theme (Light or Dark)
+                        if (theme_SelectedItem == "Light" || theme_SelectedItem == "Dark")
+                        {
+                            VM.ConfigureView.Theme_SelectedItem = theme_SelectedItem;
+                        }
+                        else
+                        {
+                            VM.ConfigureView.Theme_SelectedItem = "Light"; // Default fallback
+                        }
                     }
-                    theme_SelectedItem_Read = theme_SelectedItem;
+                    else
+                    {
+                        VM.ConfigureView.Theme_SelectedItem = "Light"; // Default if no theme saved
+                    }
+                    theme_SelectedItem_Read = VM.ConfigureView.Theme_SelectedItem;
 
                     // Update
                     bool updateAutoCheck_IsChecked = true;

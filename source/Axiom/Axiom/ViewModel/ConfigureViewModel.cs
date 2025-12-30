@@ -1122,12 +1122,8 @@ namespace ViewModel
         // Items Source
         private ObservableCollection<string> _Theme_Items = new ObservableCollection<string>()
         {
-            "Axiom",
-            "FFmpeg",
-            "Cyberpunk",
-            "Onyx",
-            "Circuit",
-            "System"
+            "Light",
+            "Dark"
         };
         public ObservableCollection<string> Theme_Items
         {
