@@ -8,122 +8,138 @@
   d:DesignWidth="800"
   mc:Ignorable="d">
 
-  <Grid>
-    <!--  Script View  -->
-    <TextBox
-      x:Name="tbxScriptView"
-      Grid.ColumnSpan="1"
-      Margin="11,71,280,56"
-      Padding="10,10,10,48"
-      VerticalContentAlignment="Top"
-      AcceptsReturn="True"
-      AllowDrop="True"
-      FontSize="14"
-      PreviewDragOver="tbxScriptView_PreviewDragOver"
-      PreviewDrop="tbxScriptView_PreviewDrop"
-      RenderOptions.ClearTypeHint="Enabled"
-      Text="{Binding MainView.ScriptView_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      TextWrapping="Wrap"
-      VerticalScrollBarVisibility="Auto" />
+  <!--  Script Container  -->
+  <Border
+    Background="{DynamicResource RegionBrush}"
+    BorderBrush="{DynamicResource BorderBrush}"
+    BorderThickness="1"
+    CornerRadius="4">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
 
-    <!--  Save Button  -->
-    <Button
-      x:Name="btnScriptSave"
-      Width="59"
-      Margin="86,0,0,66"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Click="btnScriptSave_Click"
-      Cursor="Hand">
-      <TextBlock Text="Save" />
-    </Button>
+      <!--  Script View TextBox  -->
+      <TextBox
+        x:Name="tbxScriptView"
+        Grid.Row="0"
+        Margin="0"
+        Padding="10"
+        VerticalContentAlignment="Top"
+        AcceptsReturn="True"
+        AllowDrop="True"
+        Background="Transparent"
+        BorderThickness="0"
+        FontFamily="Consolas"
+        FontSize="13"
+        PreviewDragOver="tbxScriptView_PreviewDragOver"
+        PreviewDrop="tbxScriptView_PreviewDrop"
+        RenderOptions.ClearTypeHint="Enabled"
+        Text="{Binding MainView.ScriptView_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto" />
 
-    <!--  Load Button  -->
-    <Button
-      x:Name="btnScriptLoad"
-      Width="59"
-      Margin="20,0,0,66"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Click="btnScriptLoad_Click"
-      Cursor="Hand">
-      <TextBlock Text="Load" />
-    </Button>
+      <!--  Buttons Bar  -->
+      <Border
+        Grid.Row="1"
+        Background="{DynamicResource SecondaryRegionBrush}"
+        BorderBrush="{DynamicResource BorderBrush}"
+        BorderThickness="0,1,0,0"
+        CornerRadius="0,0,4,4">
+        <StackPanel
+          Margin="8,6,8,6"
+          HorizontalAlignment="Left"
+          Orientation="Horizontal">
 
-    <!--  Copy Button  -->
-    <Button
-      x:Name="btnScriptCopy"
-      Width="59"
-      Margin="152,0,0,66"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Click="btnScriptCopy_Click"
-      Cursor="Hand">
-      <TextBlock Text="Copy" />
-    </Button>
+          <!--  Load Button  -->
+          <Button
+            x:Name="btnScriptLoad"
+            Width="59"
+            Margin="0,0,4,0"
+            Click="btnScriptLoad_Click"
+            Cursor="Hand">
+            <TextBlock Text="Load" />
+          </Button>
 
-    <!--  Sort Button  -->
-    <Button
-      x:Name="btnScriptSort"
-      Width="59"
-      Margin="284,0,0,66"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Click="btnScriptSort_Click"
-      Cursor="Hand">
-      <TextBlock
-        x:Name="txblScriptSort"
-        Width="50"
-        Text="{Binding MainView.Sort_Text, Mode=TwoWay}"
-        TextAlignment="Center" />
-    </Button>
+          <!--  Save Button  -->
+          <Button
+            x:Name="btnScriptSave"
+            Width="59"
+            Margin="0,0,4,0"
+            Click="btnScriptSave_Click"
+            Cursor="Hand">
+            <TextBlock Text="Save" />
+          </Button>
 
-    <!--  Clear Button  -->
-    <Button
-      x:Name="btnScriptClear"
-      Width="59"
-      Margin="218,0,0,66"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Click="btnScriptClear_Click"
-      Cursor="Hand">
-      <TextBlock
-        x:Name="txblScriptClear"
-        Width="50"
-        Text="Clear"
-        TextAlignment="Center" />
-    </Button>
+          <!--  Copy Button  -->
+          <Button
+            x:Name="btnScriptCopy"
+            Width="59"
+            Margin="0,0,4,0"
+            Click="btnScriptCopy_Click"
+            Cursor="Hand">
+            <TextBlock Text="Copy" />
+          </Button>
 
-    <!--  Script Button  -->
-    <Button
-      x:Name="btnScript"
-      Width="75"
-      Margin="350,0,0,66"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Click="btnScript_Click"
-      Cursor="Hand"
-      ToolTip="Generate FFmpeg Commands"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <TextBlock Text="Script" />
-    </Button>
+          <!--  Clear Button  -->
+          <Button
+            x:Name="btnScriptClear"
+            Width="59"
+            Margin="0,0,4,0"
+            Click="btnScriptClear_Click"
+            Cursor="Hand">
+            <TextBlock
+              x:Name="txblScriptClear"
+              Width="50"
+              Text="Clear"
+              TextAlignment="Center" />
+          </Button>
 
-    <!--  Run Button  -->
-    <Button
-      x:Name="btnScriptRun"
-      Width="72"
-      Margin="432,0,0,66"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Click="btnScriptRun_Click"
-      Cursor="Hand"
-      ToolTip="Run the customized Script."
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <TextBlock Text="Run" />
-    </Button>
+          <!--  Sort Button  -->
+          <Button
+            x:Name="btnScriptSort"
+            Width="59"
+            Margin="0,0,8,0"
+            Click="btnScriptSort_Click"
+            Cursor="Hand">
+            <TextBlock
+              x:Name="txblScriptSort"
+              Width="50"
+              Text="{Binding MainView.Sort_Text, Mode=TwoWay}"
+              TextAlignment="Center" />
+          </Button>
 
-  </Grid>
+          <!--  Script Button  -->
+          <Button
+            x:Name="btnScript"
+            Width="75"
+            Margin="0,0,4,0"
+            Click="btnScript_Click"
+            Cursor="Hand"
+            ToolTip="Generate FFmpeg Commands"
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True">
+            <TextBlock Text="Script" />
+          </Button>
+
+          <!--  Run Button  -->
+          <Button
+            x:Name="btnScriptRun"
+            Width="72"
+            Margin="0"
+            Click="btnScriptRun_Click"
+            Cursor="Hand"
+            ToolTip="Run the customized Script."
+            ToolTipService.InitialShowDelay="500"
+            ToolTipService.ShowOnDisabled="True">
+            <TextBlock Text="Run" />
+          </Button>
+
+        </StackPanel>
+      </Border>
+
+    </Grid>
+  </Border>
 
 </UserControl>

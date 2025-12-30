@@ -22,8 +22,6 @@
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
     </Grid.ColumnDefinitions>
 
     <!--  Input Row  -->
@@ -40,69 +38,86 @@
       <TextBlock Text="Input" />
     </Button>
 
-    <!--  Input Textbox  -->
-    <TextBox
-      x:Name="tbxInput"
+    <!--  Input Container  -->
+    <Border
       Grid.Row="0"
       Grid.Column="1"
-      Height="22"
-      Margin="0,0,4,4"
-      Padding="10,1,10,0"
-      AllowDrop="True"
-      MaxLines="1"
-      PreviewDragOver="tbxInput_PreviewDragOver"
-      PreviewDrop="tbxInput_PreviewDrop"
-      Text="{Binding MainView.Input_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      TextChanged="tbxInput_TextChanged"
-      TextWrapping="NoWrap" />
-
-    <!--  Input Clear Button  -->
-    <Button
-      x:Name="btnInputClear"
-      Grid.Row="0"
-      Grid.Column="2"
-      Width="28"
-      Height="28"
-      Margin="0,0,2,4"
-      Padding="0"
-      Background="Transparent"
-      BorderThickness="0"
-      Click="btnInputClear_Click"
-      Cursor="Hand"
-      IsEnabled="{Binding MainView.Input_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      ToolTip="Clear"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <iconPacks:PackIconPhosphorIcons
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="BackspaceFill" />
-    </Button>
-
-    <!--  Input Location Button  -->
-    <Button
-      x:Name="openLocationInput"
-      Grid.Row="0"
-      Grid.Column="3"
-      Width="28"
-      Height="28"
       Margin="0,0,0,4"
-      Padding="0"
-      Background="Transparent"
-      BorderThickness="0"
-      Click="openLocationInput_Click"
-      Cursor="Hand"
-      IsEnabled="{Binding MainView.Input_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      ToolTip="Open this location"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <iconPacks:PackIconPhosphorIcons
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="FolderOpenFill" />
-    </Button>
+      Background="{DynamicResource RegionBrush}"
+      BorderBrush="{DynamicResource BorderBrush}"
+      BorderThickness="1"
+      CornerRadius="4">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Input Textbox  -->
+        <TextBox
+          x:Name="tbxInput"
+          Grid.Column="0"
+          Padding="8,0,8,0"
+          VerticalAlignment="Center"
+          VerticalContentAlignment="Center"
+          AllowDrop="True"
+          Background="Transparent"
+          BorderThickness="0"
+          MaxLines="1"
+          PreviewDragOver="tbxInput_PreviewDragOver"
+          PreviewDrop="tbxInput_PreviewDrop"
+          Text="{Binding MainView.Input_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          TextChanged="tbxInput_TextChanged"
+          TextWrapping="NoWrap" />
+
+        <!--  Input Clear Button  -->
+        <Button
+          x:Name="btnInputClear"
+          Grid.Column="1"
+          Width="28"
+          Height="28"
+          Margin="2,0,2,0"
+          Padding="0"
+          Background="Transparent"
+          BorderThickness="0"
+          Click="btnInputClear_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding MainView.Input_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Clear"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="BackspaceFill" />
+        </Button>
+
+        <!--  Input Location Button  -->
+        <Button
+          x:Name="openLocationInput"
+          Grid.Column="2"
+          Width="28"
+          Height="28"
+          Margin="0,0,2,0"
+          Padding="0"
+          Background="Transparent"
+          BorderThickness="0"
+          Click="openLocationInput_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding MainView.Input_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Open this location"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="FolderOpenFill" />
+        </Button>
+      </Grid>
+    </Border>
 
     <!--  Output Row  -->
     <!--  Output Button  -->
@@ -110,76 +125,93 @@
       x:Name="btnOutput"
       Grid.Row="1"
       Grid.Column="0"
+      Width="60"
       Margin="0,0,4,0"
+      HorizontalAlignment="Left"
       Click="btnOutput_Click"
       Cursor="Hand">
       <TextBlock Text="Output" />
     </Button>
 
-    <!--  Output Textbox  -->
-    <TextBox
-      x:Name="tbxOutput"
+    <!--  Output Container  -->
+    <Border
       Grid.Row="1"
       Grid.Column="1"
-      Height="22"
-      Margin="0,0,4,0"
-      Padding="10,1,10,0"
-      AllowDrop="True"
-      MaxLines="1"
-      PreviewDragOver="tbxOutput_PreviewDragOver"
-      PreviewDrop="tbxOutput_PreviewDrop"
-      PreviewKeyUp="tbxOutput_PreviewKeyUp"
-      Text="{Binding MainView.Output_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      TextChanged="tbxOutput_TextChanged"
-      TextWrapping="NoWrap" />
-
-    <!--  Output Clear Button  -->
-    <Button
-      x:Name="btnOutputClear"
-      Grid.Row="1"
-      Grid.Column="2"
-      Width="28"
-      Height="28"
-      Margin="0,0,2,0"
-      Padding="0"
-      Background="Transparent"
-      BorderThickness="0"
-      Click="btnOutputClear_Click"
-      Cursor="Hand"
-      IsEnabled="{Binding MainView.Output_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      ToolTip="Clear"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <iconPacks:PackIconPhosphorIcons
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="BackspaceFill" />
-    </Button>
-
-    <!--  Output Location Button  -->
-    <Button
-      x:Name="openLocationOutput"
-      Grid.Row="1"
-      Grid.Column="3"
-      Width="28"
-      Height="28"
       Margin="0"
-      Padding="0"
-      Background="Transparent"
-      BorderThickness="0"
-      Click="openLocationOutput_Click"
-      Cursor="Hand"
-      IsEnabled="{Binding MainView.Output_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      ToolTip="Open this location"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <iconPacks:PackIconPhosphorIcons
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="FolderOpenFill" />
-    </Button>
+      Background="{DynamicResource RegionBrush}"
+      BorderBrush="{DynamicResource BorderBrush}"
+      BorderThickness="1"
+      CornerRadius="4">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Output Textbox  -->
+        <TextBox
+          x:Name="tbxOutput"
+          Grid.Column="0"
+          Padding="8,0,8,0"
+          AllowDrop="True"
+          Background="Transparent"
+          BorderThickness="0"
+          MaxLines="1"
+          PreviewDragOver="tbxOutput_PreviewDragOver"
+          PreviewDrop="tbxOutput_PreviewDrop"
+          PreviewKeyUp="tbxOutput_PreviewKeyUp"
+          Text="{Binding MainView.Output_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          TextChanged="tbxOutput_TextChanged"
+          TextWrapping="NoWrap" />
+
+        <!--  Output Clear Button  -->
+        <Button
+          x:Name="btnOutputClear"
+          Grid.Column="1"
+          Width="28"
+          Height="28"
+          Margin="2,0,2,0"
+          Padding="0"
+          Background="Transparent"
+          BorderThickness="0"
+          Click="btnOutputClear_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding MainView.Output_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Clear"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="BackspaceFill" />
+        </Button>
+
+        <!--  Output Location Button  -->
+        <Button
+          x:Name="openLocationOutput"
+          Grid.Column="2"
+          Width="28"
+          Height="28"
+          Margin="0,0,2,0"
+          Padding="0"
+          Background="Transparent"
+          BorderThickness="0"
+          Click="openLocationOutput_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding MainView.Output_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Open this location"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <iconPacks:PackIconPhosphorIcons
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource PrimaryTextBrush}"
+            Kind="FolderOpenFill" />
+        </Button>
+      </Grid>
+    </Border>
 
   </Grid>
 </UserControl>

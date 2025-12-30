@@ -62,13 +62,13 @@
     <views:InputOutputControl
       Grid.Row="0"
       Grid.Column="0"
-      Margin="10,10,10,0" />
+      Margin="10,10,5,5" />
 
     <!--  Script View - Row 1, Column 0  -->
     <views:ScriptControl
       Grid.Row="1"
       Grid.Column="0"
-      Margin="10,10,10,0" />
+      Margin="10,5,5,5" />
 
     <!--  Tab Control - Row 0+1, Column 1  -->
     <TabControl
@@ -76,7 +76,7 @@
       Grid.Row="0"
       Grid.RowSpan="2"
       Grid.Column="1"
-      Margin="0,10,0,0"
+      Margin="5,10,10,-10"
       Background="Transparent"
       BorderThickness="1,1,0,0">
 
@@ -236,7 +236,7 @@
       Grid.Row="2"
       Grid.Column="0"
       Grid.ColumnSpan="2"
-      Margin="0"
+      Margin="0,5,0,0"
       Background="{DynamicResource SecondaryRegionBrush}"
       BorderBrush="{DynamicResource BorderBrush}"
       BorderThickness="0,1,0,0"
