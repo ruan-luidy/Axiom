@@ -72,11 +72,6 @@
       SelectedValue="{Binding MainView.Preset_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
       SelectedValuePath="Name"
       SelectionChanged="cboPreset_SelectionChanged">
-      <ComboBox.ItemsPanel>
-        <ItemsPanelTemplate>
-          <StackPanel Margin="0,-7,0,0" />
-        </ItemsPanelTemplate>
-      </ComboBox.ItemsPanel>
       <ComboBox.ItemTemplate>
         <DataTemplate>
           <Grid Width="93">

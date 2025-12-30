@@ -192,7 +192,7 @@
               <!--  Config Tab  -->
               <TabItem
                 HorizontalContentAlignment="Stretch"
-                DataContext="{Binding ConfigView}"
+                DataContext="{Binding ConfigureView}"
                 Header="Config">
                 <views:SettingsConfigControl />
               </TabItem>
@@ -200,7 +200,7 @@
               <!--  File Tab  -->
               <TabItem
                 HorizontalContentAlignment="Stretch"
-                DataContext="{Binding SettingsView}"
+                DataContext="{Binding ConfigureView}"
                 Header="File">
                 <views:SettingsFileControl />
               </TabItem>
@@ -208,7 +208,7 @@
               <!--  System Tab  -->
               <TabItem
                 HorizontalContentAlignment="Stretch"
-                DataContext="{Binding SystemView}"
+                DataContext="{Binding ConfigureView}"
                 Header="System">
                 <views:SettingsSystemControl />
               </TabItem>

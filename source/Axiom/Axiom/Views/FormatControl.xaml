@@ -43,8 +43,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="Container"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
         <ComboBox
           x:Name="cboFormat_Container"
           Grid.Column="2"
@@ -53,13 +52,11 @@
           Margin="0,2,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
-          
           ItemsSource="{Binding Format_Container_Items}"
           PreviewMouseUp="cboFormat_Container_PreviewMouseUp"
           SelectedValue="{Binding Format_Container_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           SelectedValuePath="Name"
-          SelectionChanged="cboFormat_Container_SelectionChanged"
-         >
+          SelectionChanged="cboFormat_Container_SelectionChanged">
           <ComboBox.ItemsPanel>
             <ItemsPanelTemplate>
               <StackPanel Margin="0,-7,0,0" />
@@ -87,8 +84,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="Media"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
         <ComboBox
           x:Name="cboFormat_MediaType"
           Grid.Row="1"
@@ -99,11 +95,9 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Format_MediaType_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          
           ItemsSource="{Binding Format_MediaType_Items}"
           SelectedItem="{Binding Format_MediaType_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFormat_MediaType_SelectionChanged"
-          />
+          SelectionChanged="cboFormat_MediaType_SelectionChanged" />
 
         <!--  Cut  -->
         <Label
@@ -114,8 +108,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="Cut"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
         <ComboBox
           x:Name="cboFormat_Cut"
           Grid.Row="3"
@@ -126,12 +119,10 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Format_Cut_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemContainerStyle="{DynamicResource ComboBoxCategoryStyleItem}"
           ItemsSource="{Binding Format_Cut_Items}"
           SelectedIndex="{Binding Format_Cut_SelectedIndex}"
           SelectedItem="{Binding Format_Cut_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFormat_Cut_SelectionChanged"
-          />
+          SelectionChanged="cboFormat_Cut_SelectionChanged" />
 
         <!--  Cut Start  -->
         <Label
@@ -142,8 +133,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="Start Time"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
         <!--  Hours  -->
         <TextBox
           x:Name="tbxCutStartHours"
@@ -162,7 +152,6 @@
           LostFocus="tbxCutStartHours_LostFocus"
           MaxLength="2"
           MaxLines="1"
-          
           Text="{Binding Format_CutStart_Hours_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Hours"
@@ -202,7 +191,6 @@
           LostFocus="tbxCutStartMinutes_LostFocus"
           MaxLength="2"
           MaxLines="1"
-          
           Text="{Binding Format_CutStart_Minutes_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Minutes"
@@ -242,7 +230,6 @@
           LostFocus="tbxCutStartSeconds_LostFocus"
           MaxLength="2"
           MaxLines="1"
-          
           Text="{Binding Format_CutStart_Seconds_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Seconds"
@@ -281,7 +268,6 @@
           LostFocus="tbxCutStartMilliseconds_LostFocus"
           MaxLength="3"
           MaxLines="1"
-          
           Text="{Binding Format_CutStart_Milliseconds_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Milliseconds"
@@ -301,7 +287,6 @@
           Cursor="Arrow"
           IsEnabled="{Binding Format_CutStart_IsEnabled}"
           IsReadOnly="True"
-          
           Text=""
           TextWrapping="NoWrap" />
 
@@ -315,8 +300,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="End Time"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
 
         <!--  Hours  -->
         <TextBox
@@ -336,7 +320,6 @@
           LostFocus="tbxCutEndHours_LostFocus"
           MaxLength="2"
           MaxLines="1"
-          
           Text="{Binding Format_CutEnd_Hours_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Hours"
@@ -375,7 +358,6 @@
           LostFocus="tbxCutEndMinutes_LostFocus"
           MaxLength="2"
           MaxLines="1"
-          
           Text="{Binding Format_CutEnd_Minutes_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Minutes"
@@ -414,7 +396,6 @@
           LostFocus="tbxCutEndSeconds_LostFocus"
           MaxLength="2"
           MaxLines="1"
-          
           Text="{Binding Format_CutEnd_Seconds_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Seconds"
@@ -452,7 +433,6 @@
           LostFocus="tbxCutEndMilliseconds_LostFocus"
           MaxLength="3"
           MaxLines="1"
-          
           Text="{Binding Format_CutEnd_Milliseconds_Text, Mode=TwoWay}"
           TextWrapping="NoWrap"
           ToolTip="Milliseconds"
@@ -472,7 +452,6 @@
           Cursor="Arrow"
           IsEnabled="{Binding Format_CutEnd_IsEnabled}"
           IsReadOnly="True"
-          
           Text=""
           TextWrapping="NoWrap" />
 
@@ -486,8 +465,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="Frame Range"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
         <!--  Start  -->
         <TextBox
           x:Name="tbxFrameStart"
@@ -504,7 +482,6 @@
           KeyDown="tbxFrameStart_KeyDown"
           LostFocus="tbxFrameStart_LostFocus"
           MaxLines="1"
-          
           Text="{Binding Format_FrameStart_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           TextWrapping="NoWrap"
           ToolTip="Start Frame"
@@ -526,7 +503,6 @@
           KeyDown="tbxFrameEnd_KeyDown"
           LostFocus="tbxFrameEnd_LostFocus"
           MaxLines="1"
-          
           Text="{Binding Format_FrameEnd_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           TextWrapping="NoWrap"
           ToolTip="End Frame"
@@ -542,8 +518,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="YouTube"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
         <ComboBox
           x:Name="cboYouTube"
           Grid.Row="8"
@@ -558,8 +533,7 @@
           ItemsSource="{Binding Format_YouTube_Items}"
           SelectedIndex="{Binding Format_YouTube_SelectedIndex}"
           SelectedItem="{Binding Format_YouTube_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboYouTube_SelectionChanged"
-          />
+          SelectionChanged="cboYouTube_SelectionChanged" />
 
         <!--  YouTube Quality  -->
         <Label
@@ -570,8 +544,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Content="Quality"
-          FontFamily="Segoe UI Semilight"
-          />
+          FontFamily="Segoe UI Semilight" />
         <ComboBox
           x:Name="cboYouTube_Quality"
           Grid.Row="9"
@@ -582,11 +555,9 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Format_YouTube_Quality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          
           ItemsSource="{Binding Format_YouTube_Quality_Items}"
           SelectedIndex="{Binding Format_YouTube_Quality_SelectedIndex}"
-          SelectedItem="{Binding Format_YouTube_Quality_SelectedItem, Mode=TwoWay}"
-          />
+          SelectedItem="{Binding Format_YouTube_Quality_SelectedItem, Mode=TwoWay}" />
 
       </Grid>
 
