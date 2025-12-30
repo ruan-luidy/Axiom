@@ -71,25 +71,27 @@
       Margin="10,5,5,5" />
 
     <!--  Tab Control - Row 0+1, Column 1  -->
-    <TabControl
+    <hc:TabControl
       x:Name="tabControl"
       Grid.Row="0"
       Grid.RowSpan="2"
       Grid.Column="1"
-      Margin="5,10,10,-10"
+      Width="380"
+      Margin="5,10,0,-10"
       Background="Transparent"
-      BorderThickness="1,1,0,0">
+      BorderThickness="1,1,0,0"
+      IsTabFillEnabled="True">
 
       <!--  Format Tab  -->
-      <TabItem
+      <hc:TabItem
         HorizontalContentAlignment="Stretch"
         DataContext="{Binding FormatView}"
         Header="Format">
         <views:FormatControl />
-      </TabItem>
+      </hc:TabItem>
 
       <!--  Video Tab  -->
-      <TabItem HorizontalContentAlignment="Stretch" Header="Video">
+      <hc:TabItem HorizontalContentAlignment="Stretch" Header="Video">
 
         <!--  Video TabControl  -->
         <TabControl
@@ -127,26 +129,26 @@
           </TabItem>
 
         </TabControl>
-      </TabItem>
+      </hc:TabItem>
 
       <!--  Audio Tab  -->
-      <TabItem
+      <hc:TabItem
         HorizontalContentAlignment="Stretch"
         DataContext="{Binding AudioView}"
         Header="Audio">
         <views:AudioSettingsControl />
-      </TabItem>
+      </hc:TabItem>
 
       <!--  Subtitles Tab  -->
-      <TabItem
+      <hc:TabItem
         HorizontalContentAlignment="Stretch"
         DataContext="{Binding SubtitleView}"
         Header="Subtitles">
         <views:SubtitlesControl />
-      </TabItem>
+      </hc:TabItem>
 
       <!--  Filters Tab  -->
-      <TabItem HorizontalContentAlignment="Stretch" Header="Filters">
+      <hc:TabItem HorizontalContentAlignment="Stretch" Header="Filters">
 
         <!--  Filters TabControl  -->
         <TabControl
@@ -170,20 +172,20 @@
           </TabItem>
 
           <!--  Audio Filter Tab  -->
-          <TabItem
+          <hc:TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding FilterAudioView}"
             Header="Audio">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:FilterAudioControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
         </TabControl>
-      </TabItem>
+      </hc:TabItem>
 
       <!--  Settings Tab  -->
-      <TabItem HorizontalContentAlignment="Stretch" Header="Settings">
+      <hc:TabItem HorizontalContentAlignment="Stretch" Header="Settings">
 
         <!--  Settings TabControl  -->
         <TabControl
@@ -227,9 +229,9 @@
           </TabItem>
 
         </TabControl>
-      </TabItem>
+      </hc:TabItem>
 
-    </TabControl>
+    </hc:TabControl>
 
     <!--  Bottom Bar - Row 2, Column 0+1  -->
     <Border
