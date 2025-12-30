@@ -151,25 +151,26 @@
       <hc:TabItem HorizontalContentAlignment="Stretch" Header="Filters">
 
         <!--  Filters TabControl  -->
-        <TabControl
+        <hc:TabControl
           x:Name="tabFilters"
-          Width="341"
+          Width="380"
           Margin="-1,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="Transparent"
           BorderThickness="0,1,0,0"
+          IsTabFillEnabled="True"
           TabStripPlacement="Top">
 
           <!--  Video Filter Tab  -->
-          <TabItem
+          <hc:TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding FilterVideoView}"
             Header="Video">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:FilterVideoControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
           <!--  Audio Filter Tab  -->
           <hc:TabItem
@@ -181,54 +182,55 @@
             </ScrollViewer>
           </hc:TabItem>
 
-        </TabControl>
+        </hc:TabControl>
       </hc:TabItem>
 
       <!--  Settings Tab  -->
       <hc:TabItem HorizontalContentAlignment="Stretch" Header="Settings">
 
         <!--  Settings TabControl  -->
-        <TabControl
+        <hc:TabControl
           x:Name="tabSettings"
-          Width="341"
+          Width="380"
           Margin="-1,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="Transparent"
           BorderThickness="0,1,0,0"
+          IsTabFillEnabled="True"
           TabStripPlacement="Top">
 
           <!--  Config Tab  -->
-          <TabItem
+          <hc:TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding ConfigureView}"
             Header="Config">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:SettingsConfigControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
           <!--  File Tab  -->
-          <TabItem
+          <hc:TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding ConfigureView}"
             Header="File">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:SettingsFileControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
           <!--  System Tab  -->
-          <TabItem
+          <hc:TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding ConfigureView}"
             Header="System">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:SettingsSystemControl />
             </ScrollViewer>
-          </TabItem>
+          </hc:TabItem>
 
-        </TabControl>
+        </hc:TabControl>
       </hc:TabItem>
 
     </hc:TabControl>
