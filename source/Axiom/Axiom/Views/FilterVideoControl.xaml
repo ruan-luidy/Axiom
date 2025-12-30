@@ -8,7 +8,6 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="450"
   d:DesignWidth="800"
-  DataContext="{Binding FilterVideoView}"
   Foreground="{DynamicResource PrimaryTextBrush}"
   mc:Ignorable="d">
 
@@ -47,9 +46,10 @@
         <Label
           Grid.Row="0"
           Grid.Column="1"
-          Width="95"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Display"
           FontFamily="Segoe UI Semibold" />
 
@@ -59,6 +59,8 @@
           Grid.Column="1"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Drop Frames"
           FontFamily="Segoe UI Semilight"
           ToolTipService.InitialShowDelay="500"
@@ -75,7 +77,6 @@
           Grid.Row="1"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_DropFrames_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -113,9 +114,10 @@
         <Label
           Grid.Row="1"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Fix"
           FontFamily="Segoe UI Semibold" />
 
@@ -123,9 +125,10 @@
         <Label
           Grid.Row="6"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Deband"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -133,7 +136,6 @@
           Grid.Row="6"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Deband_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -145,9 +147,10 @@
         <Label
           Grid.Row="7"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Deshake"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -155,7 +158,6 @@
           Grid.Row="7"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Deshake_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -167,9 +169,10 @@
         <Label
           Grid.Row="4"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Deflicker"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -177,7 +180,6 @@
           Grid.Row="4"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Deflicker_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -189,9 +191,10 @@
         <Label
           Grid.Row="8"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Dejudder"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -199,7 +202,6 @@
           Grid.Row="8"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Dejudder_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -211,9 +213,10 @@
         <Label
           Grid.Row="5"
           Grid.Column="1"
-          Width="90"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Denoise"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -221,7 +224,6 @@
           Grid.Row="5"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Denoise_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -233,9 +235,10 @@
         <Label
           Grid.Row="2"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Deinterlace"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -243,7 +246,6 @@
           Grid.Row="2"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Deinterlace_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -255,9 +257,10 @@
         <Label
           Grid.Row="3"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Deblock"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -265,7 +268,6 @@
           Grid.Row="3"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Deblock_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -298,9 +300,10 @@
         <Label
           Grid.Row="0"
           Grid.Column="1"
-          Width="95"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Transpose"
           FontFamily="Segoe UI Semibold" />
 
@@ -308,9 +311,10 @@
         <Label
           Grid.Row="1"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Flip"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -318,7 +322,6 @@
           Grid.Row="1"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Flip_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -330,9 +333,10 @@
         <Label
           Grid.Row="2"
           Grid.Column="1"
-          Width="85"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
           Content="Rotate"
           FontFamily="Segoe UI Semilight" />
         <ComboBox
@@ -340,7 +344,6 @@
           Grid.Row="2"
           Grid.Column="2"
           Width="105"
-          Height="22"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding FilterVideo_Rotate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

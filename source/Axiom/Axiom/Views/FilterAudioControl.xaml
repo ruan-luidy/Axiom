@@ -8,246 +8,278 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="450"
   d:DesignWidth="800"
-  DataContext="{Binding FilterAudioView}"
   Foreground="{DynamicResource PrimaryTextBrush}"
   mc:Ignorable="d">
 
-  <Grid Background="Transparent">
+  <StackPanel Margin="10,10,10,0" Background="Transparent">
 
-    <!--  Grid  -->
-    <Grid Margin="5,5,5,0" VerticalAlignment="Top">
-
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="7" />
-        <ColumnDefinition Width="95" />
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-
-      <Grid.RowDefinitions>
-        <RowDefinition Height="0" />
-        <RowDefinition Height="0" />
-        <RowDefinition Height="0" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="22" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="22" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-        <RowDefinition Height="33" />
-      </Grid.RowDefinitions>
-
-      <!--  EQ Group  -->
+    <!--  EQ Group  -->
+    <StackPanel Margin="0,0,0,15">
+      <!--  EQ Header  -->
       <Label
-        Grid.Row="3"
-        Grid.Column="1"
-        Width="85"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="EQ"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Lowpass  -->
-      <Label
-        Grid.Row="4"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Lowpass"
-        FontFamily="Segoe UI Semilight" />
-      <ComboBox
-        x:Name="cboFilterAudio_Lowpass"
-        Grid.Row="4"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_Lowpass_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ItemsSource="{Binding FilterAudio_Lowpass_Items}"
-        SelectedItem="{Binding FilterAudio_Lowpass_SelectedItem, Mode=TwoWay}" />
+      <!--  Lowpass Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-      <!--  Highpass  -->
-      <Label
-        Grid.Row="5"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Highpass"
-        FontFamily="Segoe UI Semilight" />
-      <ComboBox
-        x:Name="cboFilterAudio_Highpass"
-        Grid.Row="5"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_Highpass_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ItemsSource="{Binding FilterAudio_Highpass_Items}"
-        SelectedItem="{Binding FilterAudio_Highpass_SelectedItem, Mode=TwoWay}" />
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Lowpass"
+          FontFamily="Segoe UI Semilight" />
 
-      <!--  Dynamics Group  -->
+        <ComboBox
+          x:Name="cboFilterAudio_Lowpass"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding FilterAudio_Lowpass_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterAudio_Lowpass_Items}"
+          SelectedItem="{Binding FilterAudio_Lowpass_SelectedItem, Mode=TwoWay}" />
+      </Grid>
+
+      <!--  Highpass Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Highpass"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboFilterAudio_Highpass"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding FilterAudio_Highpass_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterAudio_Highpass_Items}"
+          SelectedItem="{Binding FilterAudio_Highpass_SelectedItem, Mode=TwoWay}" />
+      </Grid>
+    </StackPanel>
+
+    <!--  Dynamics Group  -->
+    <StackPanel Margin="0,0,0,15">
+      <!--  Dynamics Header  -->
       <Label
-        Grid.Row="7"
-        Grid.Column="1"
-        Width="85"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="Dynamics"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Contrast  -->
-      <Label
-        Grid.Row="8"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Contrast"
-        FontFamily="Segoe UI Semilight" />
-      <Slider
-        x:Name="slFilterAudio_Contrast"
-        Grid.Row="8"
-        Grid.Column="2"
-        Height="18"
-        Margin="0,4,50,0"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsMoveToPointEnabled="True"
-        IsSnapToTickEnabled="True"
-        Maximum="100"
-        Minimum="0"
-        MouseDoubleClick="slFilterAudio_Contrast_MouseDoubleClick"
-        PreviewMouseUp="slFilterAudio_Contrast_PreviewMouseUp"
-        Value="{Binding FilterAudio_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        x:Name="tbxFilterAudio_Contrast"
-        Grid.Row="8"
-        Grid.Column="2"
-        Width="39"
-        Margin="0,0,7,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        KeyDown="tbxFilterAudio_Contrast_KeyDown"
-        MaxLength="4"
-        MaxLines="1"
-        PreviewKeyUp="tbxFilterAudio_Contrast_PreviewKeyUp"
-        Text="{Binding Value, ElementName=slFilterAudio_Contrast, UpdateSourceTrigger=PropertyChanged}" />
+      <!--  Contrast Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-      <!--  Extra Stereo  -->
-      <Label
-        Grid.Row="9"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Extra Stereo"
-        FontFamily="Segoe UI Semilight" />
-      <Slider
-        x:Name="slFilterAudio_ExtraStereo"
-        Grid.Row="9"
-        Grid.Column="2"
-        Height="18"
-        Margin="0,4,50,0"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_ExtraStereo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsMoveToPointEnabled="True"
-        IsSnapToTickEnabled="True"
-        Maximum="100"
-        Minimum="-100"
-        MouseDoubleClick="slFilterAudio_ExtraStereo_MouseDoubleClick"
-        PreviewMouseUp="slFilterAudio_ExtraStereo_PreviewMouseUp"
-        Value="{Binding FilterAudio_ExtraStereo_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        x:Name="tbxFilterAudio_ExtraStereo"
-        Grid.Row="9"
-        Grid.Column="2"
-        Width="39"
-        Margin="0,0,7,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_ExtraStereo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        KeyDown="tbxFilterAudio_ExtraStereo_KeyDown"
-        MaxLength="4"
-        MaxLines="1"
-        PreviewKeyUp="tbxFilterAudio_ExtraStereo_PreviewKeyUp"
-        Text="{Binding Value, ElementName=slFilterAudio_ExtraStereo, UpdateSourceTrigger=PropertyChanged}" />
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Contrast"
+          FontFamily="Segoe UI Semilight" />
 
-      <!--  Headphones  -->
-      <Label
-        Grid.Row="10"
-        Grid.Column="1"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Headphones"
-        FontFamily="Segoe UI Semilight" />
-      <ComboBox
-        x:Name="cboFilterAudio_Headphones"
-        Grid.Row="10"
-        Grid.Column="2"
-        Width="105"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_Headphones_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ItemsSource="{Binding FilterAudio_Headphones_Items}"
-        SelectedItem="{Binding FilterAudio_Headphones_SelectedItem, Mode=TwoWay}" />
+        <Grid Grid.Column="1">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="45" />
+          </Grid.ColumnDefinitions>
 
-      <!--  Timing Group  -->
+          <Slider
+            x:Name="slFilterAudio_Contrast"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Background="{DynamicResource BorderBrush}"
+            IsEnabled="{Binding FilterAudio_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="True"
+            Maximum="100"
+            Minimum="0"
+            MouseDoubleClick="slFilterAudio_Contrast_MouseDoubleClick"
+            PreviewMouseUp="slFilterAudio_Contrast_PreviewMouseUp"
+            Value="{Binding FilterAudio_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+          <TextBox
+            x:Name="tbxFilterAudio_Contrast"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            IsEnabled="{Binding FilterAudio_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            KeyDown="tbxFilterAudio_Contrast_KeyDown"
+            MaxLength="4"
+            MaxLines="1"
+            PreviewKeyUp="tbxFilterAudio_Contrast_PreviewKeyUp"
+            Text="{Binding Value, ElementName=slFilterAudio_Contrast, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
+
+      <!--  Extra Stereo Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Extra Stereo"
+          FontFamily="Segoe UI Semilight" />
+
+        <Grid Grid.Column="1">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="45" />
+          </Grid.ColumnDefinitions>
+
+          <Slider
+            x:Name="slFilterAudio_ExtraStereo"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Background="{DynamicResource BorderBrush}"
+            IsEnabled="{Binding FilterAudio_ExtraStereo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="True"
+            Maximum="100"
+            Minimum="-100"
+            MouseDoubleClick="slFilterAudio_ExtraStereo_MouseDoubleClick"
+            PreviewMouseUp="slFilterAudio_ExtraStereo_PreviewMouseUp"
+            Value="{Binding FilterAudio_ExtraStereo_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+          <TextBox
+            x:Name="tbxFilterAudio_ExtraStereo"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            IsEnabled="{Binding FilterAudio_ExtraStereo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            KeyDown="tbxFilterAudio_ExtraStereo_KeyDown"
+            MaxLength="4"
+            MaxLines="1"
+            PreviewKeyUp="tbxFilterAudio_ExtraStereo_PreviewKeyUp"
+            Text="{Binding Value, ElementName=slFilterAudio_ExtraStereo, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
+
+      <!--  Headphones Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Headphones"
+          FontFamily="Segoe UI Semilight" />
+
+        <ComboBox
+          x:Name="cboFilterAudio_Headphones"
+          Grid.Column="1"
+          Width="105"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding FilterAudio_Headphones_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding FilterAudio_Headphones_Items}"
+          SelectedItem="{Binding FilterAudio_Headphones_SelectedItem, Mode=TwoWay}" />
+      </Grid>
+    </StackPanel>
+
+    <!--  Timing Group  -->
+    <StackPanel Margin="0,0,0,0">
+      <!--  Timing Header  -->
       <Label
-        Grid.Row="12"
-        Grid.Column="1"
-        Width="85"
+        Margin="0,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
         Content="Timing"
         FontFamily="Segoe UI Semibold" />
 
-      <!--  Tempo  -->
-      <Label
-        Grid.Row="13"
-        Grid.Column="1"
-        Width="85"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Tempo"
-        FontFamily="Segoe UI Semilight" />
-      <Slider
-        x:Name="slFilterAudio_Tempo"
-        Grid.Row="13"
-        Grid.Column="2"
-        Margin="0,4,50,0"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_Tempo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsMoveToPointEnabled="True"
-        IsSnapToTickEnabled="True"
-        Maximum="200"
-        Minimum="50"
-        MouseDoubleClick="slFilterAudio_Tempo_MouseDoubleClick"
-        PreviewMouseUp="slFilterAudio_Tempo_PreviewMouseUp"
-        Value="{Binding FilterAudio_Tempo_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        x:Name="tbxFilterAudio_Tempo"
-        Grid.Row="13"
-        Grid.Column="2"
-        Width="39"
-        Margin="0,0,7,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Top"
-        IsEnabled="{Binding FilterAudio_Tempo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        KeyDown="tbxFilterAudio_Tempo_KeyDown"
-        MaxLength="4"
-        MaxLines="1"
-        PreviewKeyUp="tbxFilterAudio_Tempo_PreviewKeyUp"
-        Text="{Binding Value, ElementName=slFilterAudio_Tempo, UpdateSourceTrigger=PropertyChanged}" />
+      <!--  Tempo Row  -->
+      <Grid Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="95" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-    </Grid>
+        <Label
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Tempo"
+          FontFamily="Segoe UI Semilight" />
 
-  </Grid>
+        <Grid Grid.Column="1">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="45" />
+          </Grid.ColumnDefinitions>
+
+          <Slider
+            x:Name="slFilterAudio_Tempo"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Background="{DynamicResource BorderBrush}"
+            IsEnabled="{Binding FilterAudio_Tempo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="True"
+            Maximum="200"
+            Minimum="50"
+            MouseDoubleClick="slFilterAudio_Tempo_MouseDoubleClick"
+            PreviewMouseUp="slFilterAudio_Tempo_PreviewMouseUp"
+            Value="{Binding FilterAudio_Tempo_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+          <TextBox
+            x:Name="tbxFilterAudio_Tempo"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            IsEnabled="{Binding FilterAudio_Tempo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            KeyDown="tbxFilterAudio_Tempo_KeyDown"
+            MaxLength="4"
+            MaxLines="1"
+            PreviewKeyUp="tbxFilterAudio_Tempo_PreviewKeyUp"
+            Text="{Binding Value, ElementName=slFilterAudio_Tempo, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
+    </StackPanel>
+
+  </StackPanel>
 
 </UserControl>

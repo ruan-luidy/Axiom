@@ -61,8 +61,7 @@
       Width="260"
       Margin="0,10,10,56"
       HorizontalAlignment="Right"
-      Background="Transparent"
-      TabStripPlacement="Top">
+      Background="Transparent">
 
       <!--  Format Tab  -->
       <TabItem
@@ -75,44 +74,42 @@
       <!--  Video Tab  -->
       <TabItem HorizontalContentAlignment="Stretch" Header="Video">
 
-        <Grid Background="Transparent">
-          <ScrollViewer
-            Width="254"
-            Padding="-4,0"
-            HorizontalAlignment="Right"
-            VerticalScrollBarVisibility="Auto">
+        <!--  Video TabControl  -->
+        <TabControl
+          x:Name="tabVideo"
+          Width="254"
+          Margin="0,0,0,0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0"
+          TabStripPlacement="Top">
 
-            <!--  Video TabControl  -->
-            <TabControl
-              x:Name="tabVideo"
-              Margin="0,0,0,0"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Top"
-              Background="Transparent"
-              BorderThickness="0"
-              TabStripPlacement="Top">
+          <!--  Encoding Tab  -->
+          <TabItem HorizontalContentAlignment="Stretch" Header="Encoding">
+            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
+              <views:VideoEncodingControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  Encoding Tab  -->
-              <TabItem HorizontalContentAlignment="Stretch" Header="Encoding">
-                <views:VideoEncodingControl />
-              </TabItem>
+          <!--  Color Tab  -->
+          <TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding VideoView}"
+            Header="Color">
+            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
+              <views:VideoColorControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  Color Tab  -->
-              <TabItem
-                HorizontalContentAlignment="Stretch"
-                DataContext="{Binding VideoView}"
-                Header="Color">
-                <views:VideoColorControl />
-              </TabItem>
+          <!--  Size Tab  -->
+          <TabItem HorizontalContentAlignment="Stretch" Header="Size">
+            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
+              <views:VideoSizeControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  Size Tab  -->
-              <TabItem HorizontalContentAlignment="Stretch" Header="Size">
-                <views:VideoSizeControl />
-              </TabItem>
-
-            </TabControl>
-          </ScrollViewer>
-        </Grid>
+        </TabControl>
       </TabItem>
 
       <!--  Audio Tab  -->
@@ -134,91 +131,85 @@
       <!--  Filters Tab  -->
       <TabItem HorizontalContentAlignment="Stretch" Header="Filters">
 
-        <Grid Background="Transparent">
-          <ScrollViewer
-            Width="254"
-            Padding="-4,0"
-            HorizontalAlignment="Right"
-            VerticalScrollBarVisibility="Auto">
+        <!--  Filters TabControl  -->
+        <TabControl
+          x:Name="tabFilters"
+          Width="260"
+          Margin="0,0,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0,1,0,0"
+          TabStripPlacement="Top">
 
-            <!--  Filters TabControl  -->
-            <TabControl
-              x:Name="tabFilters"
-              Margin="0,0,0,0"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Top"
-              Background="Transparent"
-              BorderThickness="0"
-              TabStripPlacement="Top">
+          <!--  Video Filter Tab  -->
+          <TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding FilterVideoView}"
+            Header="Video">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:FilterVideoControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  Video Filter Tab  -->
-              <TabItem
-                HorizontalContentAlignment="Stretch"
-                DataContext="{Binding FilterVideoView}"
-                Header="Video">
-                <views:FilterVideoControl />
-              </TabItem>
+          <!--  Audio Filter Tab  -->
+          <TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding FilterAudioView}"
+            Header="Audio">
+            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
+              <views:FilterAudioControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  Audio Filter Tab  -->
-              <TabItem
-                HorizontalContentAlignment="Stretch"
-                DataContext="{Binding FilterAudioView}"
-                Header="Audio">
-                <views:FilterAudioControl />
-              </TabItem>
-
-            </TabControl>
-          </ScrollViewer>
-        </Grid>
+        </TabControl>
       </TabItem>
 
       <!--  Settings Tab  -->
       <TabItem HorizontalContentAlignment="Stretch" Header="Settings">
 
-        <Grid Background="Transparent">
-          <ScrollViewer
-            Width="254"
-            Padding="-4,0"
-            HorizontalAlignment="Right"
-            VerticalScrollBarVisibility="Auto">
+        <!--  Settings TabControl  -->
+        <TabControl
+          x:Name="tabSettings"
+          Width="260"
+          Margin="0,0,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0,1,0,0"
+          TabStripPlacement="Top">
 
-            <!--  Settings TabControl  -->
-            <TabControl
-              x:Name="tabSettings"
-              Margin="0,0,0,0"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Top"
-              Background="Transparent"
-              BorderThickness="0"
-              TabStripPlacement="Top">
+          <!--  Config Tab  -->
+          <TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding ConfigureView}"
+            Header="Config">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:SettingsConfigControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  Config Tab  -->
-              <TabItem
-                HorizontalContentAlignment="Stretch"
-                DataContext="{Binding ConfigureView}"
-                Header="Config">
-                <views:SettingsConfigControl />
-              </TabItem>
+          <!--  File Tab  -->
+          <TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding ConfigureView}"
+            Header="File">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:SettingsFileControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  File Tab  -->
-              <TabItem
-                HorizontalContentAlignment="Stretch"
-                DataContext="{Binding ConfigureView}"
-                Header="File">
-                <views:SettingsFileControl />
-              </TabItem>
+          <!--  System Tab  -->
+          <TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding ConfigureView}"
+            Header="System">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:SettingsSystemControl />
+            </ScrollViewer>
+          </TabItem>
 
-              <!--  System Tab  -->
-              <TabItem
-                HorizontalContentAlignment="Stretch"
-                DataContext="{Binding ConfigureView}"
-                Header="System">
-                <views:SettingsSystemControl />
-              </TabItem>
-
-            </TabControl>
-          </ScrollViewer>
-        </Grid>
+        </TabControl>
       </TabItem>
 
     </TabControl>
