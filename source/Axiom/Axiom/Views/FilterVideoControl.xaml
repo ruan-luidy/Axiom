@@ -12,18 +12,23 @@
   mc:Ignorable="d">
 
   <hc:UniformSpacingPanel
+    Height="540"
     Margin="10,10,10,0"
     Background="Transparent"
     Orientation="Vertical"
     Spacing="5">
 
     <!--  Display Header  -->
-    <Label
-      HorizontalAlignment="Left"
-      Background="Transparent"
-      BorderThickness="0"
-      Content="Display"
-      FontFamily="Segoe UI Semibold" />
+    <hc:Row>
+      <hc:Col Span="24">
+        <Label
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Display"
+          FontFamily="Segoe UI Bold" />
+      </hc:Col>
+    </hc:Row>
 
     <!--  Drop Frames Row  -->
     <hc:Row Gutter="20">
@@ -60,12 +65,16 @@
     <hc:Divider Margin="0,10,0,10" />
 
     <!--  Fix Header  -->
-    <Label
-      HorizontalAlignment="Left"
-      Background="Transparent"
-      BorderThickness="0"
-      Content="Fix"
-      FontFamily="Segoe UI Semibold" />
+    <hc:Row>
+      <hc:Col Span="24">
+        <Label
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Fix"
+          FontFamily="Segoe UI Bold" />
+      </hc:Col>
+    </hc:Row>
 
     <!--  Deinterlace Row  -->
     <hc:Row Gutter="20">
@@ -231,12 +240,16 @@
     <hc:Divider Margin="0,10,0,10" />
 
     <!--  Transpose Header  -->
-    <Label
-      HorizontalAlignment="Left"
-      Background="Transparent"
-      BorderThickness="0"
-      Content="Transpose"
-      FontFamily="Segoe UI Semibold" />
+    <hc:Row>
+      <hc:Col Span="24">
+        <Label
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Transpose"
+          FontFamily="Segoe UI Bold" />
+      </hc:Col>
+    </hc:Row>
 
     <!--  Flip Row  -->
     <hc:Row Gutter="20">
