@@ -18,14 +18,6 @@
     Orientation="Vertical"
     Spacing="5">
 
-    <!--  Config Header  -->
-    <Label
-      HorizontalAlignment="Left"
-      Background="Transparent"
-      BorderThickness="0"
-      Content="Config"
-      FontFamily="Segoe UI Semibold" />
-
     <!--  Location Row  -->
     <hc:Row Gutter="20">
       <hc:Col Span="10">
@@ -344,13 +336,7 @@
       </hc:Col>
     </hc:Row>
 
-    <!--  App Header  -->
-    <Label
-      HorizontalAlignment="Left"
-      Background="Transparent"
-      BorderThickness="0"
-      Content="App"
-      FontFamily="Segoe UI Semibold" />
+    <hc:Divider Margin="0,10,0,10" />
 
     <!--  Theme Row  -->
     <hc:Row Gutter="20">
@@ -379,6 +365,8 @@
           SelectionChanged="themeSelect_SelectionChanged" />
       </hc:Col>
     </hc:Row>
+
+    <hc:Divider Margin="0,10,0,10" />
 
     <!--  Updates Row  -->
     <hc:Row Gutter="20">
