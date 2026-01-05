@@ -73,22 +73,26 @@
     </hc:Row>
 
     <!--  Input Tokens Custom  -->
-    <TextBox
-      x:Name="tbxInputFileNameTokensCustom"
-      Width="218"
-      Height="75"
-      Padding="10"
-      HorizontalAlignment="Left"
-      VerticalContentAlignment="Top"
-      IsEnabled="{Binding InputFileNameTokensCustom_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      MaxLines="1"
-      RenderOptions.ClearTypeHint="Enabled"
-      Text="{Binding InputFileNameTokensCustom_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      TextWrapping="Wrap"
-      ToolTip="Add additional custom Input Filename Tokens to be removed, separated by commas."
-      ToolTipService.InitialShowDelay="200"
-      ToolTipService.ShowOnDisabled="True"
-      VerticalScrollBarVisibility="Auto" />
+    <hc:Row Gutter="20">
+      <hc:Col Span="24">
+        <TextBox
+          x:Name="tbxInputFileNameTokensCustom"
+          Width="306"
+          Height="85"
+          Padding="10"
+          HorizontalAlignment="Left"
+          VerticalContentAlignment="Top"
+          IsEnabled="{Binding InputFileNameTokensCustom_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          MaxLines="1"
+          RenderOptions.ClearTypeHint="Enabled"
+          Text="{Binding InputFileNameTokensCustom_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          TextWrapping="Wrap"
+          ToolTip="Add additional custom Input Filename Tokens to be removed, separated by commas."
+          ToolTipService.InitialShowDelay="200"
+          ToolTipService.ShowOnDisabled="True"
+          VerticalScrollBarVisibility="Auto" />
+      </hc:Col>
+    </hc:Row>
 
     <hc:Divider Margin="0,10,0,10" />
 
