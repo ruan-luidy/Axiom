@@ -210,10 +210,11 @@
     <Grid>
       <ListView
         x:Name="lstvOutputNaming"
+        Width="278"
         Height="220"
-        Margin="0,0,30,0"
+        HorizontalAlignment="Left"
         VerticalAlignment="Top"
-        BorderThickness="1"
+        BorderThickness="0"
         IsEnabled="{Binding OutputNaming_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         IsSynchronizedWithCurrentItem="False"
         ItemsSource="{Binding OutputNaming_ListView_Items}"
@@ -234,7 +235,7 @@
         <ListView.View>
           <GridView>
             <!--  CheckBox  -->
-            <GridViewColumn>
+            <GridViewColumn Width="auto">
               <GridViewColumn.CellTemplate>
                 <DataTemplate>
                   <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
