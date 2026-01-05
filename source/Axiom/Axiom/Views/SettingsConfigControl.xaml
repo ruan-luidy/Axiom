@@ -12,28 +12,24 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
 
-  <StackPanel Margin="10,10,10,0" Background="Transparent">
+  <hc:UniformSpacingPanel
+    Margin="10,10,10,0"
+    Background="Transparent"
+    Orientation="Vertical"
+    Spacing="5">
 
-    <!--  Config Group  -->
-    <StackPanel Margin="0,0,0,15">
-      <!--  Config Header  -->
-      <Label
-        Margin="0,0,0,5"
-        HorizontalAlignment="Left"
-        Background="Transparent"
-        BorderThickness="0"
-        Content="Config"
-        FontFamily="Segoe UI Semibold" />
+    <!--  Config Header  -->
+    <Label
+      HorizontalAlignment="Left"
+      Background="Transparent"
+      BorderThickness="0"
+      Content="Config"
+      FontFamily="Segoe UI Semibold" />
 
-      <!--  Location Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Location Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
@@ -44,11 +40,12 @@
           ToolTip="Your config file will be moved to this location."
           ToolTipService.InitialShowDelay="250"
           ToolTipService.ShowOnDisabled="True" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <ComboBox
             x:Name="cboConfigPath"
-            Width="105"
+            Width="115"
             IsEnabled="{Binding ConfigPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             ItemsSource="{Binding ConfigPath_Items}"
             SelectedIndex="{Binding ConfigPath_SelectedIndex}"
@@ -61,7 +58,6 @@
             x:Name="btnConfigPath"
             Width="28"
             Height="28"
-            Margin="5,0,0,0"
             Padding="0"
             Click="btnConfigPath_Click"
             Cursor="Hand"
@@ -74,18 +70,14 @@
               Foreground="{DynamicResource PrimaryTextBrush}"
               Kind="FolderOpenFill" />
           </Button>
-        </StackPanel>
-      </Grid>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Presets Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Presets Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
@@ -96,12 +88,12 @@
           ToolTip="Path to Custom Presets folder."
           ToolTipService.InitialShowDelay="250"
           ToolTipService.ShowOnDisabled="True" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <TextBox
             x:Name="tbxCustomPresetsPath"
-            Width="105"
-            Height="20"
+            Width="115"
             AllowDrop="True"
             IsEnabled="{Binding CustomPresetsPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsReadOnly="True"
@@ -120,7 +112,6 @@
             x:Name="btnCustomPresetsAuto"
             Width="28"
             Height="28"
-            Margin="5,0,0,0"
             Padding="0"
             Click="btnCustomPresetsAuto_Click"
             Cursor="Hand"
@@ -133,18 +124,14 @@
               Foreground="{DynamicResource PrimaryTextBrush}"
               Kind="ArrowCounterClockwise" />
           </Button>
-        </StackPanel>
-      </Grid>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  FFmpeg Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  FFmpeg Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
@@ -155,12 +142,12 @@
           ToolTip="Path to ffmpeg.exe"
           ToolTipService.InitialShowDelay="250"
           ToolTipService.ShowOnDisabled="True" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <TextBox
             x:Name="tbxFFmpegPathConfig"
-            Width="105"
-            Height="20"
+            Width="115"
             AllowDrop="True"
             IsEnabled="{Binding FFmpegPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsReadOnly="True"
@@ -179,7 +166,6 @@
             x:Name="btnFFmpegAuto"
             Width="28"
             Height="28"
-            Margin="5,0,0,0"
             Padding="0"
             Click="btnFFmpegAuto_Click"
             Cursor="Hand"
@@ -192,18 +178,14 @@
               Foreground="{DynamicResource PrimaryTextBrush}"
               Kind="ArrowCounterClockwise" />
           </Button>
-        </StackPanel>
-      </Grid>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  FFprobe Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  FFprobe Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
@@ -214,12 +196,12 @@
           ToolTip="Path to ffprobe.exe"
           ToolTipService.InitialShowDelay="250"
           ToolTipService.ShowOnDisabled="True" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <TextBox
             x:Name="tbxFFprobePathConfig"
-            Width="105"
-            Height="20"
+            Width="115"
             AllowDrop="True"
             IsEnabled="{Binding FFprobePath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsReadOnly="True"
@@ -238,7 +220,6 @@
             x:Name="btnFFprobeAuto"
             Width="28"
             Height="28"
-            Margin="5,0,0,0"
             Padding="0"
             Click="btnFFprobeAuto_Click"
             Cursor="Hand"
@@ -251,18 +232,14 @@
               Foreground="{DynamicResource PrimaryTextBrush}"
               Kind="ArrowCounterClockwise" />
           </Button>
-        </StackPanel>
-      </Grid>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  FFplay Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  FFplay Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
@@ -273,12 +250,12 @@
           ToolTip="Path to ffplay.exe"
           ToolTipService.InitialShowDelay="250"
           ToolTipService.ShowOnDisabled="True" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <TextBox
             x:Name="tbxFFplayPathConfig"
-            Width="105"
-            Height="20"
+            Width="115"
             AllowDrop="True"
             IsEnabled="{Binding FFplayPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsReadOnly="True"
@@ -297,7 +274,6 @@
             x:Name="btnFFplayAuto"
             Width="28"
             Height="28"
-            Margin="5,0,0,0"
             Padding="0"
             Click="btnFFplayAuto_Click"
             Cursor="Hand"
@@ -310,18 +286,15 @@
               Foreground="{DynamicResource PrimaryTextBrush}"
               Kind="ArrowCounterClockwise" />
           </Button>
-        </StackPanel>
-      </Grid>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  youtube-dl Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  youtube-dl Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
+          HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
@@ -331,12 +304,12 @@
           ToolTip="Path to youtube-dl.exe"
           ToolTipService.InitialShowDelay="250"
           ToolTipService.ShowOnDisabled="True" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <TextBox
             x:Name="tbxyoutubedlPathConfig"
-            Width="105"
-            Height="20"
+            Width="115"
             AllowDrop="True"
             IsEnabled="{Binding youtubedlPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsReadOnly="True"
@@ -355,7 +328,6 @@
             x:Name="btnyoutubedlAuto"
             Width="28"
             Height="28"
-            Margin="5,0,0,0"
             Padding="0"
             Click="btnyoutubedlAuto_Click"
             Cursor="Hand"
@@ -368,31 +340,23 @@
               Foreground="{DynamicResource PrimaryTextBrush}"
               Kind="ArrowCounterClockwise" />
           </Button>
-        </StackPanel>
-      </Grid>
-    </StackPanel>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-    <!--  App Group  -->
-    <StackPanel Margin="0,0,0,0">
-      <!--  App Header  -->
-      <Label
-        Margin="0,0,0,5"
-        HorizontalAlignment="Left"
-        Background="Transparent"
-        BorderThickness="0"
-        Content="App"
-        FontFamily="Segoe UI Semibold" />
+    <!--  App Header  -->
+    <Label
+      HorizontalAlignment="Left"
+      Background="Transparent"
+      BorderThickness="0"
+      Content="App"
+      FontFamily="Segoe UI Semibold" />
 
-      <!--  Theme Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Theme Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
           x:Name="labelTheme"
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
@@ -401,11 +365,11 @@
           ToolTip="Program Theme"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True" />
-
+      </hc:Col>
+      <hc:Col Span="14">
         <ComboBox
           x:Name="cboTheme"
-          Grid.Column="1"
-          Width="105"
+          Width="115"
           HorizontalAlignment="Left"
           IsEnabled="{Binding Theme_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           IsTextSearchEnabled="False"
@@ -413,17 +377,13 @@
           SelectedIndex="{Binding Theme_SelectedIndex}"
           SelectedItem="{Binding Theme_SelectedItem}"
           SelectionChanged="themeSelect_SelectionChanged" />
-      </Grid>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Updates Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Updates Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
@@ -432,8 +392,9 @@
           ToolTip="Automatically check for updates at startup."
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <ToggleButton
             x:Name="tglUpdateAutoCheck"
             Width="55"
@@ -449,30 +410,26 @@
           </ToggleButton>
 
           <Label
-            Margin="7,0,0,0"
             VerticalAlignment="Center"
             Background="Transparent"
             BorderThickness="0"
             Content="Auto-Check" />
-        </StackPanel>
-      </Grid>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Settings Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="80" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Settings Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
-          Grid.Column="0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
           Content="Settings" />
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
+      </hc:Col>
+      <hc:Col Span="14">
+        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
           <Button
             x:Name="btnSettingsDefault"
             Background="Transparent"
@@ -486,7 +443,6 @@
 
           <Button
             x:Name="btnClearAllSavedSettings"
-            Margin="5,0,0,0"
             Background="Transparent"
             Click="btnResetConfig_Click"
             Cursor="Hand"
@@ -495,9 +451,9 @@
             ToolTipService.ShowOnDisabled="True">
             <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Reset" />
           </Button>
-        </StackPanel>
-      </Grid>
-    </StackPanel>
+        </hc:UniformSpacingPanel>
+      </hc:Col>
+    </hc:Row>
 
-  </StackPanel>
+  </hc:UniformSpacingPanel>
 </UserControl>
