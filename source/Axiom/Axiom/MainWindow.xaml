@@ -154,90 +154,85 @@
 
       <!--  Filters Tab  -->
       <hc:TabItem HorizontalContentAlignment="Stretch" Header="Filters">
-        <hc:SimplePanel Background="{DynamicResource RegionBrush}">
-          <!--  Filters TabControl  -->
-          <hc:TabControl
-            x:Name="tabFilters"
-            Width="380"
-            Margin="0,0,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="0,0,0,0"
-            IsTabFillEnabled="True"
-            TabStripPlacement="Top">
+        <!--  Filters TabControl  -->
+        <hc:TabControl
+          x:Name="tabFilters"
+          Width="380"
+          Margin="0,0,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          BorderThickness="0,0,0,0"
+          IsTabFillEnabled="True"
+          TabStripPlacement="Top">
 
-            <!--  Video Filter Tab  -->
-            <hc:TabItem
-              HorizontalContentAlignment="Stretch"
-              DataContext="{Binding FilterVideoView}"
-              Header="Video">
-              <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <views:FilterVideoControl Background="{DynamicResource RegionBrush}" />
-              </ScrollViewer>
-            </hc:TabItem>
+          <!--  Video Filter Tab  -->
+          <hc:TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding FilterVideoView}"
+            Header="Video">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:FilterVideoControl />
+            </ScrollViewer>
+          </hc:TabItem>
 
-            <!--  Audio Filter Tab  -->
-            <hc:TabItem
-              HorizontalContentAlignment="Stretch"
-              DataContext="{Binding FilterAudioView}"
-              Header="Audio">
-              <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <views:FilterAudioControl Background="{DynamicResource RegionBrush}" />
-              </ScrollViewer>
-            </hc:TabItem>
+          <!--  Audio Filter Tab  -->
+          <hc:TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding FilterAudioView}"
+            Header="Audio">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:FilterAudioControl />
+            </ScrollViewer>
+          </hc:TabItem>
 
-          </hc:TabControl>
-        </hc:SimplePanel>
+        </hc:TabControl>
       </hc:TabItem>
 
       <!--  Settings Tab  -->
       <hc:TabItem HorizontalContentAlignment="Stretch" Header="Settings">
-        <hc:SimplePanel Background="{DynamicResource RegionBrush}">
-          <!--  Settings TabControl  -->
-          <hc:TabControl
-            x:Name="tabSettings"
-            Width="380"
-            Margin="-1,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="Transparent"
-            BorderThickness="0,0,0,0"
-            IsTabFillEnabled="True"
-            TabStripPlacement="Top">
+        <!--  Settings TabControl  -->
+        <hc:TabControl
+          x:Name="tabSettings"
+          Width="380"
+          Margin="-1,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Background="Transparent"
+          BorderThickness="0,0,0,0"
+          IsTabFillEnabled="True"
+          TabStripPlacement="Top">
 
-            <!--  Config Tab  -->
-            <hc:TabItem
-              HorizontalContentAlignment="Stretch"
-              DataContext="{Binding ConfigureView}"
-              Header="Config">
-              <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <views:SettingsConfigControl Background="{DynamicResource RegionBrush}" />
-              </ScrollViewer>
-            </hc:TabItem>
+          <!--  Config Tab  -->
+          <hc:TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding ConfigureView}"
+            Header="Config">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:SettingsConfigControl />
+            </ScrollViewer>
+          </hc:TabItem>
 
-            <!--  File Tab  -->
-            <hc:TabItem
-              HorizontalContentAlignment="Stretch"
-              DataContext="{Binding ConfigureView}"
-              Header="File">
-              <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <views:SettingsFileControl Background="{DynamicResource RegionBrush}" />
-              </ScrollViewer>
-            </hc:TabItem>
+          <!--  File Tab  -->
+          <hc:TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding ConfigureView}"
+            Header="File">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:SettingsFileControl />
+            </ScrollViewer>
+          </hc:TabItem>
 
-            <!--  System Tab  -->
-            <hc:TabItem
-              HorizontalContentAlignment="Stretch"
-              DataContext="{Binding ConfigureView}"
-              Header="System">
-              <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <views:SettingsSystemControl Background="{DynamicResource RegionBrush}" />
-              </ScrollViewer>
-            </hc:TabItem>
+          <!--  System Tab  -->
+          <hc:TabItem
+            HorizontalContentAlignment="Stretch"
+            DataContext="{Binding ConfigureView}"
+            Header="System">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <views:SettingsSystemControl />
+            </ScrollViewer>
+          </hc:TabItem>
 
-          </hc:TabControl>
-        </hc:SimplePanel>
-
+        </hc:TabControl>
       </hc:TabItem>
 
     </hc:TabControl>

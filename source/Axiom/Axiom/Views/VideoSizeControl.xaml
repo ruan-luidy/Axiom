@@ -13,17 +13,11 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
 
-  <StackPanel Margin="10,10,10,0" Background="Transparent">
-
-    <!--  Size Header  -->
-    <Label
-      Width="45"
-      Margin="0,0,0,5"
-      HorizontalAlignment="Left"
-      Background="Transparent"
-      BorderThickness="0"
-      Content="Size"
-      FontFamily="Segoe UI Semibold" />
+  <hc:UniformSpacingPanel
+    Margin="10,10,10,0"
+    Background="Transparent"
+    Orientation="Vertical"
+    Spacing="5">
 
     <!--  Size Row  -->
     <hc:Row Gutter="20">
@@ -236,5 +230,5 @@
         </hc:UniformSpacingPanel>
       </hc:Col>
     </hc:Row>
-  </StackPanel>
+  </hc:UniformSpacingPanel>
 </UserControl>
