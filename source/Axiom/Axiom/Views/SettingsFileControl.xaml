@@ -252,7 +252,7 @@
 
       <hc:Col Span="4">
         <hc:UniformSpacingPanel
-          Margin="0,5,0,0"
+          Margin="-26,5,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Orientation="Vertical"
