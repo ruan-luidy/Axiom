@@ -16,229 +16,223 @@
 
   <StackPanel Margin="10,10,10,0" Background="Transparent">
 
-    <!--  Size Group  -->
-    <StackPanel Margin="0,0,0,0">
-      <!--  Size Header  -->
-      <Label
-        Width="45"
-        Margin="0,0,0,5"
-        HorizontalAlignment="Left"
-        Background="Transparent"
-        BorderThickness="0"
-        Content="Size"
-        FontFamily="Segoe UI Semibold" />
+    <!--  Size Header  -->
+    <Label
+      Width="45"
+      Margin="0,0,0,5"
+      HorizontalAlignment="Left"
+      Background="Transparent"
+      BorderThickness="0"
+      Content="Size"
+      FontFamily="Segoe UI Semibold" />
 
-      <!--  Size Row  -->
-      <hc:Row Gutter="20">
-        <hc:Col Span="6">
-          <Label
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Size"
-            FontFamily="Segoe UI Semilight" />
-        </hc:Col>
-        <hc:Col Span="18">
-          <ComboBox
-            x:Name="cboVideo_Scale"
-            Width="105"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IsEnabled="{Binding Video_Scale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            ItemsSource="{Binding Video_Scale_Items}"
-            SelectedIndex="{Binding Video_Scale_SelectedIndex}"
-            SelectedItem="{Binding Video_Scale_SelectedItem, Mode=TwoWay}"
-            SelectionChanged="cboVideo_Scale_SelectionChanged" />
-        </hc:Col>
-      </hc:Row>
+    <!--  Size Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
+        <Label
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Size"
+          FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+      <hc:Col Span="14">
+        <ComboBox
+          x:Name="cboVideo_Scale"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_Scale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding Video_Scale_Items}"
+          SelectedIndex="{Binding Video_Scale_SelectedIndex}"
+          SelectedItem="{Binding Video_Scale_SelectedItem, Mode=TwoWay}"
+          SelectionChanged="cboVideo_Scale_SelectionChanged" />
+      </hc:Col>
+    </hc:Row>
 
 
-      <!--  Width Row  -->
-      <hc:Row Gutter="20">
-        <hc:Col Span="6">
-          <Label
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Width"
-            FontFamily="Segoe UI Semilight" />
-        </hc:Col>
-        <hc:Col Span="18">
-          <TextBox
-            x:Name="tbxVideo_Width"
-            Width="105"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            GotFocus="tbxVideo_Width_GotFocus"
-            IsEnabled="{Binding Video_Width_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            LostFocus="tbxVideo_Width_LostFocus"
-            MaxLines="1"
-            Text="{Binding Video_Width_Text, Mode=TwoWay}"
-            TextWrapping="NoWrap" />
-        </hc:Col>
-      </hc:Row>
+    <!--  Width Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
+        <Label
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Width"
+          FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+      <hc:Col Span="14">
+        <TextBox
+          x:Name="tbxVideo_Width"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          GotFocus="tbxVideo_Width_GotFocus"
+          IsEnabled="{Binding Video_Width_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          LostFocus="tbxVideo_Width_LostFocus"
+          MaxLines="1"
+          Text="{Binding Video_Width_Text, Mode=TwoWay}"
+          TextWrapping="NoWrap" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Height Row  -->
-      <hc:Row Gutter="20">
-        <hc:Col Span="6">
-          <Label
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Height"
-            FontFamily="Segoe UI Semilight" />
-        </hc:Col>
-        <hc:Col Span="18">
-          <TextBox
-            x:Name="tbxVideo_Height"
-            Width="105"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            GotFocus="tbxVideo_Height_GotFocus"
-            IsEnabled="{Binding Video_Height_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            LostFocus="tbxVideo_Height_LostFocus"
-            MaxLines="1"
-            Text="{Binding Video_Height_Text, Mode=TwoWay}"
-            TextWrapping="NoWrap" />
-        </hc:Col>
-      </hc:Row>
+    <!--  Height Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
+        <Label
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Height"
+          FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+      <hc:Col Span="14">
+        <TextBox
+          x:Name="tbxVideo_Height"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          GotFocus="tbxVideo_Height_GotFocus"
+          IsEnabled="{Binding Video_Height_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          LostFocus="tbxVideo_Height_LostFocus"
+          MaxLines="1"
+          Text="{Binding Video_Height_Text, Mode=TwoWay}"
+          TextWrapping="NoWrap" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Screen Format Row  -->
-      <hc:Row Gutter="20">
-        <hc:Col Span="6">
-          <Label
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Format"
-            FontFamily="Segoe UI Semilight"
-            ToolTip="Screen Format"
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True" />
-        </hc:Col>
-        <hc:Col Span="18">
-          <ComboBox
-            x:Name="cboVideo_ScreenFormat"
-            Width="105"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IsEnabled="{Binding Video_ScreenFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            ItemsSource="{Binding Video_ScreenFormat_Items}"
-            SelectedIndex="{Binding Video_ScreenFormat_SelectedIndex}"
-            SelectedItem="{Binding Video_ScreenFormat_SelectedItem}"
-            SelectionChanged="cboVideo_ScreenFormat_SelectionChanged"
-            ToolTip="Screen Format"
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True" />
-        </hc:Col>
-      </hc:Row>
+    <!--  Screen Format Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
+        <Label
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Format"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Screen Format"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+      </hc:Col>
+      <hc:Col Span="14">
+        <ComboBox
+          x:Name="cboVideo_ScreenFormat"
+          Width="105"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_ScreenFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding Video_ScreenFormat_Items}"
+          SelectedIndex="{Binding Video_ScreenFormat_SelectedIndex}"
+          SelectedItem="{Binding Video_ScreenFormat_SelectedItem}"
+          SelectionChanged="cboVideo_ScreenFormat_SelectionChanged"
+          ToolTip="Screen Format"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Aspect Ratio Row  -->
-      <hc:Row Gutter="20">
-        <hc:Col Span="7">
-          <Label
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Aspect Ratio"
-            FontFamily="Segoe UI Semilight"
-            ToolTip="Aspect Ratio"
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True" />
-        </hc:Col>
-        <hc:Col Span="17">
-          <ComboBox
-            x:Name="cboVideo_AspectRatio"
-            Width="105"
-            Height="22"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IsEnabled="{Binding Video_AspectRatio_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            ItemsSource="{Binding Video_AspectRatio_Items}"
-            SelectedIndex="{Binding Video_AspectRatio_SelectedIndex}"
-            SelectedItem="{Binding Video_AspectRatio_SelectedItem}"
-            SelectionChanged="cboVideo_AspectRatio_SelectionChanged" />
-        </hc:Col>
-      </hc:Row>
+    <!--  Aspect Ratio Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
+        <Label
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Aspect Ratio"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Aspect Ratio"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+      </hc:Col>
+      <hc:Col Span="14">
+        <ComboBox
+          x:Name="cboVideo_AspectRatio"
+          Width="105"
+          Height="22"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_AspectRatio_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding Video_AspectRatio_Items}"
+          SelectedIndex="{Binding Video_AspectRatio_SelectedIndex}"
+          SelectedItem="{Binding Video_AspectRatio_SelectedItem}"
+          SelectionChanged="cboVideo_AspectRatio_SelectionChanged" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Scaling Row  -->
-      <hc:Row Gutter="20">
-        <hc:Col Span="6">
-          <Label
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Scaling"
-            FontFamily="Segoe UI Semilight"
-            ToolTip="Algorithm used for resizing."
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True" />
-        </hc:Col>
-        <hc:Col Span="18">
-          <ComboBox
-            x:Name="cboVideo_ScalingAlgorithm"
-            Width="105"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IsEnabled="{Binding Video_ScalingAlgorithm_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsSynchronizedWithCurrentItem="True"
-            ItemsSource="{Binding Video_ScalingAlgorithm_Items}"
-            SelectedIndex="{Binding Video_ScalingAlgorithm_SelectedIndex}"
-            SelectedItem="{Binding Video_ScalingAlgorithm_SelectedItem}"
-            SelectionChanged="cboVideo_ScalingAlgorithm_SelectionChanged"
-            ToolTip="Algorithm used for resizing."
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True" />
-        </hc:Col>
-      </hc:Row>
+    <!--  Scaling Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
+        <Label
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Scaling"
+          FontFamily="Segoe UI Semilight"
+          ToolTip="Algorithm used for resizing."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+      </hc:Col>
+      <hc:Col Span="10">
+        <ComboBox
+          x:Name="cboVideo_ScalingAlgorithm"
+          Width="110"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          IsEnabled="{Binding Video_ScalingAlgorithm_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsSynchronizedWithCurrentItem="True"
+          ItemsSource="{Binding Video_ScalingAlgorithm_Items}"
+          SelectedIndex="{Binding Video_ScalingAlgorithm_SelectedIndex}"
+          SelectedItem="{Binding Video_ScalingAlgorithm_SelectedItem}"
+          SelectionChanged="cboVideo_ScalingAlgorithm_SelectionChanged"
+          ToolTip="Algorithm used for resizing."
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Crop Row  -->
-      <hc:Row Gutter="20">
-        <hc:Col Span="6">
-          <Label
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Crop"
-            FontFamily="Segoe UI Semilight" />
-        </hc:Col>
-        <hc:Col Span="9">
-          <Button
-            x:Name="btnVideo_Crop"
-            Width="50"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="btnVideo_Crop_Click"
-            Cursor="Hand"
-            IsEnabled="{Binding Video_Crop_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            ToolTip="Open Crop Window"
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True">
-            <TextBlock Style="{DynamicResource ButtonCropTextBlock}" Text="Crop" />
-          </Button>
-        </hc:Col>
-        <hc:Col Span="9">
-          <Button
-            x:Name="btnVideo_CropClear"
-            Width="50"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="btnVideo_CropClear_Click"
-            Cursor="Hand"
-            ToolTip="Clear Last Used Crop Settings"
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True">
-            <TextBlock x:Name="tblkCropClear" Text="{Binding Video_CropClear_Text, Mode=TwoWay}" />
-          </Button>
-        </hc:Col>
-      </hc:Row>
-    </StackPanel>
+    <!--  Crop Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col HorizontalAlignment="Left" Span="10">
+        <Label
+          VerticalAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Crop"
+          FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+      <hc:Col HorizontalAlignment="Left" Span="5">
+        <Button
+          x:Name="btnVideo_Crop"
+          Width="55"
+          VerticalAlignment="Top"
+          Click="btnVideo_Crop_Click"
+          Cursor="Hand"
+          IsEnabled="{Binding Video_Crop_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ToolTip="Open Crop Window"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock Text="Crop" />
+        </Button>
+      </hc:Col>
+      <hc:Col HorizontalAlignment="Left" Span="5">
+        <Button
+          x:Name="btnVideo_CropClear"
+          Width="55"
+          VerticalAlignment="Top"
+          Click="btnVideo_CropClear_Click"
+          Cursor="Hand"
+          ToolTip="Clear Last Used Crop Settings"
+          ToolTipService.InitialShowDelay="500"
+          ToolTipService.ShowOnDisabled="True">
+          <TextBlock x:Name="tblkCropClear" Text="{Binding Video_CropClear_Text, Mode=TwoWay}" />
+        </Button>
+      </hc:Col>
+    </hc:Row>
   </StackPanel>
 </UserControl>
