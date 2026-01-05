@@ -14,6 +14,7 @@
   mc:Ignorable="d">
 
   <hc:UniformSpacingPanel
+    Height="620"
     Margin="10,10,10,0"
     Background="Transparent"
     Orientation="Vertical"
@@ -207,12 +208,13 @@
       ToolTipService.ShowOnDisabled="True" />
 
     <!--  Tokens List with Buttons  -->
-    <hc:Row Gutter="5">
+    <hc:Row Gutter="0">
       <hc:Col Span="20">
         <ListView
           x:Name="lstvOutputNaming"
           Width="273"
-          Height="220"
+          Height="208"
+          Padding="-6"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           BorderThickness="0"
@@ -252,7 +254,7 @@
 
       <hc:Col Span="4">
         <hc:UniformSpacingPanel
-          Margin="-26,5,0,0"
+          Margin="-22,0,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Orientation="Vertical"
