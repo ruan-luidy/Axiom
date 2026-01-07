@@ -37,6 +37,7 @@
   Height="508"
   MinWidth="912"
   MinHeight="508"
+  Background="{DynamicResource DarkDefaultBrush}"
   Closing="Window_Closing"
   Icon="axiom.ico"
   Loaded="Window_Loaded"
@@ -73,169 +74,166 @@
       Margin="10,5,5,5" />
 
     <!--  Tab Control - Row 0+1, Column 1  -->
-    <hc:TabControl
+    <TabControl
       x:Name="tabControl"
       Grid.Row="0"
       Grid.RowSpan="2"
       Grid.Column="1"
       Width="380"
-      Margin="5,0,0,-10"
+      Margin="5,8,0,-10"
       BorderThickness="1,1,0,0"
-      IsTabFillEnabled="True">
+      Style="{StaticResource TabControlSliding}">
 
       <!--  Format Tab  -->
-      <hc:TabItem
+      <TabItem
         HorizontalContentAlignment="Stretch"
         DataContext="{Binding FormatView}"
         Header="Format">
         <views:FormatControl Background="{DynamicResource RegionBrush}" />
-      </hc:TabItem>
+      </TabItem>
 
       <!--  Video Tab  -->
-      <hc:TabItem HorizontalContentAlignment="Stretch" Header="Video">
+      <TabItem HorizontalContentAlignment="Stretch" Header="Video">
 
         <!--  Video TabControl  -->
-        <hc:TabControl
+        <TabControl
           x:Name="tabVideo"
-          Margin="0"
+          Margin="0,5,0,0"
           VerticalAlignment="Top"
-          BorderThickness="0"
-          IsTabFillEnabled="True"
-          TabStripPlacement="Top">
+          BorderThickness="0,1,0,0"
+          Style="{StaticResource TabControlSliding}">
 
           <!--  Encoding Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding VideoView}"
             Header="Encoding">
             <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
               <views:VideoEncodingControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
           <!--  Color Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding VideoView}"
             Header="Color">
             <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
               <views:VideoColorControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
           <!--  Size Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding VideoView}"
             Header="Size">
             <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
               <views:VideoSizeControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
-        </hc:TabControl>
-      </hc:TabItem>
+        </TabControl>
+      </TabItem>
 
       <!--  Audio Tab  -->
-      <hc:TabItem
+      <TabItem
         HorizontalContentAlignment="Stretch"
         DataContext="{Binding AudioView}"
         Header="Audio">
         <views:AudioSettingsControl />
-      </hc:TabItem>
+      </TabItem>
 
       <!--  Subtitles Tab  -->
-      <hc:TabItem
+      <TabItem
         HorizontalContentAlignment="Stretch"
         DataContext="{Binding SubtitleView}"
         Header="Subtitles">
         <views:SubtitlesControl />
-      </hc:TabItem>
+      </TabItem>
 
       <!--  Filters Tab  -->
-      <hc:TabItem HorizontalContentAlignment="Stretch" Header="Filters">
+      <TabItem HorizontalContentAlignment="Stretch" Header="Filters">
         <!--  Filters TabControl  -->
-        <hc:TabControl
+        <TabControl
           x:Name="tabFilters"
           Width="380"
-          Margin="0,0,0,0"
+          Margin="0,5,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
-          BorderThickness="0,0,0,0"
-          IsTabFillEnabled="True"
+          BorderThickness="0,1,0,0"
+          Style="{StaticResource TabControlSliding}"
           TabStripPlacement="Top">
 
           <!--  Video Filter Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding FilterVideoView}"
             Header="Video">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:FilterVideoControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
           <!--  Audio Filter Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding FilterAudioView}"
             Header="Audio">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:FilterAudioControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
-        </hc:TabControl>
-      </hc:TabItem>
+        </TabControl>
+      </TabItem>
 
       <!--  Settings Tab  -->
-      <hc:TabItem HorizontalContentAlignment="Stretch" Header="Settings">
+      <TabItem HorizontalContentAlignment="Stretch" Header="Settings">
         <!--  Settings TabControl  -->
-        <hc:TabControl
+        <TabControl
           x:Name="tabSettings"
           Width="380"
-          Margin="-1,0"
+          Margin="0,5,0,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
-          Background="Transparent"
-          BorderThickness="0,0,0,0"
-          IsTabFillEnabled="True"
-          TabStripPlacement="Top">
+          BorderThickness="0,1,0,0"
+          Style="{StaticResource TabControlSliding}">
 
           <!--  Config Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding ConfigureView}"
             Header="Config">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:SettingsConfigControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
           <!--  File Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding ConfigureView}"
             Header="File">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:SettingsFileControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
           <!--  System Tab  -->
-          <hc:TabItem
+          <TabItem
             HorizontalContentAlignment="Stretch"
             DataContext="{Binding ConfigureView}"
             Header="System">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
               <views:SettingsSystemControl />
             </ScrollViewer>
-          </hc:TabItem>
+          </TabItem>
 
-        </hc:TabControl>
-      </hc:TabItem>
+        </TabControl>
+      </TabItem>
 
-    </hc:TabControl>
+    </TabControl>
 
     <!--  Bottom Bar - Row 2, Column 0+1  -->
     <Border

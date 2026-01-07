@@ -10,13 +10,11 @@
   xmlns:hc="https://handyorg.github.io/handycontrol"
   xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  Background="{DynamicResource SecondaryRegionBrush}"
   mc:Ignorable="d">
 
   <hc:UniformSpacingPanel
     Height="620"
     Margin="10,10,10,0"
-    Background="Transparent"
     Orientation="Vertical"
     Spacing="5">
 

@@ -11,26 +11,27 @@
   Foreground="{DynamicResource PrimaryTextBrush}"
   mc:Ignorable="d">
 
-  <StackPanel Margin="10,10,10,0" Background="Transparent">
+  <hc:UniformSpacingPanel
+    Margin="10,10,10,0"
+    Orientation="Vertical"
+    Spacing="5">
 
-    <!--  Color Profiles Group  -->
-    <StackPanel Margin="0,0,0,15">
-      <!--  Color Space Header  -->
-      <Label
-        Margin="0,0,0,5"
-        HorizontalAlignment="Left"
-        Background="Transparent"
-        BorderThickness="0"
-        Content="Color Space"
-        FontFamily="Segoe UI Semibold" />
+    <!--  Color Space Header  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
+        <Label
+          Margin="0,0,0,5"
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="Color Space"
+          FontFamily="Segoe UI Bold" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Color Range Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Color Range Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -42,12 +43,12 @@
           ToolTip="Color Range"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True" />
-
+      </hc:Col>
+      <hc:Col Span="14">
         <ComboBox
           x:Name="cboColorRange"
           Grid.Column="1"
-          Width="105"
-          Margin="0,2,0,0"
+          Width="115"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Video_Color_Range_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -56,15 +57,12 @@
           SelectedIndex="{Binding Video_Color_Range_SelectedIndex}"
           SelectedItem="{Binding Video_Color_Range_SelectedItem, Mode=TwoWay}"
           SelectionChanged="cboColorRange_SelectionChanged" />
-      </Grid>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Color Space Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Color Space Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -76,12 +74,12 @@
           ToolTip="Color Space"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True" />
-
+      </hc:Col>
+      <hc:Col Span="14">
         <ComboBox
           x:Name="cboColorSpace"
           Grid.Column="1"
-          Width="105"
-          Margin="0,2,0,0"
+          Width="115"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Video_Color_Space_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -89,15 +87,12 @@
           ItemsSource="{Binding Video_Color_Space_Items}"
           SelectedIndex="{Binding Video_Color_Space_SelectedIndex}"
           SelectedItem="{Binding Video_Color_Space_SelectedItem, Mode=TwoWay}" />
-      </Grid>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Color Primaries Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Color Primaries Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -109,12 +104,12 @@
           ToolTip="Color Primaries"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True" />
-
+      </hc:Col>
+      <hc:Col Span="14">
         <ComboBox
           x:Name="cboColorPrimaries"
           Grid.Column="1"
-          Width="105"
-          Margin="0,2,0,0"
+          Width="115"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Video_Color_Primaries_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -122,15 +117,12 @@
           ItemsSource="{Binding Video_Color_Primaries_Items}"
           SelectedIndex="{Binding Video_Color_Primaries_SelectedIndex}"
           SelectedItem="{Binding Video_Color_Primaries_SelectedItem, Mode=TwoWay}" />
-      </Grid>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Transfer Characteristics Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Transfer Characteristics Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -142,12 +134,12 @@
           ToolTip="Transfer Characteristics"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True" />
-
+      </hc:Col>
+      <hc:Col Span="14">
         <ComboBox
           x:Name="cboColorTransferCharacteristics"
           Grid.Column="1"
-          Width="105"
-          Margin="0,2,0,0"
+          Width="115"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Video_Color_TransferCharacteristics_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -155,15 +147,12 @@
           ItemsSource="{Binding Video_Color_TransferCharacteristics_Items}"
           SelectedIndex="{Binding Video_Color_TransferCharacteristics_SelectedIndex}"
           SelectedItem="{Binding Video_Color_TransferCharacteristics_SelectedItem, Mode=TwoWay}" />
-      </Grid>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Color Matrix Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Color Matrix Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -175,12 +164,12 @@
           ToolTip="Color Matrix"
           ToolTipService.InitialShowDelay="500"
           ToolTipService.ShowOnDisabled="True" />
-
+      </hc:Col>
+      <hc:Col Span="14">
         <ComboBox
           x:Name="cboColorMatrix"
           Grid.Column="1"
-          Width="105"
-          Margin="0,2,0,0"
+          Width="115"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           IsEnabled="{Binding Video_Color_Matrix_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -188,15 +177,13 @@
           ItemsSource="{Binding Video_Color_Matrix_Items}"
           SelectedIndex="{Binding Video_Color_Matrix_SelectedIndex}"
           SelectedItem="{Binding Video_Color_Matrix_SelectedItem, Mode=TwoWay}" />
-      </Grid>
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Color Reset Button Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Color Reset Button Row  -->
+    <hc:Row Gutter="20">
+      <hc:Col Span="10" />
+      <hc:Col Span="14">
         <Button
           x:Name="btnColor_Reset"
           Grid.Column="1"
@@ -210,9 +197,8 @@
           ToolTipService.ShowOnDisabled="True">
           <TextBlock Text="Reset" />
         </Button>
-      </Grid>
-    </StackPanel>
-
+      </hc:Col>
+    </hc:Row>
 
     <!--  EQ Group  -->
     <StackPanel Margin="0,0,0,15">
@@ -1778,6 +1764,6 @@
     </StackPanel>
 
 
-  </StackPanel>
+  </hc:UniformSpacingPanel>
 
 </UserControl>
