@@ -12,6 +12,7 @@
   mc:Ignorable="d">
 
   <hc:UniformSpacingPanel
+    Height="1000"
     Margin="10,10,10,0"
     Orientation="Vertical"
     Spacing="5">
@@ -181,14 +182,14 @@
     </hc:Row>
 
     <!--  Color Reset Button Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10" />
-      <hc:Col Span="14">
+    <hc:Row>
+      <hc:Col Span="18">
         <Button
           x:Name="btnColor_Reset"
           Grid.Column="1"
           Width="50"
-          HorizontalAlignment="Left"
+          Margin="-1,0"
+          HorizontalAlignment="Right"
           VerticalAlignment="Center"
           Click="btnColor_Reset_Click"
           Cursor="Hand"
@@ -200,24 +201,23 @@
       </hc:Col>
     </hc:Row>
 
-    <!--  EQ Group  -->
-    <StackPanel Margin="0,0,0,15">
-      <!--  EQ Header  -->
-      <Label
-        Margin="0,0,0,5"
-        HorizontalAlignment="Left"
-        Background="Transparent"
-        BorderThickness="0"
-        Content="EQ"
-        FontFamily="Segoe UI Semibold" />
+    <hc:Divider Margin="0,10,0,10" />
 
-      <!--  Brightness Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <!--  EQ Header  -->
+    <hc:Row>
+      <hc:Col Span="24">
+        <Label
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="EQ"
+          FontFamily="Segoe UI Bold" />
+      </hc:Col>
+    </hc:Row>
 
+    <!--  Brightness Row  -->
+    <hc:Row>
+      <hc:Col Span="24">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -226,45 +226,42 @@
           BorderThickness="0"
           Content="Brightness"
           FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+    </hc:Row>
 
-        <Grid Grid.Column="1">
-          <Slider
-            x:Name="slFilterVideo_EQ_Brightness"
-            Margin="0,4,50,0"
-            VerticalAlignment="Top"
-            Background="{DynamicResource BorderBrush}"
-            IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsMoveToPointEnabled="True"
-            IsSnapToTickEnabled="True"
-            Maximum="100"
-            Minimum="-100"
-            MouseDoubleClick="slFilterVideo_EQ_Brightness_MouseDoubleClick"
-            PreviewMouseUp="slFilterVideo_EQ_Brightness_PreviewMouseUp"
-            Value="{Binding FilterVideo_EQ_Brightness_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-          <TextBox
-            x:Name="tbxFilterVideo_EQ_Brightness"
-            Width="39"
-            Height="22"
-            Margin="0,2,9,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            KeyDown="tbxFilterVideo_EQ_Brightness_KeyDown"
-            MaxLength="4"
-            MaxLines="1"
-            PreviewKeyUp="tbxFilterVideo_EQ_Brightness_PreviewKeyUp"
-            Text="{Binding Value, ElementName=slFilterVideo_EQ_Brightness, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
-      </Grid>
+    <hc:Row Gutter="20">
+      <hc:Col Span="14">
+        <Slider
+          x:Name="slFilterVideo_EQ_Brightness"
+          VerticalAlignment="Center"
+          Background="{DynamicResource BorderBrush}"
+          IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsMoveToPointEnabled="True"
+          IsSnapToTickEnabled="True"
+          Maximum="100"
+          Minimum="-100"
+          MouseDoubleClick="slFilterVideo_EQ_Brightness_MouseDoubleClick"
+          PreviewMouseUp="slFilterVideo_EQ_Brightness_PreviewMouseUp"
+          Value="{Binding FilterVideo_EQ_Brightness_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+      <hc:Col Span="10">
+        <TextBox
+          x:Name="tbxFilterVideo_EQ_Brightness"
+          Width="50"
+          HorizontalAlignment="Left"
+          HorizontalContentAlignment="Center"
+          IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          KeyDown="tbxFilterVideo_EQ_Brightness_KeyDown"
+          MaxLength="4"
+          MaxLines="1"
+          PreviewKeyUp="tbxFilterVideo_EQ_Brightness_PreviewKeyUp"
+          Text="{Binding Value, ElementName=slFilterVideo_EQ_Brightness, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Contrast Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Contrast Row  -->
+    <hc:Row>
+      <hc:Col Span="24">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -273,45 +270,42 @@
           BorderThickness="0"
           Content="Contrast"
           FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+    </hc:Row>
 
-        <Grid Grid.Column="1">
-          <Slider
-            x:Name="slFilterVideo_EQ_Contrast"
-            Margin="0,4,50,0"
-            VerticalAlignment="Top"
-            Background="{DynamicResource BorderBrush}"
-            IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsMoveToPointEnabled="True"
-            IsSnapToTickEnabled="True"
-            Maximum="100"
-            Minimum="-100"
-            MouseDoubleClick="slFilterVideo_EQ_Contrast_MouseDoubleClick"
-            PreviewMouseUp="slFilterVideo_EQ_Contrast_PreviewMouseUp"
-            Value="{Binding FilterVideo_EQ_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-          <TextBox
-            x:Name="tbxFilterVideo_EQ_Contrast"
-            Width="39"
-            Height="22"
-            Margin="0,2,9,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            KeyDown="tbxFilterVideo_EQ_Contrast_KeyDown"
-            MaxLength="4"
-            MaxLines="1"
-            PreviewKeyUp="tbxFilterVideo_EQ_Contrast_PreviewKeyUp"
-            Text="{Binding Value, ElementName=slFilterVideo_EQ_Contrast, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
-      </Grid>
+    <hc:Row Gutter="20">
+      <hc:Col Span="14">
+        <Slider
+          x:Name="slFilterVideo_EQ_Contrast"
+          VerticalAlignment="Center"
+          Background="{DynamicResource BorderBrush}"
+          IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsMoveToPointEnabled="True"
+          IsSnapToTickEnabled="True"
+          Maximum="100"
+          Minimum="-100"
+          MouseDoubleClick="slFilterVideo_EQ_Contrast_MouseDoubleClick"
+          PreviewMouseUp="slFilterVideo_EQ_Contrast_PreviewMouseUp"
+          Value="{Binding FilterVideo_EQ_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+      <hc:Col Span="10">
+        <TextBox
+          x:Name="tbxFilterVideo_EQ_Contrast"
+          Width="50"
+          HorizontalAlignment="Left"
+          HorizontalContentAlignment="Center"
+          IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          KeyDown="tbxFilterVideo_EQ_Contrast_KeyDown"
+          MaxLength="4"
+          MaxLines="1"
+          PreviewKeyUp="tbxFilterVideo_EQ_Contrast_PreviewKeyUp"
+          Text="{Binding Value, ElementName=slFilterVideo_EQ_Contrast, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Saturation Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Saturation Row  -->
+    <hc:Row>
+      <hc:Col Span="24">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -320,45 +314,42 @@
           BorderThickness="0"
           Content="Saturation"
           FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+    </hc:Row>
 
-        <Grid Grid.Column="1">
-          <Slider
-            x:Name="slFilterVideo_EQ_Saturation"
-            Margin="0,4,50,0"
-            VerticalAlignment="Top"
-            Background="{DynamicResource BorderBrush}"
-            IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsMoveToPointEnabled="True"
-            IsSnapToTickEnabled="True"
-            Maximum="100"
-            Minimum="-100"
-            MouseDoubleClick="slFilterVideo_EQ_Saturation_MouseDoubleClick"
-            PreviewMouseUp="slFilterVideo_EQ_Saturation_PreviewMouseUp"
-            Value="{Binding FilterVideo_EQ_Saturation_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-          <TextBox
-            x:Name="tbxFilterVideo_EQ_Saturation"
-            Width="39"
-            Height="22"
-            Margin="0,2,9,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            KeyDown="tbxFilterVideo_EQ_Saturation_KeyDown"
-            MaxLength="4"
-            MaxLines="1"
-            PreviewKeyUp="tbxFilterVideo_EQ_Saturation_PreviewKeyUp"
-            Text="{Binding Value, ElementName=slFilterVideo_EQ_Saturation, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
-      </Grid>
+    <hc:Row Gutter="20">
+      <hc:Col Span="14">
+        <Slider
+          x:Name="slFilterVideo_EQ_Saturation"
+          VerticalAlignment="Center"
+          Background="{DynamicResource BorderBrush}"
+          IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsMoveToPointEnabled="True"
+          IsSnapToTickEnabled="True"
+          Maximum="100"
+          Minimum="-100"
+          MouseDoubleClick="slFilterVideo_EQ_Saturation_MouseDoubleClick"
+          PreviewMouseUp="slFilterVideo_EQ_Saturation_PreviewMouseUp"
+          Value="{Binding FilterVideo_EQ_Saturation_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+      <hc:Col Span="10">
+        <TextBox
+          x:Name="tbxFilterVideo_EQ_Saturation"
+          Width="50"
+          HorizontalAlignment="Left"
+          HorizontalContentAlignment="Center"
+          IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          KeyDown="tbxFilterVideo_EQ_Saturation_KeyDown"
+          MaxLength="4"
+          MaxLines="1"
+          PreviewKeyUp="tbxFilterVideo_EQ_Saturation_PreviewKeyUp"
+          Text="{Binding Value, ElementName=slFilterVideo_EQ_Saturation, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+    </hc:Row>
 
-      <!--  Gamma Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <!--  Gamma Row  -->
+    <hc:Row>
+      <hc:Col Span="24">
         <Label
           Grid.Column="0"
           HorizontalAlignment="Left"
@@ -367,50 +358,47 @@
           BorderThickness="0"
           Content="Gamma"
           FontFamily="Segoe UI Semilight" />
+      </hc:Col>
+    </hc:Row>
 
-        <Grid Grid.Column="1">
-          <Slider
-            x:Name="slFilterVideo_EQ_Gamma"
-            Margin="0,4,50,0"
-            VerticalAlignment="Top"
-            Background="{DynamicResource BorderBrush}"
-            IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsMoveToPointEnabled="True"
-            IsSnapToTickEnabled="True"
-            Maximum="100"
-            Minimum="-100"
-            MouseDoubleClick="slFilterVideo_EQ_Gamma_MouseDoubleClick"
-            PreviewMouseUp="slFilterVideo_EQ_Gamma_PreviewMouseUp"
-            Value="{Binding FilterVideo_EQ_Gamma_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-          <TextBox
-            x:Name="tbxFilterVideo_EQ_Gamma"
-            Width="39"
-            Height="22"
-            Margin="0,2,9,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            KeyDown="tbxFilterVideo_EQ_Gamma_KeyDown"
-            MaxLength="4"
-            MaxLines="1"
-            PreviewKeyUp="tbxFilterVideo_EQ_Gamma_PreviewKeyUp"
-            Text="{Binding Value, ElementName=slFilterVideo_EQ_Gamma, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
-      </Grid>
-
-      <!--  EQ Reset Button Row  -->
-      <Grid Margin="0,0,0,5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <Button
-          x:Name="btnFilterVideo_EQ_Reset"
-          Grid.Column="1"
+    <hc:Row Gutter="20">
+      <hc:Col Span="14">
+        <Slider
+          x:Name="slFilterVideo_EQ_Gamma"
+          VerticalAlignment="Center"
+          Background="{DynamicResource BorderBrush}"
+          IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          IsMoveToPointEnabled="True"
+          IsSnapToTickEnabled="True"
+          Maximum="100"
+          Minimum="-100"
+          MouseDoubleClick="slFilterVideo_EQ_Gamma_MouseDoubleClick"
+          PreviewMouseUp="slFilterVideo_EQ_Gamma_PreviewMouseUp"
+          Value="{Binding FilterVideo_EQ_Gamma_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+      <hc:Col Span="10">
+        <TextBox
+          x:Name="tbxFilterVideo_EQ_Gamma"
           Width="50"
           HorizontalAlignment="Left"
+          HorizontalContentAlignment="Center"
+          IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          KeyDown="tbxFilterVideo_EQ_Gamma_KeyDown"
+          MaxLength="4"
+          MaxLines="1"
+          PreviewKeyUp="tbxFilterVideo_EQ_Gamma_PreviewKeyUp"
+          Text="{Binding Value, ElementName=slFilterVideo_EQ_Gamma, UpdateSourceTrigger=PropertyChanged}" />
+      </hc:Col>
+    </hc:Row>
+
+    <!--  EQ Reset Button Row  -->
+    <hc:Row>
+      <hc:Col Span="18">
+        <Button
+          x:Name="btnFilterVideo_EQ_Reset"
+          Width="50"
+          Margin="-1,0"
+          HorizontalAlignment="Right"
           VerticalAlignment="Bottom"
           Click="btnFilterVideo_EQ_Reset_Click"
           Cursor="Hand"
@@ -419,9 +407,10 @@
           ToolTipService.ShowOnDisabled="True">
           <TextBlock Text="Reset" />
         </Button>
-      </Grid>
-    </StackPanel>
+      </hc:Col>
+    </hc:Row>
 
+    <hc:Divider Margin="0,10,0,10" />
 
     <!--  Selective Color Group  -->
     <StackPanel Margin="0,0,0,0">
