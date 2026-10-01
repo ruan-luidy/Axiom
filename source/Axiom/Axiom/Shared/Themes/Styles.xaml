@@ -594,15 +594,18 @@
               Style="{x:Null}"
               Visibility="Collapsed" />
 
+            <!--  6 px from the field, below it or above it when the screen runs out  -->
             <Popup
               x:Name="PART_Popup"
+              controls:DropDownPlacement.Gap="6"
+              controls:DropDownPlacement.ShadowRoom="16"
               AllowsTransparency="True"
               Focusable="False"
               IsOpen="{TemplateBinding IsDropDownOpen}"
-              Placement="Bottom"
+              PlacementTarget="{Binding ElementName=Root}"
               PopupAnimation="None">
               <!--  The card lines up with the field; the margin is the room its shadow needs  -->
-              <Grid x:Name="DropDown" Margin="0,4,14,16">
+              <Grid x:Name="DropDown" Margin="0,0,14,16">
                 <Grid.RenderTransform>
                   <TranslateTransform />
                 </Grid.RenderTransform>
