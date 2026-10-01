@@ -1,145 +1,128 @@
+<!--
+  The FFmpeg script: generated from the options, editable, and runnable as it stands.
+-->
 <UserControl
   x:Class="Axiom.Views.ScriptControl"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="450"
-  d:DesignWidth="800"
+  d:DesignWidth="520"
   mc:Ignorable="d">
 
-  <!--  Script Container  -->
-  <Border
-    Background="{DynamicResource RegionBrush}"
-    BorderBrush="{DynamicResource BorderBrush}"
-    BorderThickness="1"
-    CornerRadius="4">
+  <Border Style="{StaticResource Card}">
     <Grid>
       <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
         <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
       </Grid.RowDefinitions>
 
-      <!--  Script View TextBox  -->
+      <!--  Header: title, file and edit actions, then generate and run  -->
+      <Border
+        Padding="12,6,8,6"
+        BorderBrush="{DynamicResource BorderBrush}"
+        BorderThickness="0,0,0,1">
+        <DockPanel LastChildFill="False">
+          <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Path
+              Data="{icons:Phosphor TerminalBold}"
+              Fill="{DynamicResource ThirdlyTextBrush}"
+              Style="{StaticResource Icon.Small}" />
+            <TextBlock
+              Margin="8,0,0,0"
+              Style="{StaticResource SectionHeaderStyle}"
+              Text="SCRIPT" />
+          </StackPanel>
+
+          <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button
+              x:Name="btnScriptLoad"
+              Click="btnScriptLoad_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Load a script from a file">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon}" />
+            </Button>
+            <Button
+              x:Name="btnScriptSave"
+              Click="btnScriptSave_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Save the script to a file">
+              <Path Data="{icons:Phosphor FloppyDiskBold}" Style="{StaticResource Icon}" />
+            </Button>
+            <Button
+              x:Name="btnScriptCopy"
+              Click="btnScriptCopy_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Copy">
+              <Path Data="{icons:Phosphor CopyBold}" Style="{StaticResource Icon}" />
+            </Button>
+            <Button
+              x:Name="btnScriptClear"
+              Click="btnScriptClear_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Clear">
+              <Path Data="{icons:Phosphor EraserBold}" Style="{StaticResource Icon}" />
+            </Button>
+            <Button
+              x:Name="btnScriptSort"
+              Margin="4,0,0,0"
+              Padding="10,0"
+              Click="btnScriptSort_Click"
+              Style="{StaticResource ButtonDefault.Small}"
+              ToolTip="Sort the arguments one per line, or put them back on one line">
+              <TextBlock x:Name="txblScriptSort" Text="{Binding MainView.Sort_Text, Mode=TwoWay}" />
+            </Button>
+            <Button
+              x:Name="btnScript"
+              Margin="4,0,0,0"
+              Click="btnScript_Click"
+              Style="{StaticResource ButtonDefault.Small}"
+              ToolTip="Generate FFmpeg Commands">
+              <StackPanel Orientation="Horizontal">
+                <Path Data="{icons:Phosphor MagicWandBold}" Style="{StaticResource Icon.Small}" />
+                <TextBlock Margin="6,0,0,0" Text="Script" />
+              </StackPanel>
+            </Button>
+            <Button
+              x:Name="btnScriptRun"
+              Margin="4,0,0,0"
+              Click="btnScriptRun_Click"
+              Style="{StaticResource ButtonDefault.Small}"
+              ToolTip="Run the customized Script.">
+              <StackPanel Orientation="Horizontal">
+                <Path Data="{icons:Phosphor PlayBold}" Style="{StaticResource Icon.Small}" />
+                <TextBlock Margin="6,0,0,0" Text="Run" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </DockPanel>
+      </Border>
+
       <TextBox
         x:Name="tbxScriptView"
-        Grid.Row="0"
-        Margin="0"
-        Padding="10"
+        Grid.Row="1"
+        Height="Auto"
+        MinHeight="0"
+        Padding="12,10"
+        VerticalAlignment="Stretch"
         VerticalContentAlignment="Top"
+        hc:InfoElement.Placeholder="Press Script to generate the FFmpeg command"
         AcceptsReturn="True"
         AllowDrop="True"
         Background="Transparent"
         BorderThickness="0"
-        FontFamily="Consolas"
-        FontSize="13"
+        FontFamily="{StaticResource Font.Mono}"
+        FontSize="{StaticResource FontSize.Body}"
         PreviewDragOver="tbxScriptView_PreviewDragOver"
         PreviewDrop="tbxScriptView_PreviewDrop"
         RenderOptions.ClearTypeHint="Enabled"
+        Style="{StaticResource TextBoxExtend}"
         Text="{Binding MainView.ScriptView_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         TextWrapping="Wrap"
         VerticalScrollBarVisibility="Auto" />
-
-      <!--  Buttons Bar  -->
-      <Border
-        Grid.Row="1"
-        Background="{DynamicResource SecondaryRegionBrush}"
-        BorderBrush="{DynamicResource BorderBrush}"
-        BorderThickness="0,1,0,0"
-        CornerRadius="0,0,4,4">
-        <StackPanel
-          Margin="8,6,8,6"
-          HorizontalAlignment="Left"
-          Orientation="Horizontal">
-
-          <!--  Load Button  -->
-          <Button
-            x:Name="btnScriptLoad"
-            Width="59"
-            Margin="0,0,4,0"
-            Click="btnScriptLoad_Click"
-            Cursor="Hand">
-            <TextBlock Text="Load" />
-          </Button>
-
-          <!--  Save Button  -->
-          <Button
-            x:Name="btnScriptSave"
-            Width="59"
-            Margin="0,0,4,0"
-            Click="btnScriptSave_Click"
-            Cursor="Hand">
-            <TextBlock Text="Save" />
-          </Button>
-
-          <!--  Copy Button  -->
-          <Button
-            x:Name="btnScriptCopy"
-            Width="59"
-            Margin="0,0,4,0"
-            Click="btnScriptCopy_Click"
-            Cursor="Hand">
-            <TextBlock Text="Copy" />
-          </Button>
-
-          <!--  Clear Button  -->
-          <Button
-            x:Name="btnScriptClear"
-            Width="59"
-            Margin="0,0,4,0"
-            Click="btnScriptClear_Click"
-            Cursor="Hand">
-            <TextBlock
-              x:Name="txblScriptClear"
-              Width="50"
-              Text="Clear"
-              TextAlignment="Center" />
-          </Button>
-
-          <!--  Sort Button  -->
-          <Button
-            x:Name="btnScriptSort"
-            Width="59"
-            Margin="0,0,8,0"
-            Click="btnScriptSort_Click"
-            Cursor="Hand">
-            <TextBlock
-              x:Name="txblScriptSort"
-              Width="50"
-              Text="{Binding MainView.Sort_Text, Mode=TwoWay}"
-              TextAlignment="Center" />
-          </Button>
-
-          <!--  Script Button  -->
-          <Button
-            x:Name="btnScript"
-            Width="75"
-            Margin="0,0,4,0"
-            Click="btnScript_Click"
-            Cursor="Hand"
-            ToolTip="Generate FFmpeg Commands"
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True">
-            <TextBlock Text="Script" />
-          </Button>
-
-          <!--  Run Button  -->
-          <Button
-            x:Name="btnScriptRun"
-            Width="72"
-            Margin="0"
-            Click="btnScriptRun_Click"
-            Cursor="Hand"
-            ToolTip="Run the customized Script."
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True">
-            <TextBlock Text="Run" />
-          </Button>
-
-        </StackPanel>
-      </Border>
-
     </Grid>
   </Border>
-
 </UserControl>

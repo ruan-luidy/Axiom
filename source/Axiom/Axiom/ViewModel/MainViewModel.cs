@@ -65,8 +65,8 @@ namespace ViewModel
         /// </summary>
         public void LoadControlsDefaults()
         {
-            Window_Width = 824;
-            Window_Height = 464;
+            Window_Width = 1280;
+            Window_Height = 760;
 
             Window_Position_Top = 0;
             Window_Position_Left = 0;

@@ -1,6 +1,5 @@
 <!--
-  Input/Output Control
-  Extracted from MainWindow.xaml (Lines 182-347)
+  Input and output paths: browse, type or drop a file, clear it, open its folder.
 -->
 <UserControl
   x:Class="Axiom.Views.InputOutputControl"
@@ -8,210 +7,135 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:hc="https://handyorg.github.io/handycontrol"
-  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  d:DesignHeight="56"
-  d:DesignWidth="545"
+  d:DesignHeight="84"
+  d:DesignWidth="760"
   mc:Ignorable="d">
 
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
+  <UserControl.Resources>
+    <!--  The browse button at the start of a row: icon and a fixed width label, so both rows line up  -->
+    <Style
+      x:Key="BrowseButton"
+      BasedOn="{StaticResource ButtonDefault.Small}"
+      TargetType="Button">
+      <Setter Property="Width" Value="88" />
+      <Setter Property="Margin" Value="0,0,8,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="ToolTipService.InitialShowDelay" Value="400" />
+    </Style>
 
-    <!--  Input Row  -->
-    <!--  Input Button  -->
-    <Button
-      x:Name="btnInput"
-      Grid.Row="0"
-      Grid.Column="0"
-      Width="60"
-      Margin="0,0,4,4"
-      HorizontalAlignment="Left"
-      Click="btnInput_Click"
-      Cursor="Hand">
-      <TextBlock Text="Input" />
-    </Button>
+    <!--  The path itself: monospace, borderless inside the row  -->
+    <Style
+      x:Key="PathBox"
+      BasedOn="{StaticResource TextBox.Small}"
+      TargetType="TextBox">
+      <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
+      <Setter Property="AllowDrop" Value="True" />
+      <Setter Property="MaxLines" Value="1" />
+      <Setter Property="TextWrapping" Value="NoWrap" />
+      <Setter Property="Background" Value="{DynamicResource SecondaryRegionBrush}" />
+    </Style>
+  </UserControl.Resources>
 
-    <!--  Input Container  -->
-    <Border
-      Grid.Row="0"
-      Grid.Column="1"
-      Margin="0,0,0,4"
-      Background="{DynamicResource RegionBrush}"
-      BorderBrush="{DynamicResource BorderBrush}"
-      BorderThickness="1"
-      CornerRadius="4">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+  <Border Padding="10" Style="{StaticResource Card}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="8" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
 
-        <!--  Input Textbox  -->
-        <TextBox
-          x:Name="tbxInput"
-          Grid.Column="0"
-          Padding="8,0,8,0"
-          VerticalAlignment="Center"
-          VerticalContentAlignment="Center"
-          AllowDrop="True"
-          Background="Transparent"
-          BorderThickness="0"
-          MaxLines="1"
-          PreviewDragOver="tbxInput_PreviewDragOver"
-          PreviewDrop="tbxInput_PreviewDrop"
-          Text="{Binding MainView.Input_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          TextChanged="tbxInput_TextChanged"
-          TextWrapping="NoWrap" />
+      <!--  Input  -->
+      <Button
+        x:Name="btnInput"
+        Click="btnInput_Click"
+        Style="{StaticResource BrowseButton}"
+        ToolTip="Choose the file (or, in batch, the folder) to convert">
+        <StackPanel Orientation="Horizontal">
+          <Path Data="{icons:Phosphor FileArrowUpBold}" Style="{StaticResource Icon.Small}" />
+          <TextBlock Margin="8,0,0,0" Text="Input" />
+        </StackPanel>
+      </Button>
+      <TextBox
+        x:Name="tbxInput"
+        Grid.Column="1"
+        hc:InfoElement.Placeholder="Drop a file here or browse"
+        PreviewDragOver="tbxInput_PreviewDragOver"
+        PreviewDrop="tbxInput_PreviewDrop"
+        Style="{StaticResource PathBox}"
+        Text="{Binding MainView.Input_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextChanged="tbxInput_TextChanged" />
+      <Button
+        x:Name="btnInputClear"
+        Grid.Column="2"
+        Margin="4,0,0,0"
+        Click="btnInputClear_Click"
+        IsEnabled="{Binding MainView.Input_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Style="{StaticResource IconButton}"
+        ToolTip="Clear">
+        <Path Data="{icons:Phosphor XBold}" Style="{StaticResource Icon.Small}" />
+      </Button>
+      <Button
+        x:Name="openLocationInput"
+        Grid.Column="3"
+        Click="openLocationInput_Click"
+        IsEnabled="{Binding MainView.Input_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Style="{StaticResource IconButton}"
+        ToolTip="Open this location">
+        <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon}" />
+      </Button>
 
-        <!--  Input Clear Button  -->
-        <Button
-          x:Name="btnInputClear"
-          Grid.Column="1"
-          Width="28"
-          Height="28"
-          Margin="2,0,2,0"
-          Padding="0"
-          Background="Transparent"
-          BorderThickness="0"
-          Click="btnInputClear_Click"
-          Cursor="Hand"
-          IsEnabled="{Binding MainView.Input_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ToolTip="Clear"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True">
-          <iconPacks:PackIconPhosphorIcons
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="{DynamicResource PrimaryTextBrush}"
-            Kind="BackspaceFill" />
-        </Button>
-
-        <!--  Input Location Button  -->
-        <Button
-          x:Name="openLocationInput"
-          Grid.Column="2"
-          Width="28"
-          Height="28"
-          Margin="0,0,2,0"
-          Padding="0"
-          Background="Transparent"
-          BorderThickness="0"
-          Click="openLocationInput_Click"
-          Cursor="Hand"
-          IsEnabled="{Binding MainView.Input_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ToolTip="Open this location"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True">
-          <iconPacks:PackIconPhosphorIcons
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="{DynamicResource PrimaryTextBrush}"
-            Kind="FolderOpenFill" />
-        </Button>
-      </Grid>
-    </Border>
-
-    <!--  Output Row  -->
-    <!--  Output Button  -->
-    <Button
-      x:Name="btnOutput"
-      Grid.Row="1"
-      Grid.Column="0"
-      Width="60"
-      Margin="0,0,4,0"
-      HorizontalAlignment="Left"
-      Click="btnOutput_Click"
-      Cursor="Hand">
-      <TextBlock Text="Output" />
-    </Button>
-
-    <!--  Output Container  -->
-    <Border
-      Grid.Row="1"
-      Grid.Column="1"
-      Margin="0"
-      Background="{DynamicResource RegionBrush}"
-      BorderBrush="{DynamicResource BorderBrush}"
-      BorderThickness="1"
-      CornerRadius="4">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <!--  Output Textbox  -->
-        <TextBox
-          x:Name="tbxOutput"
-          Grid.Column="0"
-          Padding="8,0,8,0"
-          AllowDrop="True"
-          Background="Transparent"
-          BorderThickness="0"
-          MaxLines="1"
-          PreviewDragOver="tbxOutput_PreviewDragOver"
-          PreviewDrop="tbxOutput_PreviewDrop"
-          PreviewKeyUp="tbxOutput_PreviewKeyUp"
-          Text="{Binding MainView.Output_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          TextChanged="tbxOutput_TextChanged"
-          TextWrapping="NoWrap" />
-
-        <!--  Output Clear Button  -->
-        <Button
-          x:Name="btnOutputClear"
-          Grid.Column="1"
-          Width="28"
-          Height="28"
-          Margin="2,0,2,0"
-          Padding="0"
-          Background="Transparent"
-          BorderThickness="0"
-          Click="btnOutputClear_Click"
-          Cursor="Hand"
-          IsEnabled="{Binding MainView.Output_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ToolTip="Clear"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True">
-          <iconPacks:PackIconPhosphorIcons
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="{DynamicResource PrimaryTextBrush}"
-            Kind="BackspaceFill" />
-        </Button>
-
-        <!--  Output Location Button  -->
-        <Button
-          x:Name="openLocationOutput"
-          Grid.Column="2"
-          Width="28"
-          Height="28"
-          Margin="0,0,2,0"
-          Padding="0"
-          Background="Transparent"
-          BorderThickness="0"
-          Click="openLocationOutput_Click"
-          Cursor="Hand"
-          IsEnabled="{Binding MainView.Output_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ToolTip="Open this location"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True">
-          <iconPacks:PackIconPhosphorIcons
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="{DynamicResource PrimaryTextBrush}"
-            Kind="FolderOpenFill" />
-        </Button>
-      </Grid>
-    </Border>
-
-  </Grid>
+      <!--  Output  -->
+      <Button
+        x:Name="btnOutput"
+        Grid.Row="2"
+        Click="btnOutput_Click"
+        Style="{StaticResource BrowseButton}"
+        ToolTip="Choose where the converted file goes">
+        <StackPanel Orientation="Horizontal">
+          <Path Data="{icons:Phosphor FileArrowDownBold}" Style="{StaticResource Icon.Small}" />
+          <TextBlock Margin="8,0,0,0" Text="Output" />
+        </StackPanel>
+      </Button>
+      <TextBox
+        x:Name="tbxOutput"
+        Grid.Row="2"
+        Grid.Column="1"
+        hc:InfoElement.Placeholder="Where the converted file is saved"
+        PreviewDragOver="tbxOutput_PreviewDragOver"
+        PreviewDrop="tbxOutput_PreviewDrop"
+        PreviewKeyUp="tbxOutput_PreviewKeyUp"
+        Style="{StaticResource PathBox}"
+        Text="{Binding MainView.Output_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        TextChanged="tbxOutput_TextChanged" />
+      <Button
+        x:Name="btnOutputClear"
+        Grid.Row="2"
+        Grid.Column="2"
+        Margin="4,0,0,0"
+        Click="btnOutputClear_Click"
+        IsEnabled="{Binding MainView.Output_Clear_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Style="{StaticResource IconButton}"
+        ToolTip="Clear">
+        <Path Data="{icons:Phosphor XBold}" Style="{StaticResource Icon.Small}" />
+      </Button>
+      <Button
+        x:Name="openLocationOutput"
+        Grid.Row="2"
+        Grid.Column="3"
+        Click="openLocationOutput_Click"
+        IsEnabled="{Binding MainView.Output_Location_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Style="{StaticResource IconButton}"
+        ToolTip="Open this location">
+        <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon}" />
+      </Button>
+    </Grid>
+  </Border>
 </UserControl>

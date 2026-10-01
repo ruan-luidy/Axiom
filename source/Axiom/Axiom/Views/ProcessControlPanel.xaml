@@ -1,7 +1,5 @@
 <!--
-  Process Control Panel
-  Extracted from MainWindow.xaml (Lines 7845-8011)
-  Contains: Preset Management and Convert/Preview buttons
+  The action bar under the workspace: presets on the left; batch, preview and convert on the right.
 -->
 <UserControl
   x:Class="Axiom.Views.ProcessControlPanel"
@@ -9,148 +7,142 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:hc="https://handyorg.github.io/handycontrol"
-  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  d:DesignHeight="35"
-  d:DesignWidth="433"
+  d:DesignHeight="52"
+  d:DesignWidth="760"
   mc:Ignorable="d">
 
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
-    </Grid.ColumnDefinitions>
+  <Border Padding="10,8" Style="{StaticResource Card}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" MaxWidth="220" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
 
-    <!--  Delete Preset Button  -->
-    <Button
-      x:Name="btnDeletePreset"
-      Grid.Column="0"
-      Width="28"
-      Height="28"
-      Margin="0,0,2,0"
-      Padding="0"
-      Click="btnDeletePreset_Click"
-      Cursor="Hand"
-      ToolTip="Delete Preset"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <iconPacks:PackIconPhosphorIcons
-        HorizontalAlignment="Center"
+      <!--  Presets; the combo gives up width first when the window is narrow  -->
+      <StackPanel
+        Margin="0,0,10,0"
         VerticalAlignment="Center"
-        Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="Trash" />
-    </Button>
+        Orientation="Horizontal">
+        <Path
+          Data="{icons:Phosphor BookmarksSimpleBold}"
+          Fill="{DynamicResource ThirdlyTextBrush}"
+          Style="{StaticResource Icon.Small}" />
+        <TextBlock
+          Margin="8,0,0,0"
+          Style="{StaticResource SectionHeaderStyle}"
+          Text="PRESET"
+          Visibility="{Binding IsCompact, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Boolean2VisibilityReConverter}}" />
+      </StackPanel>
+      <ComboBox
+        x:Name="cboPreset"
+        Grid.Column="1"
+        MinWidth="96"
+        ItemsSource="{Binding MainView.Preset_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        SelectedIndex="{Binding MainView.Preset_SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        SelectedValue="{Binding MainView.Preset_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        SelectedValuePath="Name"
+        SelectionChanged="cboPreset_SelectionChanged">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      <StackPanel
+        Grid.Column="2"
+        Margin="4,0,0,0"
+        Orientation="Horizontal">
+        <Button
+          x:Name="btnSavePreset"
+          Click="btnSavePreset_Click"
+          Style="{StaticResource IconButton}"
+          ToolTip="Save Preset">
+          <Path Data="{icons:Phosphor FloppyDiskBold}" Style="{StaticResource Icon}" />
+        </Button>
+        <Button
+          x:Name="btnDeletePreset"
+          Click="btnDeletePreset_Click"
+          Style="{StaticResource IconButton}"
+          ToolTip="Delete Preset">
+          <Path Data="{icons:Phosphor TrashBold}" Style="{StaticResource Icon}" />
+        </Button>
+      </StackPanel>
 
-    <!--  Save Preset Button  -->
-    <Button
-      x:Name="btnSavePreset"
-      Grid.Column="1"
-      Width="28"
-      Height="28"
-      Margin="0,0,4,0"
-      Padding="0"
-      Click="btnSavePreset_Click"
-      Cursor="Hand"
-      ToolTip="Save Preset"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True">
-      <iconPacks:PackIconPhosphorIcons
-        HorizontalAlignment="Center"
+      <!--  Batch, preview, convert  -->
+      <StackPanel
+        Grid.Column="4"
+        Margin="12,0,0,0"
         VerticalAlignment="Center"
-        Foreground="{DynamicResource PrimaryTextBrush}"
-        Kind="FloppyDisk" />
-    </Button>
+        Orientation="Horizontal">
+        <ToggleButton
+          x:Name="tglBatch"
+          Height="{StaticResource Control.Height}"
+          Padding="10,0"
+          Checked="tglBatch_Checked"
+          IsChecked="{Binding MainView.Batch_IsChecked, Mode=TwoWay}"
+          Style="{StaticResource ToggleButtonDefault}"
+          ToolTip="Enable, Browse for folder, Enter file extention to batch process."
+          ToolTipService.InitialShowDelay="400"
+          ToolTipService.ShowOnDisabled="True"
+          Unchecked="tglBatch_Unchecked">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor StackBold}" Style="{StaticResource Icon.Small}" />
+            <TextBlock
+              x:Name="batchTextBlock"
+              Margin="6,0,0,0"
+              FontSize="{StaticResource FontSize.Sm}"
+              Text="Batch" />
+          </StackPanel>
+        </ToggleButton>
+        <TextBox
+          x:Name="batchExtensionTextBox"
+          Width="72"
+          Margin="4,0,12,0"
+          hc:InfoElement.Placeholder="ext"
+          IsEnabled="{Binding MainView.BatchExtension_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          Style="{StaticResource TextBox.Small}"
+          Text="{Binding MainView.BatchExtension_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          TextChanged="batchExtension_TextChanged"
+          TextWrapping="NoWrap"
+          ToolTip="File Extension in Folder to Batch Process (e.g. mp4)"
+          ToolTipService.InitialShowDelay="400"
+          ToolTipService.ShowOnDisabled="True" />
 
-    <!--  Preset ComboBox  -->
-    <ComboBox
-      x:Name="cboPreset"
-      Grid.Column="2"
-      Width="75"
-      Height="22"
-      Margin="0,0,8,0"
-      VerticalAlignment="Center"
-      ItemsSource="{Binding MainView.Preset_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      SelectedIndex="{Binding MainView.Preset_SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      SelectedValue="{Binding MainView.Preset_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      SelectedValuePath="Name"
-      SelectionChanged="cboPreset_SelectionChanged">
-      <ComboBox.ItemTemplate>
-        <DataTemplate>
-          <Grid Width="93">
-            <TextBlock DataContext="{Binding}">
-              <TextBlock.Text>
-                <Binding Path="Name" />
-              </TextBlock.Text>
-            </TextBlock>
-          </Grid>
-        </DataTemplate>
-      </ComboBox.ItemTemplate>
-    </ComboBox>
-
-    <!--  Spacer  -->
-    <Grid Grid.Column="3" />
-
-    <!--  Batch Toggle  -->
-    <ToggleButton
-      x:Name="tglBatch"
-      Grid.Column="4"
-      Margin="0,0,4,0"
-      VerticalAlignment="Center"
-      Checked="tglBatch_Checked"
-      Cursor="Hand"
-      IsChecked="{Binding MainView.Batch_IsChecked, Mode=TwoWay}"
-      ToolTip="Enable, Browse for folder, Enter file extention to batch process."
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True"
-      Unchecked="tglBatch_Unchecked">
-      <TextBlock
-        x:Name="batchTextBlock"
-        Style="{DynamicResource TextBlockStyle}"
-        Text="Batch" />
-    </ToggleButton>
-
-    <!--  Batch Extension TextBox  -->
-    <TextBox
-      x:Name="batchExtensionTextBox"
-      Grid.Column="5"
-      Margin="0,0,4,0"
-      VerticalAlignment="Center"
-      IsEnabled="{Binding MainView.BatchExtension_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      Text="{Binding MainView.BatchExtension_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      TextChanged="batchExtension_TextChanged"
-      TextWrapping="NoWrap"
-      ToolTip="File Extension in Folder to Batch Process (e.g. mp4)"
-      ToolTipService.InitialShowDelay="500"
-      ToolTipService.ShowOnDisabled="True" />
-
-    <!--  Preview Button  -->
-    <Button
-      x:Name="btnPreview"
-      Grid.Column="6"
-      Margin="0,0,4,0"
-      VerticalAlignment="Center"
-      Click="btnPreview_Click"
-      Cursor="Hand">
-      <TextBlock x:Name="btnPreviewTextBlock" Text="Preview" />
-    </Button>
-
-    <!--  Convert Button  -->
-    <Button
-      x:Name="btnConvert"
-      Grid.Column="7"
-      Width="75"
-      Margin="0"
-      VerticalAlignment="Center"
-      Click="btnConvert_Click"
-      Cursor="Hand">
-      <TextBlock x:Name="btnConvertTextBlock" Text="{Binding MainView.Convert_Text, Mode=TwoWay}" />
-    </Button>
-
-  </Grid>
+        <Button
+          x:Name="btnPreview"
+          Click="btnPreview_Click"
+          Style="{StaticResource ButtonDefault.Small}"
+          ToolTip="Preview the output with FFplay">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor EyeBold}" Style="{StaticResource Icon.Small}" />
+            <TextBlock
+              x:Name="btnPreviewTextBlock"
+              Margin="6,0,0,0"
+              Text="Preview"
+              Visibility="{Binding IsCompact, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Boolean2VisibilityReConverter}}" />
+          </StackPanel>
+        </Button>
+        <Button
+          x:Name="btnConvert"
+          MinWidth="112"
+          Margin="8,0,0,0"
+          Click="btnConvert_Click"
+          FontWeight="SemiBold"
+          Style="{StaticResource ButtonPrimary.Small}">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor LightningBold}" Style="{StaticResource Icon.Small}" />
+            <TextBlock
+              x:Name="btnConvertTextBlock"
+              Margin="6,0,0,0"
+              Text="{Binding MainView.Convert_Text, Mode=TwoWay}" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+    </Grid>
+  </Border>
 </UserControl>

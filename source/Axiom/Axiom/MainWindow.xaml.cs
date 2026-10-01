@@ -201,11 +201,7 @@ namespace Axiom
       // -----------------------------------------------------------------
       //base.Closing += this.Window_Closing;
 
-      // Set Min/Max Width/Height to prevent Tablets maximizing
-      //MinWidth = MainWindow.minWidth;
-      //MinHeight = MainWindow.minHeight;
-      MinWidth = VM.MainView.Window_Width;
-      MinHeight = VM.MainView.Window_Height;
+      // The minimum size is in MainWindow.xaml; the layout adapts down to it (MainWindow/Layout.cs)
 
       // -------------------------
       // Set Current Version to Assembly Version
@@ -683,17 +679,16 @@ namespace Axiom
                         this.WindowState = WindowState.Normal;
                     }
 
-                    // Window Width
-                    //double width = MainWindow.minWidth;
+                    // Window Width and Height, kept at the default when the config has none
                     double width = VM.MainView.Window_Width;
-                    double.TryParse(Controls.Configure.ConfigFile.conf.Read("Main Window", "Window_Width"), out width);
+                    if (double.TryParse(Controls.Configure.ConfigFile.conf.Read("Main Window", "Window_Width"), out double savedWidth) && savedWidth > 0)
+                        width = savedWidth;
                     this.Width = width;
                     width_Read = width;
 
-                    // Window Height
-                    //double height = MainWindow.minHeight;
                     double height = VM.MainView.Window_Height;
-                    double.TryParse(Controls.Configure.ConfigFile.conf.Read("Main Window", "Window_Height"), out height);
+                    if (double.TryParse(Controls.Configure.ConfigFile.conf.Read("Main Window", "Window_Height"), out double savedHeight) && savedHeight > 0)
+                        height = savedHeight;
                     this.Height = height;
                     height_Read = height;
 

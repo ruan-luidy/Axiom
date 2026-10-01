@@ -21,28 +21,25 @@
   x:Class="Axiom.MainWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:System="clr-namespace:System;assembly=mscorlib"
-  xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-  xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:hc="https://handyorg.github.io/handycontrol"
-  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
   xmlns:local="clr-namespace:ViewModel"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:my="clr-namespace:Axiom"
-  xmlns:settings="clr-namespace:Axiom.Properties"
   xmlns:views="clr-namespace:Axiom.Views"
   Title="{Binding MainView.TitleVersion, Mode=OneWay}"
-  Width="909"
-  Height="508"
-  MinWidth="912"
-  MinHeight="508"
-  Background="{DynamicResource DarkDefaultBrush}"
+  Width="1280"
+  Height="760"
+  MinWidth="640"
+  MinHeight="480"
+  Background="{DynamicResource Workspace.BackgroundBrush}"
   Closing="Window_Closing"
   Icon="axiom.ico"
   Loaded="Window_Loaded"
+  NonClientAreaBackground="{DynamicResource RegionBrush}"
+  NonClientAreaHeight="36"
   RenderOptions.BitmapScalingMode="HighQuality"
-  Style="{DynamicResource WindowWin10}"
+  SizeChanged="Window_SizeChanged"
   UseLayoutRounding="True"
   mc:Ignorable="d">
 
@@ -50,215 +47,246 @@
     <local:VM />
   </hc:Window.DataContext>
 
+  <!--  Tools sit in the title bar, next to the caption buttons  -->
+  <hc:Window.NonClientAreaContent>
+    <views:ToolbarControl Margin="0,0,8,0" HorizontalAlignment="Right" />
+  </hc:Window.NonClientAreaContent>
+
+  <hc:Window.Resources>
+    <!--  A sidebar label: hidden while the sidebar is the compact icon rail  -->
+    <Style x:Key="NavLabel" TargetType="TextBlock">
+      <Setter Property="Margin" Value="12,0,0,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Visibility" Value="{Binding IsCompact, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Boolean2VisibilityReConverter}}" />
+    </Style>
+  </hc:Window.Resources>
+
   <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
       <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
-    <!--  Input / Output - Row 0, Column 0  -->
-    <views:InputOutputControl
-      Grid.Row="0"
-      Grid.Column="0"
-      Margin="10,10,5,5" />
-
-    <!--  Script View - Row 1, Column 0  -->
-    <views:ScriptControl
-      Grid.Row="1"
-      Grid.Column="0"
-      Margin="10,5,5,5" />
-
-    <!--  Tab Control - Row 0+1, Column 1  -->
-    <TabControl
-      x:Name="tabControl"
-      Grid.Row="0"
-      Grid.RowSpan="2"
-      Grid.Column="1"
-      Width="380"
-      Margin="5,8,0,-10"
-      BorderThickness="1,1,0,0"
-      Style="{StaticResource TabControlSliding}">
-
-      <!--  Format Tab  -->
-      <TabItem
-        HorizontalContentAlignment="Stretch"
-        DataContext="{Binding FormatView}"
-        Header="Format">
-        <views:FormatControl Background="{DynamicResource RegionBrush}" />
-      </TabItem>
-
-      <!--  Video Tab  -->
-      <TabItem HorizontalContentAlignment="Stretch" Header="Video">
-
-        <!--  Video TabControl  -->
-        <TabControl
-          x:Name="tabVideo"
-          Margin="0,5,0,0"
-          VerticalAlignment="Top"
-          BorderThickness="0,1,0,0"
-          Style="{StaticResource TabControlSliding}">
-
-          <!--  Encoding Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding VideoView}"
-            Header="Encoding">
-            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
-              <views:VideoEncodingControl />
-            </ScrollViewer>
-          </TabItem>
-
-          <!--  Color Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding VideoView}"
-            Header="Color">
-            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
-              <views:VideoColorControl />
-            </ScrollViewer>
-          </TabItem>
-
-          <!--  Size Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding VideoView}"
-            Header="Size">
-            <ScrollViewer Padding="-4,0" VerticalScrollBarVisibility="Auto">
-              <views:VideoSizeControl />
-            </ScrollViewer>
-          </TabItem>
-
-        </TabControl>
-      </TabItem>
-
-      <!--  Audio Tab  -->
-      <TabItem
-        HorizontalContentAlignment="Stretch"
-        DataContext="{Binding AudioView}"
-        Header="Audio">
-        <views:AudioSettingsControl />
-      </TabItem>
-
-      <!--  Subtitles Tab  -->
-      <TabItem
-        HorizontalContentAlignment="Stretch"
-        DataContext="{Binding SubtitleView}"
-        Header="Subtitles">
-        <views:SubtitlesControl />
-      </TabItem>
-
-      <!--  Filters Tab  -->
-      <TabItem HorizontalContentAlignment="Stretch" Header="Filters">
-        <!--  Filters TabControl  -->
-        <TabControl
-          x:Name="tabFilters"
-          Width="380"
-          Margin="0,5,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          BorderThickness="0,1,0,0"
-          Style="{StaticResource TabControlSliding}"
-          TabStripPlacement="Top">
-
-          <!--  Video Filter Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding FilterVideoView}"
-            Header="Video">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-              <views:FilterVideoControl />
-            </ScrollViewer>
-          </TabItem>
-
-          <!--  Audio Filter Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding FilterAudioView}"
-            Header="Audio">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-              <views:FilterAudioControl />
-            </ScrollViewer>
-          </TabItem>
-
-        </TabControl>
-      </TabItem>
-
-      <!--  Settings Tab  -->
-      <TabItem HorizontalContentAlignment="Stretch" Header="Settings">
-        <!--  Settings TabControl  -->
-        <TabControl
-          x:Name="tabSettings"
-          Width="380"
-          Margin="0,5,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          BorderThickness="0,1,0,0"
-          Style="{StaticResource TabControlSliding}">
-
-          <!--  Config Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding ConfigureView}"
-            Header="Config">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-              <views:SettingsConfigControl />
-            </ScrollViewer>
-          </TabItem>
-
-          <!--  File Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding ConfigureView}"
-            Header="File">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-              <views:SettingsFileControl />
-            </ScrollViewer>
-          </TabItem>
-
-          <!--  System Tab  -->
-          <TabItem
-            HorizontalContentAlignment="Stretch"
-            DataContext="{Binding ConfigureView}"
-            Header="System">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-              <views:SettingsSystemControl />
-            </ScrollViewer>
-          </TabItem>
-
-        </TabControl>
-      </TabItem>
-
-    </TabControl>
-
-    <!--  Bottom Bar - Row 2, Column 0+1  -->
+    <!--  ===== SIDEBAR =====  -->
     <Border
-      Grid.Row="2"
-      Grid.Column="0"
-      Grid.ColumnSpan="2"
-      Margin="0,5,0,0"
-      Background="{DynamicResource SecondaryRegionBrush}"
+      x:Name="Sidebar"
+      Width="196"
+      Background="{DynamicResource RegionBrush}"
       BorderBrush="{DynamicResource BorderBrush}"
-      BorderThickness="0,1,0,0"
-      CornerRadius="0">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+      BorderThickness="0,1,1,0">
+      <StackPanel Margin="0,12,0,0">
+        <TextBlock
+          Margin="20,0,0,6"
+          Style="{StaticResource SectionHeaderStyle}"
+          Text="ENCODE"
+          Visibility="{Binding IsCompact, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Boolean2VisibilityReConverter}}" />
 
-        <!--  Tool Buttons - Left  -->
-        <views:ToolbarControl Grid.Column="0" Margin="8,4,8,4" />
+        <RadioButton
+          Checked="Nav_Checked"
+          GroupName="Nav"
+          IsChecked="True"
+          Style="{StaticResource NavItemStyle}"
+          Tag="0"
+          ToolTip="Format">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor FilmStripBold}" Style="{StaticResource Icon}" />
+            <TextBlock Style="{StaticResource NavLabel}" Text="Format" />
+          </StackPanel>
+        </RadioButton>
+        <RadioButton
+          Checked="Nav_Checked"
+          GroupName="Nav"
+          Style="{StaticResource NavItemStyle}"
+          Tag="1"
+          ToolTip="Video">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor VideoCameraBold}" Style="{StaticResource Icon}" />
+            <TextBlock Style="{StaticResource NavLabel}" Text="Video" />
+          </StackPanel>
+        </RadioButton>
+        <RadioButton
+          Checked="Nav_Checked"
+          GroupName="Nav"
+          Style="{StaticResource NavItemStyle}"
+          Tag="2"
+          ToolTip="Audio">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor SpeakerHighBold}" Style="{StaticResource Icon}" />
+            <TextBlock Style="{StaticResource NavLabel}" Text="Audio" />
+          </StackPanel>
+        </RadioButton>
+        <RadioButton
+          Checked="Nav_Checked"
+          GroupName="Nav"
+          Style="{StaticResource NavItemStyle}"
+          Tag="3"
+          ToolTip="Subtitles">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor SubtitlesBold}" Style="{StaticResource Icon}" />
+            <TextBlock Style="{StaticResource NavLabel}" Text="Subtitles" />
+          </StackPanel>
+        </RadioButton>
+        <RadioButton
+          Checked="Nav_Checked"
+          GroupName="Nav"
+          Style="{StaticResource NavItemStyle}"
+          Tag="4"
+          ToolTip="Filters">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor SlidersHorizontalBold}" Style="{StaticResource Icon}" />
+            <TextBlock Style="{StaticResource NavLabel}" Text="Filters" />
+          </StackPanel>
+        </RadioButton>
 
-        <!--  Process Buttons - Right  -->
-        <views:ProcessControlPanel Grid.Column="2" Margin="8,4,8,4" />
-      </Grid>
+        <TextBlock
+          Margin="20,16,0,6"
+          Style="{StaticResource SectionHeaderStyle}"
+          Text="APP"
+          Visibility="{Binding IsCompact, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Boolean2VisibilityReConverter}}" />
+        <Border
+          Margin="16,12"
+          Style="{StaticResource RowSeparator}"
+          Visibility="{Binding IsCompact, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Boolean2VisibilityConverter}}" />
+
+        <RadioButton
+          Checked="Nav_Checked"
+          GroupName="Nav"
+          Style="{StaticResource NavItemStyle}"
+          Tag="5"
+          ToolTip="Settings">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor GearSixBold}" Style="{StaticResource Icon}" />
+            <TextBlock Style="{StaticResource NavLabel}" Text="Settings" />
+          </StackPanel>
+        </RadioButton>
+      </StackPanel>
     </Border>
 
+    <!--  ===== WORKSPACE =====  -->
+    <Grid Grid.Column="1" Margin="12">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+
+      <views:InputOutputControl />
+
+      <!--
+        Options and the script. Wide: side by side. Narrow: the script goes under the options.
+        Window_SizeChanged moves the script card and sizes the rows and columns.
+      -->
+      <Grid
+        x:Name="Body"
+        Grid.Row="1"
+        Margin="0,12">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition x:Name="OptionsColumn" Width="11*" />
+          <ColumnDefinition x:Name="ScriptColumn" Width="9*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition x:Name="OptionsRow" Height="*" />
+          <RowDefinition x:Name="ScriptRow" Height="0" />
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource Card}">
+          <TabControl x:Name="Pages" Style="{StaticResource PagesTabControl}">
+
+            <TabItem DataContext="{Binding FormatView}">
+              <TabControl Style="{StaticResource SegmentTabControl}">
+                <TabItem Header="Format">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:FormatControl />
+                  </ScrollViewer>
+                </TabItem>
+              </TabControl>
+            </TabItem>
+
+            <TabItem DataContext="{Binding VideoView}">
+              <TabControl Style="{StaticResource SegmentTabControl}">
+                <TabItem Header="Encoding">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:VideoEncodingControl />
+                  </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Color">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:VideoColorControl />
+                  </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Size">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:VideoSizeControl />
+                  </ScrollViewer>
+                </TabItem>
+              </TabControl>
+            </TabItem>
+
+            <TabItem DataContext="{Binding AudioView}">
+              <TabControl Style="{StaticResource SegmentTabControl}">
+                <TabItem Header="Audio">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:AudioSettingsControl />
+                  </ScrollViewer>
+                </TabItem>
+              </TabControl>
+            </TabItem>
+
+            <TabItem DataContext="{Binding SubtitleView}">
+              <TabControl Style="{StaticResource SegmentTabControl}">
+                <TabItem Header="Subtitles">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:SubtitlesControl />
+                  </ScrollViewer>
+                </TabItem>
+              </TabControl>
+            </TabItem>
+
+            <TabItem>
+              <TabControl Style="{StaticResource SegmentTabControl}">
+                <TabItem DataContext="{Binding FilterVideoView}" Header="Video">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:FilterVideoControl />
+                  </ScrollViewer>
+                </TabItem>
+                <TabItem DataContext="{Binding FilterAudioView}" Header="Audio">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:FilterAudioControl />
+                  </ScrollViewer>
+                </TabItem>
+              </TabControl>
+            </TabItem>
+
+            <TabItem DataContext="{Binding ConfigureView}">
+              <TabControl Style="{StaticResource SegmentTabControl}">
+                <TabItem Header="Config">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:SettingsConfigControl />
+                  </ScrollViewer>
+                </TabItem>
+                <TabItem Header="File">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:SettingsFileControl />
+                  </ScrollViewer>
+                </TabItem>
+                <TabItem Header="System">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <views:SettingsSystemControl />
+                  </ScrollViewer>
+                </TabItem>
+              </TabControl>
+            </TabItem>
+
+          </TabControl>
+        </Border>
+
+        <views:ScriptControl
+          x:Name="ScriptCard"
+          Grid.Column="1"
+          Margin="12,0,0,0" />
+      </Grid>
+
+      <views:ProcessControlPanel Grid.Row="2" />
+    </Grid>
   </Grid>
 </hc:Window>
