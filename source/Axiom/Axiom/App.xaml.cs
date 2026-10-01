@@ -26,6 +26,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Axiom
 {
@@ -34,6 +36,12 @@ namespace Axiom
   /// </summary>
   public partial class App : Application
   {
-
+    static App()
+    {
+      // Every window starts from the same family and everything inside inherits it, so no control falls
+      // back to its own default (HandyControl's or the system's)
+      TextElement.FontFamilyProperty.OverrideMetadata(typeof(Window),
+        new FrameworkPropertyMetadata(new FontFamily("Segoe UI")));
+    }
   }
 }

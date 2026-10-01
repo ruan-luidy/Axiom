@@ -26,6 +26,8 @@
 
   <system:Double x:Key="Control.Height">28</system:Double>
 
+  <!--  One family for the whole UI; monospace only where the text is code (the script, the consoles)  -->
+  <FontFamily x:Key="Font.Ui">Segoe UI</FontFamily>
   <FontFamily x:Key="Font.Mono">Cascadia Mono, Consolas</FontFamily>
 
   <!--  Behind the panels, a step below RegionBrush. ThemeService swaps both of these with the theme  -->
@@ -545,6 +547,7 @@
 
   <!--  Context menu: grows in from 96% instead of popping  -->
   <Style BasedOn="{StaticResource ContextMenuBaseStyle}" TargetType="ContextMenu">
+    <Setter Property="FontFamily" Value="{StaticResource Font.Ui}" />
     <Setter Property="RenderTransformOrigin" Value="0.5,0" />
     <Setter Property="Opacity" Value="0" />
     <Setter Property="RenderTransform">
@@ -584,6 +587,7 @@
 
   <!--  Tooltip: a small card, no Windows shadow  -->
   <Style TargetType="ToolTip">
+    <Setter Property="FontFamily" Value="{StaticResource Font.Ui}" />
     <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
     <Setter Property="FontSize" Value="{StaticResource FontSize.Sm}" />
     <Setter Property="Padding" Value="8,5" />

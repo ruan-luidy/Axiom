@@ -25,12 +25,11 @@
       <Setter Property="ToolTipService.InitialShowDelay" Value="400" />
     </Style>
 
-    <!--  The path itself: monospace, borderless inside the row  -->
+    <!--  The path itself, on the row background  -->
     <Style
       x:Key="PathBox"
       BasedOn="{StaticResource TextBox.Small}"
       TargetType="TextBox">
-      <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
       <Setter Property="AllowDrop" Value="True" />
       <Setter Property="MaxLines" Value="1" />
       <Setter Property="TextWrapping" Value="NoWrap" />

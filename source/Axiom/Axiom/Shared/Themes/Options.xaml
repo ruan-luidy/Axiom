@@ -225,12 +225,11 @@
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
   </Style>
 
-  <!--  A path the app keeps (FFmpeg, presets, log): read-only, monospace; clicking it opens a picker  -->
+  <!--  A path the app keeps (FFmpeg, presets, log): read-only; clicking it opens a picker  -->
   <Style
     x:Key="PathField"
     BasedOn="{StaticResource TextBox.Small}"
     TargetType="TextBox">
-    <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
     <Setter Property="FontSize" Value="{StaticResource FontSize.XS}" />
     <Setter Property="Cursor" Value="Hand" />
     <Setter Property="IsReadOnlyCaretVisible" Value="False" />
@@ -245,7 +244,6 @@
     <Setter Property="Margin" Value="8,0,0,0" />
     <Setter Property="Padding" Value="4,0" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
-    <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
   </Style>
 
   <Style
@@ -285,7 +283,6 @@
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
     <Setter Property="CaretBrush" Value="{DynamicResource PrimaryTextBrush}" />
-    <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
     <Setter Property="FontSize" Value="{StaticResource FontSize.Sm}" />
     <Setter Property="MaxLength" Value="2" />
     <Setter Property="ToolTipService.InitialShowDelay" Value="400" />
@@ -294,7 +291,6 @@
   <Style x:Key="TimeSeparator" TargetType="TextBlock">
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="Foreground" Value="{DynamicResource ThirdlyTextBrush}" />
-    <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
     <Setter Property="FontSize" Value="{StaticResource FontSize.Sm}" />
   </Style>
 
