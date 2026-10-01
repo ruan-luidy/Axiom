@@ -16,20 +16,6 @@ namespace Axiom.Views
       InitializeComponent();
     }
 
-    private void btnVideoBitRateAdvanced_Expand_Click(object sender, RoutedEventArgs e)
-    {
-      // Expand
-      if (VM.VideoView.Video_BitRateAdvanced_IsExpanded == false)
-      {
-        VM.VideoView.Video_BitRateAdvanced_IsExpanded = true;
-      }
-      // Collapse
-      else if (VM.VideoView.Video_BitRateAdvanced_IsExpanded == true)
-      {
-        VM.VideoView.Video_BitRateAdvanced_IsExpanded = false;
-      }
-    }
-
     /// <summary>
     /// Encode Speed Presets - ComboBox
     /// </summary>
@@ -549,27 +535,6 @@ namespace Axiom.Views
       Controls.Video.Controls.VideoBitRateDisplay(VM.VideoView.Video_Quality_Items,
                                                   VM.VideoView.Video_Quality_SelectedItem,
                                                   VM.VideoView.Video_Pass_SelectedItem);
-    }
-
-    // Expanded
-    private void expVideo_BitRateAdvanced_Expander_Expanded(object sender, RoutedEventArgs e)
-    {
-      // TODO: Fix XAML compilation - textBlockExpand moved to VideoEncodingControl UserControl
-      //textBlockExpand.Text = "-";
-    }
-
-    // Collapsed
-    private void expVideo_BitRateAdvanded_Expander_Collapsed(object sender, RoutedEventArgs e)
-    {
-      // TODO: Fix XAML compilation - textBlockExpand moved to VideoEncodingControl UserControl
-      //textBlockExpand.Text = "+";
-    }
-
-    // Alternate spelling
-    private void expVideo_BitRateAdvanced_Expander_Collapsed(object sender, RoutedEventArgs e)
-    {
-      // Call the correctly spelled method
-      expVideo_BitRateAdvanded_Expander_Collapsed(sender, e);
     }
 
     private void cboVideo_Pass_DropDownClosed(object sender, EventArgs e)
