@@ -212,6 +212,19 @@
     <Setter Property="BorderThickness" Value="2,0,0,0" />
   </Style>
 
+  <!--  A list inside a panel (muxed streams, output naming): framed like a field  -->
+  <Style
+    x:Key="OptionList"
+    BasedOn="{StaticResource {x:Type ListView}}"
+    TargetType="ListView">
+    <Setter Property="Background" Value="{DynamicResource RegionBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="FontSize" Value="{StaticResource FontSize.Sm}" />
+    <Setter Property="hc:BorderElement.CornerRadius" Value="{StaticResource Radius.Sm}" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+  </Style>
+
   <!--  The number box next to a slider  -->
   <Style
     x:Key="SliderValue"
