@@ -17,8 +17,26 @@
     <Style x:Key="Divider" TargetType="Border">
       <Setter Property="Width" Value="1" />
       <Setter Property="Height" Value="16" />
-      <Setter Property="Margin" Value="6,0" />
+      <Setter Property="Margin" Value="10,0" />
       <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
+    </Style>
+
+    <!--  A bit larger than the in-page icon buttons, with room between them  -->
+    <Style
+      x:Key="BarButton"
+      BasedOn="{StaticResource IconButton}"
+      TargetType="Button">
+      <Setter Property="Width" Value="32" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="Margin" Value="2,0" />
+    </Style>
+    <Style
+      x:Key="BarToggle"
+      BasedOn="{StaticResource IconToggle}"
+      TargetType="ToggleButton">
+      <Setter Property="Width" Value="32" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="Margin" Value="2,0" />
     </Style>
   </UserControl.Resources>
 
@@ -31,14 +49,14 @@
     <Button
       x:Name="btnProperties"
       Click="btnProperties_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="View File Properties">
       <Path Data="{icons:Phosphor ListMagnifyingGlassBold}" Style="{StaticResource Icon}" />
     </Button>
     <Button
       x:Name="btnPlayFile"
       Click="btnPlayFile_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="Play Converted File">
       <Path Data="{icons:Phosphor PlayBold}" Style="{StaticResource Icon}" />
     </Button>
@@ -50,7 +68,7 @@
       x:Name="tglAutoSortScript"
       Checked="tglAutoSortScript_Checked"
       IsChecked="{Binding MainView.AutoSortScript_IsChecked}"
-      Style="{StaticResource IconToggle}"
+      Style="{StaticResource BarToggle}"
       ToolTip="Auto Sort Script"
       Unchecked="tglAutoSortScript_Unchecked">
       <Path Data="{icons:Phosphor SortAscendingBold}" Style="{StaticResource Icon}" />
@@ -59,7 +77,7 @@
       x:Name="tglCMDWindowKeep"
       Checked="tglCMDWindowKeep_Checked"
       IsChecked="{Binding MainView.CMDWindowKeep_IsChecked}"
-      Style="{StaticResource IconToggle}"
+      Style="{StaticResource BarToggle}"
       ToolTip="Keep FFmpeg window open after converting"
       Unchecked="tglCMDWindowKeep_Unchecked">
       <Path Data="{icons:Phosphor BrowserBold}" Style="{StaticResource Icon}" />
@@ -71,28 +89,28 @@
     <Button
       x:Name="btnLog"
       Click="btnLog_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="View the last Output Log">
       <Path Data="{icons:Phosphor FileTextBold}" Style="{StaticResource Icon}" />
     </Button>
     <Button
       x:Name="btnLogConsole"
       Click="btnLogConsole_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="Show Log Console">
       <Path Data="{icons:Phosphor NotepadBold}" Style="{StaticResource Icon}" />
     </Button>
     <Button
       x:Name="btnDebugConsole"
       Click="btnDebugConsole_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="Show Debug Console">
       <Path Data="{icons:Phosphor BugBold}" Style="{StaticResource Icon}" />
     </Button>
     <Button
       x:Name="btnCmd"
       Click="btnCmd_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="Launch Command Prompt / PowerShell">
       <Path Data="{icons:Phosphor TerminalWindowBold}" Style="{StaticResource Icon}" />
     </Button>
@@ -103,7 +121,7 @@
     <Button
       x:Name="btnUpdate"
       Click="btnUpdate_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="Check for Updates">
       <Path Data="{icons:Phosphor ArrowCircleUpBold}" Style="{StaticResource Icon}" />
     </Button>
@@ -111,14 +129,14 @@
       x:Name="btbWebsite"
       Command="hc:ControlCommands.OpenLink"
       CommandParameter="https://axiomui.github.io/"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="Visit Website">
       <Path Data="{icons:Phosphor GlobeHemisphereWestBold}" Style="{StaticResource Icon}" />
     </Button>
     <Button
       x:Name="btnInfo"
       Click="btnInfo_Click"
-      Style="{StaticResource IconButton}"
+      Style="{StaticResource BarButton}"
       ToolTip="About this program">
       <Path Data="{icons:Phosphor InfoBold}" Style="{StaticResource Icon}" />
     </Button>

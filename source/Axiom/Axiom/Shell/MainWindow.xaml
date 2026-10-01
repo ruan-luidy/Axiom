@@ -46,7 +46,7 @@
   Icon="pack://application:,,,/Axiom;component/axiom.ico"
   Loaded="Window_Loaded"
   NonClientAreaBackground="{DynamicResource RegionBrush}"
-  NonClientAreaHeight="36"
+  NonClientAreaHeight="40"
   RenderOptions.BitmapScalingMode="HighQuality"
   SizeChanged="Window_SizeChanged"
   UseLayoutRounding="True"
