@@ -598,14 +598,14 @@
             <Popup
               x:Name="PART_Popup"
               controls:DropDownPlacement.Gap="6"
-              controls:DropDownPlacement.ShadowRoom="16"
+              controls:DropDownPlacement.ShadowRoom="12,10,12,16"
               AllowsTransparency="True"
               Focusable="False"
               IsOpen="{TemplateBinding IsDropDownOpen}"
               PlacementTarget="{Binding ElementName=Root}"
               PopupAnimation="None">
-              <!--  The card lines up with the field; the margin is the room its shadow needs  -->
-              <Grid x:Name="DropDown" Margin="0,0,14,16">
+              <!--  Room for the shadow on every side; keep it equal to ShadowRoom above  -->
+              <Grid x:Name="DropDown" Margin="12,10,12,16">
                 <Grid.RenderTransform>
                   <TranslateTransform />
                 </Grid.RenderTransform>
