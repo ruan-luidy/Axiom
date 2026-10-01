@@ -44,11 +44,19 @@ namespace Axiom.Shared.Controls
         var gap = GetGap(popup) * scale;
         var shadow = GetShadowRoom(popup) * scale;
 
-        return new[]
-        {
-          new CustomPopupPlacement(new Point(0, targetSize.Height + gap), PopupPrimaryAxis.Horizontal),
-          new CustomPopupPlacement(new Point(0, shadow - popupSize.Height - gap), PopupPrimaryAxis.Horizontal),
-        };
+        var below = new CustomPopupPlacement(new Point(0, targetSize.Height + gap), PopupPrimaryAxis.None);
+        var above = new CustomPopupPlacement(new Point(0, shadow - popupSize.Height - gap), PopupPrimaryAxis.None);
+        if (target == null || PresentationSource.FromVisual(target) == null)
+          return new[] { below, above };
+
+        // Pick the side ourselves: left to choose, WPF slides the popup up over the field instead of flipping it
+        var top = target.PointToScreen(new Point(0, 0)).Y;
+        var screen = System.Windows.Forms.Screen.FromPoint(new System.Drawing.Point(
+          (int)target.PointToScreen(new Point(0, 0)).X, (int)top)).WorkingArea;
+        var fitsBelow = top + targetSize.Height + gap + popupSize.Height <= screen.Bottom;
+        var roomAbove = top - screen.Top;
+        var roomBelow = screen.Bottom - (top + targetSize.Height);
+        return new[] { fitsBelow || roomBelow >= roomAbove ? below : above };
       };
     }
   }
