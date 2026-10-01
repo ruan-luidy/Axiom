@@ -32,6 +32,8 @@
         <hc:Theme />
         <!--  Design system: tokens, icons, buttons, fields and the Windows components  -->
         <ResourceDictionary Source="Shared/Themes/Styles.xaml" />
+        <!--  Option pages: panels, rows and the fields inside them  -->
+        <ResourceDictionary Source="Shared/Themes/Options.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

@@ -189,7 +189,8 @@
           <RowDefinition x:Name="ScriptRow" Height="0" />
         </Grid.RowDefinitions>
 
-        <Border Style="{StaticResource Card}">
+        <!--  The options sit straight on the workspace; their panels are the cards  -->
+        <Border>
           <TabControl x:Name="Pages" Style="{StaticResource PagesTabControl}">
 
             <TabItem DataContext="{Binding FormatView}">

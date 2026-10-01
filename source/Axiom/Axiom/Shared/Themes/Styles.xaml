@@ -265,7 +265,7 @@
             </Grid.RowDefinitions>
             <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
               <TabPanel
-                Margin="16,0"
+                Margin="2,0"
                 IsItemsHost="True"
                 KeyboardNavigation.TabIndex="1" />
             </Border>

@@ -1,566 +1,198 @@
 <!--
-  Format Control
-  Extracted from MainWindow.xaml (Lines 77-645)
+  Format: the container, what to cut out of the input, and YouTube downloads.
 -->
 <UserControl
   x:Class="Axiom.Views.FormatControl"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Axiom.Shared.Controls"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignWidth="700"
   mc:Ignorable="d">
 
-  <Grid Background="Transparent">
-    <ScrollViewer Width="254" HorizontalAlignment="Right">
+  <controls:MasonryPanel Style="{StaticResource OptionPages}">
 
-      <Grid Margin="5,5,5,30" VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="15" />
-          <ColumnDefinition Width="95" />
-          <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <controls:OptionPanel Header="CONTAINER" Icon="{icons:Phosphor PackageBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Container">
+          <ComboBox
+            x:Name="cboFormat_Container"
+            ItemsSource="{Binding Format_Container_Items}"
+            PreviewMouseUp="cboFormat_Container_PreviewMouseUp"
+            SelectedValue="{Binding Format_Container_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedValuePath="Name"
+            SelectionChanged="cboFormat_Container_SelectionChanged">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Media">
+          <ComboBox
+            x:Name="cboFormat_MediaType"
+            IsEnabled="{Binding Format_MediaType_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Format_MediaType_Items}"
+            SelectedItem="{Binding Format_MediaType_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboFormat_MediaType_SelectionChanged" />
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
 
-        <Grid.RowDefinitions>
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="22" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="22" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-          <RowDefinition Height="33" />
-        </Grid.RowDefinitions>
+    <controls:OptionPanel Header="CUT" Icon="{icons:Phosphor ScissorsBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Cut">
+          <ComboBox
+            x:Name="cboFormat_Cut"
+            IsEnabled="{Binding Format_Cut_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Format_Cut_Items}"
+            SelectedIndex="{Binding Format_Cut_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Format_Cut_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboFormat_Cut_SelectionChanged" />
+        </controls:OptionRow>
 
-        <!--  Container  -->
-        <Label
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="Container"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFormat_Container"
-          Grid.Column="2"
-          Width="105"
-          Height="22"
-          Margin="0,2,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          ItemsSource="{Binding Format_Container_Items}"
-          PreviewMouseUp="cboFormat_Container_PreviewMouseUp"
-          SelectedValue="{Binding Format_Container_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          SelectedValuePath="Name"
-          SelectionChanged="cboFormat_Container_SelectionChanged">
-          <ComboBox.ItemsPanel>
-            <ItemsPanelTemplate>
-              <StackPanel Margin="0,-7,0,0" />
-            </ItemsPanelTemplate>
-          </ComboBox.ItemsPanel>
-          <ComboBox.ItemTemplate>
-            <DataTemplate>
-              <Grid>
-                <TextBlock DataContext="{Binding}">
-                  <TextBlock.Text>
-                    <Binding Path="Name" />
-                  </TextBlock.Text>
-                </TextBlock>
-              </Grid>
-            </DataTemplate>
-          </ComboBox.ItemTemplate>
-        </ComboBox>
+        <controls:OptionRow Label="Start">
+          <Border IsEnabled="{Binding Format_CutStart_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TimeField}">
+            <StackPanel Orientation="Horizontal">
+              <TextBox
+                x:Name="tbxCutStartHours"
+                GotFocus="tbxCutStartHours_GotFocus"
+                KeyDown="tbxCutStartHours_KeyDown"
+                LostFocus="tbxCutStartHours_LostFocus"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutStart_Hours_Text, Mode=TwoWay}"
+                ToolTip="Hours" />
+              <TextBlock Style="{StaticResource TimeSeparator}" Text=":" />
+              <TextBox
+                x:Name="tbxCutStartMinutes"
+                GotFocus="tbxCutStartMinutes_GotFocus"
+                KeyDown="tbxCutStartMinutes_KeyDown"
+                LostFocus="tbxCutStartMinutes_LostFocus"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutStart_Minutes_Text, Mode=TwoWay}"
+                ToolTip="Minutes" />
+              <TextBlock Style="{StaticResource TimeSeparator}" Text=":" />
+              <TextBox
+                x:Name="tbxCutStartSeconds"
+                GotFocus="tbxCutStartSeconds_GotFocus"
+                KeyDown="tbxCutStartSeconds_KeyDown"
+                LostFocus="tbxCutStartSeconds_LostFocus"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutStart_Seconds_Text, Mode=TwoWay}"
+                ToolTip="Seconds" />
+              <TextBlock Style="{StaticResource TimeSeparator}" Text="." />
+              <TextBox
+                x:Name="tbxCutStartMilliseconds"
+                Width="34"
+                GotFocus="tbxCutStartMilliseconds_GotFocus"
+                KeyDown="tbxCutStartMilliseconds_KeyDown"
+                LostFocus="tbxCutStartMilliseconds_LostFocus"
+                MaxLength="3"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutStart_Milliseconds_Text, Mode=TwoWay}"
+                ToolTip="Milliseconds" />
+            </StackPanel>
+          </Border>
+        </controls:OptionRow>
 
-        <!--  MediaType  -->
-        <Label
-          Grid.Row="1"
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="Media"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFormat_MediaType"
-          Grid.Row="1"
-          Grid.Column="2"
-          Width="105"
-          Height="22"
-          Margin="0,2,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding Format_MediaType_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding Format_MediaType_Items}"
-          SelectedItem="{Binding Format_MediaType_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFormat_MediaType_SelectionChanged" />
+        <controls:OptionRow Label="End">
+          <Border IsEnabled="{Binding Format_CutEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TimeField}">
+            <StackPanel Orientation="Horizontal">
+              <TextBox
+                x:Name="tbxCutEndHours"
+                GotFocus="tbxCutEndHours_GotFocus"
+                KeyDown="tbxCutEndHours_KeyDown"
+                LostFocus="tbxCutEndHours_LostFocus"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutEnd_Hours_Text, Mode=TwoWay}"
+                ToolTip="Hours" />
+              <TextBlock Style="{StaticResource TimeSeparator}" Text=":" />
+              <TextBox
+                x:Name="tbxCutEndMinutes"
+                GotFocus="tbxCutEndMinutes_GotFocus"
+                KeyDown="tbxCutEndMinutes_KeyDown"
+                LostFocus="tbxCutEndMinutes_LostFocus"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutEnd_Minutes_Text, Mode=TwoWay}"
+                ToolTip="Minutes" />
+              <TextBlock Style="{StaticResource TimeSeparator}" Text=":" />
+              <TextBox
+                x:Name="tbxCutEndSeconds"
+                GotFocus="tbxCutEndSeconds_GotFocus"
+                KeyDown="tbxCutEndSeconds_KeyDown"
+                LostFocus="tbxCutEndSeconds_LostFocus"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutEnd_Seconds_Text, Mode=TwoWay}"
+                ToolTip="Seconds" />
+              <TextBlock Style="{StaticResource TimeSeparator}" Text="." />
+              <TextBox
+                x:Name="tbxCutEndMilliseconds"
+                Width="34"
+                GotFocus="tbxCutEndMilliseconds_GotFocus"
+                KeyDown="tbxCutEndMilliseconds_KeyDown"
+                LostFocus="tbxCutEndMilliseconds_LostFocus"
+                MaxLength="3"
+                Style="{StaticResource TimePart}"
+                Text="{Binding Format_CutEnd_Milliseconds_Text, Mode=TwoWay}"
+                ToolTip="Milliseconds" />
+            </StackPanel>
+          </Border>
+        </controls:OptionRow>
 
-        <!--  Cut  -->
-        <Label
-          Grid.Row="3"
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="Cut"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboFormat_Cut"
-          Grid.Row="3"
-          Grid.Column="2"
-          Width="105"
-          Height="22"
-          Margin="0,3,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding Format_Cut_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding Format_Cut_Items}"
-          SelectedIndex="{Binding Format_Cut_SelectedIndex}"
-          SelectedItem="{Binding Format_Cut_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboFormat_Cut_SelectionChanged" />
+        <controls:OptionRow Label="Frames">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox
+              x:Name="tbxFrameStart"
+              GotFocus="tbxFrameStart_GotFocus"
+              IsEnabled="{Binding Format_FrameEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              KeyDown="tbxFrameStart_KeyDown"
+              LostFocus="tbxFrameStart_LostFocus"
+              Text="{Binding Format_FrameStart_Text, Mode=TwoWay}"
+              ToolTip="Start Frame" />
+            <TextBlock Grid.Column="1" Style="{StaticResource RangeDash}" />
+            <TextBox
+              x:Name="tbxFrameEnd"
+              Grid.Column="2"
+              GotFocus="tbxFrameEnd_GotFocus"
+              IsEnabled="{Binding Format_FrameEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              KeyDown="tbxFrameEnd_KeyDown"
+              LostFocus="tbxFrameEnd_LostFocus"
+              Text="{Binding Format_FrameEnd_Text, Mode=TwoWay}"
+              ToolTip="End Frame" />
+          </Grid>
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
 
-        <!--  Cut Start  -->
-        <Label
-          Grid.Row="4"
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="Start Time"
-          FontFamily="Segoe UI Semilight" />
-        <!--  Hours  -->
-        <TextBox
-          x:Name="tbxCutStartHours"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="21"
-          Height="22"
-          Margin="1,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutStartHours_GotFocus"
-          IsEnabled="{Binding Format_CutStart_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutStartHours_KeyDown"
-          LostFocus="tbxCutStartHours_LostFocus"
-          MaxLength="2"
-          MaxLines="1"
-          Text="{Binding Format_CutStart_Hours_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Hours"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <Label
-          x:Name="lblCutStartHours"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="3"
-          Height="18"
-          Margin="21,4,0,0"
-          Padding="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="1"
-          Content=":"
-          FontFamily="Segoe UI Semilight"
-          IsEnabled="{Binding Format_CutStart_IsEnabled}"
-          Style="{DynamicResource LabelCut}" />
+    <controls:OptionPanel Header="YOUTUBE" Icon="{icons:Phosphor YoutubeLogoBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Download">
+          <ComboBox
+            x:Name="cboYouTube"
+            IsEnabled="{Binding Format_YouTube_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Format_YouTube_Items}"
+            SelectedIndex="{Binding Format_YouTube_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Format_YouTube_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboYouTube_SelectionChanged" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Quality">
+          <ComboBox
+            x:Name="cboYouTube_Quality"
+            IsEnabled="{Binding Format_YouTube_Quality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Format_YouTube_Quality_Items}"
+            SelectedIndex="{Binding Format_YouTube_Quality_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Format_YouTube_Quality_SelectedItem, Mode=TwoWay}" />
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
 
-        <!--  Minutes  -->
-        <TextBox
-          x:Name="tbxCutStartMinutes"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="21"
-          Height="22"
-          Margin="22,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutStartMinutes_GotFocus"
-          IsEnabled="{Binding Format_CutStart_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutStartMinutes_KeyDown"
-          LostFocus="tbxCutStartMinutes_LostFocus"
-          MaxLength="2"
-          MaxLines="1"
-          Text="{Binding Format_CutStart_Minutes_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Minutes"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <Label
-          x:Name="lblCutStartMinutes"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="3"
-          Height="18"
-          Margin="42,4,0,0"
-          Padding="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="1"
-          Content=":"
-          FontFamily="Segoe UI Semilight"
-          IsEnabled="{Binding Format_CutStart_IsEnabled}"
-          Style="{DynamicResource LabelCut}" />
-
-        <!--  Seconds  -->
-        <TextBox
-          x:Name="tbxCutStartSeconds"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="21"
-          Height="22"
-          Margin="43,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutStartSeconds_GotFocus"
-          IsEnabled="{Binding Format_CutStart_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutStartSeconds_KeyDown"
-          LostFocus="tbxCutStartSeconds_LostFocus"
-          MaxLength="2"
-          MaxLines="1"
-          Text="{Binding Format_CutStart_Seconds_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Seconds"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <Label
-          x:Name="lblCutStartSeconds"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="3"
-          Margin="63,4,0,0"
-          Padding="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="1"
-          Content="."
-          FontFamily="Segoe UI Semilight"
-          IsEnabled="{Binding Format_CutStart_IsEnabled}"
-          Style="{DynamicResource LabelCut}" />
-
-        <!--  Milliseconds  -->
-        <TextBox
-          x:Name="tbxCutStartMilliseconds"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="30"
-          Height="22"
-          Margin="64,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutStartMilliseconds_GotFocus"
-          IsEnabled="{Binding Format_CutStart_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutStartMilliseconds_KeyDown"
-          LostFocus="tbxCutStartMilliseconds_LostFocus"
-          MaxLength="3"
-          MaxLines="1"
-          Text="{Binding Format_CutStart_Milliseconds_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Milliseconds"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <!--  Background  -->
-        <TextBox
-          x:Name="tbxCutStart"
-          Grid.Row="4"
-          Grid.Column="2"
-          Width="105"
-          Height="22"
-          Margin="0,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Cursor="Arrow"
-          IsEnabled="{Binding Format_CutStart_IsEnabled}"
-          IsReadOnly="True"
-          Text=""
-          TextWrapping="NoWrap" />
-
-
-        <!--  Cut End  -->
-        <Label
-          Grid.Row="5"
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="End Time"
-          FontFamily="Segoe UI Semilight" />
-
-        <!--  Hours  -->
-        <TextBox
-          x:Name="tbxCutEndHours"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="21"
-          Height="22"
-          Margin="1,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutEndHours_GotFocus"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutEndHours_KeyDown"
-          LostFocus="tbxCutEndHours_LostFocus"
-          MaxLength="2"
-          MaxLines="1"
-          Text="{Binding Format_CutEnd_Hours_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Hours"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <Label
-          x:Name="lblCutEndHours"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="3"
-          Height="18"
-          Margin="21,4,0,0"
-          Padding="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="1"
-          Content=":"
-          FontFamily="Segoe UI Semilight"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled}"
-          Style="{DynamicResource LabelCut}" />
-        <!--  Minutes  -->
-        <TextBox
-          x:Name="tbxCutEndMinutes"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="21"
-          Height="22"
-          Margin="22,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutEndMinutes_GotFocus"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutEndMinutes_KeyDown"
-          LostFocus="tbxCutEndMinutes_LostFocus"
-          MaxLength="2"
-          MaxLines="1"
-          Text="{Binding Format_CutEnd_Minutes_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Minutes"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <Label
-          x:Name="lblCutEndMinutes"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="3"
-          Height="18"
-          Margin="42,4,0,0"
-          Padding="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="1"
-          Content=":"
-          FontFamily="Segoe UI Semilight"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled}"
-          Style="{DynamicResource LabelCut}" />
-        <!--  Seconds  -->
-        <TextBox
-          x:Name="tbxCutEndSeconds"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="21"
-          Height="22"
-          Margin="43,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutEndSeconds_GotFocus"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutEndSeconds_KeyDown"
-          LostFocus="tbxCutEndSeconds_LostFocus"
-          MaxLength="2"
-          MaxLines="1"
-          Text="{Binding Format_CutEnd_Seconds_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Seconds"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <Label
-          x:Name="lblCutEndSeconds"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="3"
-          Margin="63,4,0,0"
-          Padding="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="1"
-          Content="."
-          FontFamily="Segoe UI Semilight"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled}"
-          Style="{DynamicResource LabelCut}" />
-        <!--  Milliseconds  -->
-        <TextBox
-          x:Name="tbxCutEndMilliseconds"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="30"
-          Height="22"
-          Margin="64,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Panel.ZIndex="2"
-          GotFocus="tbxCutEndMilliseconds_GotFocus"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxCutEndMilliseconds_KeyDown"
-          LostFocus="tbxCutEndMilliseconds_LostFocus"
-          MaxLength="3"
-          MaxLines="1"
-          Text="{Binding Format_CutEnd_Milliseconds_Text, Mode=TwoWay}"
-          TextWrapping="NoWrap"
-          ToolTip="Milliseconds"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <!--  Background  -->
-        <TextBox
-          x:Name="tbxCutEnd"
-          Grid.Row="5"
-          Grid.Column="2"
-          Width="105"
-          Height="22"
-          Margin="0,3,0,0"
-          Padding="1,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Cursor="Arrow"
-          IsEnabled="{Binding Format_CutEnd_IsEnabled}"
-          IsReadOnly="True"
-          Text=""
-          TextWrapping="NoWrap" />
-
-        <!--  Frame Range  -->
-        <Label
-          Grid.Row="6"
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          Margin="0,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="Frame Range"
-          FontFamily="Segoe UI Semilight" />
-        <!--  Start  -->
-        <TextBox
-          x:Name="tbxFrameStart"
-          Grid.Row="6"
-          Grid.Column="2"
-          Width="50"
-          Height="22"
-          Margin="0,3,0,0"
-          Padding="0,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          GotFocus="tbxFrameStart_GotFocus"
-          IsEnabled="{Binding Format_FrameEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxFrameStart_KeyDown"
-          LostFocus="tbxFrameStart_LostFocus"
-          MaxLines="1"
-          Text="{Binding Format_FrameStart_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          TextWrapping="NoWrap"
-          ToolTip="Start Frame"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-        <!--  End  -->
-        <TextBox
-          x:Name="tbxFrameEnd"
-          Grid.Row="6"
-          Grid.Column="2"
-          Width="50"
-          Height="22"
-          Margin="55,3,0,0"
-          Padding="0,1,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          GotFocus="tbxFrameEnd_GotFocus"
-          IsEnabled="{Binding Format_FrameEnd_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          KeyDown="tbxFrameEnd_KeyDown"
-          LostFocus="tbxFrameEnd_LostFocus"
-          MaxLines="1"
-          Text="{Binding Format_FrameEnd_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          TextWrapping="NoWrap"
-          ToolTip="End Frame"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-
-        <!--  YouTube  -->
-        <Label
-          Grid.Row="8"
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="YouTube"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboYouTube"
-          Grid.Row="8"
-          Grid.Column="2"
-          Width="105"
-          Height="22"
-          Margin="0,3,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding Format_YouTube_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemContainerStyle="{DynamicResource ComboBoxCategoryStyleItem}"
-          ItemsSource="{Binding Format_YouTube_Items}"
-          SelectedIndex="{Binding Format_YouTube_SelectedIndex}"
-          SelectedItem="{Binding Format_YouTube_SelectedItem, Mode=TwoWay}"
-          SelectionChanged="cboYouTube_SelectionChanged" />
-
-        <!--  YouTube Quality  -->
-        <Label
-          Grid.Row="9"
-          Grid.Column="1"
-          Width="86"
-          Height="26"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Content="Quality"
-          FontFamily="Segoe UI Semilight" />
-        <ComboBox
-          x:Name="cboYouTube_Quality"
-          Grid.Row="9"
-          Grid.Column="2"
-          Width="105"
-          Height="22"
-          Margin="0,2,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          IsEnabled="{Binding Format_YouTube_Quality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding Format_YouTube_Quality_Items}"
-          SelectedIndex="{Binding Format_YouTube_Quality_SelectedIndex}"
-          SelectedItem="{Binding Format_YouTube_Quality_SelectedItem, Mode=TwoWay}" />
-
-      </Grid>
-
-    </ScrollViewer>
-  </Grid>
+  </controls:MasonryPanel>
 </UserControl>
