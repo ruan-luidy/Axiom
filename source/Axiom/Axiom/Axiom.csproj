@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>disable</Nullable>
@@ -25,7 +25,7 @@
     <PackageReference Include="HandyControls" Version="3.6.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.Core" Version="6.2.1" />
     <PackageReference Include="MahApps.Metro.IconPacks.PhosphorIcons" Version="6.2.1" />
-    <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="System.Management" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
