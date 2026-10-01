@@ -41,13 +41,24 @@
     Opacity="0.28"
     Color="{StaticResource ColorAccent}" />
 
+  <!--
+    A popup only draws inside its own bounds, so whatever holds a shadowed card leaves room for it: 14 px on
+    the right and 16 px below (blur + depth). The shadow goes on its own border behind the card; an Effect on
+    the card itself would render the text inside it without ClearType.
+  -->
   <DropShadowEffect
     x:Key="Shadow.Popup"
-    BlurRadius="20"
+    BlurRadius="12"
     Direction="270"
-    Opacity="0.35"
-    ShadowDepth="6"
+    Opacity="0.45"
+    ShadowDepth="3"
     Color="Black" />
+
+  <Style x:Key="CardShadow" TargetType="Border">
+    <Setter Property="Background" Value="{DynamicResource RegionBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource Radius.Lg}" />
+    <Setter Property="Effect" Value="{StaticResource Shadow.Popup}" />
+  </Style>
 
   <!--
     ========================================
@@ -587,30 +598,29 @@
               x:Name="PART_Popup"
               AllowsTransparency="True"
               Focusable="False"
-              HorizontalOffset="-8"
               IsOpen="{TemplateBinding IsDropDownOpen}"
               Placement="Bottom"
-              PopupAnimation="None"
-              VerticalOffset="2">
-              <!--  The margin is room for the shadow; the offset puts the card back under the field  -->
-              <Border
-                x:Name="DropDown"
-                MinWidth="{Binding ActualWidth, ElementName=Root}"
-                MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                Margin="8,0,8,14"
-                Padding="4"
-                Background="{DynamicResource RegionBrush}"
-                BorderBrush="{DynamicResource BorderBrush}"
-                BorderThickness="1"
-                CornerRadius="{StaticResource Radius.Lg}"
-                Effect="{StaticResource Shadow.Popup}">
-                <Border.RenderTransform>
+              PopupAnimation="None">
+              <!--  The card lines up with the field; the margin is the room its shadow needs  -->
+              <Grid x:Name="DropDown" Margin="0,4,14,16">
+                <Grid.RenderTransform>
                   <TranslateTransform />
-                </Border.RenderTransform>
-                <ScrollViewer x:Name="DropDownScroll" SnapsToDevicePixels="True">
-                  <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
-                </ScrollViewer>
-              </Border>
+                </Grid.RenderTransform>
+                <Border Style="{StaticResource CardShadow}" />
+                <Border
+                  x:Name="Card"
+                  MinWidth="{Binding ActualWidth, ElementName=Root}"
+                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                  Padding="4"
+                  Background="{DynamicResource RegionBrush}"
+                  BorderBrush="{DynamicResource BorderBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{StaticResource Radius.Lg}">
+                  <ScrollViewer x:Name="DropDownScroll" SnapsToDevicePixels="True">
+                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                  </ScrollViewer>
+                </Border>
+              </Grid>
             </Popup>
           </Grid>
           <ControlTemplate.Triggers>
@@ -646,7 +656,7 @@
               </Trigger.EnterActions>
             </Trigger>
             <Trigger Property="HasItems" Value="False">
-              <Setter TargetName="DropDown" Property="MinHeight" Value="32" />
+              <Setter TargetName="Card" Property="MinHeight" Value="32" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
               <Setter Property="Opacity" Value="0.5" />
