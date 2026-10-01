@@ -500,29 +500,7 @@ namespace Axiom.Views
     {
       Controls.Configure.theme = VM.ConfigureView.Theme_SelectedItem;
 
-      // Change HandyControl Theme
-      // Remove existing theme
-      var existingTheme = App.Current.Resources.MergedDictionaries
-        .OfType<HandyControl.Themes.Theme>()
-        .FirstOrDefault();
-
-      if (existingTheme != null)
-      {
-        App.Current.Resources.MergedDictionaries.Remove(existingTheme);
-      }
-
-      // Add new theme with selected skin
-      var newTheme = new HandyControl.Themes.Theme();
-      if (Controls.Configure.theme == "Dark")
-      {
-        newTheme.Skin = HandyControl.Data.SkinType.Dark;
-      }
-      else // Light
-      {
-        newTheme.Skin = HandyControl.Data.SkinType.Default;
-      }
-
-      App.Current.Resources.MergedDictionaries.Add(newTheme);
+      Axiom.Shared.Services.ThemeService.Apply(VM.ConfigureView.Theme_SelectedItem);
     }
   }
 }

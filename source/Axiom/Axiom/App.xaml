@@ -27,8 +27,11 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <!--  HandyControl Themes  -->
-        <hc:Theme Skin="Default" />
+        <!--  HandyControl with the blue accent; ThemeService switches it between dark and light  -->
+        <hc:ThemeResources AccentColor="#3778bf" RequestedTheme="Dark" />
+        <hc:Theme />
+        <!--  Design system: tokens, icons, buttons, fields and the Windows components  -->
+        <ResourceDictionary Source="Shared/Themes/Styles.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

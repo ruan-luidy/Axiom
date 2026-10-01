@@ -90,7 +90,7 @@ namespace ViewModel
             InputFileNameTokensCustom_Text = string.Empty;
             OutputFileNameSpacing_SelectedItem = "Original";
             OutputOverwrite_SelectedItem = "Always";
-            Theme_SelectedItem = "Axiom";
+            Theme_SelectedItem = "Dark";
             UpdateAutoCheck_IsChecked = true;
         }
 

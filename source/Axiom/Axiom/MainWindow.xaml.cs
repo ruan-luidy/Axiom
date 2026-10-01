@@ -232,59 +232,8 @@ namespace Axiom
       ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject),
                                                            new FrameworkPropertyMetadata(Int32.MaxValue));
 
-      // -------------------------
-      // Log Text Theme SelectiveColorPreview
-      // -------------------------
-      switch (VM.ConfigureView.Theme_SelectedItem)
-      {
-        case "Axiom":
-          Log.ConsoleDefault = Brushes.White; // Default
-          Log.ConsoleTitle = (SolidColorBrush)(new BrushConverter().ConvertFrom("#007DF2")); // Titles
-          Log.ConsoleWarning = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E3D004")); // Warning
-          Log.ConsoleError = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F44B35")); // Error
-          Log.ConsoleAction = (SolidColorBrush)(new BrushConverter().ConvertFrom("#72D4E8")); // Actions
-          break;
-
-        case "FFmpeg":
-          Log.ConsoleDefault = Brushes.White; // Default
-          Log.ConsoleTitle = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5cb85c")); // Titles
-          Log.ConsoleWarning = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E3D004")); // Warning
-          Log.ConsoleError = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F44B35")); // Error
-          Log.ConsoleAction = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5cb85c")); // Actions
-          break;
-
-        case "Cyberpunk":
-          Log.ConsoleDefault = Brushes.White; // Default
-          Log.ConsoleTitle = (SolidColorBrush)(new BrushConverter().ConvertFrom("#9f3ed2")); // Titles
-          Log.ConsoleWarning = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E3D004")); // Warning
-          Log.ConsoleError = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F44B35")); // Error
-          Log.ConsoleAction = (SolidColorBrush)(new BrushConverter().ConvertFrom("#9380fd")); // Actions
-          break;
-
-        case "Onyx":
-          Log.ConsoleDefault = Brushes.White; // Default
-          Log.ConsoleTitle = (SolidColorBrush)(new BrushConverter().ConvertFrom("#999999")); // Titles
-          Log.ConsoleWarning = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E3D004")); // Warning
-          Log.ConsoleError = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F44B35")); // Error
-          Log.ConsoleAction = (SolidColorBrush)(new BrushConverter().ConvertFrom("#777777")); // Actions
-          break;
-
-        case "Circuit":
-          Log.ConsoleDefault = Brushes.White; // Default
-          Log.ConsoleTitle = (SolidColorBrush)(new BrushConverter().ConvertFrom("#ad8a4a")); // Titles
-          Log.ConsoleWarning = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E3D004")); // Warning
-          Log.ConsoleError = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F44B35")); // Error
-          Log.ConsoleAction = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2ebf93")); // Actions
-          break;
-
-        case "System":
-          Log.ConsoleDefault = Brushes.White; // Default
-          Log.ConsoleTitle = (SolidColorBrush)(new BrushConverter().ConvertFrom("#007DF2")); // Titles
-          Log.ConsoleWarning = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E3D004")); // Warning
-          Log.ConsoleError = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F44B35")); // Error
-          Log.ConsoleAction = (SolidColorBrush)(new BrushConverter().ConvertFrom("#72D4E8")); // Actions
-          break;
-      }
+      // The log colours come from the theme; the saved one is applied once the settings are read
+      Axiom.Shared.Services.ThemeService.Apply(Axiom.Shared.Services.ThemeService.Dark);
 
       // -----------------------------------------------------------------
       // Log Console Message ///////// 
@@ -760,36 +709,12 @@ namespace Axiom
                     VM.MainView.AutoSortScript_IsChecked = mainwindow_AutoSortScript_IsChecked;
                     autoSortScript_IsChecked_Read = mainwindow_AutoSortScript_IsChecked;
 
-                    // Theme
+                    // Theme (the old named themes map to Light or Dark)
                     string theme_SelectedItem = Controls.Configure.ConfigFile.conf.Read("Settings", "Theme_SelectedItem");
-                    if (!string.IsNullOrWhiteSpace(theme_SelectedItem))
-                    {
-                        // Convert old themes to new Light/Dark system
-                        if (theme_SelectedItem == "Axiom" || theme_SelectedItem == "FFmpeg" ||
-                            theme_SelectedItem == "Cyberpunk" || theme_SelectedItem == "Circuit" ||
-                            theme_SelectedItem == "Prelude" || theme_SelectedItem == "System")
-                        {
-                            theme_SelectedItem = "Light"; // Default to Light for old themes
-                        }
-                        else if (theme_SelectedItem == "Onyx")
-                        {
-                            theme_SelectedItem = "Dark"; // Onyx was dark theme
-                        }
-
-                        // Only set if it's a valid theme (Light or Dark)
-                        if (theme_SelectedItem == "Light" || theme_SelectedItem == "Dark")
-                        {
-                            VM.ConfigureView.Theme_SelectedItem = theme_SelectedItem;
-                        }
-                        else
-                        {
-                            VM.ConfigureView.Theme_SelectedItem = "Light"; // Default fallback
-                        }
-                    }
-                    else
-                    {
-                        VM.ConfigureView.Theme_SelectedItem = "Light"; // Default if no theme saved
-                    }
+                    VM.ConfigureView.Theme_SelectedItem = string.IsNullOrWhiteSpace(theme_SelectedItem)
+                        ? Axiom.Shared.Services.ThemeService.Dark
+                        : Axiom.Shared.Services.ThemeService.Normalize(theme_SelectedItem);
+                    Axiom.Shared.Services.ThemeService.Apply(VM.ConfigureView.Theme_SelectedItem);
                     theme_SelectedItem_Read = VM.ConfigureView.Theme_SelectedItem;
 
                     // Update
