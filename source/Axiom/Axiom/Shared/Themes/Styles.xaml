@@ -293,6 +293,18 @@
     </Setter>
   </Style>
 
+  <!--  Log, debug and file properties text: monospace on the card it sits in  -->
+  <Style x:Key="ConsoleText" TargetType="RichTextBox">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="12,10" />
+    <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSize.Sm}" />
+    <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
+  </Style>
+
   <!--
     ========================================
     BUTTONS

@@ -33,7 +33,7 @@ namespace Axiom
   /// <summary>
   /// Interaction logic for xaml
   /// </summary>
-  public partial class CropWindow : Window
+  public partial class CropWindow : HandyControl.Controls.Window
   {
     private MainWindow mainwindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
@@ -53,11 +53,7 @@ namespace Axiom
 
       this.mainwindow = mainwindow;
 
-      // Set Min/Max Width/Height to prevent Tablets maximizing
-      this.MinWidth = 480;
-      this.MinHeight = 270;
-      this.MaxWidth = 480;
-      this.MaxHeight = 270;
+      // The window fits the crop diagram (SizeToContent in CropWindow.xaml) and cannot be resized
     }
 
 

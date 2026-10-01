@@ -29,7 +29,7 @@ namespace Axiom
   /// <summary>
   /// Interaction logic for Info.xaml
   /// </summary>
-  public partial class InfoWindow : Window
+  public partial class InfoWindow : HandyControl.Controls.Window
   {
     public InfoWindow()
     {

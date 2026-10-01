@@ -31,7 +31,7 @@ namespace Axiom
     /// <summary>
     /// Interaction logic for FailedImportWindow.xaml
     /// </summary>
-    public partial class FailedImportWindow : Window
+    public partial class FailedImportWindow : HandyControl.Controls.Window
     {
         public FailedImportWindow()
         {

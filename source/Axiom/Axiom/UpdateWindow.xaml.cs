@@ -38,7 +38,7 @@ namespace Axiom
   /// <summary>
   /// Interaction logic for Update.xaml
   /// </summary>
-  public partial class UpdateWindow : Window
+  public partial class UpdateWindow : HandyControl.Controls.Window
   {
     // Axiom Exe Current Directory
     //public static string currentDir = Directory.GetCurrentDirectory().TrimEnd('\\') + @"\";

@@ -30,7 +30,7 @@ namespace Axiom
   /// <summary>
   /// Interaction logic for Console.xaml
   /// </summary>
-  public partial class FilePropertiesWindow : Window
+  public partial class FilePropertiesWindow : HandyControl.Controls.Window
   {
     private MainWindow mainwindow;
 
