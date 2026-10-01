@@ -225,6 +225,17 @@
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
   </Style>
 
+  <!--  A path the app keeps (FFmpeg, presets, log): read-only, monospace; clicking it opens a picker  -->
+  <Style
+    x:Key="PathField"
+    BasedOn="{StaticResource TextBox.Small}"
+    TargetType="TextBox">
+    <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSize.XS}" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="IsReadOnlyCaretVisible" Value="False" />
+  </Style>
+
   <!--  The number box next to a slider  -->
   <Style
     x:Key="SliderValue"

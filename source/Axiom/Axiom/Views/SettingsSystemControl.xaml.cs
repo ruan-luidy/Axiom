@@ -143,18 +143,15 @@ namespace Axiom.Views
             }
 
             /// <summary>
-            /// Log Path - Label Button
+            /// Log Path - Open Location Button
             /// </summary>
-            private void lblLogPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+            private void btnLogPathOpen_Click(object sender, RoutedEventArgs e)
             {
-              if (e.LeftButton == MouseButtonState.Pressed)
+              if (MainWindow.IsValidPath(VM.ConfigureView.LogPath_Text))
               {
-                if (MainWindow.IsValidPath(VM.ConfigureView.LogPath_Text))
+                if (Directory.Exists(VM.ConfigureView.LogPath_Text))
                 {
-                  if (Directory.Exists(VM.ConfigureView.LogPath_Text))
-                  {
-                    System.Diagnostics.Process.Start("explorer.exe", VM.ConfigureView.LogPath_Text);
-                  }
+                  System.Diagnostics.Process.Start("explorer.exe", VM.ConfigureView.LogPath_Text);
                 }
               }
             }

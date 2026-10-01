@@ -1,447 +1,258 @@
 <!--
-  SettingsConfigControl
-  Extracted from MainWindow.xaml
+  Settings > Config: where Axiom keeps its config and finds FFmpeg, the theme, updates and resets.
 -->
 <UserControl
   x:Class="Axiom.Views.SettingsConfigControl"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Axiom.Shared.Controls"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:hc="https://handyorg.github.io/handycontrol"
-  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignWidth="700"
   mc:Ignorable="d">
 
-  <hc:UniformSpacingPanel
-    Margin="10,10,10,0"
-    Background="Transparent"
-    Orientation="Vertical"
-    Spacing="5">
+  <controls:MasonryPanel Style="{StaticResource OptionPages}">
 
-    <!--  Location Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Location"
-          Cursor="Hand"
-          PreviewMouseDown="lblConfigPath_PreviewMouseDown"
-          ToolTip="Your config file will be moved to this location."
-          ToolTipService.InitialShowDelay="250"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
+    <controls:OptionPanel Header="PATHS" Icon="{icons:Phosphor FolderBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Config" ToolTip="Your config file will be moved to this location.">
+          <DockPanel>
+            <Button
+              x:Name="btnConfigPath"
+              Click="btnConfigPath_Click"
+              DockPanel.Dock="Right"
+              Style="{StaticResource IconButton}"
+              ToolTip="Open Location">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <ComboBox
+              x:Name="cboConfigPath"
+              IsEnabled="{Binding ConfigPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ItemsSource="{Binding ConfigPath_Items}"
+              SelectedIndex="{Binding ConfigPath_SelectedIndex}"
+              SelectedItem="{Binding ConfigPath_SelectedItem}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Presets" ToolTip="Path to Custom Presets folder.">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnCustomPresetsAuto"
+              Click="btnCustomPresetsAuto_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Default">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <Button
+              Click="btnCustomPresetsPathOpen_Click"
+              DockPanel.Dock="Right"
+              Style="{StaticResource IconButton}"
+              ToolTip="Open Location">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <TextBox
+              x:Name="tbxCustomPresetsPath"
+              AllowDrop="True"
+              IsEnabled="{Binding CustomPresetsPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsReadOnly="True"
+              MaxLines="1"
+              PreviewDragEnter="tbxCustomPresetsPath_PreviewDragOver"
+              PreviewDragOver="tbxCustomPresetsPath_PreviewDragOver"
+              PreviewDrop="tbxCustomPresetsPath_PreviewDrop"
+              PreviewMouseDown="tbxCustomPresetsPath_PreviewMouseDown"
+              Style="{StaticResource PathField}"
+              Text="{Binding CustomPresetsPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ToolTip="{Binding CustomPresetsPath_Text, Mode=OneWay}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <Border Style="{StaticResource PanelDivider}" />
+        <controls:OptionRow Label="FFmpeg" ToolTip="Path to ffmpeg.exe">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnFFmpegAuto"
+              Click="btnFFmpegAuto_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Auto">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <Button
+              Click="btnFFmpegPathOpen_Click"
+              DockPanel.Dock="Right"
+              Style="{StaticResource IconButton}"
+              ToolTip="Open Location">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <TextBox
+              x:Name="tbxFFmpegPathConfig"
+              AllowDrop="True"
+              IsEnabled="{Binding FFmpegPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsReadOnly="True"
+              MaxLines="1"
+              PreviewDragEnter="tbxFFmpegPath_PreviewDragOver"
+              PreviewDragOver="tbxFFmpegPath_PreviewDragOver"
+              PreviewDrop="tbxFFmpegPath_PreviewDrop"
+              PreviewMouseDown="tbxFFmpegPath_PreviewMouseDown"
+              Style="{StaticResource PathField}"
+              Text="{Binding FFmpegPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ToolTip="{Binding FFmpegPath_Text, Mode=OneWay}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="FFprobe" ToolTip="Path to ffprobe.exe">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnFFprobeAuto"
+              Click="btnFFprobeAuto_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Auto">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <Button
+              Click="btnFFprobePathOpen_Click"
+              DockPanel.Dock="Right"
+              Style="{StaticResource IconButton}"
+              ToolTip="Open Location">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <TextBox
+              x:Name="tbxFFprobePathConfig"
+              AllowDrop="True"
+              IsEnabled="{Binding FFprobePath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsReadOnly="True"
+              MaxLines="1"
+              PreviewDragEnter="tbxFFprobePath_PreviewDragOver"
+              PreviewDragOver="tbxFFprobePath_PreviewDragOver"
+              PreviewDrop="tbxFFprobePath_PreviewDrop"
+              PreviewMouseDown="tbxFFprobePath_PreviewMouseDown"
+              Style="{StaticResource PathField}"
+              Text="{Binding FFprobePath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ToolTip="{Binding FFprobePath_Text, Mode=OneWay}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="FFplay" ToolTip="Path to ffplay.exe">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnFFplayAuto"
+              Click="btnFFplayAuto_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Auto">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <Button
+              Click="btnFFplayPathOpen_Click"
+              DockPanel.Dock="Right"
+              Style="{StaticResource IconButton}"
+              ToolTip="Open Location">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <TextBox
+              x:Name="tbxFFplayPathConfig"
+              AllowDrop="True"
+              IsEnabled="{Binding FFplayPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsReadOnly="True"
+              MaxLines="1"
+              PreviewDragEnter="tbxFFplayPath_PreviewDragOver"
+              PreviewDragOver="tbxFFplayPath_PreviewDragOver"
+              PreviewDrop="tbxFFplayPath_PreviewDrop"
+              PreviewMouseDown="tbxFFplayPath_PreviewMouseDown"
+              Style="{StaticResource PathField}"
+              Text="{Binding FFplayPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ToolTip="{Binding FFplayPath_Text, Mode=OneWay}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="youtube-dl" ToolTip="Path to youtube-dl.exe">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnyoutubedlAuto"
+              Click="btnyoutubedlAuto_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Auto">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <Button
+              Click="btnyoutubedlPathOpen_Click"
+              DockPanel.Dock="Right"
+              Style="{StaticResource IconButton}"
+              ToolTip="Open Location">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <TextBox
+              x:Name="tbxyoutubedlPathConfig"
+              AllowDrop="True"
+              IsEnabled="{Binding youtubedlPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsReadOnly="True"
+              MaxLines="1"
+              PreviewDragEnter="tbxyoutubedlPath_PreviewDragOver"
+              PreviewDragOver="tbxyoutubedlPath_PreviewDragOver"
+              PreviewDrop="tbxyoutubedlPath_PreviewDrop"
+              PreviewMouseDown="tbxyoutubedlPath_PreviewMouseDown"
+              Style="{StaticResource PathField}"
+              Text="{Binding youtubedlPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ToolTip="{Binding youtubedlPath_Text, Mode=OneWay}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <TextBlock Style="{StaticResource PanelNote}" Text="Click a path to choose another file, or drop one on it." />
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel Header="APPEARANCE" Icon="{icons:Phosphor PaletteBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Theme" ToolTip="Program Theme">
           <ComboBox
-            x:Name="cboConfigPath"
-            Width="115"
-            IsEnabled="{Binding ConfigPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            ItemsSource="{Binding ConfigPath_Items}"
-            SelectedIndex="{Binding ConfigPath_SelectedIndex}"
-            SelectedItem="{Binding ConfigPath_SelectedItem}"
-            ToolTip="Your config file will be moved to this location."
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True" />
+            x:Name="cboTheme"
+            IsEnabled="{Binding Theme_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsTextSearchEnabled="False"
+            ItemsSource="{Binding Theme_Items}"
+            SelectedIndex="{Binding Theme_SelectedIndex}"
+            SelectedItem="{Binding Theme_SelectedItem}"
+            SelectionChanged="themeSelect_SelectionChanged" />
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
 
-          <Button
-            x:Name="btnConfigPath"
-            Width="28"
-            Height="28"
-            Padding="0"
-            Click="btnConfigPath_Click"
-            Cursor="Hand"
-            ToolTip="Open Location"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True">
-            <iconPacks:PackIconPhosphorIcons
-              HorizontalAlignment="Center"
+    <controls:OptionPanel Header="APP" Icon="{icons:Phosphor GearSixBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Updates" ToolTip="Automatically check for updates at startup.">
+          <StackPanel Orientation="Horizontal">
+            <ToggleButton
+              x:Name="tglUpdateAutoCheck"
+              Checked="tglUpdateAutoCheck_Checked"
+              IsChecked="{Binding UpdateAutoCheck_IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsEnabled="{Binding UpdateAutoCheck_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              Style="{StaticResource OptionSwitch}"
+              Unchecked="tglUpdateAutoCheck_Unchecked" />
+            <TextBlock
+              Margin="8,0,0,0"
               VerticalAlignment="Center"
-              Foreground="{DynamicResource PrimaryTextBrush}"
-              Kind="FolderOpenFill" />
-          </Button>
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
+              FontSize="{StaticResource FontSize.Sm}"
+              Foreground="{DynamicResource SecondaryTextBrush}"
+              Text="{Binding UpdateAutoCheck_Text}" />
+          </StackPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Settings">
+          <StackPanel Orientation="Horizontal">
+            <Button
+              x:Name="btnSettingsDefault"
+              Click="btnSettingsDefault_Click"
+              Content="Default"
+              Style="{StaticResource ButtonDefault.Small}"
+              ToolTip="Set all settings to default." />
+            <Button
+              x:Name="btnClearAllSavedSettings"
+              Margin="6,0,0,0"
+              Click="btnResetConfig_Click"
+              Content="Reset"
+              Style="{StaticResource ButtonDanger.Small}"
+              ToolTip="Delete config file and reset settings." />
+          </StackPanel>
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
 
-    <!--  Presets Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Presets"
-          Cursor="Hand"
-          PreviewMouseDown="lblCustomPresetsPath_PreviewMouseDown"
-          ToolTip="Path to Custom Presets folder."
-          ToolTipService.InitialShowDelay="250"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
-          <TextBox
-            x:Name="tbxCustomPresetsPath"
-            Width="115"
-            AllowDrop="True"
-            IsEnabled="{Binding CustomPresetsPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsReadOnly="True"
-            MaxLines="1"
-            PreviewDragEnter="tbxCustomPresetsPath_PreviewDragOver"
-            PreviewDragOver="tbxCustomPresetsPath_PreviewDragOver"
-            PreviewDrop="tbxCustomPresetsPath_PreviewDrop"
-            PreviewMouseDown="tbxCustomPresetsPath_PreviewMouseDown"
-            Text="{Binding CustomPresetsPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="NoWrap"
-            ToolTip="{Binding CustomPresetsPath_Text, Mode=OneWay}"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True" />
-
-          <Button
-            x:Name="btnCustomPresetsAuto"
-            Width="28"
-            Height="28"
-            Padding="0"
-            Click="btnCustomPresetsAuto_Click"
-            Cursor="Hand"
-            ToolTip="Revert to Default"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True">
-            <iconPacks:PackIconPhosphorIcons
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Foreground="{DynamicResource PrimaryTextBrush}"
-              Kind="ArrowCounterClockwise" />
-          </Button>
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
-
-    <!--  FFmpeg Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="FFmpeg"
-          Cursor="Hand"
-          PreviewMouseDown="lblFFmpegPath_PreviewMouseDown"
-          ToolTip="Path to ffmpeg.exe"
-          ToolTipService.InitialShowDelay="250"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
-          <TextBox
-            x:Name="tbxFFmpegPathConfig"
-            Width="115"
-            AllowDrop="True"
-            IsEnabled="{Binding FFmpegPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsReadOnly="True"
-            MaxLines="1"
-            PreviewDragEnter="tbxFFmpegPath_PreviewDragOver"
-            PreviewDragOver="tbxFFmpegPath_PreviewDragOver"
-            PreviewDrop="tbxFFmpegPath_PreviewDrop"
-            PreviewMouseDown="tbxFFmpegPath_PreviewMouseDown"
-            Text="{Binding FFmpegPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="NoWrap"
-            ToolTip="{Binding FFmpegPath_Text, Mode=OneWay}"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True" />
-
-          <Button
-            x:Name="btnFFmpegAuto"
-            Width="28"
-            Height="28"
-            Padding="0"
-            Click="btnFFmpegAuto_Click"
-            Cursor="Hand"
-            ToolTip="Revert to Auto"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True">
-            <iconPacks:PackIconPhosphorIcons
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Foreground="{DynamicResource PrimaryTextBrush}"
-              Kind="ArrowCounterClockwise" />
-          </Button>
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
-
-    <!--  FFprobe Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="FFprobe"
-          Cursor="Hand"
-          PreviewMouseDown="lblFFprobePath_PreviewMouseDown"
-          ToolTip="Path to ffprobe.exe"
-          ToolTipService.InitialShowDelay="250"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
-          <TextBox
-            x:Name="tbxFFprobePathConfig"
-            Width="115"
-            AllowDrop="True"
-            IsEnabled="{Binding FFprobePath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsReadOnly="True"
-            MaxLines="1"
-            PreviewDragEnter="tbxFFprobePath_PreviewDragOver"
-            PreviewDragOver="tbxFFprobePath_PreviewDragOver"
-            PreviewDrop="tbxFFprobePath_PreviewDrop"
-            PreviewMouseDown="tbxFFprobePath_PreviewMouseDown"
-            Text="{Binding FFprobePath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="NoWrap"
-            ToolTip="{Binding FFprobePath_Text, Mode=OneWay}"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True" />
-
-          <Button
-            x:Name="btnFFprobeAuto"
-            Width="28"
-            Height="28"
-            Padding="0"
-            Click="btnFFprobeAuto_Click"
-            Cursor="Hand"
-            ToolTip="Revert to Auto"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True">
-            <iconPacks:PackIconPhosphorIcons
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Foreground="{DynamicResource PrimaryTextBrush}"
-              Kind="ArrowCounterClockwise" />
-          </Button>
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
-
-    <!--  FFplay Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="FFplay"
-          Cursor="Hand"
-          PreviewMouseDown="lblFFplayPath_PreviewMouseDown"
-          ToolTip="Path to ffplay.exe"
-          ToolTipService.InitialShowDelay="250"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
-          <TextBox
-            x:Name="tbxFFplayPathConfig"
-            Width="115"
-            AllowDrop="True"
-            IsEnabled="{Binding FFplayPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsReadOnly="True"
-            MaxLines="1"
-            PreviewDragEnter="tbxFFplayPath_PreviewDragOver"
-            PreviewDragOver="tbxFFplayPath_PreviewDragOver"
-            PreviewDrop="tbxFFplayPath_PreviewDrop"
-            PreviewMouseDown="tbxFFplayPath_PreviewMouseDown"
-            Text="{Binding FFplayPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="NoWrap"
-            ToolTip="{Binding FFplayPath_Text, Mode=OneWay}"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True" />
-
-          <Button
-            x:Name="btnFFplayAuto"
-            Width="28"
-            Height="28"
-            Padding="0"
-            Click="btnFFplayAuto_Click"
-            Cursor="Hand"
-            ToolTip="Revert to Auto"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True">
-            <iconPacks:PackIconPhosphorIcons
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Foreground="{DynamicResource PrimaryTextBrush}"
-              Kind="ArrowCounterClockwise" />
-          </Button>
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
-
-    <!--  youtube-dl Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="youtube-dl"
-          Cursor="Hand"
-          PreviewMouseDown="lblyoutubedlPath_PreviewMouseDown"
-          ToolTip="Path to youtube-dl.exe"
-          ToolTipService.InitialShowDelay="250"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
-          <TextBox
-            x:Name="tbxyoutubedlPathConfig"
-            Width="115"
-            AllowDrop="True"
-            IsEnabled="{Binding youtubedlPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsReadOnly="True"
-            MaxLines="1"
-            PreviewDragEnter="tbxyoutubedlPath_PreviewDragOver"
-            PreviewDragOver="tbxyoutubedlPath_PreviewDragOver"
-            PreviewDrop="tbxyoutubedlPath_PreviewDrop"
-            PreviewMouseDown="tbxyoutubedlPath_PreviewMouseDown"
-            Text="{Binding youtubedlPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="NoWrap"
-            ToolTip="{Binding youtubedlPath_Text, Mode=OneWay}"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True" />
-
-          <Button
-            x:Name="btnyoutubedlAuto"
-            Width="28"
-            Height="28"
-            Padding="0"
-            Click="btnyoutubedlAuto_Click"
-            Cursor="Hand"
-            ToolTip="Revert to Auto"
-            ToolTipService.InitialShowDelay="200"
-            ToolTipService.ShowOnDisabled="True">
-            <iconPacks:PackIconPhosphorIcons
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Foreground="{DynamicResource PrimaryTextBrush}"
-              Kind="ArrowCounterClockwise" />
-          </Button>
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
-
-    <hc:Divider Margin="0,10,0,10" />
-
-    <!--  Theme Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          x:Name="labelTheme"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Theme"
-          ToolTip="Program Theme"
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <ComboBox
-          x:Name="cboTheme"
-          Width="115"
-          HorizontalAlignment="Left"
-          IsEnabled="{Binding Theme_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          IsTextSearchEnabled="False"
-          ItemsSource="{Binding Theme_Items}"
-          SelectedIndex="{Binding Theme_SelectedIndex}"
-          SelectedItem="{Binding Theme_SelectedItem}"
-          SelectionChanged="themeSelect_SelectionChanged" />
-      </hc:Col>
-    </hc:Row>
-
-    <hc:Divider Margin="0,10,0,10" />
-
-    <!--  Updates Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Updates"
-          ToolTip="Automatically check for updates at startup."
-          ToolTipService.InitialShowDelay="500"
-          ToolTipService.ShowOnDisabled="True" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
-          <ToggleButton
-            x:Name="tglUpdateAutoCheck"
-            Width="55"
-            Checked="tglUpdateAutoCheck_Checked"
-            Cursor="Hand"
-            IsChecked="{Binding UpdateAutoCheck_IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            IsEnabled="{Binding UpdateAutoCheck_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            ToolTip="Automatically check for updates at startup."
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True"
-            Unchecked="tglUpdateAutoCheck_Unchecked">
-            <TextBlock Style="{DynamicResource TextBlockStyle}" Text="{Binding UpdateAutoCheck_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-          </ToggleButton>
-
-          <Label
-            VerticalAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Content="Auto-Check" />
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
-
-    <!--  Settings Row  -->
-    <hc:Row Gutter="20">
-      <hc:Col Span="10">
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Background="Transparent"
-          BorderThickness="0"
-          Content="Settings" />
-      </hc:Col>
-      <hc:Col Span="14">
-        <hc:UniformSpacingPanel Orientation="Horizontal" Spacing="5">
-          <Button
-            x:Name="btnSettingsDefault"
-            Background="Transparent"
-            Click="btnSettingsDefault_Click"
-            Cursor="Hand"
-            ToolTip="Set all settings to default."
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True">
-            <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Default" />
-          </Button>
-
-          <Button
-            x:Name="btnClearAllSavedSettings"
-            Background="Transparent"
-            Click="btnResetConfig_Click"
-            Cursor="Hand"
-            ToolTip="Delete config file and reset settings."
-            ToolTipService.InitialShowDelay="500"
-            ToolTipService.ShowOnDisabled="True">
-            <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Reset" />
-          </Button>
-        </hc:UniformSpacingPanel>
-      </hc:Col>
-    </hc:Row>
-
-  </hc:UniformSpacingPanel>
+  </controls:MasonryPanel>
 </UserControl>

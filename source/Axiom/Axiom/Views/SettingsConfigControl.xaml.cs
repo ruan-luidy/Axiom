@@ -47,7 +47,7 @@ namespace Axiom.Views
     }
 
     /// <summary>
-    /// CustomPresets Auto Path - Label Button
+    /// CustomPresets Auto Path - Revert Button
     /// </summary>
     private void btnCustomPresetsAuto_Click(object sender, RoutedEventArgs e)
     {
@@ -136,122 +136,79 @@ namespace Axiom.Views
     }
 
     /// <summary>
-    /// Config Path - Label Button
+    /// Custom Presets Path - Open Location Button
     /// </summary>
-    private void lblConfigPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    private void btnCustomPresetsPathOpen_Click(object sender, RoutedEventArgs e)
     {
-      if (e.LeftButton == MouseButtonState.Pressed)
+      if (MainWindow.IsValidPath(VM.ConfigureView.CustomPresetsPath_Text))
       {
-        switch (VM.ConfigureView.ConfigPath_SelectedItem)
+        if (Directory.Exists(VM.ConfigureView.CustomPresetsPath_Text))
         {
-          case "AppData Local":
-            MainWindow.ConfigDirectoryOpen(MainWindow.appDataLocalDir + @"Axiom UI\");
-            break;
-
-          case "AppData Roaming":
-            MainWindow.ConfigDirectoryOpen(MainWindow.appDataRoamingDir + @"Axiom UI\");
-            break;
-
-          case "Documents":
-            MainWindow.ConfigDirectoryOpen(MainWindow.documentsDir + @"Axiom UI\");
-            break;
-
-          case "App Root":
-            Process.Start("explorer.exe", MainWindow.appRootDir);
-            break;
+          Process.Start("explorer.exe", VM.ConfigureView.CustomPresetsPath_Text);
         }
       }
     }
 
     /// <summary>
-    /// Custom Presets Path - Label Button
+    /// FFmpeg Path - Open Location Button
     /// </summary>
-    private void lblCustomPresetsPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    private void btnFFmpegPathOpen_Click(object sender, RoutedEventArgs e)
     {
-      if (e.LeftButton == MouseButtonState.Pressed)
+      string path = VM.ConfigureView.FFmpegPath_Text;
+      if (path != "<auto>" && MainWindow.IsValidPath(path))
       {
-        if (MainWindow.IsValidPath(VM.ConfigureView.CustomPresetsPath_Text))
+        string directory = Path.GetDirectoryName(path);
+        if (Directory.Exists(directory))
         {
-          if (Directory.Exists(VM.ConfigureView.CustomPresetsPath_Text))
-          {
-            Process.Start("explorer.exe", VM.ConfigureView.CustomPresetsPath_Text);
-          }
+          Process.Start("explorer.exe", directory);
         }
       }
     }
 
     /// <summary>
-    /// FFmpeg Path - Label Button
+    /// FFplay Path - Open Location Button
     /// </summary>
-    private void lblFFmpegPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    private void btnFFplayPathOpen_Click(object sender, RoutedEventArgs e)
     {
-      if (e.LeftButton == MouseButtonState.Pressed)
+      string path = VM.ConfigureView.FFplayPath_Text;
+      if (path != "<auto>" && MainWindow.IsValidPath(path))
       {
-        string path = VM.ConfigureView.FFmpegPath_Text;
-        if (path != "<auto>" && MainWindow.IsValidPath(path))
+        string directory = Path.GetDirectoryName(path);
+        if (Directory.Exists(directory))
         {
-          string directory = Path.GetDirectoryName(path);
-          if (Directory.Exists(directory))
-          {
-            Process.Start("explorer.exe", directory);
-          }
+          Process.Start("explorer.exe", directory);
         }
       }
     }
 
     /// <summary>
-    /// FFplay Path - Label Button
+    /// FFprobe Path - Open Location Button
     /// </summary>
-    private void lblFFplayPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    private void btnFFprobePathOpen_Click(object sender, RoutedEventArgs e)
     {
-      if (e.LeftButton == MouseButtonState.Pressed)
+      string path = VM.ConfigureView.FFprobePath_Text;
+      if (path != "<auto>" && MainWindow.IsValidPath(path))
       {
-        string path = VM.ConfigureView.FFplayPath_Text;
-        if (path != "<auto>" && MainWindow.IsValidPath(path))
+        string directory = Path.GetDirectoryName(path);
+        if (Directory.Exists(directory))
         {
-          string directory = Path.GetDirectoryName(path);
-          if (Directory.Exists(directory))
-          {
-            Process.Start("explorer.exe", directory);
-          }
+          Process.Start("explorer.exe", directory);
         }
       }
     }
 
     /// <summary>
-    /// FFprobe Path - Label Button
+    /// youtube-dl Path - Open Location Button
     /// </summary>
-    private void lblFFprobePath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    private void btnyoutubedlPathOpen_Click(object sender, RoutedEventArgs e)
     {
-      if (e.LeftButton == MouseButtonState.Pressed)
+      string path = VM.ConfigureView.youtubedlPath_Text;
+      if (path != "<auto>" && MainWindow.IsValidPath(path))
       {
-        string path = VM.ConfigureView.FFprobePath_Text;
-        if (path != "<auto>" && MainWindow.IsValidPath(path))
+        string directory = Path.GetDirectoryName(path);
+        if (Directory.Exists(directory))
         {
-          string directory = Path.GetDirectoryName(path);
-          if (Directory.Exists(directory))
-          {
-            Process.Start("explorer.exe", directory);
-          }
-        }
-      }
-    }
-
-    /// <summary>
-    /// youtube-dl Path - Label Button
-    /// </summary>
-    private void lblyoutubedlPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-    {
-      if (e.LeftButton == MouseButtonState.Pressed)
-      {
-        string path = VM.ConfigureView.youtubedlPath_Text;
-        if (path != "<auto>" && MainWindow.IsValidPath(path))
-        {
-          string directory = Path.GetDirectoryName(path);
-          if (Directory.Exists(directory))
-          {
-            Process.Start("explorer.exe", directory);
-          }
+          Process.Start("explorer.exe", directory);
         }
       }
     }
