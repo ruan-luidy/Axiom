@@ -1,0 +1,304 @@
+<!--
+  Video > Encoding: the codec, hardware acceleration, quality and bit rate, frames and device optimization.
+-->
+<UserControl
+  x:Class="Axiom.Features.Video.VideoEncodingControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Axiom.Shared.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignWidth="700"
+  mc:Ignorable="d">
+
+  <controls:MasonryPanel Style="{StaticResource OptionPages}">
+
+    <controls:OptionPanel Header="ENCODER" Icon="{icons:Phosphor CpuBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Codec">
+          <ComboBox
+            x:Name="cboVideo_Codec"
+            IsEnabled="{Binding Video_Codec_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_Codec_Items}"
+            SelectedIndex="{Binding Video_Codec_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Video_Codec_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboVideo_Codec_SelectionChanged" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Speed" ToolTip="Encoding Speed. Slower = Better Quality &amp; Compression.">
+          <ComboBox
+            x:Name="cboEncodeSpeed"
+            IsEnabled="{Binding Video_EncodeSpeed_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_EncodeSpeed_Items}"
+            SelectedIndex="{Binding Video_EncodeSpeed_SelectedIndex, Mode=TwoWay}"
+            SelectedValue="{Binding Video_EncodeSpeed_SelectedItem, Mode=TwoWay}"
+            SelectedValuePath="Name"
+            SelectionChanged="cboEncodeSpeed_SelectionChanged">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel Header="QUALITY" Icon="{icons:Phosphor GaugeBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Quality">
+          <ComboBox
+            x:Name="cboVideo_Quality"
+            IsEnabled="{Binding Video_Quality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_Quality_Items}"
+            SelectedValue="{Binding Video_Quality_SelectedItem, Mode=TwoWay}"
+            SelectedValuePath="Name"
+            SelectionChanged="cboVideo_Quality_SelectionChanged">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Pass" ToolTip="Encoding Pass Method">
+          <ComboBox
+            x:Name="cboVideo_Pass"
+            DropDownClosed="cboVideo_Pass_DropDownClosed"
+            IsEnabled="{Binding Video_Pass_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_Pass_Items}"
+            SelectedIndex="{Binding Video_Pass_SelectedIndex, Mode=TwoWay}"
+            SelectedValue="{Binding Video_Pass_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboVideo_Pass_SelectionChanged" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="CRF" ToolTip="Constant Rate Factor. Lower value is higher quality.">
+          <DockPanel>
+            <TextBox
+              x:Name="tbxVideo_CRF"
+              DockPanel.Dock="Right"
+              IsEnabled="{Binding Video_CRF_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              KeyDown="tbxVideo_CRF_KeyDown"
+              MaxLength="2"
+              Style="{StaticResource SliderValue}"
+              Text="{Binding Video_CRF_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              TextChanged="tbxVideo_CRF_TextChanged" />
+            <Slider
+              x:Name="slVideo_CRF"
+              IsEnabled="{Binding Video_CRF_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              Maximum="51"
+              Minimum="0"
+              MouseDoubleClick="slVideo_CRF_MouseDoubleClick"
+              Style="{StaticResource OptionSlider}"
+              ValueChanged="slVideo_CRF_ValueChanged"
+              Value="{Binding Video_CRF_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Bit Rate" ToolTip="Video Bit Rate (e.g. 1000K or 1M)">
+          <DockPanel>
+            <ToggleButton
+              DockPanel.Dock="Right"
+              IsChecked="{Binding Video_BitRateAdvanced_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              Style="{StaticResource Disclosure}"
+              ToolTip="Show Advanced Bit Rate Controls" />
+            <ToggleButton
+              x:Name="tglVideo_VBR"
+              Checked="tglVideo_VBR_Checked"
+              Content="VBR"
+              DockPanel.Dock="Right"
+              IsChecked="{Binding Video_VBR_IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsEnabled="{Binding Video_VBR_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              Style="{StaticResource OptionChip}"
+              ToolTip="Toggle Variable Bit Rate."
+              Unchecked="tglVideo_VBR_Unchecked" />
+            <TextBox
+              x:Name="tbxVideo_BitRate"
+              IsEnabled="{Binding Video_BitRate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              MaxLength="10"
+              Text="{Binding Video_BitRate_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </DockPanel>
+        </controls:OptionRow>
+
+        <Border Style="{StaticResource DisclosedRows}" Visibility="{Binding Video_BitRateAdvanced_IsExpanded, Converter={StaticResource Boolean2VisibilityConverter}}">
+          <StackPanel>
+            <controls:OptionRow
+              Label="Min Rate"
+              LabelWidth="80"
+              ToolTip="Video Min Bit Rate (e.g. 1000K or 1M)">
+              <TextBox
+                x:Name="tbxVideo_MinRate"
+                IsEnabled="{Binding Video_MinRate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxLength="10"
+                Text="{Binding Video_MinRate_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </controls:OptionRow>
+            <controls:OptionRow
+              Label="Max Rate"
+              LabelWidth="80"
+              ToolTip="Video Max Bit Rate (e.g. 1000K or 1M)">
+              <TextBox
+                x:Name="tbxVideo_MaxRate"
+                IsEnabled="{Binding Video_MaxRate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxLength="10"
+                Text="{Binding Video_MaxRate_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </controls:OptionRow>
+            <controls:OptionRow
+              Label="Buf Size"
+              LabelWidth="80"
+              ToolTip="Rate Control Buffer (e.g. 1000K or 1M)">
+              <TextBox
+                x:Name="tbxVideo_BufSize"
+                IsEnabled="{Binding Video_BufSize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxLength="10"
+                Text="{Binding Video_BufSize_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </controls:OptionRow>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel Header="HARDWARE ACCELERATION" Icon="{icons:Phosphor CircuitryBold}">
+      <StackPanel>
+        <controls:OptionRow Label="HW Accel" ToolTip="Hardware Acceleration">
+          <ComboBox
+            x:Name="cboHWAccel"
+            IsEnabled="{Binding Video_HWAccel_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_HWAccel_Items}"
+            SelectedIndex="{Binding Video_HWAccel_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Video_HWAccel_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboHWAccel_SelectionChanged" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Decode" ToolTip="Hardware Acceleration Decode">
+          <ComboBox
+            x:Name="cboHWAccelDecode"
+            IsEnabled="{Binding Video_HWAccel_Decode_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_HWAccel_Decode_Items}"
+            SelectedIndex="{Binding Video_HWAccel_Decode_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Video_HWAccel_Decode_SelectedItem, Mode=TwoWay}" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Transcode" ToolTip="Hardware Acceleration Transcode">
+          <ComboBox
+            x:Name="cboHWAccelTranscode"
+            IsEnabled="{Binding Video_HWAccel_Transcode_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_HWAccel_Transcode_Items}"
+            SelectedIndex="{Binding Video_HWAccel_Transcode_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Video_HWAccel_Transcode_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboHWAccelTranscode_SelectionChanged" />
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel Header="FRAMES" Icon="{icons:Phosphor FilmReelBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Pixel Format">
+          <ComboBox
+            x:Name="cboVideo_PixelFormat"
+            IsEnabled="{Binding Video_PixelFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_PixelFormat_Items}"
+            SelectedIndex="{Binding Video_PixelFormat_SelectedIndex, Mode=TwoWay}"
+            SelectedItem="{Binding Video_PixelFormat_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboVideo_PixelFormat_SelectionChanged" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Frame Rate" ToolTip="Frames Per Second">
+          <ComboBox
+            x:Name="cboVideo_FrameRate"
+            IsEditable="{Binding Video_FPS_IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsEnabled="{Binding Video_FPS_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsTextSearchEnabled="False"
+            ItemsSource="{Binding Video_FPS_Items}"
+            SelectedIndex="{Binding Video_FPS_SelectedIndex}"
+            SelectedItem="{Binding Video_FPS_SelectedItem}"
+            SelectionChanged="cboVideo_FPS_SelectionChanged"
+            Text="{Binding Video_FPS_Text}"
+            TextBoxBase.KeyDown="cboVideo_FrameRate_KeyDown" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Speed" ToolTip="Speed Up / Slow Down Video">
+          <ComboBox
+            x:Name="cboVideo_Speed"
+            IsEditable="{Binding Video_Speed_IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsEnabled="{Binding Video_Speed_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsTextSearchEnabled="False"
+            ItemsSource="{Binding Video_Speed_Items}"
+            SelectedIndex="{Binding Video_Speed_SelectedIndex}"
+            SelectedItem="{Binding Video_Speed_SelectedItem}"
+            SelectionChanged="cboVideo_Speed_SelectionChanged"
+            Text="{Binding Video_Speed_Text}"
+            TextBoxBase.KeyDown="cboVideo_Speed_KeyDown" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Vsync">
+          <controls:OptionRow.ToolTip>
+            <TextBlock>
+              auto: Chooses between 1 and 2 depending on muxer capabilities. This is the default method.<LineBreak />
+              passthrough: Each frame is passed with its timestamp from the demuxer to the muxer.<LineBreak />
+              cfr: Frames will be duplicated and dropped to achieve exactly the requested constant frame rate.<LineBreak />
+              vfr: Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp.<LineBreak />
+              drop: As passthrough but destroys all timestamps, making the muxer generate fresh timestamps based on frame-rate.</TextBlock>
+          </controls:OptionRow.ToolTip>
+          <ComboBox
+            x:Name="cboVideo_Vsync"
+            IsEnabled="{Binding Video_Vsync_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Video_Vsync_Items}"
+            SelectedItem="{Binding Video_Vsync_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboVideo_Vsync_SelectionChanged" />
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel Header="OPTIMIZE" Icon="{icons:Phosphor DevicesBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Device" ToolTip="Optimize file for device type.">
+          <DockPanel>
+            <ToggleButton
+              DockPanel.Dock="Right"
+              IsChecked="{Binding Video_Optimize_IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsEnabled="{Binding Video_Optimize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              Style="{StaticResource Disclosure}"
+              ToolTip="Tune, profile and level" />
+            <ComboBox
+              x:Name="cboVideo_Optimize"
+              IsEnabled="{Binding Video_Optimize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ItemsSource="{Binding Video_Optimize_Items}"
+              SelectedIndex="{Binding Video_Optimize_SelectedIndex, Mode=TwoWay}"
+              SelectedValue="{Binding Video_Optimize_SelectedItem, Mode=TwoWay}"
+              SelectedValuePath="Name"
+              SelectionChanged="cboVideo_Optimize_SelectionChanged">
+              <ComboBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+          </DockPanel>
+        </controls:OptionRow>
+
+        <Border Style="{StaticResource DisclosedRows}" Visibility="{Binding Video_Optimize_IsExpanded, Converter={StaticResource Boolean2VisibilityConverter}}">
+          <StackPanel>
+            <controls:OptionRow Label="Tune" LabelWidth="80">
+              <ComboBox
+                x:Name="cboVideo_Optimize_Tune"
+                IsEnabled="{Binding Video_Optimize_Tune_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Video_Optimize_Tune_Items}"
+                SelectedIndex="{Binding Video_Optimize_Tune_SelectedIndex, Mode=TwoWay}"
+                SelectedItem="{Binding Video_Optimize_Tune_SelectedItem, Mode=TwoWay}" />
+            </controls:OptionRow>
+            <controls:OptionRow Label="Profile" LabelWidth="80">
+              <ComboBox
+                x:Name="cboVideo_Optimize_Profile"
+                IsEnabled="{Binding Video_Optimize_Profile_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Video_Optimize_Profile_Items}"
+                SelectedIndex="{Binding Video_Optimize_Profile_SelectedIndex, Mode=TwoWay}"
+                SelectedItem="{Binding Video_Optimize_Profile_SelectedItem, Mode=TwoWay}" />
+            </controls:OptionRow>
+            <controls:OptionRow Label="Level" LabelWidth="80">
+              <ComboBox
+                x:Name="cboVideo_Optimize_Level"
+                IsEnabled="{Binding Video_Optimize_Level_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Video_Optimize_Level_Items}"
+                SelectedIndex="{Binding Video_Optimize_Level_SelectedIndex, Mode=TwoWay}"
+                SelectedItem="{Binding Video_Optimize_Level_SelectedItem, Mode=TwoWay}" />
+            </controls:OptionRow>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </controls:OptionPanel>
+
+  </controls:MasonryPanel>
+</UserControl>

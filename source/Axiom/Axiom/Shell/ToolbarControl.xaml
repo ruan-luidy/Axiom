@@ -1,0 +1,126 @@
+<!--
+  Tools, shown in the title bar: the converted file, the script options, the consoles and the app.
+-->
+<UserControl
+  x:Class="Axiom.Shell.ToolbarControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="36"
+  d:DesignWidth="420"
+  mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <Style x:Key="Divider" TargetType="Border">
+      <Setter Property="Width" Value="1" />
+      <Setter Property="Height" Value="16" />
+      <Setter Property="Margin" Value="6,0" />
+      <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
+    </Style>
+  </UserControl.Resources>
+
+  <StackPanel
+    VerticalAlignment="Center"
+    Orientation="Horizontal"
+    WindowChrome.IsHitTestVisibleInChrome="True">
+
+    <!--  The converted file  -->
+    <Button
+      x:Name="btnProperties"
+      Click="btnProperties_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="View File Properties">
+      <Path Data="{icons:Phosphor ListMagnifyingGlassBold}" Style="{StaticResource Icon}" />
+    </Button>
+    <Button
+      x:Name="btnPlayFile"
+      Click="btnPlayFile_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="Play Converted File">
+      <Path Data="{icons:Phosphor PlayBold}" Style="{StaticResource Icon}" />
+    </Button>
+
+    <Border Style="{StaticResource Divider}" />
+
+    <!--  Script options  -->
+    <ToggleButton
+      x:Name="tglAutoSortScript"
+      Checked="tglAutoSortScript_Checked"
+      IsChecked="{Binding MainView.AutoSortScript_IsChecked}"
+      Style="{StaticResource IconToggle}"
+      ToolTip="Auto Sort Script"
+      Unchecked="tglAutoSortScript_Unchecked">
+      <Path Data="{icons:Phosphor SortAscendingBold}" Style="{StaticResource Icon}" />
+    </ToggleButton>
+    <ToggleButton
+      x:Name="tglCMDWindowKeep"
+      Checked="tglCMDWindowKeep_Checked"
+      IsChecked="{Binding MainView.CMDWindowKeep_IsChecked}"
+      Style="{StaticResource IconToggle}"
+      ToolTip="Keep FFmpeg window open after converting"
+      Unchecked="tglCMDWindowKeep_Unchecked">
+      <Path Data="{icons:Phosphor BrowserBold}" Style="{StaticResource Icon}" />
+    </ToggleButton>
+
+    <Border Style="{StaticResource Divider}" />
+
+    <!--  Logs and consoles  -->
+    <Button
+      x:Name="btnLog"
+      Click="btnLog_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="View the last Output Log">
+      <Path Data="{icons:Phosphor FileTextBold}" Style="{StaticResource Icon}" />
+    </Button>
+    <Button
+      x:Name="btnLogConsole"
+      Click="btnLogConsole_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="Show Log Console">
+      <Path Data="{icons:Phosphor NotepadBold}" Style="{StaticResource Icon}" />
+    </Button>
+    <Button
+      x:Name="btnDebugConsole"
+      Click="btnDebugConsole_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="Show Debug Console">
+      <Path Data="{icons:Phosphor BugBold}" Style="{StaticResource Icon}" />
+    </Button>
+    <Button
+      x:Name="btnCmd"
+      Click="btnCmd_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="Launch Command Prompt / PowerShell">
+      <Path Data="{icons:Phosphor TerminalWindowBold}" Style="{StaticResource Icon}" />
+    </Button>
+
+    <Border Style="{StaticResource Divider}" />
+
+    <!--  The app  -->
+    <Button
+      x:Name="btnUpdate"
+      Click="btnUpdate_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="Check for Updates">
+      <Path Data="{icons:Phosphor ArrowCircleUpBold}" Style="{StaticResource Icon}" />
+    </Button>
+    <Button
+      x:Name="btbWebsite"
+      Command="hc:ControlCommands.OpenLink"
+      CommandParameter="https://axiomui.github.io/"
+      Style="{StaticResource IconButton}"
+      ToolTip="Visit Website">
+      <Path Data="{icons:Phosphor GlobeHemisphereWestBold}" Style="{StaticResource Icon}" />
+    </Button>
+    <Button
+      x:Name="btnInfo"
+      Click="btnInfo_Click"
+      Style="{StaticResource IconButton}"
+      ToolTip="About this program">
+      <Path Data="{icons:Phosphor InfoBold}" Style="{StaticResource Icon}" />
+    </Button>
+  </StackPanel>
+</UserControl>

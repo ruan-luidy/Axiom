@@ -1,0 +1,907 @@
+<!--
+  Video > Color: the colour space written to the output, the EQ filter and selective colour.
+
+  EQ and selective colour are filters, so those two panels read the FilterVideo view model even though the
+  page sits under Video.
+-->
+<UserControl
+  x:Class="Axiom.Features.Video.VideoColorControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Axiom.Shared.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vm="clr-namespace:ViewModel"
+  d:DesignWidth="700"
+  mc:Ignorable="d">
+
+  <controls:MasonryPanel Style="{StaticResource OptionPages}">
+
+    <controls:OptionPanel Header="COLOR SPACE" Icon="{icons:Phosphor SwatchesBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Range" ToolTip="Color Range">
+          <ComboBox
+            x:Name="cboColorRange"
+            IsEnabled="{Binding Video_Color_Range_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding Video_Color_Range_Items}"
+            SelectedIndex="{Binding Video_Color_Range_SelectedIndex}"
+            SelectedItem="{Binding Video_Color_Range_SelectedItem, Mode=TwoWay}"
+            SelectionChanged="cboColorRange_SelectionChanged" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Space" ToolTip="Color Space">
+          <ComboBox
+            x:Name="cboColorSpace"
+            IsEnabled="{Binding Video_Color_Space_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding Video_Color_Space_Items}"
+            SelectedIndex="{Binding Video_Color_Space_SelectedIndex}"
+            SelectedItem="{Binding Video_Color_Space_SelectedItem, Mode=TwoWay}" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Primaries" ToolTip="Color Primaries">
+          <ComboBox
+            x:Name="cboColorPrimaries"
+            IsEnabled="{Binding Video_Color_Primaries_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding Video_Color_Primaries_Items}"
+            SelectedIndex="{Binding Video_Color_Primaries_SelectedIndex}"
+            SelectedItem="{Binding Video_Color_Primaries_SelectedItem, Mode=TwoWay}" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Transfer" ToolTip="Transfer Characteristics">
+          <ComboBox
+            x:Name="cboColorTransferCharacteristics"
+            IsEnabled="{Binding Video_Color_TransferCharacteristics_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding Video_Color_TransferCharacteristics_Items}"
+            SelectedIndex="{Binding Video_Color_TransferCharacteristics_SelectedIndex}"
+            SelectedItem="{Binding Video_Color_TransferCharacteristics_SelectedItem, Mode=TwoWay}" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Matrix" ToolTip="Color Matrix">
+          <ComboBox
+            x:Name="cboColorMatrix"
+            IsEnabled="{Binding Video_Color_Matrix_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding Video_Color_Matrix_Items}"
+            SelectedIndex="{Binding Video_Color_Matrix_SelectedIndex}"
+            SelectedItem="{Binding Video_Color_Matrix_SelectedItem, Mode=TwoWay}" />
+        </controls:OptionRow>
+        <Button
+          x:Name="btnColor_Reset"
+          Margin="0,6,0,0"
+          HorizontalAlignment="Right"
+          Click="btnColor_Reset_Click"
+          Style="{StaticResource ButtonDefault.Small}"
+          ToolTip="Reset Color Default.">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            <TextBlock Margin="6,0,0,0" Text="Reset" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel
+      DataContext="{x:Static vm:VM.FilterVideoView}"
+      Header="EQ"
+      Icon="{icons:Phosphor SlidersBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Brightness">
+          <DockPanel>
+            <TextBox
+              x:Name="tbxFilterVideo_EQ_Brightness"
+              DockPanel.Dock="Right"
+              IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              KeyDown="tbxFilterVideo_EQ_Brightness_KeyDown"
+              MaxLength="4"
+              MaxLines="1"
+              PreviewKeyUp="tbxFilterVideo_EQ_Brightness_PreviewKeyUp"
+              Style="{StaticResource SliderValue}"
+              Text="{Binding Value, ElementName=slFilterVideo_EQ_Brightness, UpdateSourceTrigger=PropertyChanged}" />
+            <Slider
+              x:Name="slFilterVideo_EQ_Brightness"
+              IsEnabled="{Binding FilterVideo_EQ_Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsMoveToPointEnabled="True"
+              IsSnapToTickEnabled="True"
+              Maximum="100"
+              Minimum="-100"
+              MouseDoubleClick="slFilterVideo_EQ_Brightness_MouseDoubleClick"
+              PreviewMouseUp="slFilterVideo_EQ_Brightness_PreviewMouseUp"
+              Style="{StaticResource OptionSlider}"
+              Value="{Binding FilterVideo_EQ_Brightness_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Contrast">
+          <DockPanel>
+            <TextBox
+              x:Name="tbxFilterVideo_EQ_Contrast"
+              DockPanel.Dock="Right"
+              IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              KeyDown="tbxFilterVideo_EQ_Contrast_KeyDown"
+              MaxLength="4"
+              MaxLines="1"
+              PreviewKeyUp="tbxFilterVideo_EQ_Contrast_PreviewKeyUp"
+              Style="{StaticResource SliderValue}"
+              Text="{Binding Value, ElementName=slFilterVideo_EQ_Contrast, UpdateSourceTrigger=PropertyChanged}" />
+            <Slider
+              x:Name="slFilterVideo_EQ_Contrast"
+              IsEnabled="{Binding FilterVideo_EQ_Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsMoveToPointEnabled="True"
+              IsSnapToTickEnabled="True"
+              Maximum="100"
+              Minimum="-100"
+              MouseDoubleClick="slFilterVideo_EQ_Contrast_MouseDoubleClick"
+              PreviewMouseUp="slFilterVideo_EQ_Contrast_PreviewMouseUp"
+              Style="{StaticResource OptionSlider}"
+              Value="{Binding FilterVideo_EQ_Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Saturation">
+          <DockPanel>
+            <TextBox
+              x:Name="tbxFilterVideo_EQ_Saturation"
+              DockPanel.Dock="Right"
+              IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              KeyDown="tbxFilterVideo_EQ_Saturation_KeyDown"
+              MaxLength="4"
+              MaxLines="1"
+              PreviewKeyUp="tbxFilterVideo_EQ_Saturation_PreviewKeyUp"
+              Style="{StaticResource SliderValue}"
+              Text="{Binding Value, ElementName=slFilterVideo_EQ_Saturation, UpdateSourceTrigger=PropertyChanged}" />
+            <Slider
+              x:Name="slFilterVideo_EQ_Saturation"
+              IsEnabled="{Binding FilterVideo_EQ_Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsMoveToPointEnabled="True"
+              IsSnapToTickEnabled="True"
+              Maximum="100"
+              Minimum="-100"
+              MouseDoubleClick="slFilterVideo_EQ_Saturation_MouseDoubleClick"
+              PreviewMouseUp="slFilterVideo_EQ_Saturation_PreviewMouseUp"
+              Style="{StaticResource OptionSlider}"
+              Value="{Binding FilterVideo_EQ_Saturation_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Gamma">
+          <DockPanel>
+            <TextBox
+              x:Name="tbxFilterVideo_EQ_Gamma"
+              DockPanel.Dock="Right"
+              IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              KeyDown="tbxFilterVideo_EQ_Gamma_KeyDown"
+              MaxLength="4"
+              MaxLines="1"
+              PreviewKeyUp="tbxFilterVideo_EQ_Gamma_PreviewKeyUp"
+              Style="{StaticResource SliderValue}"
+              Text="{Binding Value, ElementName=slFilterVideo_EQ_Gamma, UpdateSourceTrigger=PropertyChanged}" />
+            <Slider
+              x:Name="slFilterVideo_EQ_Gamma"
+              IsEnabled="{Binding FilterVideo_EQ_Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsMoveToPointEnabled="True"
+              IsSnapToTickEnabled="True"
+              Maximum="100"
+              Minimum="-100"
+              MouseDoubleClick="slFilterVideo_EQ_Gamma_MouseDoubleClick"
+              PreviewMouseUp="slFilterVideo_EQ_Gamma_PreviewMouseUp"
+              Style="{StaticResource OptionSlider}"
+              Value="{Binding FilterVideo_EQ_Gamma_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <Button
+          x:Name="btnFilterVideo_EQ_Reset"
+          Margin="0,6,0,0"
+          HorizontalAlignment="Right"
+          Click="btnFilterVideo_EQ_Reset_Click"
+          Style="{StaticResource ButtonDefault.Small}"
+          ToolTip="Reset EQ to Default.">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            <TextBlock Margin="6,0,0,0" Text="Reset" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel
+      DataContext="{x:Static vm:VM.FilterVideoView}"
+      Header="SELECTIVE COLOR"
+      Icon="{icons:Phosphor PaletteBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Color">
+          <ComboBox
+            x:Name="cboFilterVideo_SelectiveColor"
+            IsEnabled="{Binding FilterVideo_SelectiveColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding FilterVideo_SelectiveColor_Items}"
+            SelectedIndex="{Binding FilterVideo_SelectiveColor_SelectedIndex}"
+            SelectedValue="{Binding FilterVideo_SelectiveColor_SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedValuePath="Name"
+            SelectionChanged="cboFilterVideo_SelectiveColor_SelectionChanged">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                  </Grid.ColumnDefinitions>
+
+                  <Border
+                    Width="12"
+                    Height="12"
+                    Margin="2"
+                    Background="{Binding Color}" />
+
+                  <TextBlock
+                    Grid.Column="1"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding Name}" />
+                </Grid>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Method">
+          <ComboBox
+            x:Name="cboFilterVideo_SelectiveColor_Correction_Method"
+            IsEnabled="{Binding FilterVideo_SelectiveColor_Correction_Method_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding FilterVideo_SelectiveColor_Correction_Method_Items}"
+            SelectedItem="{Binding FilterVideo_SelectiveColor_Correction_Method_SelectedItem, Mode=TwoWay}" />
+        </controls:OptionRow>
+
+        <!--  One page of sliders per colour; the Color dropdown above picks the page  -->
+        <TabControl
+          x:Name="tabControl_SelectiveColor"
+          Margin="0,4,0,0"
+          SelectedIndex="{Binding SelectedIndex, ElementName=cboFilterVideo_SelectiveColor}"
+          Style="{StaticResource PagesTabControl}">
+          <TabItem x:Name="tabItem_SelectiveColor_Reds" Header="Reds">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Reds_Cyan"
+                    DockPanel.Dock="Right"
+                    IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Cyan_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Reds_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Reds_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Reds_Cyan"
+                    IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Cyan_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Reds_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Reds_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Reds_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Reds_Magenta"
+                    DockPanel.Dock="Right"
+                    IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Magenta_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    MaxLength="4"
+                    MaxLines="1"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Reds_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Reds_Magenta"
+                    IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Magenta_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Reds_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Reds_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Reds_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Reds_Yellow"
+                    DockPanel.Dock="Right"
+                    IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Yellow_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    MaxLength="4"
+                    MaxLines="1"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Reds_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Reds_Yellow"
+                    IsEnabled="{Binding FilterVideo_SelectiveColor_Reds_Yellow_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Reds_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Reds_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Reds_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Yellows" Header="Yellows">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Yellows_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Yellows_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Yellows_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Yellows_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Yellows_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Yellows_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Yellows_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Yellows_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Yellows_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Yellows_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Yellows_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Yellows_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Yellows_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Yellows_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Yellows_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Yellows_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Yellows_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Yellows_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Yellows_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Yellows_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Yellows_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Greens" Header="Greens">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Greens_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Greens_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Greens_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Greens_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Greens_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Greens_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Greens_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Greens_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Greens_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Greens_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Greens_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Greens_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Greens_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Greens_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Greens_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Greens_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Greens_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Greens_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Greens_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Greens_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Greens_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Cyans" Header="Cyans">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Cyans_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Cyans_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Cyans_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Cyans_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Cyans_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Cyans_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Cyans_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Cyans_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Cyans_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Cyans_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Cyans_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Cyans_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Cyans_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Cyans_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Cyans_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Cyans_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Cyans_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Cyans_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Cyans_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Cyans_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Cyans_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Blues" Header="Blues">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Blues_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blues_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blues_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Blues_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Blues_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Blues_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Blues_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Blues_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blues_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blues_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Blues_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Blues_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Blues_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Blues_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Blues_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blues_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blues_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Blues_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Blues_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Blues_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Blues_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Magentas" Header="Magentas">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Magentas_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Magentas_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Magentas_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Magentas_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Magentas_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Magentas_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Magentas_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Magentas_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Magentas_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Magentas_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Magentas_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Magentas_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Magentas_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Magentas_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Magentas_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Magentas_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Magentas_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Magentas_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Magentas_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Magentas_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Magentas_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Whites" Header="Whites">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Whites_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Whites_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Whites_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Whites_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Whites_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Whites_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Whites_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Whites_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Whites_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Whites_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Whites_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Whites_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Whites_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Whites_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Whites_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Whites_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Whites_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Whites_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Whites_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Whites_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Whites_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Neutrals" Header="Neutrals">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Neutrals_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Neutrals_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Neutrals_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Neutrals_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Neutrals_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Neutrals_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Neutrals_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Neutrals_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Neutrals_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Neutrals_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Neutrals_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Neutrals_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Neutrals_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Neutrals_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Neutrals_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Neutrals_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Neutrals_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Neutrals_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Neutrals_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Neutrals_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Neutrals_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+          <TabItem x:Name="tabItem_SelectiveColor_Blacks" Header="Blacks">
+            <StackPanel>
+              <controls:OptionRow Label="Cyan">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Blacks_Cyan"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blacks_Cyan_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blacks_Cyan, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Blacks_Cyan"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Blacks_Cyan_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Blacks_Cyan_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Blacks_Cyan_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Magenta">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Blacks_Magenta"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blacks_Magenta_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blacks_Magenta, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Blacks_Magenta"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Blacks_Magenta_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Blacks_Magenta_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Blacks_Magenta_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+              <controls:OptionRow Label="Yellow">
+                <DockPanel>
+                  <TextBox
+                    x:Name="tbxFilterVideo_SelectiveColor_Blacks_Yellow"
+                    DockPanel.Dock="Right"
+                    MaxLength="4"
+                    MaxLines="1"
+                    PreviewKeyUp="tbxFilterVideo_SelectiveColor_Blacks_Yellow_PreviewKeyUp"
+                    Style="{StaticResource SliderValue}"
+                    Text="{Binding Value, ElementName=slFilterVideo_SelectiveColor_Blacks_Yellow, UpdateSourceTrigger=PropertyChanged}" />
+                  <Slider
+                    x:Name="slFilterVideo_SelectiveColor_Blacks_Yellow"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="-100"
+                    MouseDoubleClick="slFilterVideo_SelectiveColor_Blacks_Yellow_MouseDoubleClick"
+                    PreviewMouseUp="slFilterVideo_SelectiveColor_Blacks_Yellow_PreviewMouseUp"
+                    Style="{StaticResource OptionSlider}"
+                    Value="{Binding FilterVideo_SelectiveColor_Blacks_Yellow_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+              </controls:OptionRow>
+            </StackPanel>
+          </TabItem>
+        </TabControl>
+        <Button
+          x:Name="btnFilterVideo_SelectiveColorReset"
+          Margin="0,6,0,0"
+          HorizontalAlignment="Right"
+          Click="btnFilterVideo_SelectiveColorReset_Click"
+          Style="{StaticResource ButtonDefault.Small}"
+          ToolTip="Reset Selective Color to Default.">
+          <StackPanel Orientation="Horizontal">
+            <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            <TextBlock Margin="6,0,0,0" Text="Reset" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+    </controls:OptionPanel>
+
+  </controls:MasonryPanel>
+</UserControl>

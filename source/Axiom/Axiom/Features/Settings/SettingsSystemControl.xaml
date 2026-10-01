@@ -1,0 +1,151 @@
+<!--
+  Settings > System: how FFmpeg is launched, and the log.
+-->
+<UserControl
+  x:Class="Axiom.Features.Settings.SettingsSystemControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Axiom.Shared.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:hc="https://handyorg.github.io/handycontrol"
+  xmlns:icons="clr-namespace:Axiom.Shared.Icons"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignWidth="700"
+  mc:Ignorable="d">
+
+  <controls:MasonryPanel Style="{StaticResource OptionPages}">
+
+    <controls:OptionPanel Header="PROCESS" Icon="{icons:Phosphor TerminalWindowBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Shell" ToolTip="Launch FFmpeg through CMD or PowerShell">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnShellDefault"
+              Click="btnShellDefault_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Default">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <ComboBox
+              x:Name="cboShell"
+              IsEnabled="{Binding Shell_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsTextSearchEnabled="False"
+              ItemsSource="{Binding Shell_Items}"
+              SelectedIndex="{Binding Shell_SelectedIndex}"
+              SelectedItem="{Binding Shell_SelectedItem}"
+              SelectionChanged="cboShell_SelectionChanged" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Title" ToolTip="Shell Title">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnShellTitleDefault"
+              Click="btnShellTitleDefault_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Default">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <ComboBox
+              x:Name="cboShellTitle"
+              IsEnabled="{Binding ShellTitle_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsTextSearchEnabled="False"
+              ItemsSource="{Binding ShellTitle_Items}"
+              SelectedIndex="{Binding ShellTitle_SelectedIndex}"
+              SelectedItem="{Binding ShellTitle_SelectedItem}"
+              SelectionChanged="cboShellTitle_SelectionChanged" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Priority" ToolTip="Process Priority">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnProcessPriorityDefault"
+              Click="btnProcessPriorityDefault_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Default">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <ComboBox
+              x:Name="cboProcessPriority"
+              IsEnabled="{Binding ProcessPriority_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsTextSearchEnabled="False"
+              ItemsSource="{Binding ProcessPriority_Items}"
+              SelectedIndex="{Binding ProcessPriority_SelectedIndex}"
+              SelectedItem="{Binding ProcessPriority_SelectedItem}" />
+          </DockPanel>
+        </controls:OptionRow>
+        <controls:OptionRow Label="Threads" ToolTip="Amount of CPU threads to use.">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnThreadsDefault"
+              Click="btnThreadsDefault_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Default">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <ComboBox
+              x:Name="cboThreads"
+              IsEnabled="{Binding Threads_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsTextSearchEnabled="False"
+              ItemsSource="{Binding Threads_Items}"
+              KeyDown="threadSelect_KeyDown"
+              SelectedIndex="{Binding Threads_SelectedIndex}"
+              SelectedItem="{Binding Threads_SelectedItem}"
+              SelectionChanged="threadSelect_SelectionChanged" />
+          </DockPanel>
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
+
+    <controls:OptionPanel Header="LOG" Icon="{icons:Phosphor FileTextBold}">
+      <StackPanel>
+        <controls:OptionRow Label="Write Log">
+          <CheckBox
+            x:Name="cbxLog"
+            Checked="cbxLog_Checked"
+            IsChecked="{Binding LogCheckBox_IsChecked}"
+            IsEnabled="{Binding LogCheckBox_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource OptionSwitch}"
+            ToolTip="Enable/Disable Log"
+            Unchecked="cbxLog_Unchecked" />
+        </controls:OptionRow>
+        <controls:OptionRow Label="Folder" ToolTip="Path to save axiom.log">
+          <DockPanel>
+            <Button
+              DockPanel.Dock="Right"
+              x:Name="btnLogAuto"
+              Click="btnLogPathAuto_Click"
+              Style="{StaticResource IconButton}"
+              ToolTip="Revert to Default">
+              <Path Data="{icons:Phosphor ArrowCounterClockwiseBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <Button
+              Click="btnLogPathOpen_Click"
+              DockPanel.Dock="Right"
+              Style="{StaticResource IconButton}"
+              ToolTip="Open Location">
+              <Path Data="{icons:Phosphor FolderOpenBold}" Style="{StaticResource Icon.Small}" />
+            </Button>
+            <TextBox
+              x:Name="tbxLogConfig"
+              AllowDrop="True"
+              Cursor="Arrow"
+              IsEnabled="{Binding LogPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              IsReadOnly="True"
+              MaxLines="1"
+              PreviewDragEnter="tbxLogPath_PreviewDragOver"
+              PreviewDragOver="tbxLogPath_PreviewDragOver"
+              PreviewDrop="tbxLogPath_PreviewDrop"
+              Style="{StaticResource PathField}"
+              Text="{Binding LogPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ToolTip="{Binding LogPath_Text, Mode=OneWay}" />
+          </DockPanel>
+        </controls:OptionRow>
+      </StackPanel>
+    </controls:OptionPanel>
+
+  </controls:MasonryPanel>
+</UserControl>
